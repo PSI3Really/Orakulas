@@ -5,11 +5,12 @@
 # Notes
 
 Currently two users are in the database:
-*dev* - admin
-*dev-user* - simple user
 
-Passwords for both users are the same: *123*.
+  1. **dev** - admin
+  2. **dev-user** - simple user
 
-To hash the password, one must concatenate password and salt in such way: *password*{*salt*}
+Passwords for both users are the same: **123**
 
-*SHA-512* is used for hashing
+To hash the password, one must concatenate password and salt in such way: **password**{**salt**}
+
+**SHA-512** must be used for hashing
