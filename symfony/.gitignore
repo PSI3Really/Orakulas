@@ -6,18 +6,3 @@
 /app/logs/
 /vendor/
 /app/config/parameters.ini
-
-# Logs #
-########
-*.log
-
-# OS generated files #
-######################
-.DS_Store*
-ehthumbs.db
-Icon?
-Thumbs.db
-
-# PhpStorm #
-############
-/.idea/*
