@@ -232,10 +232,11 @@ DELIMITER ;
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(50) NOT NULL,
   `password` varchar(400) NOT NULL,
-  `rights` int(11) NOT NULL,
+  `salt` varchar(10) NOT NULL,
+  `admin` int(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_name_UNIQUE` (`user_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -273,3 +274,5 @@ ALTER TABLE `support_type`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+

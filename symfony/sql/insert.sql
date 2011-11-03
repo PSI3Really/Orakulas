@@ -3120,3 +3120,11 @@ INSERT INTO `temp_support_history` (`id`, `support_type_code`, `start_date`, `en
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_name`, `password`, `salt`, `admin`) VALUES
+('dev', 'bedb630ba9c74007650a44c3259a799b3ff1c3b011b37531c587f4674d230677c0b7972f9b6a42407733d4b4b577a269d1eda2f6ebede598d0d4dbac7cff5535', 'geVHBt9uir', 1),
+('dev-user', '1f12acc20ea8866ec6c3e74ca43bfb3e82614682a076c50be9adc3427bba0efa2e897e52659db396f5d6af7c0369c6935cca3146df4d01461165530573fff247', '0EN2Un-DaA', 0);
