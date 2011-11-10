@@ -1,6 +1,8 @@
 Ext.define(CONFIG.APP_NS+'.view.MainToolbar', {
     extend: 'Ext.toolbar.Toolbar',
     alias: 'widget.maintoolbar',
+
+    id: 'toolbar',
     
     initComponent: function () {
         this.items = [
@@ -30,7 +32,7 @@ Ext.define(CONFIG.APP_NS+'.view.MainToolbar', {
                             text: 'Įkelti iš failo&hellip;',
                             iconCls: 'icon-folder-open',
                             handler: function () {
-                                alert('TODO: Dialogas įkėlimui iš failo');
+                                alert('TODO: Įkėlimo iš failo dialogas');
                             }
                         }
                     ]
@@ -40,9 +42,10 @@ Ext.define(CONFIG.APP_NS+'.view.MainToolbar', {
                 text: 'Įkelti istorinius duomenis&hellip;',
                 iconCls: 'icon-arrow-270',
                 handler: function () {
-                    alert('TODO: Dialogas istorinių duomenų įkėlimui');
+                    alert('TODO: Istorinių duomenų įkėlimo dialogas');
                 }
             },
+            '-',
             {
                 iconCls: 'icon-gear',
                 tooltip: 'Administravimas / Nustatymai',
@@ -51,9 +54,12 @@ Ext.define(CONFIG.APP_NS+'.view.MainToolbar', {
                 }
             },
             {
+                type: 'splitbutton',
                 pressed: true,
                 iconCls: 'icon-flag-lt',
                 tooltip: 'Perjungti kalbą į lietuvių',
+                toggleGroup: 'languages',
+                enableToggle: true,
                 handler: function () {
                     if (!this.pressed) {
                         alert('TODO: Perjungti kalbą į lietuvių');
@@ -61,10 +67,15 @@ Ext.define(CONFIG.APP_NS+'.view.MainToolbar', {
                 }
             },
             {
+                type: 'splitbutton',
                 iconCls: 'icon-flag-gb',
                 tooltip: 'Perjungti kalbą į anglų',
+                toggleGroup: 'languages',
+                enableToggle: true,
                 handler: function () {
-                    alert('TODO: Perjungti kalbą į anglų');
+                    if (!this.pressed) {
+                        alert('TODO: Perjungti kalbą į anglų');
+                    }
                 }
             }
         ]

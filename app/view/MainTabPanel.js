@@ -11,7 +11,7 @@ Ext.define(CONFIG.APP_NS+'.view.MainTabPanel', {
                     {
                         region: 'north',
                         xtype: 'toolbar',
-                        height: 30,
+                        height: 28,
                         items: [
                             {
                                 text: 'Prognozuoti&hellip;',
@@ -48,14 +48,14 @@ Ext.define(CONFIG.APP_NS+'.view.MainTabPanel', {
                                             text: 'Lentelė',
                                             iconCls: 'icon-table',
                                             handler: function () {
-                                                alert('TODO: Nauja lentelės vaizdas');
+                                                alert('TODO: Naujas lentelės vaizdas');
                                             }
                                         },
                                         {
                                             text: 'Grafikas',
                                             iconCls: 'icon-chart',
                                             handler: function () {
-                                                alert('TODO: Nauja grafiko vaizdas');
+                                                alert('TODO: Naujas grafiko vaizdas');
                                             }
                                         }
                                     ]
@@ -64,7 +64,8 @@ Ext.define(CONFIG.APP_NS+'.view.MainTabPanel', {
                         ]
                     },
                     {
-                        region: 'center'
+                        region: 'center',
+                        border: false
                     }
                 ]
             },
