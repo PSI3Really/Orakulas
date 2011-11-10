@@ -15,15 +15,24 @@ Ext.define(CONFIG.APP_NS+'.view.MainTabPanel', {
                         items: [
                             {
                                 text: 'Prognozuoti&hellip;',
-                                iconCls: 'icon-chart-up'
+                                iconCls: 'icon-chart-up',
+                                handler: function () {
+                                    alert('TODO: Prognozavimo langas');
+                                }
                             },
                             {
                                 text: 'Analizuoti&hellip;',
-                                iconCls: 'icon-light-bulb'
+                                iconCls: 'icon-light-bulb',
+                                handler: function () {
+                                    alert('TODO: Analizavimo langas');
+                                }
                             },
                             {
                                 text: 'Eksportuoti&hellip;',
-                                iconCls: 'icon-table-export'
+                                iconCls: 'icon-table-export',
+                                handler: function () {
+                                    alert('TODO: Eksportavimo langas');
+                                }
                             },
                             '->',
                             {
