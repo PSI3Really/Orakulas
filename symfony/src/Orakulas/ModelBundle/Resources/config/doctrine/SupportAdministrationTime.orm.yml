@@ -1,0 +1,43 @@
+Orakulas\ModelBundle\Entity\SupportAdministrationTime:
+  type: entity
+  table: support_administration_time
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    createdTimestamp:
+      type: datetime
+      nullable: false
+      column: created_timestamp
+    updatedTimestamp:
+      type: datetime
+      nullable: false
+      column: updated_timestamp
+    hoursCount:
+      type: float
+      nullable: false
+      column: hours_count
+  oneToOne:
+    department:
+      targetEntity: Department
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        department_id:
+          referencedColumnName: id
+      orphanRemoval: false
+    supportType:
+      targetEntity: SupportType
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        support_type_id:
+          referencedColumnName: id
+      orphanRemoval: false
+  lifecycleCallbacks: {  }

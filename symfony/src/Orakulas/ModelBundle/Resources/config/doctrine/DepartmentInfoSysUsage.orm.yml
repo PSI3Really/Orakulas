@@ -1,0 +1,39 @@
+Orakulas\ModelBundle\Entity\DepartmentInfoSysUsage:
+  type: entity
+  table: department_info_sys_usage
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    createdTimestamp:
+      type: datetime
+      nullable: false
+      column: created_timestamp
+    updatedTimestamp:
+      type: datetime
+      nullable: false
+      column: updated_timestamp
+  oneToOne:
+    informationalSystem:
+      targetEntity: InformationalSystem
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        informational_system_id:
+          referencedColumnName: id
+      orphanRemoval: false
+    department:
+      targetEntity: Department
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        department_id:
+          referencedColumnName: id
+      orphanRemoval: false
+  lifecycleCallbacks: {  }

@@ -1,0 +1,30 @@
+Orakulas\ModelBundle\Entity\InformationalSystem:
+  type: entity
+  table: informational_system
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    createdTimestamp:
+      type: datetime
+      nullable: false
+      column: created_timestamp
+    updatedTimestamp:
+      type: datetime
+      nullable: false
+      column: updated_timestamp
+    code:
+      type: string
+      length: 20
+      fixed: false
+      nullable: false
+    name:
+      type: string
+      length: 255
+      fixed: false
+      nullable: false
+  lifecycleCallbacks: {  }

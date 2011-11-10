@@ -1,0 +1,58 @@
+Orakulas\ModelBundle\Entity\User:
+  type: entity
+  table: user
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    createdTimestamp:
+      type: datetime
+      nullable: false
+      column: created_timestamp
+    updatedTimestamp:
+      type: datetime
+      nullable: false
+      column: updated_timestamp
+    userName:
+      type: string
+      length: 50
+      fixed: false
+      nullable: false
+      column: user_name
+    password:
+      type: string
+      length: 400
+      fixed: false
+      nullable: false
+    salt:
+      type: string
+      length: 10
+      fixed: true
+      nullable: false
+    firstName:
+      type: string
+      length: 50
+      fixed: false
+      nullable: false
+      column: first_name
+    lastName:
+      type: string
+      length: 100
+      fixed: false
+      nullable: false
+      column: last_name
+    email:
+      type: string
+      length: 200
+      fixed: false
+      nullable: false
+    isAdmin:
+      type: integer
+      unsigned: false
+      nullable: false
+      column: is_admin
+  lifecycleCallbacks: {  }

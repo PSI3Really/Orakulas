@@ -1,0 +1,7 @@
+parameters:
+#    orakulas_model.example.class: Orakulas\ModelBundle\Example
+
+services:
+#    orakulas_model.example:
+#        class: %orakulas_model.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
