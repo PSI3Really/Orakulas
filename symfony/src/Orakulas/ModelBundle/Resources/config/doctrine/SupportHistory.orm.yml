@@ -1,0 +1,43 @@
+Orakulas\ModelBundle\Entity\SupportHistory:
+  type: entity
+  table: support_history
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    createdTimestamp:
+      type: datetime
+      nullable: false
+      column: created_timestamp
+    updatedTimestamp:
+      type: datetime
+      nullable: false
+      column: updated_timestamp
+    startDate:
+      type: date
+      nullable: false
+      column: start_date
+    endDate:
+      type: date
+      nullable: false
+      column: end_date
+    supportRequestCount:
+      type: integer
+      unsigned: false
+      nullable: false
+      column: support_request_count
+  oneToOne:
+    supportType:
+      targetEntity: SupportType
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        support_type_id:
+          referencedColumnName: id
+      orphanRemoval: false
+  lifecycleCallbacks: {  }

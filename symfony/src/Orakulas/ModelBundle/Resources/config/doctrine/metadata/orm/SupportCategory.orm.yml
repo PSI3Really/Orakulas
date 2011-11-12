@@ -1,0 +1,25 @@
+SupportCategory:
+  type: entity
+  table: support_category
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    createdTimestamp:
+      type: datetime
+      nullable: false
+      column: created_timestamp
+    updatedTimestamp:
+      type: datetime
+      nullable: false
+      column: updated_timestamp
+    name:
+      type: string
+      length: 255
+      fixed: false
+      nullable: false
+  lifecycleCallbacks: {  }

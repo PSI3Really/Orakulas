@@ -4,6 +4,17 @@
 
 # Notes
 
+## Symfony2 tips
+
+### Creating new bundle
+
+While in Orakulas/symfony execute
+
+    *php app/console generate:bundle --namespace=Orakulas/**Foobar**Bundle --format=yml*
+
+Preferably, please change **Foobar** to something else.
+
+## Users and hashing
 Currently two users are in the database:
 
   1. **dev** - admin

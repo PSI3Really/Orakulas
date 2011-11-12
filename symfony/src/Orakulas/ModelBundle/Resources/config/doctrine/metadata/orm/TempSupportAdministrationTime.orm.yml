@@ -1,0 +1,36 @@
+TempSupportAdministrationTime:
+  type: entity
+  table: temp_support_administration_time
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    createdTimestamp:
+      type: datetime
+      nullable: false
+      column: created_timestamp
+    updatedTimestamp:
+      type: datetime
+      nullable: false
+      column: updated_timestamp
+    departmentCode:
+      type: string
+      length: 20
+      fixed: false
+      nullable: false
+      column: department_code
+    supportTypeCode:
+      type: string
+      length: 20
+      fixed: false
+      nullable: false
+      column: support_type_code
+    hoursCount:
+      type: float
+      nullable: true
+      column: hours_count
+  lifecycleCallbacks: {  }
