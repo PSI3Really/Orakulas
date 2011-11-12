@@ -51,7 +51,7 @@ Orakulas\ModelBundle\Entity\User:
       fixed: false
       nullable: false
     isAdmin:
-      type: integer
+      type: boolean
       unsigned: false
       nullable: false
       column: is_admin

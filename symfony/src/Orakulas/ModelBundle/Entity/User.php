@@ -55,9 +55,9 @@ class User
     private $email;
 
     /**
-     * @var integer $isAdmin
+     * @var boolean $isAdmin
      */
-    private $isAdmin;
+    private $isAdmin = false;
 
 
     /**
