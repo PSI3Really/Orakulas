@@ -40,7 +40,9 @@ Ext.define(CONFIG.APP_NS+'.view.MainToolbar', {
                 text: 'Įkelti istorinius duomenis&hellip;',
                 iconCls: 'icon-arrow-270',
                 handler: function () {
-                    alert('TODO: Dialogas istorinių duomenų įkėlimui');
+                    var wnd = Ext.create(CONFIG.APP_NS+'.view.ImportData', {});
+                    
+                    wnd.show();
                 }
             },
             {
