@@ -1,7 +1,11 @@
 Ext.define(CONFIG.APP_NS+'.view.MainTabPanel', {
     extend: 'Ext.tab.Panel',
     alias: 'widget.maintabpanel',
-    
+
+    requires: [
+        CONFIG.APP_NS+'.view.Predict.Window'
+    ],
+
     initComponent: function() {
         this.items = [
             {
@@ -17,7 +21,9 @@ Ext.define(CONFIG.APP_NS+'.view.MainTabPanel', {
                                 text: 'Prognozuoti&hellip;',
                                 iconCls: 'icon-chart-up',
                                 handler: function () {
-                                    alert('TODO: Prognozavimo langas');
+                                    var wnd = Ext.create('widget.predict.window', {});
+
+                                    wnd.show();
                                 }
                             },
                             {
@@ -31,7 +37,9 @@ Ext.define(CONFIG.APP_NS+'.view.MainTabPanel', {
                                 text: 'Eksportuoti&hellip;',
                                 iconCls: 'icon-table-export',
                                 handler: function () {
-                                    alert('TODO: Eksportavimo langas');
+                                    var wnd = Ext.create('widget.export.window', {});
+
+                                    wnd.show();
                                 }
                             },
                             '->',

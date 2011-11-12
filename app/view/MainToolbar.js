@@ -1,7 +1,12 @@
 Ext.define(CONFIG.APP_NS+'.view.MainToolbar', {
     extend: 'Ext.toolbar.Toolbar',
     alias: 'widget.maintoolbar',
-    
+
+    requires: [
+        CONFIG.APP_NS+'.view.Import.Window',
+        CONFIG.APP_NS+'.view.Export.Window',
+    ],
+
     initComponent: function () {
         this.items = [
             {
@@ -40,8 +45,9 @@ Ext.define(CONFIG.APP_NS+'.view.MainToolbar', {
                 text: 'Įkelti istorinius duomenis&hellip;',
                 iconCls: 'icon-arrow-270',
                 handler: function () {
-                    var wnd = Ext.create(CONFIG.APP_NS+'.view.ImportData', {});
-                    
+                    //var wnd = Ext.create(CONFIG.APP_NS+'.view.Import.Window', {});
+                    var wnd = Ext.create('widget.import.window', {});
+
                     wnd.show();
                 }
             },
