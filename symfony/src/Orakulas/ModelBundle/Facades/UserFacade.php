@@ -17,7 +17,7 @@ class UserFacade extends EntityFacade
      * @param \string $password
      * @return \Orakulas\ModelBundle\Entity\User type object with hashed password if $username was successfully authenticated with given $password. Otherwise returns NULL.
      */
-    public function authenticate(\string $username, \string $password)
+    public function authenticate($username, $password)
     {
         if ($username == NULL || $password == NULL)
         {
@@ -76,7 +76,7 @@ class UserFacade extends EntityFacade
      * @param \string $username
      * @return \Orakulas\ModelBundle\Entity\User or NULL
      */
-    public function loadByUserName(\string $username)
+    public function loadByUserName($username)
     {
         if ($username == NULL)
         {
@@ -102,7 +102,7 @@ class UserFacade extends EntityFacade
      * @param string $chars
      * @return \string
      */
-    private function rand_str(\int $length = 32, \string $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890')
+    private function rand_str($length = 32, $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890')
     {
         $chars_length = (strlen($chars) - 1);
         $string = $chars{ rand(0, $chars_length) };
