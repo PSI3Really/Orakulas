@@ -20,7 +20,7 @@ class DefaultController extends Controller
 
         /* checking output */
         echo '<pre>';
-        var_dump($userFacade->authenticate('null', 'hey'));
+        var_dump($userFacade->loadByUserName('dev'));
         echo '</pre>';
 
         /* Sending response */

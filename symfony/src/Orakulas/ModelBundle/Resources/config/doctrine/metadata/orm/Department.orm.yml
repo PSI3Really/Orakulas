@@ -9,14 +9,6 @@ Department:
       nullable: false
       generator:
         strategy: IDENTITY
-    createdTimestamp:
-      type: datetime
-      nullable: false
-      column: created_timestamp
-    updatedTimestamp:
-      type: datetime
-      nullable: false
-      column: updated_timestamp
     code:
       type: string
       length: 20

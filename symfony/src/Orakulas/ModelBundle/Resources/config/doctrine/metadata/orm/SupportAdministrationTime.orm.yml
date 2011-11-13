@@ -9,14 +9,6 @@ SupportAdministrationTime:
       nullable: false
       generator:
         strategy: IDENTITY
-    createdTimestamp:
-      type: datetime
-      nullable: false
-      column: created_timestamp
-    updatedTimestamp:
-      type: datetime
-      nullable: false
-      column: updated_timestamp
     hoursCount:
       type: float
       nullable: false
