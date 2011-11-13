@@ -17,10 +17,13 @@ class EntityFacade
 
     const BUNDLE_NAME = 'OrakulasModelBundle';
 
+    /**
+     * @var \Symfony\Bundle\DoctrineBundle\Registry $doctrine
+     */
     private $doctrine;
 
     /**
-     * @throws InvalidArgumentException if $entity is NULL
+     * @throws \InvalidArgumentException if $entity is NULL
      * @param $entity entity to be persisted
      * @return void
      */
@@ -28,12 +31,12 @@ class EntityFacade
     {
         if ($entity == NULL)
         {
-            throw new InvalidArgumentException('cannot save null entity');
+            throw new \InvalidArgumentException('cannot save null entity');
         }
 
         if ($this->getDoctrine() == NULL)
         {
-            throw new InvalidArgumentException('doctrine isn\'t set');
+            throw new \InvalidArgumentException('doctrine isn\'t set');
         }
 
         $entityManager = $this->getDoctrine()->getEntityManager();
@@ -44,7 +47,7 @@ class EntityFacade
     /**
      * @throws InvalidArgumentException if doctrine isn't set
      * @param $id primary key of object
-     * @param string $class class of object
+     * @param \string $class class of object
      * @return loaded object
      */
     public function load($id, \string $class)
@@ -63,11 +66,18 @@ class EntityFacade
         return $repository->find($id);
     }
 
-    public function setDoctrine(/*Registry */$doctrine)
+    /**
+     * @param \Symfony\Bundle\DoctrineBundle\Registry $doctrine
+     * @return void
+     */
+    public function setDoctrine(Registry $doctrine)
     {
         $this->doctrine = $doctrine;
     }
 
+    /**
+     * @return \Symfony\Bundle\DoctrineBundle\Registry
+     */
     protected function getDoctrine()
     {
         return $this->doctrine;

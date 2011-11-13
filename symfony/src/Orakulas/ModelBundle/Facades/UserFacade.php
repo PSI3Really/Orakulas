@@ -12,12 +12,12 @@ class UserFacade extends EntityFacade
     const SALT_LEN = 10;
 
     /**
-     * @throws InvalidArgumentException if $username or $password is NULL
-     * @param string $username
-     * @param string $password
-     * @return User type object with hashed password if $username was successfully authenticated with given $password. Otherwise returns NULL.
+     * @throws \InvalidArgumentException if $username or $password is NULL
+     * @param \string $username
+     * @param \string $password
+     * @return \Orakulas\ModelBundle\Entity\User type object with hashed password if $username was successfully authenticated with given $password. Otherwise returns NULL.
      */
-    public function authenticate($username, $password)
+    public function authenticate(\string $username, \string $password)
     {
         if ($username == NULL || $password == NULL)
         {
@@ -44,9 +44,9 @@ class UserFacade extends EntityFacade
     /**
      * Persists a $user into database, at first hashing it's password
      *
-     * @throws InvalidArgumentException if $user is NULL
-     * @throws UserFacadeException if username already exists or password is unspecified
-     * @param $user
+     * @throws \InvalidArgumentException if $user is NULL
+     * @throws \Orakulas\ModelBundle\Facades\UserFacadeException if username already exists or password is unspecified
+     * @param \Orakulas\ModelBundle\Entity\User $user
      * @return void
      */
     public function save($user)
@@ -69,7 +69,14 @@ class UserFacade extends EntityFacade
         parent::save($user);
     }
 
-    public function loadByUserName($username)
+    /**
+     * Loads a user by name.
+     *
+     * @throws \InvalidArgumentException
+     * @param \string $username
+     * @return \Orakulas\ModelBundle\Entity\User or NULL
+     */
+    public function loadByUserName(\string $username)
     {
         if ($username == NULL)
         {
@@ -78,7 +85,7 @@ class UserFacade extends EntityFacade
 
         $users = $this->getDoctrine()->getRepository(UserFacade::BUNDLE_NAME.':'.UserFacade::USER)->findByUserName($username);
 
-        if ($users != null)
+        if ($users != null && $users[0] != NULL)
         {
             return $users[0];
         }
@@ -88,7 +95,14 @@ class UserFacade extends EntityFacade
         }
     }
 
-    private function rand_str($length = 32, $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890')
+    /**
+     * Generates a random string of $length characters from $chars.
+     *
+     * @param int $length
+     * @param string $chars
+     * @return \string
+     */
+    private function rand_str(\int $length = 32, \string $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890')
     {
         $chars_length = (strlen($chars) - 1);
         $string = $chars{ rand(0, $chars_length) };
