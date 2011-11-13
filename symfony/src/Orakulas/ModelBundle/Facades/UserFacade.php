@@ -60,13 +60,23 @@ class UserFacade extends EntityFacade
 
         if ($entityUser != NULL)
         {
-            throw new UserFacadeException('username already exists');
+            $entityUser->setAdmin($user->isAdmin());
+            $entityUser->setEmail($user->getEmail());
+            $entityUser->setFirstName($user->getFirstName());
+            $entityUser->setLastName($user->getLastName());
+
+            $entityUser->setSalt($this->rand_str(UserFacade::SALT_LEN));
+            $entityUser->setPassword(hash(UserFacade::HASH_ALGO, $user->getPassword().'{'.$entityUser->getSalt().'}'));
+
+            parent::save($entityUser);
         }
+        else
+        {
+            $user->setSalt($this->rand_str(UserFacade::SALT_LEN));
+            $user->setPassword(hash(UserFacade::HASH_ALGO, $user->getPassword().'{'.$user->getSalt().'}'));
 
-        $user->setSalt($this->rand_str(UserFacade::SALT_LEN));
-        $user->setPassword(hash(UserFacade::HASH_ALGO, $user->getPassword().'{'.$user->getSalt().'}'));
-
-        parent::save($user);
+            parent::save($user);
+        }
     }
 
     /**

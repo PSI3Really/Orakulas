@@ -2,12 +2,13 @@
 
 namespace Orakulas\ModelBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Role\Role;
 
 /**
  * Orakulas\ModelBundle\Entity\User
  */
-class User
+class User implements UserInterface, \Serializable
 {
     /**
      * @var integer $id
@@ -17,7 +18,7 @@ class User
     /**
      * @var string $userName
      */
-    private $userName;
+    private $username;
 
     /**
      * @var string $password
@@ -45,10 +46,20 @@ class User
     private $email;
 
     /**
-     * @var boolean $isAdmin
+     * @var boolean $admin
      */
-    private $isAdmin = false;
+    private $admin = false;
 
+    /**
+     * @var boolean $authenticated
+     */
+    private $authenticated = false;
+
+
+    private function setId($id)
+    {
+        $this->id = $id;
+    }
 
     /**
      * Get id
@@ -61,23 +72,23 @@ class User
     }
 
     /**
-     * Set userName
+     * Set username
      *
-     * @param string $userName
+     * @param string $username
      */
-    public function setUserName($userName)
+    public function setUsername($username)
     {
-        $this->userName = $userName;
+        $this->username = $username;
     }
 
     /**
-     * Get userName
+     * Get username
      *
      * @return string 
      */
-    public function getUserName()
+    public function getUsername()
     {
-        return $this->userName;
+        return $this->username;
     }
 
     /**
@@ -181,22 +192,142 @@ class User
     }
 
     /**
-     * Set isAdmin
+     * Set admin
      *
-     * @param integer $isAdmin
+     * @param boolean $admin
      */
-    public function setIsAdmin($isAdmin)
+    public function setAdmin($admin)
     {
-        $this->isAdmin = $isAdmin;
+        $this->admin = $admin;
     }
 
     /**
-     * Get isAdmin
+     * Is admin
      *
-     * @return integer 
+     * @return boolean
      */
-    public function getIsAdmin()
+    public function isAdmin()
     {
-        return $this->isAdmin;
+        return $this->admin;
+    }
+
+    /**
+     * Set authenticated
+     *
+     * @param boolean $authenticated
+     */
+    public function setAuthenticated($authenticated)
+    {
+        $this->authenticated = $authenticated;
+    }
+
+    /**
+     * Is authenticated
+     *
+     * @return boolean
+     */
+    public function isAuthenticated()
+    {
+        return $this->authenticated;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRoles()
+    {
+        $roles = array();
+        if (!$this->isAuthenticated())
+        {
+            $roles[] = new Role('IS_AUTHENTICATED_ANONYMOUSLY');
+        }
+        else
+        {
+            $roles[] = new Role('ROLE_USER');
+
+            if ($this->isAdmin())
+            {
+                $roles[] = new Role('ROLE_ADMIN');
+            }
+        }
+        
+        return $roles;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function equals(UserInterface $user)
+    {
+        if (strcasecmp($this->getUsername(), $user->getUsername()) != 0)
+        {
+            return false;
+        }
+
+        if (strcmp($this->getPassword(), $user->getPassword()) != 0)
+        {
+            return false;
+        }
+
+        if (($this->isAuthenticated() && !$user->isAuthenticated())
+                || (!$this->isAuthenticated() && $user->isAuthenticated()))
+        {
+            return false;
+        }
+
+        if (($this->isAdmin() && !$user->isAdmin())
+                || (!$this->isAdmin() && $user->isAdmin()))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @return \string Serialized string
+     */
+    public function serialize()
+    {
+        $arr = array(
+            'id' => $this->getId(),
+            'username' => $this->getUsername(),
+            'firstName' => $this->getFirstName(),
+            'lastName' => $this->getLastName(),
+            'email' => $this->getEmail(),
+            'salt' => $this->getSalt(),
+            'password' => $this->getPassword(),
+            'isAdmin' => $this->isAdmin(),
+            'isAuthenticated' => $this->isAuthenticated(),
+            'roles' => $this->getRoles()
+        );
+
+        return serialize($arr);
+    }
+
+    /**
+     * @param \string $str
+     * @return void
+     */
+    public function unserialize($str)
+    {
+        $arr = unserialize($str);
+        $this->setId($arr['id']);
+        $this->setUsername($arr['username']);
+        $this->setFirstName($arr['firstName']);
+        $this->setLastName($arr['lastName']);
+        $this->setEmail($arr['email']);
+        $this->setSalt($arr['salt']);
+        $this->setPassword($arr['password']);
+        $this->setAdmin($arr['isAdmin']);
+        $this->setAuthenticated($arr['isAuthenticated']);
     }
 }

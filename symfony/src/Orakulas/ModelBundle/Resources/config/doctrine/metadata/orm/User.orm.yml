@@ -9,7 +9,7 @@ User:
       nullable: false
       generator:
         strategy: IDENTITY
-    userName:
+    username:
       type: string
       length: 50
       fixed: false
@@ -42,7 +42,7 @@ User:
       length: 200
       fixed: false
       nullable: false
-    isAdmin:
+    admin:
       type: integer
       unsigned: false
       nullable: false
