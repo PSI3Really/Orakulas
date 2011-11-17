@@ -1,6 +1,6 @@
 Ext.define(CONFIG.APP_NS+'.view.Predict.Window', {
     extend: 'Ext.window.Window',
-    alias: 'widget.predict.window',
+    alias: 'widget.predictwindow',
 
     requires: [
         CONFIG.APP_NS+'.view.Predict.Toolbar'
@@ -26,7 +26,7 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.Window', {
         },{
             region: 'south',
             border: false,
-            xtype: 'predict.toolbar'
+            xtype: 'predicttoolbar'
         }];
 
         this.callParent(arguments);

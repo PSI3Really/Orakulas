@@ -20,27 +20,17 @@ Ext.define(CONFIG.APP_NS+'.view.MainTabPanel', {
                             {
                                 text: 'Prognozuoti&hellip;',
                                 iconCls: 'icon-chart-up',
-                                handler: function () {
-                                    var wnd = Ext.create('widget.predict.window', {});
-
-                                    wnd.show();
-                                }
+                                action: 'predict'
                             },
                             {
                                 text: 'Analizuoti&hellip;',
                                 iconCls: 'icon-light-bulb',
-                                handler: function () {
-                                    alert('TODO: Analizavimo langas');
-                                }
+                                action: 'analyze'
                             },
                             {
                                 text: 'Eksportuoti&hellip;',
                                 iconCls: 'icon-table-export',
-                                handler: function () {
-                                    var wnd = Ext.create('widget.export.window', {});
-
-                                    wnd.show();
-                                }
+                                action: 'export'
                             },
                             '->',
                             {
@@ -55,16 +45,12 @@ Ext.define(CONFIG.APP_NS+'.view.MainTabPanel', {
                                         {
                                             text: 'Lentelė',
                                             iconCls: 'icon-table',
-                                            handler: function () {
-                                                alert('TODO: Naujas lentelės vaizdas');
-                                            }
+                                            action: 'addTable'
                                         },
                                         {
                                             text: 'Grafikas',
                                             iconCls: 'icon-chart',
-                                            handler: function () {
-                                                alert('TODO: Naujas grafiko vaizdas');
-                                            }
+                                            action: 'addChart'
                                         }
                                     ]
                                 })

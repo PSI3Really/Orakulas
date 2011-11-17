@@ -1,6 +1,6 @@
 Ext.define(CONFIG.APP_NS+'.view.Import.Toolbar', {
     extend: 'Ext.toolbar.Toolbar',
-    alias: 'widget.import.toolbar',
+    alias: 'widget.importtoolbar',
 
     border: false,
 
@@ -8,13 +8,16 @@ Ext.define(CONFIG.APP_NS+'.view.Import.Toolbar', {
         this.items = [{
             xtype: 'button',
             iconCls: 'icon-folder-open',
+            action: 'openFile',
             text: 'Įkelti iš failo'
         },'->',{
             xtype: 'button',
-            text: 'Atšaukti'
+            action: 'accept',
+            text: 'Gerai'
         },{
             xtype: 'button',
-            text: 'Gerai'
+            action: 'cancel',
+            text: 'Atšaukti'
         }];
 
         this.callParent(arguments);
