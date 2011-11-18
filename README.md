@@ -20,7 +20,7 @@ Site's address:
 
 #### Install assets
 
-    php app/console assets:install
+    php app/console assets:install web/
 
 ### Creating new bundle
 
