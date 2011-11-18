@@ -39,7 +39,7 @@ Ext.define(CONFIG.APP_NS+'.view.MainTabPanel', {
                                 handler: function () {
                                     this.showMenu();
                                 },
-                                menu: new Ext.menu.Menu({
+                                menu: { //TODO: does not point upwards to the parent tab for some reason, might need to change to 2 buttons
                                     items: [
                                         {
                                             text: 'Lentelė',
@@ -52,7 +52,7 @@ Ext.define(CONFIG.APP_NS+'.view.MainTabPanel', {
                                             action: 'addChart'
                                         }
                                     ]
-                                })
+                                }
                             }
                         ]
                     }
