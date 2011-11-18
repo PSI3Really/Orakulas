@@ -23,4 +23,3 @@ Thumbs.db
 /app/cache/
 /app/logs/
 /vendor/
-/app/config/parameters.ini
