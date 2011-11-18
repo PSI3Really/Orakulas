@@ -1,0 +1,41 @@
+.icon-gear {
+	background: url(../images/icons/gear.png) no-repeat center center;
+}
+.icon-arrow-270 {
+	background: url(../images/icons/arrow-270.png) no-repeat center center;
+}
+.icon-tab-plus {
+	background: url(../images/icons/tab-plus.png) no-repeat center center;
+}
+.icon-folder-open {
+	background: url(../images/icons/folder-open.png) no-repeat center center;
+}
+.icon-document-copy {
+	background: url(../images/icons/document-copy.png) no-repeat center center;
+}
+.icon-application-plus {
+	background: url(../images/icons/application-plus.png) no-repeat center center;
+}
+.icon-light-bulb {
+	background: url(../images/icons/light-bulb.png) no-repeat center center;
+}
+.icon-table-export {
+	background: url(../images/icons/table-export.png) no-repeat center center;
+}
+.icon-chart-up {
+	background: url(../images/icons/chart-up.png) no-repeat center center;
+}
+.icon-chart {
+	background: url(../images/icons/chart.png) no-repeat center center;
+}
+.icon-table {
+	background: url(../images/icons/table.png) no-repeat center center;
+}
+
+/* Flags */
+.icon-flag-lt {
+	background: url(../images/icons/flags/lt.png) no-repeat center center;
+}
+.icon-flag-gb {
+	background: url(../images/icons/flags/gb.png) no-repeat center center;
+}

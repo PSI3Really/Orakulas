@@ -1,0 +1,2 @@
+- Icons: <http://p.yusukekamiyamane.com/> (icons-shadowless)
+- Flags: <http://www.famfamfam.com/lab/icons/flags/>
