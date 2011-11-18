@@ -4,10 +4,11 @@ Ext.define(CONFIG.APP_NS+'.view.MainToolbar', {
 
     requires: [
         CONFIG.APP_NS+'.view.Import.Window',
-        CONFIG.APP_NS+'.view.Export.Window',
+        CONFIG.APP_NS+'.view.Export.Window'
     ],
 
     initComponent: function () {
+        this.height = 30,
         this.items = [
             {
                 id: 'logo',
@@ -75,8 +76,7 @@ Ext.define(CONFIG.APP_NS+'.view.MainToolbar', {
                     alert('TODO: Perjungti kalbą į anglų');
                 }
             }
-        ]
-        
+        ];
         
         this.callParent();
     }

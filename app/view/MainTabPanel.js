@@ -10,12 +10,11 @@ Ext.define(CONFIG.APP_NS+'.view.MainTabPanel', {
         this.items = [
             {
                 title: 'Istoriniai duomenys',
-                layout: 'border',
-                items: [
+                layout: 'fit',
+                dockedItems: [
                     {
-                        region: 'north',
                         xtype: 'toolbar',
-                        height: 28,
+                        height: 30,
                         items: [
                             {
                                 text: 'Prognozuoti&hellip;',
@@ -70,10 +69,12 @@ Ext.define(CONFIG.APP_NS+'.view.MainTabPanel', {
                                 })
                             }
                         ]
-                    },
+                    }
+                ],
+                items: [
                     {
-                        region: 'center',
-                        border: false
+                        border: false,
+                        html: 'Hi'
                     }
                 ]
             },
