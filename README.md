@@ -4,6 +4,12 @@
 
 # Notes
 
+##
+
+Site's address:
+
+    http://localhost/Orakulas/web/app_dev.php/
+
 ## Symfony2 tips
 
 ### After cloning repository
