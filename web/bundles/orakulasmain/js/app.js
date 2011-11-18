@@ -2,7 +2,7 @@ Ext.require(['Ext.container.Viewport']);
 
 Ext.application({
     name: CONFIG.APP_NS,
-    appFolder: 'app',
+    appFolder: '../bundles/orakulasmain/js/app',
     autoCreateViewport: true,
     
     controllers: [

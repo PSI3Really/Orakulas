@@ -16,7 +16,6 @@ Thumbs.db
 
 # Symfony #
 ###########
-/web/bundles/
 /app/bootstrap*
 /app/cache/
 /app/logs/
