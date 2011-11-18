@@ -1,3 +1,7 @@
 OrakulasModelBundle_homepage:
-    pattern:  /hello/{name}
+    pattern:  /
     defaults: { _controller: OrakulasModelBundle:Default:index }
+
+OrakulasModelBundle_allCategories:
+    pattern:  /categories
+    defaults: { _controller: OrakulasModelBundle:Default:allCategories }

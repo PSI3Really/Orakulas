@@ -18,6 +18,14 @@ security:
             iterations: 1
             encode_as_base64: false
 
+
+
+
+
+
+
+
+
 #    encoders:
 #        Symfony\Component\Security\Core\User\User: plaintext
 

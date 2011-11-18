@@ -66,6 +66,22 @@ class EntityFacade
         return $repository->find($id);
     }
 
+    public function loadAll($class)
+    {
+        if ($class == NULL)
+        {
+            throw new InvalidArgumentException('parameters $id and $class cannot be null');
+        }
+
+        if ($this->getDoctrine() == NULL)
+        {
+            throw new InvalidArgumentException('doctrine isn\'t set');
+        }
+
+        $repository = $this->getDoctrine()->getRepository(UserFacade::BUNDLE_NAME.':'.$class);
+        return $repository->findAll();
+    }
+
     /**
      * @param \Symfony\Bundle\DoctrineBundle\Registry $doctrine
      * @return void

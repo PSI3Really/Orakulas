@@ -33,4 +33,26 @@ class DefaultController extends Controller
         /* checking output */
         return new Response('Done.');
     }
+
+    public function allCategoriesAction()
+    {
+        $entityFacade = new EntityFacade();
+        $entityFacade->setDoctrine($this->getDoctrine());
+
+        $allCategories = $entityFacade->loadAll(EntityFacade::SUPPORT_TYPE);
+        $retArray = array();
+        
+        foreach ($allCategories as $type)
+        {
+            $arr = array(
+                'id' => $type->getId(),
+                'code' => $type->getCode(),
+                'name' => $type->getName(),
+                'supportCategory' => $type->getSupportCategory()
+            );
+            $retArray[] = $arr;
+        }
+
+        return new Response(json_encode($retArray));
+    }
 }
