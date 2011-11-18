@@ -8,6 +8,7 @@ Ext.define(CONFIG.APP_NS+'.view.MainToolbar', {
     ],
 
     initComponent: function () {
+        this.height = 30,
         this.items = [
             {
                 id: 'logo',
@@ -74,8 +75,7 @@ Ext.define(CONFIG.APP_NS+'.view.MainToolbar', {
                 }
                 //*/
             }
-        ]
-        
+        ];
         
         this.callParent();
     }
