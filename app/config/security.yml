@@ -1,0 +1,19 @@
+security:
+    firewalls:
+        secured_area:
+            pattern: ^/
+            http_basic:
+                realm: "Secured demo area"
+
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
+
+    providers:
+        main:
+            entity: { class: Orakulas\ModelBundle\Entity\User, property: username }
+
+    encoders:
+        Orakulas\ModelBundle\Entity\User:
+            algorithm: sha512
+            iterations: 1
+            encode_as_base64: false

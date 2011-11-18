@@ -1,0 +1,3 @@
+OrakulasMainBundle_homepage:
+    pattern:  /
+    defaults: { _controller: OrakulasMainBundle:Welcome:index }

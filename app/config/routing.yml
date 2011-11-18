@@ -1,0 +1,12 @@
+OrakulasMainBundle:
+    resource: "@OrakulasMainBundle/Resources/config/routing.yml"
+    prefix:   /
+
+OrakulasModelBundle:
+    resource: "@OrakulasModelBundle/Resources/config/routing.yml"
+    prefix:   /model
+
+# Internal routing configuration to handle ESI
+#_internal:
+#   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
+#   prefix:   /_internal

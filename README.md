@@ -6,15 +6,30 @@
 
 ## Symfony2 tips
 
+### After cloning repository
+
+#### Install vendors
+
+    php bin/vendors install
+
+#### Install assets
+
+    php app/console assets:install
+
 ### Creating new bundle
 
 While in Orakulas/symfony execute
 
-    *php app/console generate:bundle --namespace=Orakulas/**Foobar**Bundle --format=yml*
+    php app/console generate:bundle --namespace=Orakulas/FoobarBundle --format=yml
 
 Preferably, please change **Foobar** to something else.
 
+### Clearing cache
+
+    php app/console cache:clear
+
 ## Users and hashing
+
 Currently two users are in the database:
 
   1. **dev** - admin
