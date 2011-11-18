@@ -5,5 +5,11 @@ Ext.application({
     appFolder: 'app',
     autoCreateViewport: true,
     
-    controllers: []
+    controllers: [
+        'Main',
+        'Tab',
+        'Import',
+        'Export',
+        'Predict'
+    ]
 });

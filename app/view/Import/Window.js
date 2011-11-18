@@ -1,11 +1,10 @@
 Ext.define(CONFIG.APP_NS+'.view.Import.Window', {
     extend: 'Ext.window.Window',
-    alias: 'widget.import.window',
+    alias: 'widget.importwindow',
 
     requires: [
         CONFIG.APP_NS+'.view.Import.Toolbar'
     ],
-    //*/
 
     layout: 'border',
     floatable: true,
@@ -26,7 +25,7 @@ Ext.define(CONFIG.APP_NS+'.view.Import.Window', {
         },{
             region: 'south',
             border: false,
-            xtype: 'import.toolbar'
+            xtype: 'importtoolbar'
         }];
 
         this.callParent(arguments);

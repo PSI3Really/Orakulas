@@ -1,6 +1,6 @@
 Ext.define(CONFIG.APP_NS+'.view.Export.Window', {
     extend: 'Ext.window.Window',
-    alias: 'widget.export.window',
+    alias: 'widget.exportwindow',
 
     layout: 'border',
     floatable: true,

@@ -28,16 +28,12 @@ Ext.define(CONFIG.APP_NS+'.view.MainToolbar', {
                         {
                             text: 'Klonuoti atidarytą kortelę',
                             iconCls: 'icon-document-copy',
-                            handler: function () {
-                                alert('TODO: Nauja kortelė');
-                            }
+                            action: 'cloneTab'
                         },
                         {
                             text: 'Įkelti iš failo&hellip;',
                             iconCls: 'icon-folder-open',
-                            handler: function () {
-                                alert('TODO: Dialogas įkėlimui iš failo');
-                            }
+                            action: 'importReport'
                         }
                     ]
                 })
@@ -45,36 +41,39 @@ Ext.define(CONFIG.APP_NS+'.view.MainToolbar', {
             {
                 text: 'Įkelti istorinius duomenis&hellip;',
                 iconCls: 'icon-arrow-270',
-                handler: function () {
-                    //var wnd = Ext.create(CONFIG.APP_NS+'.view.Import.Window', {});
-                    var wnd = Ext.create('widget.import.window', {});
-
-                    wnd.show();
-                }
+                action: 'importData'
             },
             {
                 iconCls: 'icon-gear',
                 tooltip: 'Administravimas / Nustatymai',
-                handler: function () {
-                    alert('TODO: Administravimo / Nustatymų langas');
-                }
+                action: 'admin'
             },
             {
                 pressed: true,
+                lang: 'LT',
                 iconCls: 'icon-flag-lt',
                 tooltip: 'Perjungti kalbą į lietuvių',
+                action: 'switchLang'
+                /*
                 handler: function () {
                     if (!this.pressed) {
                         alert('TODO: Perjungti kalbą į lietuvių');
                     }
                 }
+                */
             },
             {
+                lang: 'EN',
                 iconCls: 'icon-flag-gb',
                 tooltip: 'Perjungti kalbą į anglų',
+                action: 'switchLang'
+                /*
                 handler: function () {
-                    alert('TODO: Perjungti kalbą į anglų');
+                    if (!this.pressed) {
+                        alert('TODO: Perjungti kalbą į anglų');
+                    }
                 }
+                //*/
             }
         ];
         

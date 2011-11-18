@@ -1,6 +1,6 @@
 Ext.define(CONFIG.APP_NS+'.view.Predict.Toolbar', {
     extend: 'Ext.toolbar.Toolbar',
-    alias: 'widget.predict.toolbar',
+    alias: 'widget.predicttoolbar',
 
     border: false,
 
@@ -8,19 +8,24 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.Toolbar', {
         this.items = [{
             xtype: 'button',
             iconCls: 'icon-folder-open',
+            action: 'openFile',
             text: 'Įkelti iš failo'
         },'-',{
             xtype: 'button',
+            action: 'infSysAndDepartments',
             text: 'IS/Padaliniai...'
         },{
             xtype: 'button',
+            action: 'supportAndDepartments',
             text: 'Priemonės/Padaliniai...'
         },'->',{
             xtype: 'button',
-            text: 'Atšaukti'
+            action: 'accept',
+            text: 'Gerai'
         },{
             xtype: 'button',
-            text: 'Gerai'
+            action: 'cancel',
+            text: 'Atšaukti'
         }];
 
         this.callParent(arguments);
