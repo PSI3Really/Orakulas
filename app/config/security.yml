@@ -4,6 +4,7 @@ security:
             pattern: ^/
             http_basic:
                 realm: "Secured demo area"
+            logout: ~
 
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
