@@ -26,9 +26,19 @@ Ext.define(CONFIG.APP_NS+'.view.Export.Window', {
             items: [{
                 xtype: 'textfield'
             },{
-                xtype: 'label',
-                text: 'COMBOBOX' //TODO
-                //forceSelection: true
+
+                xtype: 'combobox',
+                forceSelection: true,
+                store: {
+                    fields: ['filetype', 'extension', 'code'],
+                    data: [
+                        {'filetype':'Excel', 'extension':'.xls', 'code':'excel'},
+                        {'filetype':'Vidinis', 'extension':'.xls', 'code':'internal'}
+                    ]
+                },
+                queryMode: 'local',
+                valueField: 'code',
+                displayField: 'filetype'
             },{
                 xtype: 'button',
                 text: 'Atšaukti'
