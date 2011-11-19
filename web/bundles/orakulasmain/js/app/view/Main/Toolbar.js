@@ -4,7 +4,8 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Toolbar', {
 
     requires: [
         CONFIG.APP_NS+'.view.Import.Window',
-        CONFIG.APP_NS+'.view.Export.Window'
+        CONFIG.APP_NS+'.view.Export.Window',
+        CONFIG.APP_NS+'.view.admin.Window'
     ],
 
     initComponent: function () {

@@ -10,6 +10,7 @@ Ext.application({
         'Tab',
         'Import',
         'Export',
-        'Predict'
+        'Predict',
+        'Admin'
     ]
 });

@@ -1,5 +1,21 @@
-Ext.define(CONFIG.APP_NS+'view.admin.Window', {
+Ext.define(CONFIG.APP_NS+'.view.admin.Window', {
     extend: 'Ext.window.Window',
-    alias:  'widget.admin.window',
-    initComponent: function() {}
+    alias:  'widget.adminWindow',
+
+    layout: 'border',
+    floatable: true,
+    modal: true,
+
+    height: 250,
+    width: 500,
+    title: 'Administruoti',
+
+    initComponent: function() {
+        this.items = [{
+            region: 'center',
+            xtype: 'panel',
+            border: false,
+        }];
+        this.callParent(arguments);
+    }
 });
