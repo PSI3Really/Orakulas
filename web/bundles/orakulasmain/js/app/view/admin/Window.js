@@ -8,7 +8,7 @@ Ext.define(CONFIG.APP_NS+'.view.admin.Window', {
 
     height: 500,
     width: 600,
-    title: 'Administruoti',
+    title: 'Administravimas / Nustatymai',
 
     requires: [
         CONFIG.APP_NS+'.view.admin.TabPanel'
