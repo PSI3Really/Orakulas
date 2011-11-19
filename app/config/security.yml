@@ -1,13 +1,18 @@
 security:
     firewalls:
+        login_firewall:
+            pattern: ^/login$
+            anonymous: ~
         secured_area:
             pattern: ^/
-            http_basic:
-                realm: "Secured demo area"
+            form_login:
+                login_path: /login
+                check_path: /login_check
             logout: ~
 
-    access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
+#    access_control:
+#        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+#        - { path: ^/admin, roles: ROLE_ADMIN }
 
     providers:
         main:

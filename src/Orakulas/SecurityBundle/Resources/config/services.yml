@@ -1,0 +1,7 @@
+parameters:
+#    orakulas_security.example.class: Orakulas\SecurityBundle\Example
+
+services:
+#    orakulas_security.example:
+#        class: %orakulas_security.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

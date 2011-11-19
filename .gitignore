@@ -16,9 +16,7 @@ Thumbs.db
 
 # Symfony #
 ###########
-/web/bundles/framework/
-/web/bundles/sensiodistribution/
-/web/bundles/webprofiler/
+/web/bundles/
 /app/bootstrap*
 /app/cache/
 /app/logs/

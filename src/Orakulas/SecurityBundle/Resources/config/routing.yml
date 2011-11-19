@@ -1,0 +1,3 @@
+OrakulasSecurityBundle_homepage:
+    pattern:  /
+    defaults: { _controller: OrakulasSecurityBundle:Security:login }
