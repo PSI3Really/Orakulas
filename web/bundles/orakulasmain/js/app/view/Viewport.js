@@ -1,21 +1,21 @@
 Ext.define(CONFIG.APP_NS+'.view.Viewport', {
     extend: 'Ext.container.Viewport',
     layout: {
-        type: 'border'
+        type: 'border',
+        padding: '0 5 5 5'
     },
     
     requires: [
-        CONFIG.APP_NS+'.view.MainToolbar',
-        CONFIG.APP_NS+'.view.MainTabPanel'
+        CONFIG.APP_NS+'.view.Main.Toolbar',
+        CONFIG.APP_NS+'.view.Main.TabPanel'
     ],
     
     initComponent: function() {
-        this.dockedItems = [
-            {
-                xtype: 'maintoolbar'
-            }
-        ],
         this.items = [
+            {
+                region: 'north',
+                xtype: 'maintoolbar'
+            },
             {
                 region: 'center',
                 xtype: 'maintabpanel'

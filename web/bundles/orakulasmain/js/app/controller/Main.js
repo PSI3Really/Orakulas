@@ -1,7 +1,7 @@
 Ext.define(CONFIG.APP_NS+'.controller.Main', {
     extend: 'Ext.app.Controller',
 
-    views: ['MainToolbar'],
+    views: ['Main.Toolbar'],
 
     init: function(){
         this.control({
