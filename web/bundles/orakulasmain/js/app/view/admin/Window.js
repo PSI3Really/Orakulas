@@ -6,16 +6,21 @@ Ext.define(CONFIG.APP_NS+'.view.admin.Window', {
     floatable: true,
     modal: true,
 
-    height: 250,
-    width: 500,
+    height: 500,
+    width: 600,
     title: 'Administruoti',
 
+    requires: [
+        CONFIG.APP_NS+'.view.admin.TabPanel'
+    ],
+
     initComponent: function() {
-        this.items = [{
-            region: 'center',
-            xtype: 'panel',
-            border: false,
-        }];
+        this.items = [
+            {
+                region: 'center',
+                xtype: 'admintabpanel'
+            }
+        ];
         this.callParent(arguments);
     }
 });
