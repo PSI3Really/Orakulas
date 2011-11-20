@@ -1,4 +1,4 @@
-Ext.define(CONFIG.APP_NS+'.view.admin.users.UsersGrid', {
+Ext.define(CONFIG.APP_NS+'.view.Admin.Users.UsersGrid', {
     extend: 'Ext.grid.Panel',
     alias: 'widget.adminusersgrid',
 

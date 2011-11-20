@@ -1,9 +1,9 @@
-Ext.define(CONFIG.APP_NS+'.view.admin.TabPanel', {
+Ext.define(CONFIG.APP_NS+'.view.Admin.TabPanel', {
     extend: 'Ext.tab.Panel',
     alias: 'widget.admintabpanel',
 
     requires: [
-        CONFIG.APP_NS+'.view.admin.users.UsersGrid'
+        CONFIG.APP_NS+'.view.Admin.Users.UsersGrid'
     ],
 
     initComponent: function() {

@@ -1,4 +1,4 @@
-Ext.define(CONFIG.APP_NS+'.view.admin.Window', {
+Ext.define(CONFIG.APP_NS+'.view.Admin.Window', {
     extend: 'Ext.window.Window',
     alias:  'widget.adminWindow',
 
@@ -11,7 +11,7 @@ Ext.define(CONFIG.APP_NS+'.view.admin.Window', {
     title: 'Administravimas / Nustatymai',
 
     requires: [
-        CONFIG.APP_NS+'.view.admin.TabPanel'
+        CONFIG.APP_NS+'.view.Admin.TabPanel'
     ],
 
     initComponent: function() {
