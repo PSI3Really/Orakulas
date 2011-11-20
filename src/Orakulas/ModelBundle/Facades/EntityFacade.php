@@ -50,7 +50,7 @@ class EntityFacade
      * @param \string $class class of object
      * @return loaded object
      */
-    public function load($id, $class)
+    public function load($class, $id)
     {
         if ($id == NULL || $class == NULL)
         {

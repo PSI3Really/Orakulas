@@ -1,7 +1,63 @@
-OrakulasModelBundle_homepage:
-    pattern:  /
-    defaults: { _controller: OrakulasModelBundle:Default:index }
+OrakulasModelBundle_departments:
+    pattern:  /departments
+    defaults: { _controller: OrakulasModelBundle:Default:department }
 
-OrakulasModelBundle_allCategories:
-    pattern:  /categories
-    defaults: { _controller: OrakulasModelBundle:Default:allCategories }
+OrakulasModelBundle_department:
+    pattern:  /department/{id}
+    defaults: { _controller: OrakulasModelBundle:Default:department }
+
+OrakulasModelBundle_departmentInfoSysUsages:
+    pattern:  /departmentInfoSysUsages
+    defaults: { _controller: OrakulasModelBundle:Default:departmentInfoSysUsage }
+
+OrakulasModelBundle_departmentInfoSysUsage:
+    pattern:  /departmentInfoSysUsage/{id}
+    defaults: { _controller: OrakulasModelBundle:Default:departmentInfoSysUsage }
+
+OrakulasModelBundle_informationalSystems:
+    pattern:  /informationalSystems
+    defaults: { _controller: OrakulasModelBundle:Default:informationalSystem }
+
+OrakulasModelBundle_informationalSystem:
+    pattern:  /informationalSystem/{id}
+    defaults: { _controller: OrakulasModelBundle:Default:informationalSystem }
+
+OrakulasModelBundle_supportAdministrationTimes:
+    pattern:  /supportAdministrationTimes
+    defaults: { _controller: OrakulasModelBundle:Default:supportAdministrationTime }
+
+OrakulasModelBundle_supportAdministrationTime:
+    pattern:  /supportAdministrationTime/{id}
+    defaults: { _controller: OrakulasModelBundle:Default:supportAdministrationTime }
+
+OrakulasModelBundle_supportCategories:
+    pattern:  /supportCategories
+    defaults: { _controller: OrakulasModelBundle:Default:supportCategory }
+
+OrakulasModelBundle_supportCategory:
+    pattern:  /supportCategory/{id}
+    defaults: { _controller: OrakulasModelBundle:Default:supportCategory }
+
+OrakulasModelBundle_supportHistories:
+    pattern:  /supportHistories
+    defaults: { _controller: OrakulasModelBundle:Default:supportHistory }
+
+OrakulasModelBundle_supportHistory:
+    pattern:  /supportHistory/{id}
+    defaults: { _controller: OrakulasModelBundle:Default:supportHistory }
+
+OrakulasModelBundle_supportTypes:
+    pattern:  /supportTypes
+    defaults: { _controller: OrakulasModelBundle:Default:supportType }
+
+OrakulasModelBundle_supportType:
+    pattern:  /supportType/{id}
+    defaults: { _controller: OrakulasModelBundle:Default:supportType }
+
+OrakulasModelBundle_users:
+    pattern:  /users
+    defaults: { _controller: OrakulasModelBundle:Default:user }
+
+OrakulasModelBundle_user:
+    pattern:  /user/{id}
+    defaults: { _controller: OrakulasModelBundle:Default:user }
