@@ -2,6 +2,11 @@ Ext.define(CONFIG.APP_NS+'.controller.Main', {
     extend: 'Ext.app.Controller',
 
     views: ['Main.Toolbar'],
+    
+    //models: ['User'],
+    //stores: ['Users'],
+
+    //requires: [CONFIG.APP_NS+'.model.User'],
 
     init: function(){
         this.control({

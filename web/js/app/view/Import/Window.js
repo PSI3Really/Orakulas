@@ -19,9 +19,8 @@ Ext.define(CONFIG.APP_NS+'.view.Import.Window', {
 
         this.items = [{
             region: 'center',
-            xtype: 'panel',
-            border: false,
-            html: '<h1>NEED A GRID HERE</h1>' //TODO
+            xtype: 'importgrid',
+            border: false
         },{
             region: 'south',
             border: false,

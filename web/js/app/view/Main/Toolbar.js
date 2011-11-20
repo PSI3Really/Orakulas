@@ -56,26 +56,12 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Toolbar', {
                 iconCls: 'icon-flag-lt',
                 tooltip: 'Perjungti kalbą į lietuvių',
                 action: 'switchLang'
-                /*
-                handler: function () {
-                    if (!this.pressed) {
-                        alert('TODO: Perjungti kalbą į lietuvių');
-                    }
-                }
-                */
             },
             {
                 lang: 'EN',
                 iconCls: 'icon-flag-gb',
                 tooltip: 'Perjungti kalbą į anglų',
                 action: 'switchLang'
-                /*
-                handler: function () {
-                    if (!this.pressed) {
-                        alert('TODO: Perjungti kalbą į anglų');
-                    }
-                }
-                //*/
             }
         ];
         
