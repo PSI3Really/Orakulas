@@ -1,7 +1,10 @@
 Ext.define(CONFIG.APP_NS+'.controller.Import', {
     extend: 'Ext.app.Controller',
+    
+    //stores: ['Users'], 
+    models: ['User'],
+    views: ['Import.Window', 'Import.Toolbar', 'Import.Grid'],
 
-    views: ['Import.Window', 'Import.Toolbar'],
 
     init: function(){
         this.control({

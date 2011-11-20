@@ -1,34 +1,26 @@
 Ext.define(CONFIG.APP_NS+'.controller.Export', {
     extend: 'Ext.app.Controller',
 
-    /*
-    views: ['Export.Window', 'Export.Toolbar'],
+    views: ['Export.Window', 'Export.Controls'],
 
     init: function(){
         this.control({
-            'exporttoolbar button[action=accept]':{
+            'exportwindow button[action=accept]':{
                 click: this.accept
             },
-            'exporttoolbar button[action=cancel]':{
+            'exportwindow button[action=cancel]':{
                 click: this.cancel
-            },
-            'exporttoolbar button[action=openFile]':{
-                click: this.openFile
             }
         });
     },
 
     accept: function(btn){
-        alert('Pressed Accept');
-        btn.up('exportwindow').close();
+        if (btn.up('exportcontrols').getForm().isValid()){
+            btn.up('exportwindow').close();
+        }
     },
 
     cancel: function(btn){
         btn.up('exportwindow').close();
-    },
-
-    openFile: function(btn){
-        alert('Pressed OpenFile');
     }
-    */
 });

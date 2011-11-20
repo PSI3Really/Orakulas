@@ -4,7 +4,13 @@ Ext.application({
     name: CONFIG.APP_NS,
     appFolder: '../js/app',
     autoCreateViewport: true,
-    
+
+    /*
+    models: [
+        'User'
+    ],
+    */
+
     controllers: [
         'Main',
         'Tab',
@@ -13,4 +19,5 @@ Ext.application({
         'Predict',
         'Admin'
     ]
+
 });
