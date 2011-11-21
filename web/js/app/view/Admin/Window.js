@@ -2,7 +2,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Window', {
     extend: 'Ext.window.Window',
     alias:  'widget.adminWindow',
 
-    layout: 'border',
+    layout: 'fit',
     floatable: true,
     modal: true,
 
@@ -17,7 +17,6 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Window', {
     initComponent: function() {
         this.items = [
             {
-                region: 'center',
                 xtype: 'admintabpanel'
             }
         ];

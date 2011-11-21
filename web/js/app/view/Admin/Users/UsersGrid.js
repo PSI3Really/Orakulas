@@ -5,6 +5,8 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Users.UsersGrid', {
     //store: CONFIG.APP_NS+'.store.Users', //Does not seem to work
 
     initComponent: function() {
+        this.border = false;
+        
         this.store = Ext.create('widget.adminUsersStore', {});
 
         this.columns = [

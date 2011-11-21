@@ -36,6 +36,14 @@
 	background: url(../images/icons/tick.png) no-repeat center center;
 }
 
+.icon-plus-circle {
+    background: url(../images/icons/plus-circle.png) no-repeat center center;
+}
+
+.icon-minus-circle {
+    background: url(../images/icons/minus-circle.png) no-repeat center center;
+}
+
 /* Flags */
 .icon-flag-lt {
 	background: url(../images/icons/flags/lt.png) no-repeat center center;
