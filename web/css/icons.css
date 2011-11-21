@@ -32,6 +32,10 @@
 	background: url(../images/icons/table.png) no-repeat center center;
 }
 
+.icon-tick {
+	background: url(../images/icons/tick.png) no-repeat center center;
+}
+
 /* Flags */
 .icon-flag-lt {
 	background: url(../images/icons/flags/lt.png) no-repeat center center;

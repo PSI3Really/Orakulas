@@ -5,11 +5,18 @@ Ext.application({
     appFolder: '../js/app',
     autoCreateViewport: true,
 
-    /*
+    paths: {
+        'Ext.ux': '../js/ux'
+    },
+
     models: [
         'User'
     ],
-    */
+
+    stores: [
+        'Users'
+    ],
+    //*/
 
     controllers: [
         'Main',

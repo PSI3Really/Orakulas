@@ -1,6 +1,7 @@
 Ext.define(CONFIG.APP_NS+'.model.User', {
     extend: 'Ext.data.Model',
     alias: 'widget.usermodel',
+    idProperty: 'id',
     fields: [
         {name: 'id',            type: 'int'},
         {name: 'username',      type: 'string'},
@@ -13,10 +14,18 @@ Ext.define(CONFIG.APP_NS+'.model.User', {
         {name: 'authenticated', type: 'boolean'}
     ],
 
-    hasMany: {model: CONFIG.APP_NS+'.model.Roles', name: 'roles'}
+    hasMany: {model: CONFIG.APP_NS+'.model.Roles', name: 'roles'},
+
+    proxy: {
+        type: 'ajax',
+        url: 'model/users',
+        reader: {
+            type: 'json'
+        }
+    }
 });
 
-Ext.define(CONFIG.APP_NS+'.model.User', {
+Ext.define(CONFIG.APP_NS+'.model.Roles', {
     extend: 'Ext.data.Model',
 
     fields: [
