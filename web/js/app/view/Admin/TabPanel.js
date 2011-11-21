@@ -3,7 +3,8 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.TabPanel', {
     alias: 'widget.admintabpanel',
 
     requires: [
-        CONFIG.APP_NS+'.view.Admin.Users.UsersGrid'
+        CONFIG.APP_NS+'.view.Admin.Users.UsersGrid',
+        CONFIG.APP_NS+'.view.Admin.Departaments.DepartamentsGrid'
     ],
 
     initComponent: function() {
@@ -23,7 +24,12 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.TabPanel', {
                 title: 'Informacines sistemos'
             },
             {
-                title: 'Padaliniai'
+                title: 'Padaliniai',
+                items: [
+                    {
+                        xtype: 'admindepartamentsgrid'
+                    }
+                ]
             },
             {
                 title: 'Priemones'
