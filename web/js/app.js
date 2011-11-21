@@ -10,11 +10,17 @@ Ext.application({
     },
 
     models: [
-        'User'
+        'Admin.User',
+        'Admin.Department',
+        'Admin.InformationalSystem',
+        'Admin.DepartmentInfoSysUsage'
     ],
 
     stores: [
-        'Users'
+        'Admin.Users',
+        'Admin.Departments',
+        'Admin.InformationalSystems',
+        'Admin.DepartmentInfoSysUsages'
     ],
     //*/
 
