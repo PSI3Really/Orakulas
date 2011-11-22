@@ -1,62 +1,126 @@
-OrakulasModelBundle_departments:
+OrakulasModelBundle_departments_get:
     pattern:  /departments
     defaults: { _controller: OrakulasModelBundle:Default:department }
+    requirements:
+      _method:  GET
+
+OrakulasModelBundle_departments_post:
+    pattern:  /departments
+    defaults: { _controller: OrakulasModelBundle:Default:departmentPost }
+    requirements:
+      _method:  POST
 
 OrakulasModelBundle_department:
     pattern:  /department/{id}
     defaults: { _controller: OrakulasModelBundle:Default:department }
 
-OrakulasModelBundle_departmentInfoSysUsages:
+OrakulasModelBundle_departmentInfoSysUsages_get:
     pattern:  /departmentInfoSysUsages
     defaults: { _controller: OrakulasModelBundle:Default:departmentInfoSysUsage }
+    requirements:
+      _method:  GET
+
+OrakulasModelBundle_departmentInfoSysUsages_post:
+    pattern:  /departmentInfoSysUsages
+    defaults: { _controller: OrakulasModelBundle:Default:departmentInfoSysUsagePost }
+    requirements:
+      _method: POST
 
 OrakulasModelBundle_departmentInfoSysUsage:
     pattern:  /departmentInfoSysUsage/{id}
     defaults: { _controller: OrakulasModelBundle:Default:departmentInfoSysUsage }
 
-OrakulasModelBundle_informationalSystems:
+OrakulasModelBundle_informationalSystems_get:
     pattern:  /informationalSystems
     defaults: { _controller: OrakulasModelBundle:Default:informationalSystem }
+    requirements:
+      _method:  GET
+
+OrakulasModelBundle_informationalSystems_post:
+    pattern:  /informationalSystems
+    defaults: { _controller: OrakulasModelBundle:Default:informationalSystemPost }
+    requirements:
+      _method: POST
 
 OrakulasModelBundle_informationalSystem:
     pattern:  /informationalSystem/{id}
     defaults: { _controller: OrakulasModelBundle:Default:informationalSystem }
 
-OrakulasModelBundle_supportAdministrationTimes:
+OrakulasModelBundle_supportAdministrationTimes_get:
     pattern:  /supportAdministrationTimes
     defaults: { _controller: OrakulasModelBundle:Default:supportAdministrationTime }
+    requirements:
+      _method:  GET
+
+OrakulasModelBundle_supportAdministrationTimes_post:
+    pattern:  /supportAdministrationTimes
+    defaults: { _controller: OrakulasModelBundle:Default:supportAdministrationTimePost }
+    requirements:
+      _method:  POST
 
 OrakulasModelBundle_supportAdministrationTime:
     pattern:  /supportAdministrationTime/{id}
     defaults: { _controller: OrakulasModelBundle:Default:supportAdministrationTime }
 
-OrakulasModelBundle_supportCategories:
+OrakulasModelBundle_supportCategories_get:
     pattern:  /supportCategories
     defaults: { _controller: OrakulasModelBundle:Default:supportCategory }
+    requirements:
+      _method:  GET
+
+OrakulasModelBundle_supportCategories_post:
+    pattern:  /supportCategories
+    defaults: { _controller: OrakulasModelBundle:Default:supportCategoryPost }
+    requirements:
+      _method:  POST
 
 OrakulasModelBundle_supportCategory:
     pattern:  /supportCategory/{id}
     defaults: { _controller: OrakulasModelBundle:Default:supportCategory }
 
-OrakulasModelBundle_supportHistories:
+OrakulasModelBundle_supportHistories_get: #errora meta
     pattern:  /supportHistories
     defaults: { _controller: OrakulasModelBundle:Default:supportHistory }
+    requirements:
+      _method:  GET
+
+OrakulasModelBundle_supportHistories_post:
+    pattern:  /supportHistories
+    defaults: { _controller: OrakulasModelBundle:Default:supportHistoryPost }
+    requirements:
+      _method:  POST
 
 OrakulasModelBundle_supportHistory:
     pattern:  /supportHistory/{id}
     defaults: { _controller: OrakulasModelBundle:Default:supportHistory }
 
-OrakulasModelBundle_supportTypes:
+OrakulasModelBundle_supportTypes_get:
     pattern:  /supportTypes
     defaults: { _controller: OrakulasModelBundle:Default:supportType }
+    requirements:
+      _method:  GET
+
+OrakulasModelBundle_supportTypes_post:
+    pattern:  /supportTypes
+    defaults: { _controller: OrakulasModelBundle:Default:supportTypePost }
+    requirements:
+      _method:  POST
 
 OrakulasModelBundle_supportType:
     pattern:  /supportType/{id}
     defaults: { _controller: OrakulasModelBundle:Default:supportType }
 
-OrakulasModelBundle_users:
+OrakulasModelBundle_users_get:
     pattern:  /users
     defaults: { _controller: OrakulasModelBundle:Default:user }
+    requirements:
+      _method:  GET
+
+OrakulasModelBundle_users_post:
+    pattern:  /users
+    defaults: { _controller: OrakulasModelBundle:Default:userPost }
+    requirements:
+      _method:  POST
 
 OrakulasModelBundle_user:
     pattern:  /user/{id}
