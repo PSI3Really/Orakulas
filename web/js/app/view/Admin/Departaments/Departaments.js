@@ -6,36 +6,36 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Departaments.Departaments', {
         CONFIG.APP_NS+'.view.Admin.Departaments.DepartamentsGrid'
     ],
 
-    border: false,
-
-    items: [
-        {
-            xtype: 'admindepartamentsgrid',
-            border: false,
-            dockedItems: [
-                {
-                    xtype: 'toolbar',
-                    dock:  'top',
-                    items: [
-                        {
-                            iconCls: 'icon-plus-circle',
-                            xtype:  'button',
-                            action: 'add',
-                            text:   'Pridėti'
-                        },
-                        {
-                            iconCls: 'icon-minus-circle',
-                            xtype:  'button',
-                            action: 'delete',
-                            text:   'Pašalinti'
-                        }
-                    ]
-                }
-            ]
-        }
-    ],
-
     initComponent: function() {
+        this.border = false;
+
+        this.items = [
+            {
+                xtype: 'admindepartamentsgrid',
+                border: false,
+                dockedItems: [
+                    {
+                        xtype: 'toolbar',
+                        dock:  'top',
+                        items: [
+                            {
+                                iconCls: 'icon-plus-circle',
+                                xtype:  'button',
+                                action: 'add',
+                                text:   'Pridėti'
+                            },
+                            {
+                                iconCls: 'icon-minus-circle',
+                                xtype:  'button',
+                                action: 'delete',
+                                text:   'Pašalinti'
+                            }
+                        ]
+                    }
+                ]
+            }
+        ];
+
         this.callParent(arguments);
     }
 });

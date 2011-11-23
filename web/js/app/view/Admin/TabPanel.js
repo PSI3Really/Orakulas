@@ -61,6 +61,6 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.TabPanel', {
             }
         ];
 
-        this.callParent();
+        this.callParent(arguments);
     }
 });

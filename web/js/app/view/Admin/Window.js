@@ -2,12 +2,6 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Window', {
     extend: 'Ext.window.Window',
     alias:  'widget.adminWindow',
 
-    layout: 'fit',
-    floatable: true,
-    modal: true,
-
-    height: 500,
-    width: 600,
     title: 'Administravimas / Nustatymai',
 
     requires: [
@@ -15,6 +9,14 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Window', {
     ],
 
     initComponent: function() {
+        this.layout = 'fit';
+        this.floatable = true;
+        this.modal = true;
+
+        this.height = 500;
+        this.width = 600;
+
+
         this.items = [
             {
                 xtype: 'admintabpanel'
