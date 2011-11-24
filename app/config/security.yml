@@ -1,13 +1,13 @@
 security:
     firewalls:
-        login_firewall:
-            pattern: ^/login$
-            anonymous: ~
+    #    login_firewall:
+    #       pattern: ^/login$
+    #       anonymous: ~
         secured_area:
-            pattern: ^/
+            pattern: ^/(?!login)
             form_login:
                 login_path: /login
-                check_path: /login_check
+                check_path: /check__if_login
             logout: ~
 
 #    access_control:

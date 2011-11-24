@@ -2,6 +2,8 @@
 
 namespace Orakulas\ModelBundle\Facades;
 
+use Orakulas\ModelBundle\Entity\Department;
+
 class ModelUtils
 {
     protected static function getterFilter($string)
@@ -9,7 +11,7 @@ class ModelUtils
         return preg_match('/(get)|(is)/', $string);
     }
 
-    protected static function objectToArray($var)
+    public static function objectToArray($var)
     {
         $result = array();
         $references = array();
@@ -47,6 +49,16 @@ class ModelUtils
         }
 
         return $result;
+    }
+
+    public static function arrayToObject($array, $className) {
+        $className = "Orakulas\\ModelBundle\\Entity\\".$className;
+        $object = new $className();
+        foreach ($array as $key => $value) {
+            $methodName = "set".ucfirst($key);
+            $object->$methodName($value);
+        }
+        return $object;
     }
 
     public static function jsonEncodeEx($param) {
