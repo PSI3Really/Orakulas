@@ -82,12 +82,10 @@ class EntityFacade
         return $repository->findAll();
     }
 
-    public function deleteAll($class) {
-        $entries = $this->loadAll($class);
+    public function delete($class, $id) {
+        $entry = $this->load($class, $id);
         $entityManager = $this->getDoctrine()->getEntityManager();
-        foreach ($entries as $entry) {
-            $entityManager->remove($entry);
-        }
+        $entityManager->remove($entry);
         $entityManager->flush();
     }
 
