@@ -13,7 +13,8 @@ Ext.application({
         'Admin.User',
         'Admin.Department',
         'Admin.InformationalSystem',
-        'Admin.DepartmentInfoSysUsage'
+        'Admin.DepartmentInfoSysUsage',
+        'Report'
     ],
 
     stores: [

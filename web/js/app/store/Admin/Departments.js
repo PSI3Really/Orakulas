@@ -9,6 +9,6 @@ Ext.define(CONFIG.APP_NS+'.store.Admin.Departments', {
         url: 'model/departments',
         reader: {
             type: 'json'
-        }
+        },
     }
 });

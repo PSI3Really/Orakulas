@@ -44,14 +44,12 @@ Ext.define(CONFIG.APP_NS+'.controller.Tab', {
     },
 
     addTable: function(item){
-        //TODO: item.up does not point to parent tab
-        //var tab = item.up('menu').up('tabpanel').getActiveTab();
-        alert('TODO: Naujas lentelės vaizdas');
+        var tab = item.up('menu').floatParent.up('tabpanel').getActiveTab();
+        alert('TODO: Naujas lentelės vaizdas: ' + tab.title);
     },
 
     addChart: function(item){
-        //TODO: item.up does not point to parent tab
-        //var tab = item.up('tabpanel').getActiveTab();
+        var tab = item.up('menu').floatParent.up('tabpanel').getActiveTab();
         alert('TODO: Naujas grafiko vaizdas');
     }
 });

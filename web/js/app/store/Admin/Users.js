@@ -9,6 +9,9 @@ Ext.define(CONFIG.APP_NS+'.store.Admin.Users', {
         url: 'model/users',
         reader: {
             type: 'json'
+        },
+        writer: {
+            type: 'json'
         }
     }
 });
