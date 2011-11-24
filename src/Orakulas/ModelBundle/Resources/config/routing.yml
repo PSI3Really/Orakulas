@@ -15,7 +15,7 @@ OrakulasModelBundle_departments_delete:
     pattern:  /departments/delete
     defaults: { _controller: OrakulasModelBundle:Default:departmentDelete }
     requirements:
-      _method:  DELETE
+      _method:  POST
 
 #ar situ reiks?
 OrakulasModelBundle_department:
@@ -38,7 +38,7 @@ OrakulasModelBundle_departmentInfoSysUsages_delete:
     pattern:  /departmentInfoSysUsages/delete
     defaults: { _controller: OrakulasModelBundle:Default:departmentInfoSysUsageDelete }
     requirements:
-      _method: DELETE
+      _method: POST
 
 OrakulasModelBundle_departmentInfoSysUsage:
     pattern:  /departmentInfoSysUsage/{id}
@@ -60,7 +60,7 @@ OrakulasModelBundle_informationalSystems_delete:
     pattern:  /informationalSystems/delete
     defaults: { _controller: OrakulasModelBundle:Default:informationalSystemDelete }
     requirements:
-      _method: DELETE
+      _method: POST
 
 OrakulasModelBundle_informationalSystem:
     pattern:  /informationalSystem/{id}
@@ -82,7 +82,7 @@ OrakulasModelBundle_supportAdministrationTimes_delete:
     pattern:  /supportAdministrationTimes/delete
     defaults: { _controller: OrakulasModelBundle:Default:supportAdministrationTimeDelete }
     requirements:
-      _method:  DELETE
+      _method:  POST
 
 OrakulasModelBundle_supportAdministrationTime:
     pattern:  /supportAdministrationTime/{id}
@@ -104,7 +104,7 @@ OrakulasModelBundle_supportCategories_delete:
     pattern:  /supportCategories/delete
     defaults: { _controller: OrakulasModelBundle:Default:supportCategoryDelete }
     requirements:
-      _method:  DELETE
+      _method:  POST
 
 OrakulasModelBundle_supportCategory:
     pattern:  /supportCategory/{id}
@@ -126,7 +126,7 @@ OrakulasModelBundle_supportHistories_delete:
     pattern:  /supportHistories/delete
     defaults: { _controller: OrakulasModelBundle:Default:supportHistoryDelete }
     requirements:
-      _method:  DELETE
+      _method:  POST
 
 OrakulasModelBundle_supportHistory:
     pattern:  /supportHistory/{id}
@@ -148,7 +148,7 @@ OrakulasModelBundle_supportTypes_delete:
     pattern:  /supportTypes/delete
     defaults: { _controller: OrakulasModelBundle:Default:supportTypeDelete }
     requirements:
-      _method:  DELETE
+      _method:  POST
 
 OrakulasModelBundle_supportType:
     pattern:  /supportType/{id}
@@ -170,7 +170,7 @@ OrakulasModelBundle_users_delete:
     pattern:  /users/delete
     defaults: { _controller: OrakulasModelBundle:Default:userDelete }
     requirements:
-      _method:  DELETE
+      _method:  POST
 
 OrakulasModelBundle_user:
     pattern:  /user/{id}
