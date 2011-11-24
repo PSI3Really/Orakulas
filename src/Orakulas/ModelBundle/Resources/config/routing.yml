@@ -17,6 +17,7 @@ OrakulasModelBundle_departments_delete:
     requirements:
       _method:  DELETE
 
+#ar situ reiks?
 OrakulasModelBundle_department:
     pattern:  /department/{id}
     defaults: { _controller: OrakulasModelBundle:Default:department }
