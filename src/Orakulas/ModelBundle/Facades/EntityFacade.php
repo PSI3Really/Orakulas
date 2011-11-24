@@ -82,6 +82,15 @@ class EntityFacade
         return $repository->findAll();
     }
 
+    public function deleteAll($class) {
+        $entries = $this->loadAll($class);
+        $entityManager = $this->getDoctrine()->getEntityManager();
+        foreach ($entries as $entry) {
+            $entityManager->remove($entry);
+        }
+        $entityManager->flush();
+    }
+
     /**
      * @param \Symfony\Bundle\DoctrineBundle\Registry $doctrine
      * @return void
