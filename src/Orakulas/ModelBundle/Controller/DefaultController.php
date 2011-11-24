@@ -46,7 +46,7 @@ class DefaultController extends Controller
     }
 
     public function departmentDeleteAction() {
-        $this->deleteAll(EntityFacade::DEPARTMENT);
+        $this->delete(EntityFacade::DEPARTMENT);
         exit;
     }
 
@@ -61,7 +61,7 @@ class DefaultController extends Controller
     }
 
     public function departmentInfoSysUsageDeleteAction() {
-        $this->deleteAll(EntityFacade::DEPARTMENT_INFO_SYS_USAGE);
+        $this->delete(EntityFacade::DEPARTMENT_INFO_SYS_USAGE);
         exit;
     }
 
@@ -76,7 +76,7 @@ class DefaultController extends Controller
     }
 
     public function informationalSystemDeleteAction() {
-        $this->deleteAll(EntityFacade::INFORMATIONAL_SYSTEM);
+        $this->delete(EntityFacade::INFORMATIONAL_SYSTEM);
         exit;
     }
 
@@ -91,7 +91,7 @@ class DefaultController extends Controller
     }
 
     public function supportAdministrationTimeDeleteAction() {
-        $this->deleteAll(EntityFacade::SUPPORT_ADMINISTRATION_TIME);
+        $this->delete(EntityFacade::SUPPORT_ADMINISTRATION_TIME);
         exit;
     }
 
@@ -106,7 +106,7 @@ class DefaultController extends Controller
     }
 
     public function supportCategoryDeleteAction() {
-        $this->deleteAll(EntityFacade::SUPPORT_CATEGORY);
+        $this->delete(EntityFacade::SUPPORT_CATEGORY);
         exit;
     }
 
@@ -122,7 +122,7 @@ class DefaultController extends Controller
     }
 
     public function supportHistoryDeleteAction() {
-        $this->deleteAll(EntityFacade::SUPPORT_HISTORY);
+        $this->delete(EntityFacade::SUPPORT_HISTORY);
         exit;
     }
 
@@ -137,7 +137,7 @@ class DefaultController extends Controller
     }
 
     public function supportTypeDeleteAction() {
-        $this->deleteAll(EntityFacade::SUPPORT_TYPE);
+        $this->delete(EntityFacade::SUPPORT_TYPE);
         exit;
     }
 
@@ -152,7 +152,7 @@ class DefaultController extends Controller
     }
 
     public function userDeleteAction() {
-        $this->deleteAll(EntityFacade::USER);
+        $this->delete(EntityFacade::USER);
         exit;
     }
 
@@ -171,7 +171,10 @@ class DefaultController extends Controller
         $this->getEntityFacade()->save($jsonValueObject);
     }
 
-    private function deleteAll($className) {
-        $this->getEntityFacade()->deleteAll($className);
+    private function delete($className) {
+        $jsonValue = $_POST["jsonValue"];
+        $jsonValueDecoded = json_decode($jsonValue, true);
+        $id = $jsonValueDecoded['id'];
+        $this->getEntityFacade()->delete($className, $id);
     }
 }
