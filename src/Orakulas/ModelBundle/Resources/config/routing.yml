@@ -5,7 +5,7 @@ OrakulasModelBundle_departments_get:
       _method:  GET
 
 OrakulasModelBundle_departments_post:
-    pattern:  /departments
+    pattern:  /departments/create
     defaults: { _controller: OrakulasModelBundle:Default:departmentPost }
     requirements:
       _method:  POST
@@ -28,7 +28,7 @@ OrakulasModelBundle_departmentInfoSysUsages_get:
       _method:  GET
 
 OrakulasModelBundle_departmentInfoSysUsages_post:
-    pattern:  /departmentInfoSysUsages
+    pattern:  /departmentInfoSysUsages/create
     defaults: { _controller: OrakulasModelBundle:Default:departmentInfoSysUsagePost }
     requirements:
       _method: POST
@@ -50,7 +50,7 @@ OrakulasModelBundle_informationalSystems_get:
       _method:  GET
 
 OrakulasModelBundle_informationalSystems_post:
-    pattern:  /informationalSystems
+    pattern:  /informationalSystems/create
     defaults: { _controller: OrakulasModelBundle:Default:informationalSystemPost }
     requirements:
       _method: POST
@@ -72,7 +72,7 @@ OrakulasModelBundle_supportAdministrationTimes_get:
       _method:  GET
 
 OrakulasModelBundle_supportAdministrationTimes_post:
-    pattern:  /supportAdministrationTimes
+    pattern:  /supportAdministrationTimes/create
     defaults: { _controller: OrakulasModelBundle:Default:supportAdministrationTimePost }
     requirements:
       _method:  POST
@@ -94,7 +94,7 @@ OrakulasModelBundle_supportCategories_get:
       _method:  GET
 
 OrakulasModelBundle_supportCategories_post:
-    pattern:  /supportCategories
+    pattern:  /supportCategories/create
     defaults: { _controller: OrakulasModelBundle:Default:supportCategoryPost }
     requirements:
       _method:  POST
@@ -116,7 +116,7 @@ OrakulasModelBundle_supportHistories_get: #errora meta
       _method:  GET
 
 OrakulasModelBundle_supportHistories_post:
-    pattern:  /supportHistories
+    pattern:  /supportHistories/create
     defaults: { _controller: OrakulasModelBundle:Default:supportHistoryPost }
     requirements:
       _method:  POST
@@ -138,7 +138,7 @@ OrakulasModelBundle_supportTypes_get:
       _method:  GET
 
 OrakulasModelBundle_supportTypes_post:
-    pattern:  /supportTypes
+    pattern:  /supportTypes/create
     defaults: { _controller: OrakulasModelBundle:Default:supportTypePost }
     requirements:
       _method:  POST
@@ -160,7 +160,7 @@ OrakulasModelBundle_users_get:
       _method:  GET
 
 OrakulasModelBundle_users_post:
-    pattern:  /users
+    pattern:  /users/create
     defaults: { _controller: OrakulasModelBundle:Default:userPost }
     requirements:
       _method:  POST
