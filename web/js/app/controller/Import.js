@@ -1,7 +1,7 @@
 Ext.define(CONFIG.APP_NS+'.controller.Import', {
     extend: 'Ext.app.Controller',
-    
-    //stores: ['Users'], 
+
+    //stores: ['Users'],
     models: ['User'],
     views: ['Import.Window', 'Import.Toolbar', 'Import.Grid'],
 
