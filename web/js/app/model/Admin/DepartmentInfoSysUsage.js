@@ -1,5 +1,6 @@
 Ext.define(CONFIG.APP_NS+'.model.Admin.DepartmentInfoSysUsage', {
     extend: 'Ext.data.Model',
+    alias: 'widget.adminDepartmentInfoSysUsageModel',
     idProperty: 'id',
 
     requires:[

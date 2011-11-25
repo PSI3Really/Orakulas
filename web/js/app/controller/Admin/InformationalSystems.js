@@ -32,8 +32,6 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.InformationalSystems', {
 
         store.add(record);
         store.sync();
-
-        
     },
 
     delete: function(btn){

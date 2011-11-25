@@ -9,7 +9,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Users', {
         'Admin.Users'
     ],
 
-    views: ['Admin.Users.Users'],
+    views: ['Admin.Users.Users', 'Admin.Users.EditWindow'],
 
     init: function(){
         this.control({
@@ -18,6 +18,15 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Users', {
             },
             'adminusersgrid button[action=delete]':{
                 click: this.delete
+            },
+            'adminusersgrid':{
+                itemdblclick: this.edit
+            },
+            'adminUsersEditWindow button[action=save]':{
+                click: this.onSaveEdit
+            },
+            'adminUsersEditWindow button[action=cancel]':{
+                click: this.onCancelEdit
             }
         });
     },
@@ -26,14 +35,21 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Users', {
         var grid = btn.up('adminusersgrid');
         var store = grid.getStore();
 
-        var record = Ext.create(CONFIG.APP_NS+'.model.Admin.User', {
-            'username': 'test',
-            'admin': false
+        var wnd = Ext.create('widget.adminUsersEditWindow', {
+            editing: false,
+            store: store
         });
 
-        //store.insert(0, record);
-        store.add(record);
-        store.sync();
+        wnd.show();
+    },
+
+    edit: function(view, record, item, index){
+        var wnd = Ext.create('widget.adminUsersEditWindow', {
+            editing: true,
+            record: record
+        });
+
+        wnd.show();
     },
 
     delete: function(btn){
@@ -56,5 +72,28 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Users', {
                 }
             });
         }
+    },
+
+    onSaveEdit: function(btn){
+        var wnd = btn.up('adminUsersEditWindow');
+        var form = wnd.down('form');
+
+        //Save all the form fields into the record
+        var values = form.getValues();
+        for (var property in values){
+            wnd.record.set(property, values[property]);
+        };
+
+        if (wnd.store && !wnd.editing){ //are we creating a new entry? Add it to the store!
+            wnd.store.add(wnd.record);
+        };
+
+        wnd.close();
+        wnd.store.sync();
+    },
+
+    onCancelEdit: function(btn){
+        var wnd = btn.up('adminUsersEditWindow');
+        wnd.close();
     }
 });

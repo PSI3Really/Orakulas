@@ -1,5 +1,6 @@
 Ext.define(CONFIG.APP_NS+'.model.Admin.SupportAdministrationTime', {
     extend: 'Ext.data.Model',
+    alias: 'widget.adminSupportAdministrationTimeModel',
     idProperty: 'id',
 
     requires:[

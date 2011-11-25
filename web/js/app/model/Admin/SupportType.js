@@ -1,5 +1,6 @@
 Ext.define(CONFIG.APP_NS+'.model.Admin.SupportType', {
     extend: 'Ext.data.Model',
+    alias: 'widget.adminSupportTypeModel',
     idProperty: 'id',
 
     requires:[
