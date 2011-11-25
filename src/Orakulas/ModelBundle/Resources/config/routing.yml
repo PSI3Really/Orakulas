@@ -1,5 +1,5 @@
 OrakulasModelBundle_departments_get:
-    pattern:  /departments
+    pattern:  /departments/read
     defaults: { _controller: OrakulasModelBundle:Default:department }
     requirements:
       _method:  GET
@@ -25,11 +25,11 @@ OrakulasModelBundle_departments_update:
 
 #ar situ reiks?
 OrakulasModelBundle_department:
-    pattern:  /department/{id}
+    pattern:  /department/read/{id}
     defaults: { _controller: OrakulasModelBundle:Default:department }
 
 OrakulasModelBundle_departmentInfoSysUsages_get:
-    pattern:  /departmentInfoSysUsages
+    pattern:  /departmentInfoSysUsages/read
     defaults: { _controller: OrakulasModelBundle:Default:departmentInfoSysUsage }
     requirements:
       _method:  GET
@@ -53,11 +53,11 @@ OrakulasModelBundle_departmentInfoSysUsages_update:
       _method: POST
 
 OrakulasModelBundle_departmentInfoSysUsage:
-    pattern:  /departmentInfoSysUsage/{id}
+    pattern:  /departmentInfoSysUsage/read/{id}
     defaults: { _controller: OrakulasModelBundle:Default:departmentInfoSysUsage }
 
 OrakulasModelBundle_informationalSystems_get:
-    pattern:  /informationalSystems
+    pattern:  /informationalSystems/read
     defaults: { _controller: OrakulasModelBundle:Default:informationalSystem }
     requirements:
       _method:  GET
@@ -81,11 +81,11 @@ OrakulasModelBundle_informationalSystems_update:
       _method: POST
 
 OrakulasModelBundle_informationalSystem:
-    pattern:  /informationalSystem/{id}
+    pattern:  /informationalSystem/read/{id}
     defaults: { _controller: OrakulasModelBundle:Default:informationalSystem }
 
 OrakulasModelBundle_supportAdministrationTimes_get:
-    pattern:  /supportAdministrationTimes
+    pattern:  /supportAdministrationTimes/read
     defaults: { _controller: OrakulasModelBundle:Default:supportAdministrationTime }
     requirements:
       _method:  GET
@@ -109,11 +109,11 @@ OrakulasModelBundle_supportAdministrationTimes_update:
       _method:  POST
 
 OrakulasModelBundle_supportAdministrationTime:
-    pattern:  /supportAdministrationTime/{id}
+    pattern:  /supportAdministrationTime/read/{id}
     defaults: { _controller: OrakulasModelBundle:Default:supportAdministrationTime }
 
 OrakulasModelBundle_supportCategories_get:
-    pattern:  /supportCategories
+    pattern:  /supportCategories/read
     defaults: { _controller: OrakulasModelBundle:Default:supportCategory }
     requirements:
       _method:  GET
@@ -137,11 +137,11 @@ OrakulasModelBundle_supportCategories_update:
       _method:  POST
 
 OrakulasModelBundle_supportCategory:
-    pattern:  /supportCategory/{id}
+    pattern:  /supportCategory/read/{id}
     defaults: { _controller: OrakulasModelBundle:Default:supportCategory }
 
 OrakulasModelBundle_supportHistories_get: #errora meta
-    pattern:  /supportHistories
+    pattern:  /supportHistories/read
     defaults: { _controller: OrakulasModelBundle:Default:supportHistory }
     requirements:
       _method:  GET
@@ -165,11 +165,11 @@ OrakulasModelBundle_supportHistories_update:
       _method:  POST
 
 OrakulasModelBundle_supportHistory:
-    pattern:  /supportHistory/{id}
+    pattern:  /supportHistory/read/{id}
     defaults: { _controller: OrakulasModelBundle:Default:supportHistory }
 
 OrakulasModelBundle_supportTypes_get:
-    pattern:  /supportTypes
+    pattern:  /supportTypes/read
     defaults: { _controller: OrakulasModelBundle:Default:supportType }
     requirements:
       _method:  GET
@@ -193,11 +193,11 @@ OrakulasModelBundle_supportTypes_update:
       _method:  POST
 
 OrakulasModelBundle_supportType:
-    pattern:  /supportType/{id}
+    pattern:  /supportType/read/{id}
     defaults: { _controller: OrakulasModelBundle:Default:supportType }
 
 OrakulasModelBundle_users_get:
-    pattern:  /users
+    pattern:  /users/read
     defaults: { _controller: OrakulasModelBundle:Default:user }
     requirements:
       _method:  GET
@@ -221,5 +221,5 @@ OrakulasModelBundle_users_update:
       _method:  POST
 
 OrakulasModelBundle_user:
-    pattern:  /user/{id}
+    pattern:  /user/read/{id}
     defaults: { _controller: OrakulasModelBundle:Default:user }
