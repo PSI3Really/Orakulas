@@ -29,16 +29,8 @@ class EntityFacade
      */
     public function save($entity)
     {
-        if ($entity == NULL)
-        {
-            throw new \InvalidArgumentException('cannot save null entity');
-        }
-
-        if ($this->getDoctrine() == NULL)
-        {
-            throw new \InvalidArgumentException('doctrine isn\'t set');
-        }
-
+        $this->checkIfEntityNotNullAndDoctrineIsSet($entity);
+        
         $entityManager = $this->getDoctrine()->getEntityManager();
         $entityManager->persist($entity);
         $entityManager->flush();
@@ -83,9 +75,27 @@ class EntityFacade
     }
 
     public function delete($class, $id) {
-        $entry = $this->load($class, $id);
+        $entity = $this->load($class, $id);
+
+        $this->checkIfEntityNotNullAndDoctrineIsSet($entity);
+        
         $entityManager = $this->getDoctrine()->getEntityManager();
-        $entityManager->remove($entry);
+        $entityManager->remove($entity);
+        $entityManager->flush();
+    }
+
+    public function update($class, $jsonValueArray) {
+        $entity = $this->load($class, $jsonValueArray['id']);
+        $this->checkIfEntityNotNullAndDoctrineIsSet($entity);
+
+        foreach ($jsonValueArray as $key => $value) {
+            if ($key != "id") {
+                $methodName = "set".ucfirst($key);
+                $entity->$methodName($value);
+            }
+        }
+
+        $entityManager = $this->getDoctrine()->getEntityManager();
         $entityManager->flush();
     }
 
@@ -104,6 +114,18 @@ class EntityFacade
     protected function getDoctrine()
     {
         return $this->doctrine;
+    }
+
+    private function checkIfEntityNotNullAndDoctrineIsSet($entity) {
+        if ($entity == NULL)
+        {
+            throw new \InvalidArgumentException('null entity');
+        }
+
+        if ($this->getDoctrine() == NULL)
+        {
+            throw new \InvalidArgumentException('doctrine isn\'t set');
+        }
     }
 }
 
