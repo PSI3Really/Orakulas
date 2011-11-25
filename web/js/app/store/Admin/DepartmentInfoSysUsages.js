@@ -6,9 +6,20 @@ Ext.define(CONFIG.APP_NS+'.store.Admin.DepartmentInfoSysUsages', {
 
     proxy: {
         type: 'ajax',
-        url: 'model/departmentInfoSysUsages',
+        api: {
+            read: 'model/departmentInfoSysUsages/read',
+            create: 'model/departmentInfoSysUsages/create',
+            update: 'model/departmentInfoSysUsages/update',
+            destroy: 'model/departmentInfoSysUsages/delete'
+        },
         reader: {
             type: 'json'
+        },
+        writer: {
+            type: 'json',
+            root: 'jsonValue',
+            encode: true,
+            writeAllFields: false
         }
     }
 });

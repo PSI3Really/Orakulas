@@ -2,7 +2,7 @@ Ext.define(CONFIG.APP_NS+'.model.Admin.User', {
     extend: 'Ext.data.Model',
     idProperty: 'id',
     fields: [
-        {name: 'id',            type: 'int'},
+        {name: 'id',            type: 'int', persist:false},
         {name: 'username',      type: 'string'},
         {name: 'password',      type: 'string'},
         {name: 'salt',          type: 'string'},

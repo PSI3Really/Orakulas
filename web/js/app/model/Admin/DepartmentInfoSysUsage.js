@@ -8,7 +8,7 @@ Ext.define(CONFIG.APP_NS+'.model.Admin.DepartmentInfoSysUsage', {
     ],
 
     fields: [
-        {name: 'id',                    type: 'int'},
+        {name: 'id',                    type: 'int', persist:false},
         {name: 'informationalSystem',   model: CONFIG.APP_NS+'.model.Admin.InformationalSystem'},
         {name: 'department',            model: CONFIG.APP_NS+'.model.Admin.Department'}
     ]

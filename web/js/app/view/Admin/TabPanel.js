@@ -4,7 +4,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.TabPanel', {
 
     requires: [
         CONFIG.APP_NS+'.view.Admin.Users.Users',
-        CONFIG.APP_NS+'.view.Admin.Departaments.Departaments',
+        CONFIG.APP_NS+'.view.Admin.Departments.Departments',
         CONFIG.APP_NS+'.view.Admin.InformationalSystems.IS',
         CONFIG.APP_NS+'.view.Admin.SupportTypes.SupportTypes'
     ],
