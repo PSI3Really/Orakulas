@@ -17,6 +17,12 @@ OrakulasModelBundle_departments_delete:
     requirements:
       _method:  POST
 
+OrakulasModelBundle_departments_update:
+    pattern:  /departments/update
+    defaults: { _controller: OrakulasModelBundle:Default:departmentUpdate }
+    requirements:
+      _method:  POST
+
 #ar situ reiks?
 OrakulasModelBundle_department:
     pattern:  /department/{id}
@@ -37,6 +43,12 @@ OrakulasModelBundle_departmentInfoSysUsages_post:
 OrakulasModelBundle_departmentInfoSysUsages_delete:
     pattern:  /departmentInfoSysUsages/delete
     defaults: { _controller: OrakulasModelBundle:Default:departmentInfoSysUsageDelete }
+    requirements:
+      _method: POST
+
+OrakulasModelBundle_departmentInfoSysUsages_update:
+    pattern:  /departmentInfoSysUsages/update
+    defaults: { _controller: OrakulasModelBundle:Default:departmentInfoSysUsageUpdate }
     requirements:
       _method: POST
 
@@ -62,6 +74,12 @@ OrakulasModelBundle_informationalSystems_delete:
     requirements:
       _method: POST
 
+OrakulasModelBundle_informationalSystems_update:
+    pattern:  /informationalSystems/update
+    defaults: { _controller: OrakulasModelBundle:Default:informationalSystemUpdate }
+    requirements:
+      _method: POST
+
 OrakulasModelBundle_informationalSystem:
     pattern:  /informationalSystem/{id}
     defaults: { _controller: OrakulasModelBundle:Default:informationalSystem }
@@ -81,6 +99,12 @@ OrakulasModelBundle_supportAdministrationTimes_post:
 OrakulasModelBundle_supportAdministrationTimes_delete:
     pattern:  /supportAdministrationTimes/delete
     defaults: { _controller: OrakulasModelBundle:Default:supportAdministrationTimeDelete }
+    requirements:
+      _method:  POST
+
+OrakulasModelBundle_supportAdministrationTimes_update:
+    pattern:  /supportAdministrationTimes/update
+    defaults: { _controller: OrakulasModelBundle:Default:supportAdministrationTimeUpdate }
     requirements:
       _method:  POST
 
@@ -106,6 +130,12 @@ OrakulasModelBundle_supportCategories_delete:
     requirements:
       _method:  POST
 
+OrakulasModelBundle_supportCategories_update:
+    pattern:  /supportCategories/update
+    defaults: { _controller: OrakulasModelBundle:Default:supportCategoryUpdate }
+    requirements:
+      _method:  POST
+
 OrakulasModelBundle_supportCategory:
     pattern:  /supportCategory/{id}
     defaults: { _controller: OrakulasModelBundle:Default:supportCategory }
@@ -125,6 +155,12 @@ OrakulasModelBundle_supportHistories_post:
 OrakulasModelBundle_supportHistories_delete:
     pattern:  /supportHistories/delete
     defaults: { _controller: OrakulasModelBundle:Default:supportHistoryDelete }
+    requirements:
+      _method:  POST
+
+OrakulasModelBundle_supportHistories_update:
+    pattern:  /supportHistories/update
+    defaults: { _controller: OrakulasModelBundle:Default:supportHistoryUpdate }
     requirements:
       _method:  POST
 
@@ -150,6 +186,12 @@ OrakulasModelBundle_supportTypes_delete:
     requirements:
       _method:  POST
 
+OrakulasModelBundle_supportTypes_update:
+    pattern:  /supportTypes/update
+    defaults: { _controller: OrakulasModelBundle:Default:supportTypeUpdate }
+    requirements:
+      _method:  POST
+
 OrakulasModelBundle_supportType:
     pattern:  /supportType/{id}
     defaults: { _controller: OrakulasModelBundle:Default:supportType }
@@ -169,6 +211,12 @@ OrakulasModelBundle_users_post:
 OrakulasModelBundle_users_delete:
     pattern:  /users/delete
     defaults: { _controller: OrakulasModelBundle:Default:userDelete }
+    requirements:
+      _method:  POST
+
+OrakulasModelBundle_users_update:
+    pattern:  /users/update
+    defaults: { _controller: OrakulasModelBundle:Default:userUpdate }
     requirements:
       _method:  POST
 
