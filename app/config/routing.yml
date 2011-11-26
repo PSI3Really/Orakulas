@@ -10,8 +10,8 @@ login:
     pattern: /login
     defaults: { _controller: OrakulasSecurityBundle:Security:login }
 
-login_check:
-    pattern: /check__if_login
+check_login:
+    pattern: /check_login
 
 # Internal routing configuration to handle ESI
 #_internal:

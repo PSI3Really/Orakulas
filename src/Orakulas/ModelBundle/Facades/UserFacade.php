@@ -11,6 +11,13 @@ class UserFacade extends EntityFacade
     const HASH_ALGO = 'sha512';
     const SALT_LEN = 10;
 
+    private $encoder;
+
+    public function setEncoder($encoder)
+    {
+        $this->encoder = $encoder;
+    }
+
     /**
      * @throws \InvalidArgumentException if $username or $password is NULL
      * @param \string $username
@@ -28,7 +35,7 @@ class UserFacade extends EntityFacade
 
         if ($entityUser != NULL)
         {
-            if (strcmp(hash(UserFacade::HASH_ALGO, $password.'{'.$entityUser->getSalt().'}'), $entityUser->getPassword()) == 0)
+            if (strcmp($this->encoder->encodePassword($password, $entityUser->getSalt()), $entityUser->getPassword()) == 0)
             {
                 return $entityUser;
             }
@@ -65,18 +72,74 @@ class UserFacade extends EntityFacade
             $entityUser->setFirstName($user->getFirstName());
             $entityUser->setLastName($user->getLastName());
 
-            $entityUser->setSalt($this->rand_str(UserFacade::SALT_LEN));
-            $entityUser->setPassword(hash(UserFacade::HASH_ALGO, $user->getPassword().'{'.$entityUser->getSalt().'}'));
+            if ($user->getSalt() == NULL || $user->getSalt() == '')
+            {
+                $entityUser->setSalt($this->rand_str(UserFacade::SALT_LEN));
+                $entityUser->setPassword($this->encoder->encodePassword($user->getPassword(), $entityUser->getSalt()));
+            }
 
             parent::save($entityUser);
         }
         else
         {
-            $user->setSalt($this->rand_str(UserFacade::SALT_LEN));
-            $user->setPassword(hash(UserFacade::HASH_ALGO, $user->getPassword().'{'.$user->getSalt().'}'));
+            if ($user->getSalt() == NULL || $user->getSalt() == '')
+            {
+                $user->setSalt($this->rand_str(UserFacade::SALT_LEN));
+                $user->setPassword($this->encoder->encodePassword($user->getPassword(), $entityUser->getSalt()));
+            }
 
             parent::save($user);
         }
+    }
+
+    public function update($class, $array)
+    {
+        if ($class == NULL || $array == NULL)
+        {
+            throw new \InvalidArgumentException('parameters $class and $array cannot be null');
+        }
+
+        if ($this->getDoctrine() == NULL)
+        {
+            throw new EntityFacadeException('doctrine isn\'t set');
+        }
+
+        if ($class !== EntityFacade::USER)
+        {
+            parent::update($class, $array);
+            return;
+        }
+
+        $entity = $this->load($class, $array['id']);
+
+        if (!isset($entity))
+        {
+            throw new EntityFacadeException('could not find a user with id '.$array['id']);
+        }
+
+        foreach ($array as $key => $value)
+        {
+            if ($key != "id")
+            {
+                $methodName = "set".ucfirst($key);
+                $entity->$methodName($value);
+            }
+        }
+
+        /** @noinspection PhpUndefinedMethodInspection */
+        if (NULL == $entity->getSalt() || '' == $entity->getSalt())
+        {
+            /** @noinspection PhpUndefinedMethodInspection */
+            $entity->setSalt($this->rand_str(UserFacade::SALT_LEN));
+
+
+            /** @noinspection PhpUndefinedMethodInspection */
+            $entity->setPassword($this->encoder->encodePassword($entity->getPassword(), $entity->getSalt()));
+        }
+
+        $entityManager = $this->getDoctrine()->getEntityManager();
+        /** @noinspection PhpUndefinedMethodInspection */
+        $entityManager->flush();
     }
 
     /**
@@ -93,6 +156,7 @@ class UserFacade extends EntityFacade
             throw new \InvalidArgumentException('parameter $username cannot be null');
         }
 
+        /** @noinspection PhpUndefinedMethodInspection */
         $users = $this->getDoctrine()->getRepository(UserFacade::BUNDLE_NAME.':'.UserFacade::USER)->findByUserName($username);
 
         if ($users != null && $users[0] != NULL)
@@ -129,7 +193,7 @@ class UserFacade extends EntityFacade
     }
 }
 
-class UserFacadeException extends \Exception
+class UserFacadeException extends EntityFacadeException
 {
     
 }

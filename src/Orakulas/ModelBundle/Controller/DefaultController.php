@@ -13,9 +13,37 @@ class DefaultController extends Controller
 {
 
     /**
-     * @var Orakulas\ModelBundle\Facades\EntityFacade
+     * @var \Orakulas\ModelBundle\Facades\EntityFacade
      */
     private $entityFacade;
+
+    /**
+     * @var \Orakulas\ModelBundle\Facades\UserFacade
+     */
+    private $userFacade;
+
+    private function getEntityFacade()
+    {
+        if (!isset($this->entityFacade))
+        {
+            $this->entityFacade = new EntityFacade();
+            $this->entityFacade->setDoctrine($this->getDoctrine());
+        }
+
+        return $this->entityFacade;
+    }
+
+    private function getUserFacade()
+    {
+        if (!isset($this->userFacade))
+        {
+            $this->userFacade = new UserFacade();
+            $this->userFacade->setDoctrine($this->getDoctrine());
+            $this->userFacade->setEncoder($this->get('security.encoder_factory'));
+        }
+
+        return $this->userFacade;
+    }
 
     private function getJsonResponse($class, $id = -1)
     {
@@ -33,6 +61,52 @@ class DefaultController extends Controller
         $response->headers->set('Content-Type', 'application/json');
 
         return $response;
+    }
+
+    private function postValue($className)
+    {
+        $jsonValue = $_POST["jsonValue"];
+        $jsonValueArray = json_decode($jsonValue, true);
+        $jsonValueObject = ModelUtils::arrayToObject($jsonValueArray, $className);
+
+        $facade = $this->getEntityFacade();
+
+        if ($className === EntityFacade::USER)
+        {
+            $facade = $this->getUserFacade();
+        }
+        $facade->save($jsonValueObject);
+    }
+
+    private function delete($className)
+    {
+        $jsonValue = $_POST["jsonValue"];
+        $jsonValueArray = json_decode($jsonValue, true);
+        $id = $jsonValueArray['id'];
+
+        $facade = $this->getEntityFacade();
+
+        if ($className === EntityFacade::USER)
+        {
+            $facade = $this->getUserFacade();
+        }
+
+        $facade->delete($className, $id);
+    }
+
+    private function update($className)
+    {
+        $jsonValue = $_POST["jsonValue"];
+        $jsonValueArray = json_decode($jsonValue, true);
+
+        $facade = $this->getEntityFacade();
+
+        if ($className === EntityFacade::USER)
+        {
+            $facade = $this->getUserFacade();
+        }
+
+        $facade->update($className, $jsonValueArray);
     }
 
     public function departmentAction($id = -1)
@@ -181,46 +255,21 @@ class DefaultController extends Controller
         return $this->getJsonResponse(EntityFacade::USER, $id);
     }
 
-    public function userPostAction() {
+    public function userPostAction()
+    {
         $this->postValue(EntityFacade::USER);
         exit;
     }
 
-    public function userDeleteAction() {
+    public function userDeleteAction()
+    {
         $this->delete(EntityFacade::USER);
         exit;
     }
 
-    public function userUpdateAction() {
+    public function userUpdateAction()
+    {
         $this->update(EntityFacade::USER);
         exit;
-    }
-
-    private function getEntityFacade() {
-        if (!isset($this->entityFacade)) {
-            $this->entityFacade = new EntityFacade();
-            $this->entityFacade->setDoctrine($this->getDoctrine());
-        }
-        return $this->entityFacade;
-    }
-
-    private function postValue($className) {
-        $jsonValue = $_POST["jsonValue"];
-        $jsonValueArray = json_decode($jsonValue, true);
-        $jsonValueObject = ModelUtils::arrayToObject($jsonValueArray, $className);
-        $this->getEntityFacade()->save($jsonValueObject);
-    }
-
-    private function delete($className) {
-        $jsonValue = $_POST["jsonValue"];
-        $jsonValueArray = json_decode($jsonValue, true);
-        $id = $jsonValueArray['id'];
-        $this->getEntityFacade()->delete($className, $id);
-    }
-
-    private function update($className) {
-        $jsonValue = $_POST["jsonValue"];
-        $jsonValueArray = json_decode($jsonValue, true);
-        $this->getEntityFacade()->update($className, $jsonValueArray);
     }
 }
