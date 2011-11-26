@@ -3,6 +3,7 @@
     border:  none;
 }
     #logo h1 {
+        padding-right: 10px;
         color: #596F8F;
         font-size: 18px;
         text-shadow: 0 1px 0 #FFF;

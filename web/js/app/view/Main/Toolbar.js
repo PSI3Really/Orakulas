@@ -17,6 +17,19 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Toolbar', {
                 xtype: 'box',
                 html: '<h1>'+CONFIG.APP_NAME+'</h1>'
             },
+            {
+                pressed: true,
+                lang: 'LT',
+                iconCls: 'icon-flag-lt',
+                tooltip: 'Perjungti kalbą į lietuvių',
+                action: 'switchLang'
+            },
+            {
+                lang: 'EN',
+                iconCls: 'icon-flag-gb',
+                tooltip: 'Perjungti kalbą į anglų',
+                action: 'switchLang'
+            },
             '->',
             {
                 xtype: 'splitbutton',
@@ -45,23 +58,16 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Toolbar', {
                 iconCls: 'icon-arrow-270',
                 action: 'importData'
             },
+            ' ',
             {
                 iconCls: 'icon-gear',
                 tooltip: 'Administravimas / Nustatymai',
                 action: 'admin'
             },
             {
-                pressed: true,
-                lang: 'LT',
-                iconCls: 'icon-flag-lt',
-                tooltip: 'Perjungti kalbą į lietuvių',
-                action: 'switchLang'
-            },
-            {
-                lang: 'EN',
-                iconCls: 'icon-flag-gb',
-                tooltip: 'Perjungti kalbą į anglų',
-                action: 'switchLang'
+                iconCls: 'icon-door-open-out',
+                tooltip: 'Atsijungti',
+                action: 'logout'
             }
         ];
         

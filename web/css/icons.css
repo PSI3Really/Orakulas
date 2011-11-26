@@ -31,17 +31,17 @@
 .icon-table {
 	background: url(../images/icons/table.png) no-repeat center center;
 }
-
 .icon-tick {
 	background: url(../images/icons/tick.png) no-repeat center center;
 }
-
 .icon-plus-circle {
     background: url(../images/icons/plus-circle.png) no-repeat center center;
 }
-
 .icon-minus-circle {
     background: url(../images/icons/minus-circle.png) no-repeat center center;
+}
+.icon-door-open-out {
+    background: url(../images/icons/door-open-out.png) no-repeat center center;
 }
 
 /* Flags */

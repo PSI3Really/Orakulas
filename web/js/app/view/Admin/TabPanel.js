@@ -27,7 +27,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.TabPanel', {
                 ]
             },
             {
-                title: 'Informacines sistemos',
+                title: 'Informacinės sistemos',
                 layout: 'fit',
                 items: [
                     {
@@ -49,7 +49,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.TabPanel', {
                 ]
             },
             {
-                title: 'Priemones',
+                title: 'Priemonės',
                 layout: 'fit',
                 items: [
                     {

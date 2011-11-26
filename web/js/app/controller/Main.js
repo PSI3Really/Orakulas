@@ -10,6 +10,9 @@ Ext.define(CONFIG.APP_NS+'.controller.Main', {
 
     init: function(){
         this.control({
+            'maintoolbar > button[action=logout]': {
+                click: this.logout
+            },
             'maintoolbar > button[action=importData]': {
                 click: this.importData
             },
@@ -24,6 +27,15 @@ Ext.define(CONFIG.APP_NS+'.controller.Main', {
             },
             'maintoolbar > button[action=switchLang]': {
                 click: this.switchLang
+            }
+        });
+    },
+
+    logout: function(){
+        Ext.MessageBox.confirm('Patvirtinimas', 'Ar tikrai norite atsijungti nuo sistemos?', function (btn) {
+            if (btn == 'yes') {
+                var loc = window.location.href.split('?');
+                window.location.href = loc+'logout';
             }
         });
     },
