@@ -1,5 +1,6 @@
 Ext.define(CONFIG.APP_NS+'.model.Admin.SupportAdministrationTime', {
     extend: 'Ext.data.Model',
+    alias: 'widget.adminSupportAdministrationTimeModel',
     idProperty: 'id',
 
     requires:[
@@ -9,7 +10,7 @@ Ext.define(CONFIG.APP_NS+'.model.Admin.SupportAdministrationTime', {
     ],
 
     fields: [
-        {name: 'id',                type: 'int'},
+        {name: 'id',                type: 'int', persist:false},
         {name: 'hoursCount',        type: 'int'},
         {name: 'department',        model: CONFIG.APP_NS+'.model.Admin.Department'},
         {name: 'supportType',       model: CONFIG.APP_NS+'.model.Admin.supportType'},

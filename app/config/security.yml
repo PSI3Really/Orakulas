@@ -7,7 +7,7 @@ security:
             pattern: ^/(?!login)
             form_login:
                 login_path: /login
-                check_path: /check__if_login
+                check_path: /check_login
             logout: ~
 
 #    access_control:

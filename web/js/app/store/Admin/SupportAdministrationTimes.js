@@ -6,9 +6,20 @@ Ext.define(CONFIG.APP_NS+'.store.Admin.SupportAdministrationTimes', {
 
     proxy: {
         type: 'ajax',
-        url: 'model/supportAdministrationTimes',
+        api: {
+            read: 'model/supportAdministrationTimes/read',
+            create: 'model/supportAdministrationTimes/create',
+            update: 'model/supportAdministrationTimes/update',
+            destroy: 'model/supportAdministrationTimes/delete'
+        },
         reader: {
             type: 'json'
+        },
+        writer: {
+            type: 'json',
+            root: 'jsonValue',
+            encode: true,
+            writeAllFields: false
         }
     }
 });

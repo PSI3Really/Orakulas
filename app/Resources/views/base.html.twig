@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+	<head>
+		<meta charset="UTF-8">
+		<title>{% block title %}Sistema Orakulas{% endblock %}</title>
+		
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="{{ asset('js/extjs/resources/css/ext-all.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ asset('css/icons.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}" />
+        {% block specificCSS %}{% endblock %}
+		
+		<!-- JS -->
+		<script type="text/javascript" src="{{ asset('js/extjs/ext-debug.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/config.js') }}"></script>
+        {% block specificJS %}{% endblock %}
+	</head>
+	<body>
+		
+		{% block body %}{% endblock %}
+		
+	</body>
 </html>

@@ -21,7 +21,7 @@ class SecurityController extends Controller
             $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
         }
 
-        return $this->render('OrakulasSecurityBundle:Security:login.html.twig', array(
+        return $this->render('::login.html.twig', array(
             // last username entered by the user
             'last_username' => $session->get(SecurityContext::LAST_USERNAME),
             'error'         => $error,

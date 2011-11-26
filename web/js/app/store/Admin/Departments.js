@@ -6,9 +6,20 @@ Ext.define(CONFIG.APP_NS+'.store.Admin.Departments', {
 
     proxy: {
         type: 'ajax',
-        url: 'model/departments',
+        api: {
+                read: 'model/departments/read',
+                create: 'model/departments/create',
+                update: 'model/departments/update',
+                destroy: 'model/departments/delete'
+        },
         reader: {
             type: 'json'
+        },
+        writer: {
+            type: 'json',
+            root: 'jsonValue',
+            encode: true,
+            writeAllFields: false
         }
     }
 });

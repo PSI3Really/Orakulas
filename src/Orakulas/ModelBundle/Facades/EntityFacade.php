@@ -31,16 +31,20 @@ class EntityFacade
     {
         if ($entity == NULL)
         {
-            throw new \InvalidArgumentException('cannot save null entity');
+            throw new \InvalidArgumentException('parameter $argument cannot be null');
         }
 
-        if ($this->getDoctrine() == NULL)
+        if (!isset($this->doctrine))
         {
-            throw new \InvalidArgumentException('doctrine isn\'t set');
+            throw new EntityFacadeException('doctrine isn\'t set');
         }
 
         $entityManager = $this->getDoctrine()->getEntityManager();
+
+        /** @noinspection PhpUndefinedMethodInspection */
         $entityManager->persist($entity);
+
+        /** @noinspection PhpUndefinedMethodInspection */
         $entityManager->flush();
     }
 
@@ -54,15 +58,16 @@ class EntityFacade
     {
         if ($id == NULL || $class == NULL)
         {
-            throw new InvalidArgumentException('parameters $id and $class cannot be null');
+            throw new \InvalidArgumentException('parameters $id and $class cannot be null');
         }
 
         if ($this->getDoctrine() == NULL)
         {
-            throw new InvalidArgumentException('doctrine isn\'t set');
+            throw new EntityFacadeException('doctrine isn\'t set');
         }
         
         $repository = $this->getDoctrine()->getRepository(UserFacade::BUNDLE_NAME.':'.$class);
+        /** @noinspection PhpUndefinedMethodInspection */
         return $repository->find($id);
     }
 
@@ -70,16 +75,75 @@ class EntityFacade
     {
         if ($class == NULL)
         {
-            throw new InvalidArgumentException('parameters $id and $class cannot be null');
+            throw new \InvalidArgumentException('parameter $class cannot be null');
         }
 
         if ($this->getDoctrine() == NULL)
         {
-            throw new InvalidArgumentException('doctrine isn\'t set');
+            throw new EntityFacadeException('doctrine isn\'t set');
         }
 
         $repository = $this->getDoctrine()->getRepository(UserFacade::BUNDLE_NAME.':'.$class);
+        /** @noinspection PhpUndefinedMethodInspection */
         return $repository->findAll();
+    }
+
+    public function delete($class, $id) {
+        if ($class == NULL || $id == NULL)
+        {
+            throw new \InvalidArgumentException('parameters $class and $id cannot be null');
+        }
+
+        if (!isset($this->doctrine))
+        {
+            throw new EntityFacadeException('doctrine isn\'t set');
+        }
+
+
+        $entity = $this->load($class, $id);
+
+        if (!isset($entity))
+        {
+            throw new EntityFacadeException("could not find an entity with id $id");
+        }
+
+        $entityManager = $this->getDoctrine()->getEntityManager();
+
+        /** @noinspection PhpUndefinedMethodInspection */
+        $entityManager->remove($entity);
+
+        /** @noinspection PhpUndefinedMethodInspection */
+        $entityManager->flush();
+    }
+
+    public function update($class, $array) {
+        if ($class == NULL || $array == NULL)
+        {
+            throw new \InvalidArgumentException('parameters $class and $array cannot be null');
+        }
+
+        if (!isset($this->doctrine))
+        {
+            throw new EntityFacadeException('doctrine isn\'t set');
+        }
+
+        $entity = $this->load($class, $array['id']);
+
+        if (!isset($entity))
+        {
+            throw new EntityFacadeException('could not find an entity with id '.$array['id']);
+        }
+
+        foreach ($array as $key => $value) {
+            if ($key != "id") {
+                $methodName = "set".ucfirst($key);
+                $entity->$methodName($value);
+            }
+        }
+
+        $entityManager = $this->getDoctrine()->getEntityManager();
+        /** @noinspection PhpUndefinedMethodInspection */
+        $entityManager->flush();
     }
 
     /**
@@ -98,6 +162,11 @@ class EntityFacade
     {
         return $this->doctrine;
     }
+}
+
+class EntityFacadeException extends \Exception
+{
+
 }
 
 ?>

@@ -1,15 +1,17 @@
 Ext.define(CONFIG.APP_NS+'.model.Admin.User', {
     extend: 'Ext.data.Model',
+    alias: 'widget.adminUserModel',
     idProperty: 'id',
+    
     fields: [
-        {name: 'id',            type: 'int'},
+        {name: 'id',            type: 'int', persist:false},
         {name: 'username',      type: 'string'},
         {name: 'password',      type: 'string'},
-        {name: 'salt',          type: 'string'},
+        //{name: 'salt',          type: 'string'},
         {name: 'firstName',     type: 'string'},
         {name: 'lastName',      type: 'string'},
         {name: 'email',         type: 'string'},
-        {name: 'admin',         type: 'boolean'},
+        {name: 'admin',         type: 'boolean', defaultValue: false},
         {name: 'authenticated', type: 'boolean'}
     ],
 

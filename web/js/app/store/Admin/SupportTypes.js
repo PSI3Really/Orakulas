@@ -6,9 +6,20 @@ Ext.define(CONFIG.APP_NS+'.store.Admin.SupportTypes', {
 
     proxy: {
         type: 'ajax',
-        url: 'model/supportTypes',
+        api: {
+            read: 'model/supportTypes/read',
+            create: 'model/supportTypes/create',
+            update: 'model/supportTypes/update',
+            destroy: 'model/supportTypes/delete'
+        },
         reader: {
             type: 'json'
+        },
+        writer: {
+            type: 'json',
+            root: 'jsonValue',
+            encode: true,
+            writeAllFields: false
         }
     }
 });

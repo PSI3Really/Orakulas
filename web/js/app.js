@@ -13,7 +13,8 @@ Ext.application({
         'Admin.User',
         'Admin.Department',
         'Admin.InformationalSystem',
-        'Admin.DepartmentInfoSysUsage'
+        'Admin.DepartmentInfoSysUsage',
+        'Report'
     ],
 
     stores: [
@@ -30,6 +31,10 @@ Ext.application({
         'Import',
         'Export',
         'Predict',
+        'Admin.Users',
+        'Admin.Departments',
+        'Admin.InformationalSystems',
+        'Admin.SupportTypes',
         'Admin'
     ]
 
