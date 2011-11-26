@@ -157,7 +157,7 @@ class UserFacade extends EntityFacade
         }
 
         /** @noinspection PhpUndefinedMethodInspection */
-        $users = $this->getDoctrine()->getRepository(UserFacade::BUNDLE_NAME.':'.UserFacade::USER)->findByUserName($username);
+        $users = $this->getDoctrine()->getRepository(UserFacade::BUNDLE_NAME.':'.UserFacade::USER)->findByUsername($username);
 
         if ($users != null && $users[0] != NULL)
         {

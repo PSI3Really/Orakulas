@@ -1,6 +1,6 @@
 Ext.define(CONFIG.APP_NS+'.view.Admin.Departments.Departments', {
     extend: 'Ext.form.Panel',
-    alias: 'widget.admindepartamentspanel',
+    alias: 'widget.admindepartmentspanel',
 
     requires: [
         CONFIG.APP_NS+'.view.Admin.Departments.DepartmentsGrid'
@@ -11,7 +11,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Departments.Departments', {
 
         this.items = [
             {
-                xtype: 'admindepartamentsgrid',
+                xtype: 'admindepartmentsgrid',
                 border: false,
                 dockedItems: [
                     {
