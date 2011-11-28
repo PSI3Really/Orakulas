@@ -16,19 +16,21 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Toolbar', {
                 id: 'logo',
                 xtype: 'box',
                 html: '<h1>'+CONFIG.APP_NAME+'</h1>'
-            },
-            {
-                pressed: true,
-                lang: 'LT',
-                iconCls: 'icon-flag-lt',
-                tooltip: 'Perjungti kalbą į lietuvių',
-                action: 'switchLang'
-            },
-            {
-                lang: 'EN',
-                iconCls: 'icon-flag-gb',
-                tooltip: 'Perjungti kalbą į anglų',
-                action: 'switchLang'
+            },{
+                xtype: 'buttongroup',
+                items: [{
+                    pressed: true,
+                    lang: 'lt',
+                    iconCls: 'icon-flag-lt',
+                    tooltip: 'Perjungti kalbą į lietuvių',
+                    action: 'switchLang'
+                },
+                {
+                    lang: 'en',
+                    iconCls: 'icon-flag-gb',
+                    tooltip: 'Perjungti kalbą į anglų',
+                    action: 'switchLang'
+                }]
             },
             '->',
             {
