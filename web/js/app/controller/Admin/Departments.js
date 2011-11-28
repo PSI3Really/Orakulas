@@ -13,17 +13,17 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Departments', {
 
     init: function(){
         this.control({
-            'admindepartmentsgrid button[action=add]':{
+            'admindepartamentsgrid button[action=add]':{
                 click: this.add
             },
-            'admindepartmentsgrid button[action=delete]':{
+            'admindepartamentsgrid button[action=delete]':{
                 click: this.delete
             }
         });
     },
 
     add: function(btn){
-        var grid = btn.up('admindepartmentsgrid');
+        var grid = btn.up('admindepartamentsgrid');
         var store = grid.getStore();
 
         var record = Ext.create(CONFIG.APP_NS+'.model.Admin.Department', {
@@ -37,7 +37,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Departments', {
 
     delete: function(btn){
         //TODO: At the moment deletes the last entry
-        var grid = btn.up('admindepartmentsgrid');
+        var grid = btn.up('admindepartamentsgrid');
         var store = grid.getStore();
 
         store.removeAt(store.getCount() - 1);

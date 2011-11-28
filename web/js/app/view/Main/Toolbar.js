@@ -16,21 +16,19 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Toolbar', {
                 id: 'logo',
                 xtype: 'box',
                 html: '<h1>'+CONFIG.APP_NAME+'</h1>'
-            },{
-                xtype: 'buttongroup',
-                items: [{
-                    pressed: true,
-                    lang: 'lt',
-                    iconCls: 'icon-flag-lt',
-                    tooltip: 'Perjungti kalbą į lietuvių',
-                    action: 'switchLang'
-                },
-                {
-                    lang: 'en',
-                    iconCls: 'icon-flag-gb',
-                    tooltip: 'Perjungti kalbą į anglų',
-                    action: 'switchLang'
-                }]
+            },
+            {
+                pressed: true,
+                lang: 'LT',
+                iconCls: 'icon-flag-lt',
+                tooltip: 'Perjungti kalbą į lietuvių',
+                action: 'switchLang'
+            },
+            {
+                lang: 'EN',
+                iconCls: 'icon-flag-gb',
+                tooltip: 'Perjungti kalbą į anglų',
+                action: 'switchLang'
             },
             '->',
             {
@@ -60,6 +58,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Toolbar', {
                 iconCls: 'icon-arrow-270',
                 action: 'importData'
             },
+            ' ',
             {
                 iconCls: 'icon-gear',
                 tooltip: 'Administravimas / Nustatymai',

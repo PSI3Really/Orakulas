@@ -1,6 +1,6 @@
 Ext.define(CONFIG.APP_NS+'.view.Admin.Departments.DepartmentsGrid', {
     extend: 'Ext.grid.Panel',
-    alias: 'widget.admindepartmentsgrid',
+    alias: 'widget.admindepartamentsgrid',
 
     //store: CONFIG.APP_NS+'.store.Users', //Does not seem to work
 

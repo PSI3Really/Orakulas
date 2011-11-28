@@ -46,8 +46,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Users', {
     edit: function(view, record, item, index){
         var wnd = Ext.create('widget.adminUsersEditWindow', {
             editing: true,
-            record: record,
-            store: record.store
+            record: record
         });
 
         wnd.show();
