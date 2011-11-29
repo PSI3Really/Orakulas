@@ -39,7 +39,7 @@ class DefaultController extends Controller
         {
             $this->userFacade = new UserFacade();
             $this->userFacade->setDoctrine($this->getDoctrine());
-            $this->userFacade->setEncoder($this->get('security.encoder_factory'));
+            $this->userFacade->setEncoderFactory($this->get('security.encoder_factory'));
         }
 
         return $this->userFacade;
