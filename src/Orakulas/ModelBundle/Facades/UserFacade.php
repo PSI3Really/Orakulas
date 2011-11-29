@@ -11,11 +11,11 @@ class UserFacade extends EntityFacade
     const HASH_ALGO = 'sha512';
     const SALT_LEN = 10;
 
-    private $encoder;
+    private $encoderFactory;
 
-    public function setEncoder($encoder)
+    public function setEncoderFactory($encoderFactory)
     {
-        $this->encoder = $encoder;
+        $this->encoderFactory = $encoderFactory;
     }
 
     /**
@@ -35,7 +35,8 @@ class UserFacade extends EntityFacade
 
         if ($entityUser != NULL)
         {
-            if (strcmp($this->encoder->encodePassword($password, $entityUser->getSalt()), $entityUser->getPassword()) == 0)
+            $encoder = $this->encoderFactory->getEncoder($entityUser);
+            if (strcmp($encoder->encodePassword($password, $entityUser->getSalt()), $entityUser->getPassword()) == 0)
             {
                 return $entityUser;
             }
@@ -74,8 +75,10 @@ class UserFacade extends EntityFacade
 
             if ($user->getSalt() == NULL || $user->getSalt() == '')
             {
+                $encoder = $this->encoderFactory->getEncoder($entityUser);
+                
                 $entityUser->setSalt($this->rand_str(UserFacade::SALT_LEN));
-                $entityUser->setPassword($this->encoder->encodePassword($user->getPassword(), $entityUser->getSalt()));
+                $entityUser->setPassword($encoder->encodePassword($user->getPassword(), $entityUser->getSalt()));
             }
 
             parent::save($entityUser);
@@ -84,8 +87,10 @@ class UserFacade extends EntityFacade
         {
             if ($user->getSalt() == NULL || $user->getSalt() == '')
             {
+                $encoder = $this->encoderFactory->getEncoder($user);
+                
                 $user->setSalt($this->rand_str(UserFacade::SALT_LEN));
-                $user->setPassword($this->encoder->encodePassword($user->getPassword(), $entityUser->getSalt()));
+                $user->setPassword($encoder->encodePassword($user->getPassword(), $entityUser->getSalt()));
             }
 
             parent::save($user);
@@ -129,12 +134,10 @@ class UserFacade extends EntityFacade
         /** @noinspection PhpUndefinedMethodInspection */
         if (NULL == $entity->getSalt() || '' == $entity->getSalt())
         {
-            /** @noinspection PhpUndefinedMethodInspection */
+            $encoder = $this->encoderFactory->getEncoder($entity);
+            
             $entity->setSalt($this->rand_str(UserFacade::SALT_LEN));
-
-
-            /** @noinspection PhpUndefinedMethodInspection */
-            $entity->setPassword($this->encoder->encodePassword($entity->getPassword(), $entity->getSalt()));
+            $entity->setPassword($encoder->encodePassword($entity->getPassword(), $entity->getSalt()));
         }
 
         $entityManager = $this->getDoctrine()->getEntityManager();
