@@ -90,7 +90,7 @@ class UserFacade extends EntityFacade
                 $encoder = $this->encoderFactory->getEncoder($user);
                 
                 $user->setSalt($this->rand_str(UserFacade::SALT_LEN));
-                $user->setPassword($encoder->encodePassword($user->getPassword(), $entityUser->getSalt()));
+                $user->setPassword($encoder->encodePassword($user->getPassword(), $user->getSalt()));
             }
 
             parent::save($user);
