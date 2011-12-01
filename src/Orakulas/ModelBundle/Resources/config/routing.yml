@@ -223,3 +223,7 @@ OrakulasModelBundle_users_update:
 OrakulasModelBundle_user:
     pattern:  /user/read/{id}
     defaults: { _controller: OrakulasModelBundle:Default:user }
+
+OrakulasModelBundle_currentUser:
+    pattern: /users/current
+    defaults: { _controller: OrakulasModelBundle:Default:currentUser }

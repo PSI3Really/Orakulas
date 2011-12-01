@@ -274,4 +274,13 @@ class DefaultController extends Controller
         $this->update(EntityFacade::USER);
         exit;
     }
+
+    public function currentUserAction() {
+        $user = $this->get('security.context')->getToken()->getUser();
+
+        $response = new Response(ModelUtils::jsonEncodeEx($user));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
 }
