@@ -26,11 +26,13 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.PersonalSettings.Window', {
                         items: [
                             '->',
                             {
+                                iconCls: 'icon-tick',
                                 xtype:  'button',
                                 action: 'confirm',
                                 text:   'Gerai'
                             },
                             {
+                                iconCls: 'icon-cross',
                                 xtype:  'button',
                                 action: 'cancel',
                                 text:   'Atšaukti'

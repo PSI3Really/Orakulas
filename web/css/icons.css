@@ -55,6 +55,9 @@
 .icon-building {
     background: url(../images/icons/building.png) no-repeat center center;
 }
+.icon-cross {
+    background: url(../images/icons/cross.png) no-repeat center center;
+}
 
 /* Flags */
 .icon-flag-lt {
