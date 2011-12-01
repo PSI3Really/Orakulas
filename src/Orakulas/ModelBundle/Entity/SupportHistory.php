@@ -34,6 +34,9 @@ class SupportHistory
      */
     private $supportType;
 
+    public function setId($id) {
+        $this->id = $id;
+    }
 
     /**
      * Get id

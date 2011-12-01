@@ -29,6 +29,9 @@ class SupportType
      */
     private $supportCategory;
 
+    public function setId($id) {
+        $this->id = $id;
+    }
 
     /**
      * Get id

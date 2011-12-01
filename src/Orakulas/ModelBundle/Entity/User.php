@@ -56,7 +56,7 @@ class User implements UserInterface, \Serializable
     private $authenticated = false;
 
 
-    private function setId($id)
+    public function setId($id)
     {
         $this->id = $id;
     }

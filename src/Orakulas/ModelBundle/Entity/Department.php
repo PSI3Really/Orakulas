@@ -24,7 +24,10 @@ class Department
      */
     private $name;
 
-
+    public function setId($id) {
+        $this->id = $id;
+    }
+    
     /**
      * Get id
      *
