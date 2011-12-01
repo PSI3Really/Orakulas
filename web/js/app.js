@@ -35,7 +35,8 @@ Ext.application({
         'Admin.Departments',
         'Admin.InformationalSystems',
         'Admin.SupportTypes',
-        'Admin'
+        'Admin',
+        'Admin.PersonalSettings'
     ]
 
 });
