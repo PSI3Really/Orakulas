@@ -10,11 +10,11 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Users.UsersGrid', {
         this.store = Ext.create('widget.adminUsersStore', {});
 
         this.columns = [
-            {header: 'Vartotojas',          dataIndex: 'username',  flex: 0},
-            {header: 'Vardas',              dataIndex: 'firstName', flex: 0},
-            {header: 'Pavardė',             dataIndex: 'lastName',  flex: 0},
-            {header: 'El. paštas',          dataIndex: 'email',     flex: 1},
-            {header: 'Administratorius?',   dataIndex: 'admin',     flex: 0,
+            {header: LANG.ENTITY.USERNAME,      dataIndex: 'username',  flex: 0},
+            {header: LANG.ENTITY.FIRST_NAME,    dataIndex: 'firstName', flex: 0},
+            {header: LANG.ENTITY.LAST_NAME,     dataIndex: 'lastName',  flex: 0},
+            {header: LANG.ENTITY.EMAIL,         dataIndex: 'email',     flex: 1},
+            {header: LANG.ENTITY.ADMIN + "?",   dataIndex: 'admin',     flex: 0,
                 renderer: this.boolRenderer
             }
         ];

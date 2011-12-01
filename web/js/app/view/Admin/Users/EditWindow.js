@@ -15,9 +15,9 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Users.EditWindow', {
         this.modal = true;
 
         if (this.editing){
-            this.title = 'Keičiamas vartotojas ' + this.record.get('username');
+            this.title = LANG.ADMIN.USERS.TITLE_CHANGE + this.record.get('username');
         } else {
-            this.title = 'Naujas vartotojas';
+            this.title = LANG.ADMIN.USERS.TITLE_NEW;
         }
 
         this.items = [
@@ -26,36 +26,36 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Users.EditWindow', {
                 border: false,
                 defaultType: 'textfield',
                 items: [{ // SOME REAL BLACK MAGIC HERE GUYS
-                    fieldLabel: 'Vartotojo vardas', //Show this if we are creating a new user
+                    fieldLabel: LANG.ENTITY.USERNAME, //Show this if we are creating a new user
                     name: 'username',
                     value: this.record.get('username'),
                     allowBlank: false,
                     hidden: this.editing,
                     readOnly: this.editing //do not let them change their user name
                 },{
-                    fieldLabel: 'Vartotojo vardas', //Show this if we are editing an existing user
+                    fieldLabel: LANG.ENTITY.USERNAME, //Show this if we are editing an existing user
                     value: this.record.get('username'),
                     hidden: !this.editing,
                     disabled: true
                 },{
-                    fieldLabel: 'Slaptažodis',
+                    fieldLabel: LANG.ENTITY.PASSWORD,
                     name: 'password',
                     allowBlank: false
                 },{
-                    fieldLabel: 'Vardas',
+                    fieldLabel: LANG.ENTITY.FIRST_NAME,
                     name: 'firstName',
                     value: this.record.get('firstName')
                 },{
-                    fieldLabel: 'Pavardė',
+                    fieldLabel: LANG.ENTITY.LAST_NAME,
                     name: 'lastName',
                     value: this.record.get('lastName')
                 },{
-                    fieldLabel: 'El. Paštas',
+                    fieldLabel: LANG.ENTITY.EMAIL,
                     name: 'email',
                     value: this.record.get('email'),
                     vtype: 'email'
                 },{
-                    fieldLabel: 'Administratorius?',
+                    fieldLabel: LANG.ENTITY.ADMIN + "?",
                     name: 'admin',
                     checked: this.record.get('admin'),
                     inputValue: 'true',
@@ -64,10 +64,10 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Users.EditWindow', {
 
                 buttons:[{
                     //formBind: true,
-                    text: 'Išsaugoti',
+                    text: LANG.BUTTON.SAVE,
                     action: 'save'
                 },{
-                    text: 'Atšaukti',
+                    text: LANG.BUTTON.CANCEL,
                     action: 'cancel'
                 }]
             }

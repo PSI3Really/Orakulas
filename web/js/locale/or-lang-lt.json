@@ -1,0 +1,102 @@
+{
+    "ADMIN":{
+        "TITLE": "Administruoti",
+        
+        "TAB":{
+            "USERS": "Vartotojai",
+            "IS": "Informacinės sistemos",
+            "DEPARTMENTS": "Padaliniai",
+            "SUPPORT_TYPES": "Priemonės"
+        },
+        "PERSONAL_SETTINGS": {
+            "TITLE": "Asmeniniai nustatymai",
+            "OLD_PASS": "Senas slaptažodis",
+            "NEW_PASS": "Naujas slaptažodis",
+            "REPEAT_PASS": "Pakartoti naują slaptažodį"
+        },
+        "USERS":{
+            "TITLE_CHANGE": "Keičiamas vartotojas: ",
+            "TITLE_NEW": "Naujas vartotojas"
+        }
+    },
+
+    "MAIN":{
+        "TOOLBAR":{
+            "BUTTON":{
+                "IMPORT_DATA": "Įkelti istorinius duomenis&hellip;",
+                "NEW_REPORT": "Nauja ataskaita&hellip;",
+                "CLONE_TAB": "Klonuoti atidarytą kortelę",
+                "IMPORT_REPORT": "Įkelti iš failo&hellip",
+                "ADMIN": "Administravimas"
+            },
+            "TOOLTIP":{
+                "LANG_LT": "Perjungti kalbą į lietuvių",
+                "LANG_EN": "Perjungti kalbą į anglų",
+                "LOGOUT": "Atsijungti"
+            }
+        },
+        "SUB_TOOLBAR":{
+            "BUTTON":{
+                "PREDICT": "Prognozuoti&hellip;",
+                "ANALYZE": "Analizuoti&hellip;",
+                "EXPORT": "Eksportuoti&hellip;",
+                "TABLE": "Lentelė",
+                "GRAPH": "Grafikas"
+            },
+            "TOOLTIP":{
+                "NEW_PORTLET": "Naujas vaizdas"
+            }
+        }
+    },
+
+    "EXPORT":{
+        "TITLE": "Eksportuoti"
+        
+    },
+
+    "IMPORT":{
+        "TITLE": "Įkelti duomenis"
+    },
+
+    "PREDICT":{
+        "TITLE": "Prognozuoti",
+
+        "BUTTON":{
+            "INFO_SYS_AND_DEPARTMENTS": "IS/Padaliniai&hellip;",
+            "SUPPORT_AND_DEPARTMENTS": "Priemonės/Padaliniai&hellip;"
+        }
+    },
+
+    "BUTTON":{
+        "ADD": "Pridėti",
+        "REMOVE": "Pašalinti",
+        "OK": "Gerai",
+        "CANCEL": "Atšaukti",
+        "SAVE": "Išsaugoti",
+        "SYNC": "Išsaugoti pakeitimus",
+        "OPEN_FILE": "Įkelti iš failo"
+    },
+    
+    "ENTITY":{
+        "DEPARTMENT": "Padalinys",
+        "INFO_SYS": "Informacinė sistema",
+        "CODE": "Kodas",
+        "SUPPORT_TYPE": "Priemonė",
+        "USERNAME": "Vartotojo vardas",
+        "PASSWORD": "Slaptažodis",
+        "FIRST_NAME": "Vardas",
+        "LAST_NAME": "Pavardė",
+        "EMAIL": "El. paštas",
+        "ADMIN": "Administratorius",
+        "FILE_NAME": "Failo pavadinimas",
+        "FILE_TYPE": "Failo tipas",
+        "FROM": "Nuo",
+        "TO": "Iki",
+        "AMOUNT": "Kiekis"
+    },
+
+    "FILETYPE":{
+        "EXCEL_XLS": "Excel - .xls",
+        "INTERNAL": "Vidinis - .xls"
+    }
+}

@@ -14,7 +14,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Predict', {
             'predicttoolbar button[action=openFile]':{
                 click: this.openFile
             },
-            'predicttoolbar button[action=infSysAndDepartments]':{
+            'predicttoolbar button[action=infoSysAndDepartments]':{
                 click: this.infSysAndDepartments
             },
             'predicttoolbar button[action=supportAndDepartments]':{

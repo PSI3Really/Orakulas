@@ -8,9 +8,10 @@ Ext.define(CONFIG.APP_NS+'.view.Export.Window', {
 
     height: 250,
     width: 500,
-    title: 'Eksportuoti',
 
     initComponent: function () {
+
+        this.title = LANG.EXPORT.TITLE;
 
         this.items = {
             xtype: 'exportcontrols',

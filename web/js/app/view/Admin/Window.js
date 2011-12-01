@@ -2,8 +2,6 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Window', {
     extend: 'Ext.window.Window',
     alias:  'widget.adminWindow',
 
-    title: 'Administravimas / Nustatymai',
-
     requires: [
         CONFIG.APP_NS+'.view.Admin.TabPanel'
     ],
@@ -16,6 +14,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Window', {
         this.height = 500;
         this.width = 600;
 
+        this.title = LANG.ADMIN.TITLE;
 
         this.items = [
             {

@@ -67,27 +67,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Main', {
 
     switchLang: function(btn){
         if (!btn.pressed){
-            var url = Ext.util.Format.format('../js/extjs/locale/ext-lang-{0}.js', btn.lang);
-
-            Ext.Ajax.request({ //check if locale file exists
-                url: url,
-                success: function(response){ //change the language
-
-                    //make only the clicked button active
-                    var buttons = btn.up('buttongroup');
-                    for (var idx = 0; idx < buttons.items.getCount(); idx++){ //
-                        buttons.items.getAt(idx).toggle(false);
-                    }
-                    btn.toggle(true);
-
-                    //TODO: I ******* hate extjs.
-                    eval(response.responseText);
-                },
-                failure: function(){
-                    Ext.Msg.alert('Failure', 'Failed to load locale file.');
-                },
-                scope: this
-            });
+            window.location.search = Ext.urlEncode({"lang":btn.lang});
         }
     }
 });

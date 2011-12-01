@@ -22,13 +22,13 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Departments.Departments', {
                                 iconCls: 'icon-plus-circle',
                                 xtype:  'button',
                                 action: 'add',
-                                text:   'Pridėti'
+                                text:   LANG.BUTTON.ADD
                             },
                             {
                                 iconCls: 'icon-minus-circle',
                                 xtype:  'button',
                                 action: 'delete',
-                                text:   'Pašalinti'
+                                text:   LANG.BUTTON.REMOVE
                             }
                         ]
                     }

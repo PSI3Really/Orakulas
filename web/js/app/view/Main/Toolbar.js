@@ -21,16 +21,17 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Toolbar', {
                 xtype: 'buttongroup',
                 items: [
                     {
-                        pressed: true,
+                        pressed: LANG_CODE === 'lt',
                         lang: 'lt',
                         iconCls: 'icon-flag-lt',
-                        tooltip: 'Perjungti kalbą į lietuvių',
+                        tooltip: LANG.MAIN.TOOLBAR.TOOLTIP.LANG_LT,
                         action: 'switchLang'
                     },
                     {
+                        pressed: LANG_CODE === 'en',
                         lang: 'en',
                         iconCls: 'icon-flag-gb',
-                        tooltip: 'Perjungti kalbą į anglų',
+                        tooltip: LANG.MAIN.TOOLBAR.TOOLTIP.LANG_EN,
                         action: 'switchLang'
                     }
                 ]
@@ -38,7 +39,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Toolbar', {
             '->',
             {
                 xtype: 'splitbutton',
-                text: 'Nauja ataskaita&hellip;',
+                text: LANG.MAIN.TOOLBAR.BUTTON.NEW_REPORT,
                 iconCls: 'icon-tab-plus',
                 handler: function () {
                     this.showMenu();
@@ -46,12 +47,12 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Toolbar', {
                 menu: new Ext.menu.Menu({
                     items: [
                         {
-                            text: 'Klonuoti atidarytą kortelę',
+                            text: LANG.MAIN.TOOLBAR.BUTTON.CLONE_TAB,
                             iconCls: 'icon-document-copy',
                             action: 'cloneTab'
                         },
                         {
-                            text: 'Įkelti iš failo&hellip;',
+                            text: LANG.MAIN.TOOLBAR.BUTTON.IMPORT_REPORT,
                             iconCls: 'icon-folder-open',
                             action: 'importReport'
                         }
@@ -59,13 +60,13 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Toolbar', {
                 })
             },
             {
-                text: 'Įkelti istorinius duomenis&hellip;',
+                text: LANG.MAIN.TOOLBAR.BUTTON.IMPORT_DATA,
                 iconCls: 'icon-arrow-270',
                 action: 'importData'
             },
             ' ',
             {
-                text: 'Administravimas',
+                text: LANG.MAIN.TOOLBAR.BUTTON.ADMIN,
                 iconCls: 'icon-building',
                 action: 'admin'
             },
@@ -76,7 +77,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Toolbar', {
             },
             {
                 iconCls: 'icon-door-open-out',
-                tooltip: 'Atsijungti',
+                tooltip: LANG.MAIN.TOOLBAR.TOOLTIP.LOGOUT,
                 action: 'logout'
             }
         ];

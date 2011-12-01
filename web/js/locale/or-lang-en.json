@@ -1,0 +1,102 @@
+{
+    "ADMIN":{
+        "TITLE": "Administrate",
+                
+        "TAB":{
+            "USERS": "Users",
+            "IS": "Informational systems",
+            "DEPARTMENTS": "Departments",
+            "SUPPORT_TYPES": "Support types"
+        },
+        "PERSONAL_SETTINGS": {
+            "TITLE": "Personal settings",
+            "OLD_PASS": "Old password",
+            "NEW_PASS": "New password",
+            "REPEAT_PASS": "Repeat new password"
+        },
+        "USERS":{
+            "TITLE_CHANGE": "Changing user: ",
+            "TITLE_NEW": "New user"
+        }
+    },
+
+    "MAIN":{
+        "TOOLBAR":{
+            "BUTTON":{
+                "IMPORT_DATA": "Import historical data&hellip;",
+                "NEW_REPORT": "New report&hellip;",
+                "CLONE_TAB": "Clone current tab",
+                "IMPORT_REPORT": "Open file&hellip",
+                "ADMIN": "Administrate"
+            },
+            "TOOLTIP":{
+                "LANG_LT": "Switch language to Lithuanian",
+                "LANG_EN": "Switch language to English",
+                "LOGOUT": "Logout"
+            }
+        },
+        "SUB_TOOLBAR":{
+            "BUTTON":{
+                "PREDICT": "Predict&hellip;",
+                "ANALYZE": "Analyze&hellip;",
+                "EXPORT": "Export&hellip;",
+                "TABLE": "Table",
+                "GRAPH": "Graph"
+            },
+            "TOOLTIP":{
+                "NEW_PORTLET": "New view"
+            }
+        }
+    },
+
+    "EXPORT":{
+        "TITLE": "Export"
+        
+    },
+
+    "IMPORT":{
+        "TITLE": "Import data"
+    },
+
+    "PREDICT":{
+        "TITLE": "Predict",
+
+        "BUTTON":{
+            "INFO_SYS_AND_DEPARTMENTS": "IS/Departments&hellip;",
+            "SUPPORT_AND_DEPARTMENTS": "Support types/Departments&hellip;"
+        }
+    },
+
+    "BUTTON":{
+        "ADD": "Add",
+        "REMOVE": "Remove",
+        "OK": "Ok",
+        "CANCEL": "Cancel",
+        "SAVE": "Save",
+        "SYNC": "Save changes",
+        "OPEN_FILE": "Open file"
+    },
+    
+    "ENTITY":{
+        "DEPARTMENT": "Department",
+        "INFO_SYS": "Informational system",
+        "CODE": "Code",
+        "SUPPORT_TYPE": "Support type",
+        "USERNAME": "Username",
+        "PASSWORD": "Password",
+        "FIRST_NAME": "First name",
+        "LAST_NAME": "Last name",
+        "EMAIL": "E-mail",
+        "ADMIN": "Administrator",
+        "FILE_NAME": "File name",
+        "FILE_TYPE": "File type",
+        "FROM": "From",
+        "TO": "To",
+        "AMOUNT": "Amount"
+    },
+
+    "FILETYPE":{
+        "EXCEL_XLS": "Excel - .xls",
+        "INTERNAL": "Internal - .xls"
+    }
+}

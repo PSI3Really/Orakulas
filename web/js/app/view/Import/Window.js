@@ -13,9 +13,9 @@ Ext.define(CONFIG.APP_NS+'.view.Import.Window', {
     height: 250,
     width: 500,
 
-    title: 'Įkelti duomenis', //TODO
-
     initComponent: function () {
+
+        this.title = LANG.IMPORT.TITLE;
 
         this.items = [{
             region: 'center',

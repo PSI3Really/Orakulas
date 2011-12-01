@@ -9,15 +9,15 @@ Ext.define(CONFIG.APP_NS+'.view.Import.Toolbar', {
             xtype: 'button',
             iconCls: 'icon-folder-open',
             action: 'openFile',
-            text: 'Įkelti iš failo'
+            text: LANG.BUTTON.OPEN_FILE
         },'->',{
             xtype: 'button',
             action: 'accept',
-            text: 'Gerai'
+            text: LANG.BUTTON.OK
         },{
             xtype: 'button',
             action: 'cancel',
-            text: 'Atšaukti'
+            text: LANG.BUTTON.CANCEL
         }];
 
         this.callParent(arguments);

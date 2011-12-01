@@ -2,8 +2,6 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.PersonalSettings.Window', {
     extend: 'Ext.window.Window',
     alias:  'widget.adminpersonalsettingswindow',
 
-    title: 'Asmeniniai nustatymai',
-
     requires: [
         CONFIG.APP_NS+'.view.Admin.PersonalSettings.PersonalSettingsPanel'
     ],
@@ -15,6 +13,8 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.PersonalSettings.Window', {
 
         this.height = 180;
         this.width = 300;
+
+        this.title = LANG.ADMIN.PERSONAL_SETTINGS.TITLE,
 
         this.items = [
             {
@@ -29,13 +29,13 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.PersonalSettings.Window', {
                                 iconCls: 'icon-tick',
                                 xtype:  'button',
                                 action: 'confirm',
-                                text:   'Gerai'
+                                text:   LANG.BUTTON.OK
                             },
                             {
                                 iconCls: 'icon-cross',
                                 xtype:  'button',
                                 action: 'cancel',
-                                text:   'Atšaukti'
+                                text:   LANG.BUTTON.CANCEL
                             }
                         ]
                     }

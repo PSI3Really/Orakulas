@@ -9,23 +9,23 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.Toolbar', {
             xtype: 'button',
             iconCls: 'icon-folder-open',
             action: 'openFile',
-            text: 'Įkelti iš failo'
+            text: LANG.BUTTON.OPEN_FILE
         },'-',{
             xtype: 'button',
-            action: 'infSysAndDepartments',
-            text: 'IS/Padaliniai...'
+            action: 'infoSysAndDepartments',
+            text: LANG.PREDICT.BUTTON.INFO_SYS_AND_DEPARTMENTS
         },{
             xtype: 'button',
             action: 'supportAndDepartments',
-            text: 'Priemonės/Padaliniai...'
+            text: LANG.PREDICT.BUTTON.SUPPORT_AND_DEPARTMENTS
         },'->',{
             xtype: 'button',
             action: 'accept',
-            text: 'Gerai'
+            text: LANG.BUTTON.OK
         },{
             xtype: 'button',
             action: 'cancel',
-            text: 'Atšaukti'
+            text: LANG.BUTTON.CANCEL
         }];
 
         this.callParent(arguments);

@@ -8,8 +8,8 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Departments.DepartmentsGrid', {
         this.store = Ext.create('widget.adminDepartmentsStore', {});
 
         this.columns = [
-            {header: 'Kodas',          dataIndex: 'code',  flex: 0},
-            {header: 'Padalinys',      dataIndex: 'name', flex: 1}
+            {header: LANG.ENTITY.CODE,          dataIndex: 'code',  flex: 0},
+            {header: LANG.ENTITY.DEPARTMENT,    dataIndex: 'name', flex: 1}
         ];
 
         this.store.load();

@@ -9,10 +9,10 @@ Ext.define(CONFIG.APP_NS+'.view.Import.Grid', {
         });
         
         this.columns = [
-            {header: 'Priemonė',  dataIndex: 'type',  flex: 1},
-            {header: 'Nuo', dataIndex: 'from',  flex: 1},
-            {header: 'Iki', dataIndex: 'to',  flex: 1},
-            {header: 'Kiekis', dataIndex: 'amount',  flex: 1}
+            {header: LANG.ENTITY.SUPPORT_TYPE,  dataIndex: 'type',  flex: 1},
+            {header: LANG.ENTITY.FROM,          dataIndex: 'from',  flex: 1},
+            {header: LANG.ENTITY.TO,            dataIndex: 'to',  flex: 1},
+            {header: LANG.ENTITY.AMOUNT,        dataIndex: 'amount',  flex: 1}
         ];
 
         this.callParent(arguments);

@@ -16,18 +16,18 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.PersonalSettings.PersonalSettingsPanel', {
         this.defaultType = 'textfield';
         this.items = [
             {
-                fieldLabel: 'Senas slaptažodis',
+                fieldLabel: LANG.PERSONAL_SETTINGS.OLD_PASS,
                 name: 'oldpassword',
                 inputType:'password'
             },
             {
-                fieldLabel: 'Naujas slaptažodis',
+                fieldLabel: LANG.PERSONAL_SETTINGS.NEW_PASS,
                 name: 'newpassword',
                 inputType:'password'
             },
             {
                 xtype: 'textfield',
-                fieldLabel: 'Pakartoti naują slaptažodį',
+                fieldLabel: LANG.PERSONAL_SETTINGS.REPEAT_PASS,
                 name: 'newpasswordagain',
                 inputType:'password'
             }

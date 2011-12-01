@@ -1,13 +1,5 @@
 //TODO: Move fileTypes to store
 
-var fileTypes = Ext.create('Ext.data.Store', {
-    fields: ['filetype', 'code'],
-    data: [
-        {'filetype':'Excel - .xls', 'code':'excel'},
-        {'filetype':'Vidinis - .xls', 'code':'internal'}
-    ]
-});
-
 Ext.define(CONFIG.APP_NS+'.view.Export.Controls', {
     extend: 'Ext.form.Panel',
     alias: 'widget.exportcontrols',
@@ -15,6 +7,14 @@ Ext.define(CONFIG.APP_NS+'.view.Export.Controls', {
     layout: 'border',
 
     initComponent: function(){
+        this.fileTypes = Ext.create('Ext.data.Store', {
+            fields: ['filetype', 'code'],
+            data: [
+                {'filetype': LANG.FILETYPE.EXCEL_XLS, 'code':'excel'},
+                {'filetype': LANG.FILETYPE.INTERNAL, 'code':'internal'}
+            ]
+        });
+        
         this.items = [{
             xtype: 'panel',
             region: 'center',
@@ -27,16 +27,16 @@ Ext.define(CONFIG.APP_NS+'.view.Export.Controls', {
             border: 'false',
             items: [{
                 xtype: 'textfield',
-                fieldLabel: 'Pavadinimas',
+                fieldLabel: LANG.ENTITY.FILE_NAME,
                 allowBlank: false
             },{
                 xtype: 'combobox',
-                fieldLabel: 'Failo tipas',
+                fieldLabel: LANG.ENTITY.FILE_TYPE,
                 action: 'typeChoose',
                 forceSelection: true,
                 editable: false,
                 allowBlank: false,
-                store: fileTypes,
+                store: this.fileTypes,
                 queryMode: 'local',
                 valueField: 'code',
                 displayField: 'filetype'
@@ -49,11 +49,11 @@ Ext.define(CONFIG.APP_NS+'.view.Export.Controls', {
             items: ['->',{
                 xtype: 'button',
                 action: 'accept',
-                text: 'Gerai'
+                text: LANG.BUTTON.OK
             },{
                 xtype: 'button',
                 action: 'cancel',
-                text: 'Atšaukti'
+                text: LANG.BUTTON.CANCEL
             }]
         };
 

@@ -12,7 +12,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.TabPanel', {
     initComponent: function() {
         this.items = [
             {
-                title: 'Vartotojai',
+                title: LANG.ADMIN.TAB.USERS,
                 layout: 'fit',
                 items: [
                     {
@@ -23,7 +23,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.TabPanel', {
                 ]
             },
             {
-                title: 'Informacinės sistemos',
+                title: LANG.ADMIN.TAB.IS,
                 layout: 'fit',
                 items: [
                     {
@@ -34,7 +34,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.TabPanel', {
                 ]
             },
             {
-                title: 'Padaliniai',
+                title: LANG.ADMIN.TAB.DEPARTMENTS,
                 layout: 'fit',
                 items: [
                     {
@@ -45,7 +45,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.TabPanel', {
                 ]
             },
             {
-                title: 'Priemonės',
+                title: LANG.ADMIN.TAB.SUPPORT_TYPES,
                 layout: 'fit',
                 items: [
                     {

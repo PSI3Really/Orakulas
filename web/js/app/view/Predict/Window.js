@@ -14,9 +14,9 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.Window', {
     height: 250,
     width: 500,
 
-    title: 'Prognozuoti', //TODO
-
     initComponent: function () {
+
+        this.title = LANG.PREDICT.TITLE;
 
         this.items = [{
             region: 'center',

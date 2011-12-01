@@ -24,20 +24,20 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Users.Users', {
                                 iconCls: 'icon-plus-circle',
                                 xtype:  'button',
                                 action: 'add',
-                                text:   'Pridėti'
+                                text:   LANG.BUTTON.ADD
                             },
                             {
                                 iconCls: 'icon-minus-circle',
                                 xtype:  'button',
                                 action: 'delete',
-                                text:   'Pašalinti'
+                                text:   LANG.BUTTON.REMOVE
                             },
                             '->',
                             {
                                 iconCls: 'icon-disk-black',
                                 xtype: 'button',
                                 action: 'sync',
-                                text: 'Išsaugoti pakeitimus'
+                                text: LANG.BUTTON.SYNC
                             }
                         ]
                     }
