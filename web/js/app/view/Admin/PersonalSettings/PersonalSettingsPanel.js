@@ -16,18 +16,18 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.PersonalSettings.PersonalSettingsPanel', {
         this.defaultType = 'textfield';
         this.items = [
             {
-                fieldLabel: LANG.PERSONAL_SETTINGS.OLD_PASS,
+                fieldLabel: LANG.ADMIN.PERSONAL_SETTINGS.OLD_PASS,
                 name: 'oldpassword',
                 inputType:'password'
             },
             {
-                fieldLabel: LANG.PERSONAL_SETTINGS.NEW_PASS,
+                fieldLabel: LANG.ADMIN.PERSONAL_SETTINGS.NEW_PASS,
                 name: 'newpassword',
                 inputType:'password'
             },
             {
                 xtype: 'textfield',
-                fieldLabel: LANG.PERSONAL_SETTINGS.REPEAT_PASS,
+                fieldLabel: LANG.ADMIN.PERSONAL_SETTINGS.REPEAT_PASS,
                 name: 'newpasswordagain',
                 inputType:'password'
             }
