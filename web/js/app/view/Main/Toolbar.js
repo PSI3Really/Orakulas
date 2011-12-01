@@ -18,19 +18,21 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Toolbar', {
                 html: '<h1>'+CONFIG.APP_NAME+'</h1>'
             },{
                 xtype: 'buttongroup',
-                items: [{
-                    pressed: true,
-                    lang: 'lt',
-                    iconCls: 'icon-flag-lt',
-                    tooltip: 'Perjungti kalbą į lietuvių',
-                    action: 'switchLang'
-                },
-                {
-                    lang: 'en',
-                    iconCls: 'icon-flag-gb',
-                    tooltip: 'Perjungti kalbą į anglų',
-                    action: 'switchLang'
-                }]
+                items: [
+                    {
+                        pressed: true,
+                        lang: 'lt',
+                        iconCls: 'icon-flag-lt',
+                        tooltip: 'Perjungti kalbą į lietuvių',
+                        action: 'switchLang'
+                    },
+                    {
+                        lang: 'en',
+                        iconCls: 'icon-flag-gb',
+                        tooltip: 'Perjungti kalbą į anglų',
+                        action: 'switchLang'
+                    }
+                ]
             },
             '->',
             {
@@ -65,6 +67,11 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Toolbar', {
                 iconCls: 'icon-gear',
                 tooltip: 'Administravimas / Nustatymai',
                 action: 'admin'
+            },
+            ' ',
+            {
+                text: 'Prisijungęs: Vardenis Pavardenis (dev)',
+                iconCls: 'icon-user'
             },
             {
                 iconCls: 'icon-door-open-out',
