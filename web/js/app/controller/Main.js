@@ -27,6 +27,9 @@ Ext.define(CONFIG.APP_NS+'.controller.Main', {
             },
             'maintoolbar button[action=switchLang]': {
                 click: this.switchLang
+            },
+            'maintoolbar button[action=adminpersonalsettings]': {
+                click: this.adminpersonalsettings
             }
         });
     },
@@ -56,6 +59,10 @@ Ext.define(CONFIG.APP_NS+'.controller.Main', {
 
     admin: function(){
         Ext.create('widget.adminWindow', {}).show();
+    },
+
+    adminpersonalsettings: function () {
+        Ext.create('widget.adminpersonalsettingswindow', {}).show();
     },
 
     switchLang: function(btn){
