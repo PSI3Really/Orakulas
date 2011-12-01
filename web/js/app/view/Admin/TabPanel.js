@@ -12,10 +12,6 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.TabPanel', {
     initComponent: function() {
         this.items = [
             {
-                layout: 'fit',
-                title: 'Asmeniniai nustatymai'
-            },
-            {
                 title: 'Vartotojai',
                 layout: 'fit',
                 items: [

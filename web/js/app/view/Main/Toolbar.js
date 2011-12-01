@@ -5,7 +5,8 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Toolbar', {
     requires: [
         CONFIG.APP_NS+'.view.Import.Window',
         CONFIG.APP_NS+'.view.Export.Window',
-        CONFIG.APP_NS+'.view.Admin.Window'
+        CONFIG.APP_NS+'.view.Admin.Window',
+        CONFIG.APP_NS+'.view.Admin.PersonalSettings.Window'
     ],
 
     initComponent: function () {
@@ -71,7 +72,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Toolbar', {
             {
                 text: 'Vardenis Pavardenis (dev)',
                 iconCls: 'icon-user-admin', // TODO: icon-user or icon-user-admin based on current user role
-                action: 'admin'
+                action: 'adminpersonalsettings'
             },
             {
                 iconCls: 'icon-door-open-out',
