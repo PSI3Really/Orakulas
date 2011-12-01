@@ -21,7 +21,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.PersonalSettings', {
         alert('TO DO: confirm');
     },
 
-    cancel: function() {
-        alert('TO DO: cancel');
+    cancel: function(btn) {
+        btn.up('adminpersonalsettingswindow').close();
     }
 });
