@@ -3,6 +3,10 @@ security:
     #    login_firewall:
     #       pattern: ^/login$
     #       anonymous: ~
+
+        ajax_calls:
+            pattern:    ^/_wdt
+            anonymous:  ~
         secured_area:
             pattern: ^/(?!login)
             form_login:
@@ -10,9 +14,10 @@ security:
                 check_path: /check_login
             logout: ~
 
-#    access_control:
-#        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-#        - { path: ^/admin, roles: ROLE_ADMIN }
+    access_control:
+        - { path: ^/_wdt, roles: 'IS_AUTHENTICATED_ANONYMOUSLY' }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin, roles: ROLE_ADMIN }
 
     providers:
         main:
