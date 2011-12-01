@@ -13,7 +13,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.PersonalSettings.Window', {
         this.floatable = true;
         this.modal = true;
 
-        this.height = 200;
+        this.height = 180;
         this.width = 300;
 
         this.items = [

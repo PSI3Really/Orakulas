@@ -16,17 +16,20 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.PersonalSettings.PersonalSettingsPanel', {
         this.defaultType = 'textfield';
         this.items = [
             {
-                fieldLabel: 'Senas slaptazodis',
-                name: 'firstName'
+                fieldLabel: 'Senas slaptažodis',
+                name: 'oldpassword',
+                inputType:'password'
             },
             {
-                fieldLabel: 'Naujas slaptazodis',
-                name: 'lastName'
+                fieldLabel: 'Naujas slaptažodis',
+                name: 'newpassword',
+                inputType:'password'
             },
             {
                 xtype: 'textfield',
-                fieldLabel: 'Pakartoti nauja slaptazodi',
-                name: 'birthDate'
+                fieldLabel: 'Pakartoti naują slaptažodį',
+                name: 'newpasswordagain',
+                inputType:'password'
             }
         ];
         this.callParent(arguments);
