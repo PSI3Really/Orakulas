@@ -55,7 +55,6 @@ Ext.define(CONFIG.APP_NS+'.controller.Main', {
     },
 
     admin: function(){
-        //alert('TODO: Administravimo / Nustatymų langas');
         Ext.create('widget.adminWindow', {}).show();
     },
 

@@ -9,8 +9,8 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Toolbar', {
     ],
 
     initComponent: function () {
-        this.id = 'toolbar',
-        this.height = 30,
+        this.id = 'toolbar';
+        this.height = 30;
         this.items = [
             {
                 id: 'logo',
@@ -64,14 +64,14 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Toolbar', {
             },
             ' ',
             {
-                iconCls: 'icon-gear',
-                tooltip: 'Administravimas / Nustatymai',
+                text: 'Administravimas',
+                iconCls: 'icon-building',
                 action: 'admin'
             },
-            ' ',
             {
-                text: 'Prisijungęs: Vardenis Pavardenis (dev)',
-                iconCls: 'icon-user'
+                text: 'Vardenis Pavardenis (dev)',
+                iconCls: 'icon-user-admin', // TODO: icon-user or icon-user-admin based on current user role
+                action: 'admin'
             },
             {
                 iconCls: 'icon-door-open-out',

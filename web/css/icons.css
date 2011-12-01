@@ -52,6 +52,9 @@
 .icon-user-admin {
     background: url(../images/icons/user-admin.png) no-repeat center center;
 }
+.icon-building {
+    background: url(../images/icons/building.png) no-repeat center center;
+}
 
 /* Flags */
 .icon-flag-lt {
