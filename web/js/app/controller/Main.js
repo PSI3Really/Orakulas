@@ -22,7 +22,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Main', {
             'maintoolbar menuitem[action=importReport]': {
                 click: this.importReport
             },
-            'maintoolbar > button[action=admin]': {
+            'maintoolbar button[action=admin]': {
                 click: this.admin
             },
             'maintoolbar button[action=switchLang]': {

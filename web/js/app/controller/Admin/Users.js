@@ -27,6 +27,9 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Users', {
             },
             'adminUsersEditWindow button[action=cancel]':{
                 click: this.onCancelEdit
+            },
+            'adminusersgrid button[action=sync]':{
+                click: this.sync
             }
         });
     },
@@ -68,11 +71,17 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Users', {
                 fn: function(btn) {
                     if (btn === 'yes'){
                         store.remove(item);
-                        store.sync();
+                        //store.sync();
                     }
                 }
             });
         }
+    },
+
+    sync: function(btn){
+        var grid = btn.up('adminusersgrid');
+        var store = grid.getStore();
+        store.sync();
     },
 
     onSaveEdit: function(btn){
@@ -90,7 +99,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Users', {
         };
 
         wnd.close();
-        wnd.store.sync();
+        //wnd.store.sync();
     },
 
     onCancelEdit: function(btn){

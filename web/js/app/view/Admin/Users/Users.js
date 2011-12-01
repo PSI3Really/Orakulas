@@ -31,6 +31,13 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Users.Users', {
                                 xtype:  'button',
                                 action: 'delete',
                                 text:   'Pašalinti'
+                            },
+                            '->',
+                            {
+                                iconCls: 'icon-disk-black',
+                                xtype: 'button',
+                                action: 'sync',
+                                text: 'Išsaugoti pakeitimus'
                             }
                         ]
                     }
