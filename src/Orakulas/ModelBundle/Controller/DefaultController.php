@@ -76,6 +76,8 @@ class DefaultController extends Controller
             $facade = $this->getUserFacade();
         }
         $facade->save($jsonValueObject);
+
+        return $jsonValueObject->getId();
     }
 
     private function delete($className)
@@ -115,8 +117,8 @@ class DefaultController extends Controller
     }
 
     public function departmentPostAction() {
-        $this->postValue(EntityFacade::DEPARTMENT);
-        exit;
+        $id = $this->postValue(EntityFacade::DEPARTMENT);
+        return $this->getJsonResponse(EntityFacade::DEPARTMENT, $id);
     }
 
     public function departmentDeleteAction() {
@@ -135,8 +137,8 @@ class DefaultController extends Controller
     }
 
     public function departmentInfoSysUsagePostAction() {
-        $this->postValue(EntityFacade::DEPARTMENT_INFO_SYS_USAGE);
-        exit;
+        $id = $this->postValue(EntityFacade::DEPARTMENT_INFO_SYS_USAGE);
+        return $this->getJsonResponse(EntityFacade::DEPARTMENT_INFO_SYS_USAGE, $id);
     }
 
     public function departmentInfoSysUsageDeleteAction() {
@@ -155,8 +157,8 @@ class DefaultController extends Controller
     }
 
     public function informationalSystemPostAction() {
-        $this->postValue(EntityFacade::INFORMATIONAL_SYSTEM);
-        exit;
+        $id = $this->postValue(EntityFacade::INFORMATIONAL_SYSTEM);
+        return $this->getJsonResponse(EntityFacade::INFORMATIONAL_SYSTEM, $id);
     }
 
     public function informationalSystemDeleteAction() {
@@ -175,8 +177,8 @@ class DefaultController extends Controller
     }
 
     public function supportAdministrationTimePostAction() {
-        $this->postValue(EntityFacade::SUPPORT_ADMINISTRATION_TIME);
-        exit;
+        $id = $this->postValue(EntityFacade::SUPPORT_ADMINISTRATION_TIME);
+        return $this->getJsonResponse(EntityFacade::SUPPORT_ADMINISTRATION_TIME, $id);
     }
 
     public function supportAdministrationTimeDeleteAction() {
@@ -195,8 +197,8 @@ class DefaultController extends Controller
     }
 
     public function supportCategoryPostAction() {
-        $this->postValue(EntityFacade::SUPPORT_CATEGORY);
-        exit;
+        $id = $this->postValue(EntityFacade::SUPPORT_CATEGORY);
+        return $this->getJsonResponse(EntityFacade::SUPPORT_CATEGORY, $id);
     }
 
     public function supportCategoryDeleteAction() {
@@ -216,8 +218,8 @@ class DefaultController extends Controller
     }
 
     public function supportHistoryPostAction() {
-        $this->postValue(EntityFacade::SUPPORT_HISTORY);
-        exit;
+        $id = $this->postValue(EntityFacade::SUPPORT_HISTORY);
+        return $this->getJsonResponse(EntityFacade::SUPPORT_HISTORY, $id);
     }
 
     public function supportHistoryDeleteAction() {
@@ -236,8 +238,8 @@ class DefaultController extends Controller
     }
 
     public function supportTypePostAction() {
-        $this->postValue(EntityFacade::SUPPORT_TYPE);
-        exit;
+        $id = $this->postValue(EntityFacade::SUPPORT_TYPE);
+        return $this->getJsonResponse(EntityFacade::SUPPORT_TYPE, $id);
     }
 
     public function supportTypeDeleteAction() {
@@ -257,8 +259,8 @@ class DefaultController extends Controller
 
     public function userPostAction()
     {
-        $this->postValue(EntityFacade::USER);
-        exit;
+        $id = $this->postValue(EntityFacade::USER);
+        return $this->getJsonResponse(EntityFacade::USER, $id);
     }
 
     public function userDeleteAction()
