@@ -35,11 +35,11 @@ Ext.application({
         'Import',
         'Export',
         'Predict',
+        'Admin.Admin',
         'Admin.Users',
         'Admin.Departments',
         'Admin.InformationalSystems',
         'Admin.SupportTypes',
-        'Admin',
         'Admin.PersonalSettings'
     ],
 

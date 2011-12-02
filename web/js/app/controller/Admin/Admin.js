@@ -1,4 +1,4 @@
-Ext.define(CONFIG.APP_NS+'.controller.Admin', {
+Ext.define(CONFIG.APP_NS+'.controller.Admin.Admin', {
     extend: 'Ext.app.Controller',
 
     models: [
