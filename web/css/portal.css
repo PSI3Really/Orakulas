@@ -1,20 +1,3 @@
-#app-header {
-    color: #596F8F;
-    font-size: 22px;
-    font-weight: 200;
-    padding: 8px 15px;
-    text-shadow: 0 1px 0 #fff;
-}
-#app-msg {
-    background: #D1DDEF;
-    border: 1px solid #ACC3E4;
-    padding: 3px 15px;
-    font-weight: bold;
-    font-size: 13px;
-    position: absolute;
-    right: 0;
-    top: 0;
-}
 .x-panel-ghost {
     z-index: 1;
 }
@@ -45,18 +28,4 @@
 .portlet-content {
     padding: 10px;
     font-size: 11px;
-}
-
-#app-options .portlet-content {
-    padding: 5px;
-    font-size: 12px;
-}
-.settings {
-    background-image:url(../shared/icons/fam/folder_wrench.png);
-}
-.nav {
-    background-image:url(../shared/icons/fam/folder_go.png);
-}
-.info {
-    background-image:url(../shared/icons/fam/information.png);
 }

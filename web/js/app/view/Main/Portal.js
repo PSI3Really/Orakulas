@@ -7,7 +7,10 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal', {
         'Ext.ux.PortalPanel'
     ],
 
+    border: false,
+
     initComponent: function(){
+        //TODO: dynamic number of columns
         this.items = [{
 
         },{
