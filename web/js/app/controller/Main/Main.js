@@ -1,4 +1,4 @@
-Ext.define(CONFIG.APP_NS+'.controller.Main', {
+Ext.define(CONFIG.APP_NS+'.controller.Main.Main', {
     extend: 'Ext.app.Controller',
 
     views: ['Main.Toolbar'],

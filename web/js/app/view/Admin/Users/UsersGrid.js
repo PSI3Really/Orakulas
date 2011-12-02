@@ -2,8 +2,6 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Users.UsersGrid', {
     extend: 'Ext.grid.Panel',
     alias: 'widget.adminusersgrid',
 
-    //store: CONFIG.APP_NS+'.store.Users', //Does not seem to work
-
     initComponent: function() {
         this.border = false;
         

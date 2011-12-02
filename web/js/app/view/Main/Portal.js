@@ -8,6 +8,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal', {
     ],
 
     border: false,
+    reports: null,
 
     initComponent: function(){
         //TODO: dynamic number of columns
@@ -18,5 +19,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal', {
         }];
 
         this.callParent();
+
+        this.fireEvent('loadReports', this);
     }
 });

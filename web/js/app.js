@@ -30,9 +30,9 @@ Ext.application({
     //*/
 
     controllers: [
-        'Main',
-        'Portal',
-        'Tab',
+        'Main.Main',
+        'Main.Portal',
+        'Main.Tab',
         'Import',
         'Export',
         'Predict',

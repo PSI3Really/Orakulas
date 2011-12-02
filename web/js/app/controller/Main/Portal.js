@@ -1,9 +1,12 @@
-Ext.define(CONFIG.APP_NS+'.controller.Portal', {
+Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
     extend: 'Ext.app.Controller',
 
     require: ['Ext.ux.Portlet'],
 
     views: ['Main.Portal'],
+
+    models: ['Usage'],
+    stores: ['Report'],
 
     refs: [
         {ref: 'portalPanel', selector: 'portal'}
@@ -12,8 +15,9 @@ Ext.define(CONFIG.APP_NS+'.controller.Portal', {
     init: function(){
         this.control({
             'portal':{
-                addTable: this.addTable,
-                addChart: this.addChart
+                addTable:       this.addTable,
+                addChart:       this.addChart,
+                loadReports:    this.loadReports
             }
         });
     },
@@ -36,6 +40,13 @@ Ext.define(CONFIG.APP_NS+'.controller.Portal', {
             title: 'Portlet mofo',
             html: '<h1>CHARTS AND SHIZZ YO</h1>'
         }))
+    },
+
+    loadReports: function(portal){
+        portal.reports = {
+            infoSys: Ext.create('widget.reportStore', {}),
+            department: Ext.create('widget.reportStore', {})
+        }
     },
 
     //private

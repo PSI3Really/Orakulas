@@ -1,4 +1,4 @@
-Ext.define(CONFIG.APP_NS+'.controller.Tab', {
+Ext.define(CONFIG.APP_NS+'.controller.Main.Tab', {
     extend: 'Ext.app.Controller',
 
     views: ['Main.TabPanel'],
