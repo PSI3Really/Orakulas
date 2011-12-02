@@ -6,10 +6,14 @@ Ext.define(CONFIG.APP_NS+'.view.Import.Toolbar', {
 
     initComponent: function(){
         this.items = [{
-            xtype: 'button',
-            iconCls: 'icon-folder-open',
+            xtype: 'filefield', //TODO: make every button look the same
             action: 'openFile',
-            text: LANG.BUTTON.OPEN_FILE
+            buttonOnly: true,
+            hideLabel: true,
+            buttonText: LANG.BUTTON.OPEN_FILE,
+            buttonConfig:{
+                iconCls: 'icon-folder-open'
+            }
         },'->',{
             xtype: 'button',
             action: 'accept',

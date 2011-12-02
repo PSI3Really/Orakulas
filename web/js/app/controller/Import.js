@@ -11,8 +11,8 @@ Ext.define(CONFIG.APP_NS+'.controller.Import', {
             'importtoolbar button[action=cancel]':{
                 click: this.cancel
             },
-            'importtoolbar button[action=openFile]':{
-                click: this.openFile
+            'importtoolbar filefield[action=openFile]':{
+                change: this.openFile
             }
         });
     },
@@ -26,7 +26,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Import', {
         btn.up('importwindow').close();
     },
 
-    openFile: function(btn){
-        alert('Pressed OpenFile');
+    openFile: function(field, value){
+        alert('Open file: ' + value);
     }
 });
