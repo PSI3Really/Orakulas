@@ -1,5 +1,6 @@
-Ext.require(['Ext.container.Viewport']);
-Ext.require(['Ext.Ajax']);
+Ext.require('Ext.container.Viewport');
+Ext.require('Ext.Ajax');
+Ext.require('Ext.chart.*');
 
 var LANG = null;
 var LANG_CODE = 'lt';
@@ -17,8 +18,7 @@ Ext.application({
         'Admin.User',
         'Admin.Department',
         'Admin.InformationalSystem',
-        'Admin.DepartmentInfoSysUsage',
-        'Report'
+        'Admin.DepartmentInfoSysUsage'
     ],
 
     stores: [

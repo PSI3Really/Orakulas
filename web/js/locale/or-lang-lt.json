@@ -41,10 +41,18 @@
                 "ANALYZE": "Analizuoti&hellip;",
                 "EXPORT": "Eksportuoti&hellip;",
                 "TABLE": "Lentelė",
-                "GRAPH": "Grafikas"
+                "CHART": "Grafikas"
             },
             "TOOLTIP":{
                 "NEW_PORTLET": "Naujas vaizdas"
+            }
+        },
+        "PORTAL":{
+            "TABLE":{
+                "TITLE": "Lentelė"
+            },
+            "CHART":{
+                "TITLE": "Grafikas"
             }
         }
     },
@@ -92,7 +100,10 @@
         "FILE_TYPE": "Failo tipas",
         "FROM": "Nuo",
         "TO": "Iki",
-        "AMOUNT": "Kiekis"
+        "AMOUNT": "Kiekis",
+        "SUPPORT_COUNT": "Paramos kiekis",
+        "HOURS_SPENT": "Panaudotos valandos",
+        "LOAD": "Apkrova"
     },
 
     "FILETYPE":{

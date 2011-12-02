@@ -3,9 +3,9 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
 
     require: ['Ext.ux.Portlet'],
 
-    views: ['Main.Portal'],
+    views: ['Main.Portal', 'Main.GridPortlet', 'Main.ChartPortlet'],
 
-    models: ['Usage'],
+    models: ['Load'],
     stores: ['Report'],
 
     refs: [
@@ -24,29 +24,29 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
 
     addTable: function(portal){
         var minCol = this.findMinColumn(portal);
+        var portletId = portal.portletCount++;
 
-        //TODO
-        minCol.add(Ext.create('Ext.ux.Portlet', {
-            title: 'Portlet mofo',
-            html: '<h1>TABLES UP IN THIS YO</h1>'
-        }))
+        minCol.add(Ext.create('widget.gridportlet', {
+            title: LANG.MAIN.PORTAL.TABLE.TITLE + ' ' + portletId, //TODO: separate by table/chart
+            store: portal.reports.department
+        }));
     },
 
     addChart: function(portal){
         var minCol = this.findMinColumn(portal);
+        var portletId = portal.portletCount++;
 
-        //TODO
-        minCol.add(Ext.create('Ext.ux.Portlet', {
-            title: 'Portlet mofo',
-            html: '<h1>CHARTS AND SHIZZ YO</h1>'
-        }))
+        minCol.add(Ext.create('widget.chartportlet', {
+            title: LANG.MAIN.PORTAL.CHART.TITLE + ' ' + portletId,
+            store: portal.reports.department,
+            leftAxisFields: ['supportCount'], //TODO: generalize
+            leftAxisTitle: LANG.ENTITY.SUPPORT_COUNT
+        }));
     },
 
     loadReports: function(portal){
-        portal.reports = {
-            infoSys: Ext.create('widget.reportStore', {}),
-            department: Ext.create('widget.reportStore', {})
-        }
+        portal.reports.infoSys = Ext.create('widget.reportStore', {});
+        portal.reports.department = Ext.create('widget.reportStore', {});
     },
 
     //private

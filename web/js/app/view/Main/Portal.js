@@ -8,7 +8,12 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal', {
     ],
 
     border: false,
-    reports: null,
+    reports: {
+        infoSys: null,
+        department: null
+    },
+    parentTab: null,
+    portletCount: 0,
 
     initComponent: function(){
         //TODO: dynamic number of columns

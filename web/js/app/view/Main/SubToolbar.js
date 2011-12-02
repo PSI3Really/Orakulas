@@ -40,7 +40,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.SubToolbar', {
                             action: 'addTable'
                         },
                         {
-                            text: LANG.MAIN.SUB_TOOLBAR.BUTTON.GRAPH,
+                            text: LANG.MAIN.SUB_TOOLBAR.BUTTON.CHART,
                             iconCls: 'icon-chart',
                             action: 'addChart'
                         }

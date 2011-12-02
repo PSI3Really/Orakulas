@@ -41,10 +41,18 @@
                 "ANALYZE": "Analyze&hellip;",
                 "EXPORT": "Export&hellip;",
                 "TABLE": "Table",
-                "GRAPH": "Graph"
+                "CHART": "Chart"
             },
             "TOOLTIP":{
                 "NEW_PORTLET": "New view"
+            }
+        },
+        "PORTAL":{
+            "TABLE":{
+                "TITLE": "Table"
+            },
+            "CHART":{
+                "TITLE": "Chart"
             }
         }
     },
@@ -92,7 +100,10 @@
         "FILE_TYPE": "File type",
         "FROM": "From",
         "TO": "To",
-        "AMOUNT": "Amount"
+        "AMOUNT": "Amount",
+        "SUPPORT_COUNT": "Support count",
+        "HOURS_SPENT": "Hours spent",
+        "LOAD": "Load"
     },
 
     "FILETYPE":{

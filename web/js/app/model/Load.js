@@ -1,6 +1,6 @@
-Ext.define(CONFIG.APP_NS+'.model.Usage', {
+Ext.define(CONFIG.APP_NS+'.model.Load', {
     extend: 'Ext.data.Model',
-    alias: 'widget.usageModel',
+    alias: 'widget.loadModel',
     idProperty: 'id',
 
     fields: [
