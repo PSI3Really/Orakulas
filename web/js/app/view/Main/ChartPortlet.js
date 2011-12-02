@@ -26,7 +26,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.ChartPortlet', {
             },{
                 type: 'Time',
                 position: 'bottom',
-                fields: ['from'],
+                fields: ['startDate'],
                 dateFormat: 'Y m',
                 grid: false
             }],
@@ -34,7 +34,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.ChartPortlet', {
                 type: 'column',
                 axis: 'left',
                 highlight: true,
-                xField: 'from',
+                xField: 'startDate',
                 yField: this.leftAxisFields[0]
             }]
         };

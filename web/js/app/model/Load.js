@@ -5,8 +5,8 @@ Ext.define(CONFIG.APP_NS+'.model.Load', {
 
     fields: [
         {name: 'id',                    type: 'int'},
-        {name: 'from',                  type: 'date'},
-        {name: 'to',                    type: 'date'},
+        {name: 'startDate',             type: 'date'},
+        {name: 'endDate',               type: 'date'},
         {name: 'supportCount',          type: 'int'},
         {name: 'hoursSpent',            type: 'int'}
     ]
