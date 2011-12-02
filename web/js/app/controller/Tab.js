@@ -45,11 +45,15 @@ Ext.define(CONFIG.APP_NS+'.controller.Tab', {
 
     addTable: function(item){
         var tab = item.up('menu').floatParent.up('tabpanel').getActiveTab();
-        alert('TODO: Naujas lentelės vaizdas: ' + tab.title);
+        var portal = tab.down('portal');
+
+        portal.fireEvent('addTable', portal);
     },
 
     addChart: function(item){
         var tab = item.up('menu').floatParent.up('tabpanel').getActiveTab();
-        alert('TODO: Naujas grafiko vaizdas');
+        var portal = tab.down('portal');
+
+        portal.fireEvent('addChart', portal);
     }
 });

@@ -31,6 +31,7 @@ Ext.application({
 
     controllers: [
         'Main',
+        'Portal',
         'Tab',
         'Import',
         'Export',
@@ -46,7 +47,7 @@ Ext.application({
     launch: function(){
         var params = Ext.urlDecode(window.location.search.substring(1));
         
-        var lang = params.lang ? params.lang : 'lt';
+        var lang = params.lang ? params.lang : CONFIG.DEFAULT_LANG;
 
         var urlExt = Ext.util.Format.format('../js/locale/ext-lang-{0}.js', lang);
         var urlApp = Ext.util.Format.format('../js/locale/{0}-lang-{1}.json', CONFIG.APP_NS, lang);

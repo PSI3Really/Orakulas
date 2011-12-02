@@ -18,7 +18,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.TabPanel', {
                 items: [
                     {
                         border: false,
-                        html: '<p>Istoriniai duomenys</p>'
+                        xtype: 'portal'
                     }
                 ]
             },
@@ -34,7 +34,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.TabPanel', {
                 items: [
                     {
                         border: false,
-                        html: '<p>Turinys: Ataskaita #1</p>'
+                        xtype: 'portal'
                     }
                 ]
             },
@@ -50,7 +50,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.TabPanel', {
                 items: [
                     {
                         border: false,
-                        html: '<p>Turinys: Ataskaita #2</p>'
+                        xtype: 'portal'
                     }
                 ]
             }
