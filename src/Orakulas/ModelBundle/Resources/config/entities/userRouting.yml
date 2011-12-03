@@ -1,0 +1,23 @@
+OrakulasModelBundle_users_create:
+    pattern: /create
+    defaults: { _controller: OrakulasModelBundle:User:create }
+    requirements:
+      _method: POST
+
+OrakulasModelBundle_users_read:
+    pattern: /read
+    defaults: { _controller: OrakulasModelBundle:User:read }
+    requirements:
+      _method: GET
+
+OrakulasModelBundle_users_update:
+   pattern: /update
+   defaults: { _controller: OrakulasModelBundle:User:update }
+   requirements:
+     _method: POST
+
+OrakulasModelBundle_users_delete:
+    pattern: /delete
+    defaults: { _controller: OrakulasModelBundle:User:delete }
+    requirements:
+      _method: POST

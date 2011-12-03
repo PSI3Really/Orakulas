@@ -4,16 +4,7 @@ namespace Orakulas\ModelBundle\Facades;
 
 use \Symfony\Bundle\DoctrineBundle\Registry;
 
-class EntityFacade
-{
-    const DEPARTMENT = 'Department';
-    const DEPARTMENT_INFO_SYS_USAGE = 'DepartmentInfoSysUsage';
-    const INFORMATIONAL_SYSTEM = 'InformationalSystem';
-    const SUPPORT_ADMINISTRATION_TIME = 'SupportAdministrationTime';
-    const SUPPORT_CATEGORY = 'SupportCategory';
-    const SUPPORT_HISTORY = 'SupportHistory';
-    const SUPPORT_TYPE = 'SupportType';
-    const USER = 'User';
+abstract class EntityFacade {
 
     const BUNDLE_NAME = 'OrakulasModelBundle';
 
@@ -24,106 +15,120 @@ class EntityFacade
 
     /**
      * @throws \InvalidArgumentException if $entity is NULL
-     * @param $entity entity to be persisted
-     * @return void
+     * @param $entity
      */
-    public function save($entity)
-    {
-        if ($entity == NULL)
-        {
+    public function save($entity) {
+        if ($entity == NULL) {
             throw new \InvalidArgumentException('parameter $argument cannot be null');
         }
 
-        if (!isset($this->doctrine))
-        {
+        if ($this->getDoctrine() == NULL) {
             throw new EntityFacadeException('doctrine isn\'t set');
         }
 
         $entityManager = $this->getDoctrine()->getEntityManager();
 
-        /** @noinspection PhpUndefinedMethodInspection */
         $entityManager->persist($entity);
-
-        /** @noinspection PhpUndefinedMethodInspection */
         $entityManager->flush();
     }
 
     /**
      * @throws InvalidArgumentException if doctrine isn't set
      * @param $id primary key of object
-     * @param \string $class class of object
      * @return loaded object
      */
-    public function load($class, $id)
-    {
-        if ($id == NULL || $class == NULL)
-        {
-            throw new \InvalidArgumentException('parameters $id and $class cannot be null');
+    public abstract function load($id);
+
+    /**
+     * @abstract
+     * @return array
+     */
+    public abstract function loadAll();
+
+    /**
+     * @param int $id
+     * @throws \InvalidArgumentException|EntityFacadeException
+     */
+    public function delete($id) {
+        if ($id == NULL) {
+            throw new \InvalidArgumentException('parameter $id cannot be null');
         }
 
-        if ($this->getDoctrine() == NULL)
-        {
-            throw new EntityFacadeException('doctrine isn\'t set');
-        }
-        
-        $repository = $this->getDoctrine()->getRepository(UserFacade::BUNDLE_NAME.':'.$class);
-        /** @noinspection PhpUndefinedMethodInspection */
-        return $repository->find($id);
-    }
-
-    public function loadAll($class)
-    {
-        if ($class == NULL)
-        {
-            throw new \InvalidArgumentException('parameter $class cannot be null');
-        }
-
-        if ($this->getDoctrine() == NULL)
-        {
+        if ($this->getDoctrine() == NULL) {
             throw new EntityFacadeException('doctrine isn\'t set');
         }
 
-        $repository = $this->getDoctrine()->getRepository(UserFacade::BUNDLE_NAME.':'.$class);
-        /** @noinspection PhpUndefinedMethodInspection */
-        return $repository->findAll();
-    }
+        $entity = $this->load($id);
 
-    public function delete($class, $id) {
-        if ($class == NULL || $id == NULL)
-        {
-            throw new \InvalidArgumentException('parameters $class and $id cannot be null');
-        }
-
-        if (!isset($this->doctrine))
-        {
-            throw new EntityFacadeException('doctrine isn\'t set');
-        }
-
-
-        $entity = $this->load($class, $id);
-
-        if (!isset($entity))
-        {
+        if (!isset($entity)) {
             throw new EntityFacadeException("could not find an entity with id $id");
         }
 
         $entityManager = $this->getDoctrine()->getEntityManager();
 
-        /** @noinspection PhpUndefinedMethodInspection */
         $entityManager->remove($entity);
-
-        /** @noinspection PhpUndefinedMethodInspection */
         $entityManager->flush();
     }
 
-    public function update($class, $array) {
-        if ($class == NULL || $array == NULL)
-        {
+    /**
+     * @abstract
+     * @param array $array
+     */
+    public abstract function fromArray($array);
+
+    /**
+     * @param $entity
+     * @return array
+     */
+    public abstract function toArray($entity);
+
+    /**
+     * @abstract
+     * @param $source
+     * @param $destination
+     */
+    public abstract function merge($source, $destination);
+
+    /**
+     * @param $entity
+     * @return string
+     */
+    public function toJson($entity) {
+        $array = $this->toArray($entity);
+
+        return json_encode($array);
+    }
+
+    /**
+     * @param string $json
+     */
+    public function fromJson($json) {
+        $array = json_decode($json, true);
+
+        return $this->fromArray($array);
+    }
+
+    /**
+     * @param \Symfony\Bundle\DoctrineBundle\Registry $doctrine
+     * @return void
+     */
+    public function setDoctrine(Registry $doctrine) {
+        $this->doctrine = $doctrine;
+    }
+
+    /**
+     * @return \Symfony\Bundle\DoctrineBundle\Registry
+     */
+    protected function getDoctrine() {
+        return $this->doctrine;
+    }
+
+    /*public function update($class, $array) {
+        if ($class == NULL || $array == NULL) {
             throw new \InvalidArgumentException('parameters $class and $array cannot be null');
         }
 
-        if (!isset($this->doctrine))
-        {
+        if (!isset($this->doctrine)) {
             throw new EntityFacadeException('doctrine isn\'t set');
         }
 
@@ -142,26 +147,8 @@ class EntityFacade
         }
 
         $entityManager = $this->getDoctrine()->getEntityManager();
-        /** @noinspection PhpUndefinedMethodInspection */
         $entityManager->flush();
-    }
-
-    /**
-     * @param \Symfony\Bundle\DoctrineBundle\Registry $doctrine
-     * @return void
-     */
-    public function setDoctrine(Registry $doctrine)
-    {
-        $this->doctrine = $doctrine;
-    }
-
-    /**
-     * @return \Symfony\Bundle\DoctrineBundle\Registry
-     */
-    protected function getDoctrine()
-    {
-        return $this->doctrine;
-    }
+    }*/
 }
 
 class EntityFacadeException extends \Exception

@@ -15,12 +15,12 @@ class DepartmentInfoSysUsage
     private $id;
 
     /**
-     * @var Orakulas\ModelBundle\Entity\InformationalSystem
+     * @var \Orakulas\ModelBundle\Entity\InformationalSystem
      */
     private $informationalSystem;
 
     /**
-     * @var Orakulas\ModelBundle\Entity\Department
+     * @var \Orakulas\ModelBundle\Entity\Department
      */
     private $department;
 
@@ -41,7 +41,7 @@ class DepartmentInfoSysUsage
     /**
      * Set informationalSystem
      *
-     * @param Orakulas\ModelBundle\Entity\InformationalSystem $informationalSystem
+     * @param \Orakulas\ModelBundle\Entity\InformationalSystem $informationalSystem
      */
     public function setInformationalSystem(\Orakulas\ModelBundle\Entity\InformationalSystem $informationalSystem)
     {
@@ -51,7 +51,7 @@ class DepartmentInfoSysUsage
     /**
      * Get informationalSystem
      *
-     * @return Orakulas\ModelBundle\Entity\InformationalSystem 
+     * @return \Orakulas\ModelBundle\Entity\InformationalSystem
      */
     public function getInformationalSystem()
     {
@@ -61,7 +61,7 @@ class DepartmentInfoSysUsage
     /**
      * Set department
      *
-     * @param Orakulas\ModelBundle\Entity\Department $department
+     * @param \Orakulas\ModelBundle\Entity\Department $department
      */
     public function setDepartment(\Orakulas\ModelBundle\Entity\Department $department)
     {
@@ -71,7 +71,7 @@ class DepartmentInfoSysUsage
     /**
      * Get department
      *
-     * @return Orakulas\ModelBundle\Entity\Department 
+     * @return \Orakulas\ModelBundle\Entity\Department
      */
     public function getDepartment()
     {

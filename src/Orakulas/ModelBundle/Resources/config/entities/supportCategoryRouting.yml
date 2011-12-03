@@ -1,0 +1,23 @@
+OrakulasModelBundle_supportCategories_create:
+    pattern: /create
+    defaults: { _controller: OrakulasModelBundle:SupportCategory:create }
+    requirements:
+      _method:  POST
+
+OrakulasModelBundle_supportCategories_read:
+    pattern: /read
+    defaults: { _controller: OrakulasModelBundle:SupportCategory:read }
+    requirements:
+      _method:  GET
+
+OrakulasModelBundle_supportCategories_update:
+   pattern: /update
+   defaults: { _controller: OrakulasModelBundle:SupportCategory:update }
+   requirements:
+     _method:  POST
+
+OrakulasModelBundle_supportCategories_delete:
+    pattern: /delete
+    defaults: { _controller: OrakulasModelBundle:SupportCategory:delete }
+    requirements:
+      _method:  POST

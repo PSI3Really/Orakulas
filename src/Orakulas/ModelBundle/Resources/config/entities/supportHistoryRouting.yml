@@ -1,0 +1,23 @@
+OrakulasModelBundle_supportHistories_create:
+    pattern: /create
+    defaults: { _controller: OrakulasModelBundle:SupportHistory:create }
+    requirements:
+      _method:  POST
+
+OrakulasModelBundle_supportHistories_read:
+    pattern: /read
+    defaults: { _controller: OrakulasModelBundle:SupportHistory:read }
+    requirements:
+      _method:  GET
+
+OrakulasModelBundle_supportHistories_update:
+   pattern: /update
+   defaults: { _controller: OrakulasModelBundle:SupportHistory:update }
+   requirements:
+     _method:  POST
+
+OrakulasModelBundle_supportHistories_delete:
+    pattern: /delete
+    defaults: { _controller: OrakulasModelBundle:SupportHistory:delete }
+    requirements:
+      _method:  POST

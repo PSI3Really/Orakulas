@@ -30,7 +30,7 @@ class SupportHistory
     private $supportRequestCount;
 
     /**
-     * @var Orakulas\ModelBundle\Entity\SupportType
+     * @var \Orakulas\ModelBundle\Entity\SupportType
      */
     private $supportType;
 
@@ -111,7 +111,7 @@ class SupportHistory
     /**
      * Set supportType
      *
-     * @param Orakulas\ModelBundle\Entity\SupportType $supportType
+     * @param \Orakulas\ModelBundle\Entity\SupportType $supportType
      */
     public function setSupportType(\Orakulas\ModelBundle\Entity\SupportType $supportType)
     {
@@ -121,7 +121,7 @@ class SupportHistory
     /**
      * Get supportType
      *
-     * @return Orakulas\ModelBundle\Entity\SupportType 
+     * @return \Orakulas\ModelBundle\Entity\SupportType
      */
     public function getSupportType()
     {

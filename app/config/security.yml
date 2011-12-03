@@ -1,9 +1,5 @@
 security:
     firewalls:
-    #    login_firewall:
-    #       pattern: ^/login$
-    #       anonymous: ~
-
         ajax_calls:
             pattern:    ^/_wdt
             anonymous:  ~
@@ -15,7 +11,7 @@ security:
             logout: ~
 
     access_control:
-        - { path: ^/_wdt, roles: 'IS_AUTHENTICATED_ANONYMOUSLY' }
+        - { path: ^/_wdt,  roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, roles: ROLE_ADMIN }
 
