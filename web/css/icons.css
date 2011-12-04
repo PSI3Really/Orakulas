@@ -58,6 +58,9 @@
 .icon-cross {
     background: url(../images/icons/cross.png) no-repeat center center;
 }
+.icon-key {
+    background: url(../images/icons/key.png) no-repeat center center;
+}
 
 /* Flags */
 .icon-flag-lt {
