@@ -1,229 +1,31 @@
-OrakulasModelBundle_departments_get:
-    pattern:  /departments/read
-    defaults: { _controller: OrakulasModelBundle:Default:department }
-    requirements:
-      _method:  GET
+OrakulasModelBundle_departments:
+    resource: "@OrakulasModelBundle/Resources/config/entities/departmentRouting.yml"
+    prefix:   /departments
 
-OrakulasModelBundle_departments_post:
-    pattern:  /departments/create
-    defaults: { _controller: OrakulasModelBundle:Default:departmentPost }
-    requirements:
-      _method:  POST
+OrakulasModelBundle_departmentInfoSysUsages:
+    resource: "@OrakulasModelBundle/Resources/config/entities/departmentInfoSysUsageRouting.yml"
+    prefix:   /departmentInfoSysUsages
 
+OrakulasModelBundle_informationalSystems:
+    resource: "@OrakulasModelBundle/Resources/config/entities/informationalSystemRouting.yml"
+    prefix:   /informationalSystems
 
-OrakulasModelBundle_departments_delete:
-    pattern:  /departments/delete
-    defaults: { _controller: OrakulasModelBundle:Default:departmentDelete }
-    requirements:
-      _method:  POST
+OrakulasModelBundle_supportAdministrationTimes:
+    resource: "@OrakulasModelBundle/Resources/config/entities/supportAdministrationTimeRouting.yml"
+    prefix:   /supportAdministrationTimes
 
-OrakulasModelBundle_departments_update:
-    pattern:  /departments/update
-    defaults: { _controller: OrakulasModelBundle:Default:departmentUpdate }
-    requirements:
-      _method:  POST
+OrakulasModelBundle_supportCategories:
+    resource: "@OrakulasModelBundle/Resources/config/entities/supportCategoryRouting.yml"
+    prefix:   /supportCategories
 
-#ar situ reiks?
-OrakulasModelBundle_department:
-    pattern:  /department/read/{id}
-    defaults: { _controller: OrakulasModelBundle:Default:department }
-
-OrakulasModelBundle_departmentInfoSysUsages_get:
-    pattern:  /departmentInfoSysUsages/read
-    defaults: { _controller: OrakulasModelBundle:Default:departmentInfoSysUsage }
-    requirements:
-      _method:  GET
-
-OrakulasModelBundle_departmentInfoSysUsages_post:
-    pattern:  /departmentInfoSysUsages/create
-    defaults: { _controller: OrakulasModelBundle:Default:departmentInfoSysUsagePost }
-    requirements:
-      _method: POST
-
-OrakulasModelBundle_departmentInfoSysUsages_delete:
-    pattern:  /departmentInfoSysUsages/delete
-    defaults: { _controller: OrakulasModelBundle:Default:departmentInfoSysUsageDelete }
-    requirements:
-      _method: POST
-
-OrakulasModelBundle_departmentInfoSysUsages_update:
-    pattern:  /departmentInfoSysUsages/update
-    defaults: { _controller: OrakulasModelBundle:Default:departmentInfoSysUsageUpdate }
-    requirements:
-      _method: POST
-
-OrakulasModelBundle_departmentInfoSysUsage:
-    pattern:  /departmentInfoSysUsage/read/{id}
-    defaults: { _controller: OrakulasModelBundle:Default:departmentInfoSysUsage }
-
-OrakulasModelBundle_informationalSystems_get:
-    pattern:  /informationalSystems/read
-    defaults: { _controller: OrakulasModelBundle:Default:informationalSystem }
-    requirements:
-      _method:  GET
-
-OrakulasModelBundle_informationalSystems_post:
-    pattern:  /informationalSystems/create
-    defaults: { _controller: OrakulasModelBundle:Default:informationalSystemPost }
-    requirements:
-      _method: POST
-
-OrakulasModelBundle_informationalSystems_delete:
-    pattern:  /informationalSystems/delete
-    defaults: { _controller: OrakulasModelBundle:Default:informationalSystemDelete }
-    requirements:
-      _method: POST
-
-OrakulasModelBundle_informationalSystems_update:
-    pattern:  /informationalSystems/update
-    defaults: { _controller: OrakulasModelBundle:Default:informationalSystemUpdate }
-    requirements:
-      _method: POST
-
-OrakulasModelBundle_informationalSystem:
-    pattern:  /informationalSystem/read/{id}
-    defaults: { _controller: OrakulasModelBundle:Default:informationalSystem }
-
-OrakulasModelBundle_supportAdministrationTimes_get:
-    pattern:  /supportAdministrationTimes/read
-    defaults: { _controller: OrakulasModelBundle:Default:supportAdministrationTime }
-    requirements:
-      _method:  GET
-
-OrakulasModelBundle_supportAdministrationTimes_post:
-    pattern:  /supportAdministrationTimes/create
-    defaults: { _controller: OrakulasModelBundle:Default:supportAdministrationTimePost }
-    requirements:
-      _method:  POST
-
-OrakulasModelBundle_supportAdministrationTimes_delete:
-    pattern:  /supportAdministrationTimes/delete
-    defaults: { _controller: OrakulasModelBundle:Default:supportAdministrationTimeDelete }
-    requirements:
-      _method:  POST
-
-OrakulasModelBundle_supportAdministrationTimes_update:
-    pattern:  /supportAdministrationTimes/update
-    defaults: { _controller: OrakulasModelBundle:Default:supportAdministrationTimeUpdate }
-    requirements:
-      _method:  POST
-
-OrakulasModelBundle_supportAdministrationTime:
-    pattern:  /supportAdministrationTime/read/{id}
-    defaults: { _controller: OrakulasModelBundle:Default:supportAdministrationTime }
-
-OrakulasModelBundle_supportCategories_get:
-    pattern:  /supportCategories/read
-    defaults: { _controller: OrakulasModelBundle:Default:supportCategory }
-    requirements:
-      _method:  GET
-
-OrakulasModelBundle_supportCategories_post:
-    pattern:  /supportCategories/create
-    defaults: { _controller: OrakulasModelBundle:Default:supportCategoryPost }
-    requirements:
-      _method:  POST
-
-OrakulasModelBundle_supportCategories_delete:
-    pattern:  /supportCategories/delete
-    defaults: { _controller: OrakulasModelBundle:Default:supportCategoryDelete }
-    requirements:
-      _method:  POST
-
-OrakulasModelBundle_supportCategories_update:
-    pattern:  /supportCategories/update
-    defaults: { _controller: OrakulasModelBundle:Default:supportCategoryUpdate }
-    requirements:
-      _method:  POST
-
-OrakulasModelBundle_supportCategory:
-    pattern:  /supportCategory/read/{id}
-    defaults: { _controller: OrakulasModelBundle:Default:supportCategory }
-
-OrakulasModelBundle_supportHistories_get: #errora meta
-    pattern:  /supportHistories/read
-    defaults: { _controller: OrakulasModelBundle:Default:supportHistory }
-    requirements:
-      _method:  GET
-
-OrakulasModelBundle_supportHistories_post:
-    pattern:  /supportHistories/create
-    defaults: { _controller: OrakulasModelBundle:Default:supportHistoryPost }
-    requirements:
-      _method:  POST
-
-OrakulasModelBundle_supportHistories_delete:
-    pattern:  /supportHistories/delete
-    defaults: { _controller: OrakulasModelBundle:Default:supportHistoryDelete }
-    requirements:
-      _method:  POST
-
-OrakulasModelBundle_supportHistories_update:
-    pattern:  /supportHistories/update
-    defaults: { _controller: OrakulasModelBundle:Default:supportHistoryUpdate }
-    requirements:
-      _method:  POST
-
-OrakulasModelBundle_supportHistory:
-    pattern:  /supportHistory/read/{id}
-    defaults: { _controller: OrakulasModelBundle:Default:supportHistory }
-
-OrakulasModelBundle_supportTypes_get:
-    pattern:  /supportTypes/read
-    defaults: { _controller: OrakulasModelBundle:Default:supportType }
-    requirements:
-      _method:  GET
-
-OrakulasModelBundle_supportTypes_post:
-    pattern:  /supportTypes/create
-    defaults: { _controller: OrakulasModelBundle:Default:supportTypePost }
-    requirements:
-      _method:  POST
-
-OrakulasModelBundle_supportTypes_delete:
-    pattern:  /supportTypes/delete
-    defaults: { _controller: OrakulasModelBundle:Default:supportTypeDelete }
-    requirements:
-      _method:  POST
-
-OrakulasModelBundle_supportTypes_update:
-    pattern:  /supportTypes/update
-    defaults: { _controller: OrakulasModelBundle:Default:supportTypeUpdate }
-    requirements:
-      _method:  POST
+OrakulasModelBundle_supportHistories:
+    resource: "@OrakulasModelBundle/Resources/config/entities/supportHistoryRouting.yml"
+    prefix:   /supportHistories
 
 OrakulasModelBundle_supportType:
-    pattern:  /supportType/read/{id}
-    defaults: { _controller: OrakulasModelBundle:Default:supportType }
+    resource: "@OrakulasModelBundle/Resources/config/entities/supportTypeRouting.yml"
+    prefix:   /supportTypes
 
-OrakulasModelBundle_users_get:
-    pattern:  /users/read
-    defaults: { _controller: OrakulasModelBundle:Default:user }
-    requirements:
-      _method:  GET
-
-OrakulasModelBundle_users_post:
-    pattern:  /users/create
-    defaults: { _controller: OrakulasModelBundle:Default:userPost }
-    requirements:
-      _method:  POST
-
-OrakulasModelBundle_users_delete:
-    pattern:  /users/delete
-    defaults: { _controller: OrakulasModelBundle:Default:userDelete }
-    requirements:
-      _method:  POST
-
-OrakulasModelBundle_users_update:
-    pattern:  /users/update
-    defaults: { _controller: OrakulasModelBundle:Default:userUpdate }
-    requirements:
-      _method:  POST
-
-OrakulasModelBundle_user:
-    pattern:  /user/read/{id}
-    defaults: { _controller: OrakulasModelBundle:Default:user }
-
-OrakulasModelBundle_currentUser:
-    pattern: /users/current
-    defaults: { _controller: OrakulasModelBundle:Default:currentUser }
+OrakulasModelBundle_users:
+    resource: "@OrakulasModelBundle/Resources/config/entities/userRouting.yml"
+    prefix:   /users

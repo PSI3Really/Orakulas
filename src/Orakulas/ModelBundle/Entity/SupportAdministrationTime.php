@@ -20,12 +20,12 @@ class SupportAdministrationTime
     private $hoursCount;
 
     /**
-     * @var Orakulas\ModelBundle\Entity\Department
+     * @var \Orakulas\ModelBundle\Entity\Department
      */
     private $department;
 
     /**
-     * @var Orakulas\ModelBundle\Entity\SupportType
+     * @var \Orakulas\ModelBundle\Entity\SupportType
      */
     private $supportType;
 
@@ -66,7 +66,7 @@ class SupportAdministrationTime
     /**
      * Set department
      *
-     * @param Orakulas\ModelBundle\Entity\Department $department
+     * @param \Orakulas\ModelBundle\Entity\Department $department
      */
     public function setDepartment(\Orakulas\ModelBundle\Entity\Department $department)
     {
@@ -76,7 +76,7 @@ class SupportAdministrationTime
     /**
      * Get department
      *
-     * @return Orakulas\ModelBundle\Entity\Department 
+     * @return \Orakulas\ModelBundle\Entity\Department
      */
     public function getDepartment()
     {
@@ -86,7 +86,7 @@ class SupportAdministrationTime
     /**
      * Set supportType
      *
-     * @param Orakulas\ModelBundle\Entity\SupportType $supportType
+     * @param \Orakulas\ModelBundle\Entity\SupportType $supportType
      */
     public function setSupportType(\Orakulas\ModelBundle\Entity\SupportType $supportType)
     {
@@ -96,7 +96,7 @@ class SupportAdministrationTime
     /**
      * Get supportType
      *
-     * @return Orakulas\ModelBundle\Entity\SupportType 
+     * @return \Orakulas\ModelBundle\Entity\SupportType
      */
     public function getSupportType()
     {

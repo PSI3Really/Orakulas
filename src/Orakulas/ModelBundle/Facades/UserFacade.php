@@ -5,8 +5,9 @@ namespace Orakulas\ModelBundle\Facades;
 use Orakulas\ModelBundle\Facades\EntityFacade;
 use Orakulas\ModelBundle\Entity\User;
 
-class UserFacade extends EntityFacade
-{
+class UserFacade extends EntityFacade {
+
+    const USER = 'User';
 
     const HASH_ALGO = 'sha512';
     const SALT_LEN = 10;
@@ -97,54 +98,6 @@ class UserFacade extends EntityFacade
         }
     }
 
-    public function update($class, $array)
-    {
-        if ($class == NULL || $array == NULL)
-        {
-            throw new \InvalidArgumentException('parameters $class and $array cannot be null');
-        }
-
-        if ($this->getDoctrine() == NULL)
-        {
-            throw new EntityFacadeException('doctrine isn\'t set');
-        }
-
-        if ($class !== EntityFacade::USER)
-        {
-            parent::update($class, $array);
-            return;
-        }
-
-        $entity = $this->load($class, $array['id']);
-
-        if (!isset($entity))
-        {
-            throw new EntityFacadeException('could not find a user with id '.$array['id']);
-        }
-
-        foreach ($array as $key => $value)
-        {
-            if ($key != "id")
-            {
-                $methodName = "set".ucfirst($key);
-                $entity->$methodName($value);
-            }
-        }
-
-        /** @noinspection PhpUndefinedMethodInspection */
-        if (NULL == $entity->getSalt() || '' == $entity->getSalt())
-        {
-            $encoder = $this->encoderFactory->getEncoder($entity);
-            
-            $entity->setSalt($this->rand_str(UserFacade::SALT_LEN));
-            $entity->setPassword($encoder->encodePassword($entity->getPassword(), $entity->getSalt()));
-        }
-
-        $entityManager = $this->getDoctrine()->getEntityManager();
-        /** @noinspection PhpUndefinedMethodInspection */
-        $entityManager->flush();
-    }
-
     /**
      * Loads a user by name.
      *
@@ -194,6 +147,111 @@ class UserFacade extends EntityFacade
 
         return $string;
     }
+
+    /**
+     * @throws InvalidArgumentException if doctrine isn't set
+     * @param $id primary key of object
+     * @return loaded object
+     */
+    public function load($id) {
+        if ($id == NULL) {
+            throw new \InvalidArgumentException('parameter $id and cannot be null');
+        }
+
+        if ($this->getDoctrine() == NULL) {
+            throw new EntityFacadeException('doctrine isn\'t set');
+        }
+
+        $repository = $this->getDoctrine()->getRepository(UserFacade::BUNDLE_NAME.':'.UserFacade::USER);
+        $entity = $repository->find($id);
+
+        return $entity;
+    }
+
+
+    public function loadAll() {
+        if ($this->getDoctrine() == NULL) {
+            throw new EntityFacadeException('doctrine isn\'t set');
+        }
+
+        $repository = $this->getDoctrine()->getRepository(UserFacade::BUNDLE_NAME.':'.UserFacade::USER);
+        return $repository->findAll();
+    }
+
+    /**
+     * @param \Orakulas\ModelBundle\Entity\User $entity
+     * @return mixed
+     */
+    public function toArray($entity) {
+        $array = array(
+            'id'            => $entity->getId(),
+            'username'      => $entity->getUsername(),
+            'firstName'     => $entity->getFirstName(),
+            'lastName'      => $entity->getLastName(),
+            'email'         => $entity->getEmail(),
+            'password'      => $entity->getPassword(),
+            'salt'          => $entity->getSalt(),
+            //'roles'         => $entity->getRoles(),
+            'admin'         => $entity->isAdmin(),
+            //'authenticated' => $entity->isAuthenticated()
+        );
+
+        return $array;
+    }
+
+    /**
+     * @param array $array
+     * @return \Orakulas\ModelBundle\Entity\User
+     */
+    public function fromArray($array) {
+        $user = new User();
+
+        if (isset($array['id']))
+            $user->setId($array['id']);
+        if (isset($array['username']))
+            $user->setUsername($array['username']);
+        if (isset($array['firstName']))
+            $user->setFirstName($array['firstName']);
+        if (isset($array['lastName']))
+            $user->setLastName($array['lastName']);
+        if (isset($array['email']))
+            $user->setEmail($array['email']);
+        if (isset($array['password']))
+            $user->setPassword($array['password']);
+        if (isset($array['salt']))
+            $user->setSalt($array['salt']);
+        if (isset($array['admin']))
+            $user->setAdmin($array['admin']);
+        //$user->setAuthenticated($array['authenticated']);
+
+        return $user;
+    }
+
+    /**
+     * @param array $source
+     * @param \Orakulas\ModelBundle\Entity\User $destination
+     */
+    public function merge($destination, $source) {
+        if (isset($source['admin']))
+            $destination->setAdmin($source['admin']);
+        if (isset($source['email']))
+            $destination->setEmail($source['email']);
+        if (isset($source['firstName']))
+            $destination->setFirstName($source['firstName']);
+        if (isset($source['lastName']))
+            $destination->setLastName($source['lastName']);
+        if (isset($source['password'])) {
+            $destination->setPassword($source['password']);
+            $destination->setSalt('');
+        }
+        if (isset($source['salt'])) {
+            $destination->setSalt($source['salt']);
+            $destination->setPassword('');
+        }
+        if (isset($source['username']))
+            $destination->setUsername($source['username']);
+    }
+
 }
 
 class UserFacadeException extends EntityFacadeException

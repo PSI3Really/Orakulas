@@ -1,0 +1,23 @@
+OrakulasModelBundle_informationalSystems_create:
+    pattern: /create
+    defaults: { _controller: OrakulasModelBundle:InformationalSystem:create }
+    requirements:
+      _method:  POST
+
+OrakulasModelBundle_informationalSystems_read:
+    pattern: /read
+    defaults: { _controller: OrakulasModelBundle:InformationalSystem:read }
+    requirements:
+      _method:  GET
+
+OrakulasModelBundle_informationalSystems_update:
+   pattern: /update
+   defaults: { _controller: OrakulasModelBundle:InformationalSystem:update }
+   requirements:
+     _method:  POST
+
+OrakulasModelBundle_informationalSystems_delete:
+    pattern: /delete
+    defaults: { _controller: OrakulasModelBundle:InformationalSystem:delete }
+    requirements:
+      _method:  POST

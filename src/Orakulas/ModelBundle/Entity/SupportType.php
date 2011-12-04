@@ -25,7 +25,7 @@ class SupportType
     private $name;
 
     /**
-     * @var Orakulas\ModelBundle\Entity\SupportCategory
+     * @var \Orakulas\ModelBundle\Entity\SupportCategory
      */
     private $supportCategory;
 
@@ -86,7 +86,7 @@ class SupportType
     /**
      * Set supportCategory
      *
-     * @param Orakulas\ModelBundle\Entity\SupportCategory $supportCategory
+     * @param \Orakulas\ModelBundle\Entity\SupportCategory $supportCategory
      */
     public function setSupportCategory(\Orakulas\ModelBundle\Entity\SupportCategory $supportCategory)
     {
@@ -96,7 +96,7 @@ class SupportType
     /**
      * Get supportCategory
      *
-     * @return Orakulas\ModelBundle\Entity\SupportCategory 
+     * @return \Orakulas\ModelBundle\Entity\SupportCategory
      */
     public function getSupportCategory()
     {

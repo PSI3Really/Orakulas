@@ -22,7 +22,7 @@ Orakulas\ModelBundle\Entity\SupportType:
   oneToOne:
     supportCategory:
       targetEntity: SupportCategory
-      cascade: {  }
+      cascade: { "persist", "merge" }
       mappedBy: null
       inversedBy: null
       joinColumns:

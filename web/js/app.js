@@ -75,3 +75,7 @@ Ext.application({
         });
     }
 });
+
+Ext.onReady(function (){
+    Ext.get('loading').fadeOut({remove:true});
+});

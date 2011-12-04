@@ -25,7 +25,7 @@ Orakulas\ModelBundle\Entity\SupportHistory:
   oneToOne:
     supportType:
       targetEntity: SupportType
-      cascade: {  }
+      cascade: { "persist", "merge" }
       mappedBy: null
       inversedBy: null
       joinColumns:
