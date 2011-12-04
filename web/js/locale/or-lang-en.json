@@ -17,6 +17,9 @@
         "USERS":{
             "TITLE_CHANGE": "Changing user: ",
             "TITLE_NEW": "New user"
+        },
+        "ADD_INFORMATIONAL_SYSTEM": {
+            "TITLE": "Informational system"
         }
     },
 

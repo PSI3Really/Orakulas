@@ -17,6 +17,9 @@
         "USERS":{
             "TITLE_CHANGE": "Keičiamas vartotojas: ",
             "TITLE_NEW": "Naujas vartotojas"
+        },
+        "ADD_INFORMATIONAL_SYSTEM": {
+            "TITLE": "Informacinė sistema"
         }
     },
 

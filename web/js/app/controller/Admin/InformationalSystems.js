@@ -9,7 +9,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.InformationalSystems', {
         'Admin.InformationalSystems'
     ],
 
-    views: ['Admin.InformationalSystems.IS'],
+    views: ['Admin.InformationalSystems.IS', 'Admin.InformationalSystems.ISAddWindow'],
 
     init: function(){
         this.control({
@@ -23,6 +23,8 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.InformationalSystems', {
     },
 
     add: function(btn){
+        Ext.create('widget.adminisaddWindow', {}).show();
+        /*
         var grid = btn.up('adminisgrid');
         var store = grid.getStore();
         
@@ -32,6 +34,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.InformationalSystems', {
 
         store.add(record);
         store.sync();
+        */
     },
 
     delete: function(btn){
