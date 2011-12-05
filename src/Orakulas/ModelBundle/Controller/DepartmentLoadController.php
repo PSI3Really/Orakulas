@@ -61,10 +61,7 @@ class DepartmentLoadController extends Controller {
         ');
         $stmt->execute();
         $result = $stmt->fetchAll();
-        $response = "";
 
-        /*foreach ($result as $row)
-            $response .= $row['department_code'] . "<br />";*/
         return new Response(json_encode($result));
     }
 }
