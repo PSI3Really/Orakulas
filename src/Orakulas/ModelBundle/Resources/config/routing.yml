@@ -29,3 +29,7 @@ OrakulasModelBundle_supportType:
 OrakulasModelBundle_users:
     resource: "@OrakulasModelBundle/Resources/config/entities/userRouting.yml"
     prefix:   /users
+
+OrakulasModelBundle_departmentsLoad:
+    resource: "@OrakulasModelBundle/Resources/config/entities/departmentLoadRouting.yml"
+    prefix:   /departmentsLoad
