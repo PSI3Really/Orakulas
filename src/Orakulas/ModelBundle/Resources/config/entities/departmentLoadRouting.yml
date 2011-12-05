@@ -1,0 +1,5 @@
+OrakulasModelBundle_departmentsLoad_view:
+    pattern: /view
+    defaults: { _controller: OrakulasModelBundle:DepartmentLoad:view }
+    requirements:
+      _method:  GET
