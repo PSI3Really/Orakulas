@@ -1,3 +1,7 @@
+OrakulasExcelBundle:
+    resource: "@OrakulasExcelBundle/Resources/config/routing.yml"
+    prefix:   /
+
 OrakulasMainBundle:
     resource: "@OrakulasMainBundle/Resources/config/routing.yml"
     prefix:   /

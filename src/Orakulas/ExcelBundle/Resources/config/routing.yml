@@ -1,0 +1,3 @@
+OrakulasExcelBundle_import_support_histories:
+    pattern:  /excel/import/supportHistories
+    defaults: { _controller: OrakulasExcelBundle:Import:readSupportHistories }

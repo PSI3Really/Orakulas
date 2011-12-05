@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Orakulas\ModelBundle\OrakulasModelBundle(),
             new Orakulas\MainBundle\OrakulasMainBundle(),
             new Orakulas\SecurityBundle\OrakulasSecurityBundle(),
+            new Orakulas\ExcelBundle\OrakulasExcelBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

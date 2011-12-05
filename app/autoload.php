@@ -18,7 +18,9 @@ $loader->registerNamespaces(array(
 $loader->registerPrefixes(array(
     'Twig_Extensions_' => __DIR__.'/../vendor/twig-extensions/lib',
     'Twig_'            => __DIR__.'/../vendor/twig/lib',
+    'PHPExcel' => __DIR__ . '/../vendor/PHPExcel'
 ));
+
 
 // intl
 if (!function_exists('intl_get_error_code')) {
