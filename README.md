@@ -18,6 +18,10 @@ Site's address:
 
     php bin/vendors install
 
+####
+
+    Copy contents of "vendors" folder in Dropbox (PSI3/vendors) to "wamp/www/Orakulas/vendor" folder
+
 #### Install assets
 
     php app/console assets:install web/
