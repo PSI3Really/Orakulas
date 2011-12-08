@@ -5,21 +5,3 @@
 {% block specificJS %}
     <script type="text/javascript" src="{{ asset('js/app_login.js') }}"></script>
 {% endblock %}
-
-{% block body %}
-
-    {% if error %}
-        <div>{{ error.message }}</div>
-    {% endif %}
-
-    <form action="{{ path('check_login') }}" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}" /><br />
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password" /><br />
-
-        <input type="submit" name="login" />
-    </form>
-
-{% endblock %}

@@ -25,12 +25,12 @@ Ext.application({
                 },
                 items: [
                     {
-                        fieldLabel: 'Vartotojo vardas',//LANG.ENTITY.USERNAME
+                        fieldLabel: '~~Vartotojas',//LANG.ENTITY.USERNAME
                         name: '_username',
                         allowBlank: false
                     },
                     {
-                        fieldLabel: 'Slaptažodis',//LANG.ENTITY.PASSWORD
+                        fieldLabel: '~~Slaptažodis',//LANG.ENTITY.PASSWORD
                         name: '_password',
                         allowBlank: false
                     }
@@ -46,7 +46,7 @@ Ext.application({
                                     pressed: LANG_CODE === 'lt',
                                     lang: 'lt',
                                     iconCls: 'icon-flag-lt',
-                                    tooltip: 'Lietuvių',//LANG.MAIN.TOOLBAR.TOOLTIP.LANG_LT,
+                                    tooltip: '~~Lietuvių',//LANG.MAIN.TOOLBAR.TOOLTIP.LANG_LT,
                                     handler: function (btn) {
                                         LANG_CODE = 'lt';
                                         btn.toggle(true);
@@ -57,7 +57,7 @@ Ext.application({
                                     pressed: LANG_CODE === 'en',
                                     lang: 'en',
                                     iconCls: 'icon-flag-gb',
-                                    tooltip: 'Anglų',//LANG.MAIN.TOOLBAR.TOOLTIP.LANG_EN,
+                                    tooltip: '~~Anglų',//LANG.MAIN.TOOLBAR.TOOLTIP.LANG_EN,
                                     handler: function (btn) {
                                         LANG_CODE = 'en';
                                         btn.toggle(true);
@@ -71,24 +71,24 @@ Ext.application({
                             xtype: 'button',
                             formBind: true,
                             disabled: true,
-                            text: 'Prisijungti',//LANG.???
+                            text: '~~Prisijungti',//LANG.???
                             iconCls: 'icon-key',
                             handler: function () {
                                 var form = this.up('form').getForm();
                                 if (form.isValid()) {
-                                    /*
                                     form.submit({
                                         success: function(form, action) {
-                                           window.reload();
+                                            //window.location.reload();
+                                            setTimeout(function () {
+                                                window.location.href = window.location.href.substring(0, window.location.href.lastIndexOf('/'));
+                                            }, 5000);
                                         },
                                         failure: function(form, action) {
-                                            Ext.Msg.alert('Boo', 'Not cool');
+                                            Ext.Msg.alert('~~Invalid Credentials', '~~You\'ve entered invalid user credentials. Try again.');
                                         }
                                     });
-                                    */
-                                    Ext.Msg.alert('Yay!', 'You\'ve done it again, champ!');
                                 } else {
-                                    Ext.Msg.alert('Invalid Data', 'Please correct form errors.')
+                                    Ext.Msg.alert('~~Invalid Data', '~~Please correct form errors.');
                                 }
                             }
                         }
