@@ -29,6 +29,19 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.InformationalSystems.IS', {
                                 xtype:  'button',
                                 action: 'delete',
                                 text:   LANG.BUTTON.REMOVE
+                            },
+                            '->',
+                            {
+                                iconCls: 'icon-disk-black',
+                                xtype: 'button',
+                                action: 'sync',
+                                text: LANG.BUTTON.SYNC
+                            },
+                            {
+                                iconCls: 'icon-arrow-return',
+                                xtype: 'button',
+                                action: 'undo',
+                                text: '~~Atšaukti pakeitimus'
                             }
                         ]
                     }

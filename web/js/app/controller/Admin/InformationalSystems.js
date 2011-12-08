@@ -17,7 +17,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.InformationalSystems', {
                 click: this.add
             },
             'adminispanel button[action=delete]':{
-                click: this.delete
+                click: this.remove
             }
         });
     },
@@ -37,7 +37,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.InformationalSystems', {
         */
     },
 
-    delete: function(btn){
+    remove: function(btn){
         var grid = btn.up('adminisgrid');
         var store = grid.getStore();
         var selected = grid.getSelectionModel().getSelection();

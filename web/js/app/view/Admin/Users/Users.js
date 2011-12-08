@@ -38,6 +38,12 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Users.Users', {
                                 xtype: 'button',
                                 action: 'sync',
                                 text: LANG.BUTTON.SYNC
+                            },
+                            {
+                                iconCls: 'icon-arrow-return',
+                                xtype: 'button',
+                                action: 'undo',
+                                text: '~~Atšaukti pakeitimus'
                             }
                         ]
                     }

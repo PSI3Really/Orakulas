@@ -17,7 +17,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.SupportTypes', {
                 click: this.add
             },
             'adminsupporttypes button[action=delete]':{
-                click: this.delete
+                click: this.remove
             }
         });
     },
@@ -34,7 +34,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.SupportTypes', {
         store.sync();
     },
 
-    delete: function(btn){
+    remove: function(btn){
 
         //alert('Pressed Delete');
     }

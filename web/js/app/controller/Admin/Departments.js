@@ -17,7 +17,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Departments', {
                 click: this.add
             },
             'admindepartmentsgrid button[action=delete]':{
-                click: this.delete
+                click: this.remove
             }
         });
     },
@@ -35,7 +35,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Departments', {
         store.sync();
     },
 
-    delete: function(btn){
+    remove: function(btn){
         //TODO: At the moment deletes the last entry
         var grid = btn.up('admindepartmentsgrid');
         var store = grid.getStore();

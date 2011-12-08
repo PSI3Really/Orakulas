@@ -17,7 +17,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Users', {
                 click: this.add
             },
             'adminusersgrid button[action=delete]':{
-                click: this.delete
+                click: this.remove
             },
             'adminusersgrid':{
                 itemdblclick: this.edit
@@ -56,7 +56,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Users', {
         wnd.show();
     },
 
-    delete: function(btn){
+    remove: function(btn){
         var grid = btn.up('adminusersgrid');
         var store = grid.getStore();
         var selected = grid.getSelectionModel().getSelection();

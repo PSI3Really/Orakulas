@@ -18,7 +18,8 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.InformationalSystems.ISAddWindow', {
 
         this.items = [
             {
-                xtype: 'adminisaddpanel'
+                xtype: 'adminisaddpanel',
+                layout: 'fit'
             }
         ];
         this.callParent(arguments);
