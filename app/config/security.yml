@@ -8,6 +8,8 @@ security:
             form_login:
                 login_path: /login
                 check_path: /check_login
+                success_handler: authentication_handler
+                failure_handler: authentication_handler
             logout: ~
 
     access_control:

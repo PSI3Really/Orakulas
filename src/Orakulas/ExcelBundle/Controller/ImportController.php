@@ -10,6 +10,7 @@ use \Orakulas\ExcelBundle\OrakulasExcelParser\OrakulasExcelParserException;
 class ImportController extends Controller {
 
     /**
+     * $_FILES['dataFile'] - norimas failas
      * $_POST["skipFirstLine"] = 0 - praleis pirma eilute, jei ne nulis, nepraleis (arba jei nera parametro)
      * $_POST["sheetName] = sheetName - skaitys parodyta sheeta, jei nera - skaitys pirma sheeta.
      * @throws \Orakulas\ExcelBundle\OrakulasExcelParser\OrakulasExcelParserException
