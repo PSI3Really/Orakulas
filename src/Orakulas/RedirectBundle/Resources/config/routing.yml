@@ -1,3 +1,7 @@
-OrakulasRedirectBundle_homepage:
+OrakulasRedirectBundle_lang:
+    pattern:  /{lang}
+    defaults: { _controller: OrakulasRedirectBundle:Redirect:redirect }
+
+OrakulasRedirectBundle_home:
     pattern:  /
     defaults: { _controller: OrakulasRedirectBundle:Redirect:redirect }
