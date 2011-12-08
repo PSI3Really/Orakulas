@@ -32,8 +32,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Main', {
     logout: function(){
         Ext.MessageBox.confirm('Patvirtinimas', 'Ar tikrai norite atsijungti nuo sistemos?', function (btn) {
             if (btn == 'yes') {
-                var loc = window.location.href.split('?');
-                window.location.href = loc+'logout';
+                window.location.href = window.location.href.substr(0, window.location.href.lastIndexOf('/'))+'/logout';
             }
         });
     },

@@ -2,6 +2,21 @@ Ext.require(['Ext.container.Viewport']);
 
 var LANG_CODE = 'lt';
 
+var login = function (form) {
+    if (form.isValid()) {
+        form.submit({
+            success: function(form, action) {
+                window.location.href = window.location.href.substring(0, window.location.href.lastIndexOf('/'))+'/redirect/'+LANG_CODE;
+            },
+            failure: function(form, action) {
+                Ext.Msg.alert('~~Invalid Credentials', '~~You\'ve entered invalid user credentials. Try again.');
+            }
+        });
+    } else {
+        Ext.Msg.alert('~~Invalid Data', '~~Please correct form errors.');
+    }
+}
+
 Ext.application({
     name: CONFIG.APP_NS,
     appFolder: '../js/app_login',
@@ -21,7 +36,14 @@ Ext.application({
                 bodyPadding: 5,
                 defaults: {
                     xtype: 'textfield',
-                    anchor: '100%'
+                    anchor: '100%',
+                    listeners: {
+                        specialkey: function (field, event) {
+                            if (event.getKey() == event.ENTER) {
+                                login(field.up('form').getForm());
+                            };
+                        }
+                    }
                 },
                 items: [
                     {
@@ -74,19 +96,7 @@ Ext.application({
                             text: '~~Prisijungti',//LANG.???
                             iconCls: 'icon-key',
                             handler: function () {
-                                var form = this.up('form').getForm();
-                                if (form.isValid()) {
-                                    form.submit({
-                                        success: function(form, action) {
-                                            window.location.href = window.location.href.substring(0, window.location.href.lastIndexOf('/'))+'/redirect';
-                                        },
-                                        failure: function(form, action) {
-                                            Ext.Msg.alert('~~Invalid Credentials', '~~You\'ve entered invalid user credentials. Try again.');
-                                        }
-                                    });
-                                } else {
-                                    Ext.Msg.alert('~~Invalid Data', '~~Please correct form errors.');
-                                }
+                                login(this.up('form').getForm());
                             }
                         }
                     ]
