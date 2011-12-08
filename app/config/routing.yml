@@ -1,3 +1,7 @@
+OrakulasRedirectBundle:
+    resource: "@OrakulasRedirectBundle/Resources/config/routing.yml"
+    prefix:   /redirect
+
 OrakulasExcelBundle:
     resource: "@OrakulasExcelBundle/Resources/config/routing.yml"
     prefix:   /

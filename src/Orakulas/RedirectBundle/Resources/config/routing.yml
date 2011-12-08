@@ -1,0 +1,3 @@
+OrakulasRedirectBundle_homepage:
+    pattern:  /
+    defaults: { _controller: OrakulasRedirectBundle:Redirect:redirect }
