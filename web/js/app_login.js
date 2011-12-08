@@ -10,7 +10,7 @@ Ext.application({
         Ext.create('Ext.window.Window', {
             width: 300,
             height: 124,
-            title: 'Prisijungimas',//LANG.???
+            title: '~~Prisijungimas',//LANG.???
             closable: false,
             draggable: false,
             layout: 'fit',
@@ -78,10 +78,7 @@ Ext.application({
                                 if (form.isValid()) {
                                     form.submit({
                                         success: function(form, action) {
-                                            //window.location.reload();
-                                            setTimeout(function () {
-                                                window.location.href = window.location.href.substring(0, window.location.href.lastIndexOf('/'));
-                                            }, 5000);
+                                            window.location.href = window.location.href.substring(0, window.location.href.lastIndexOf('/'))+'/redirect';
                                         },
                                         failure: function(form, action) {
                                             Ext.Msg.alert('~~Invalid Credentials', '~~You\'ve entered invalid user credentials. Try again.');
