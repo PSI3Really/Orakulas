@@ -2,26 +2,27 @@
 /**
  * Created by JetBrains PhpStorm.
  * User: Igratel
- * Date: 12/4/11
- * Time: 11:45 PM
+ * Date: 12/8/11
+ * Time: 2:27 PM
  * To change this template use File | Settings | File Templates.
  */
-
+ 
 namespace Orakulas\ModelBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use \Orakulas\ModelBundle\Facades;
 
-class DepartmentLoadController extends Controller {
+class isLoadController extends Controller
+{
 
-    public function viewAction ()
+    public function viewAction()
     {
         $stmt = $this->getDoctrine()->getEntityManager()->getConnection()->prepare
         ('
             select
-                department_name as entitiyName,
-                \'department\' as entityType,
+                is_name as entityName,
+                \'informational system\' as entityType,
                 year,
                 month,
                 sum(request_count) as supportCount,
@@ -29,16 +30,19 @@ class DepartmentLoadController extends Controller {
             from
             (
                 select
-                    department.code as department_code,
-                    department.name as department_name,
+                    informational_system.code as is_code,
+                    informational_system.name as is_name,
                     support_type.code as support_type_code,
                     year(support_history.start_date) as year,
                     month(support_history.start_date) as month,
                     sum(support_history.support_request_count) as request_count,
                     support_administration_time.hours_count * sum(support_history.support_request_count) as time
-
                 from
-                    department
+                    informational_system
+                    inner join department_info_sys_usage
+                    on informational_system.id = department_info_sys_usage.informational_system_id
+                    inner join department
+                    on department.id = department_info_sys_usage.department_id
                     inner join support_administration_time
                     on department.id = support_administration_time.department_id
                     inner join support_type
@@ -46,17 +50,16 @@ class DepartmentLoadController extends Controller {
                     inner join support_history
                     on support_type.id = support_history.support_type_id
                 group by
-                    department.code,
-                    department.name,
+                    informational_system.code,
+                    informational_system.name,
                     support_type.name,
                     year(support_history.start_date),
                     month(support_history.start_date)
                 order by
-                    year, month, department.name
+                    year, month, is_code
             ) as temp_departments_administration_time
             group by
-                department_code,
-                department_name,
+                is_name,
                 year,
                 month
         ');
@@ -71,8 +74,8 @@ class DepartmentLoadController extends Controller {
         $stmt = $this->getDoctrine()->getEntityManager()->getConnection()->prepare
         ('
             select
-                department_name as entitiyName,
-                \'department\' as entityType,
+                is_name as entityName,
+                \'informational system\' as entityType,
                 year,
                 month,
                 case when month < 10
@@ -84,16 +87,19 @@ class DepartmentLoadController extends Controller {
             from
             (
                 select
-                    department.code as department_code,
-                    department.name as department_name,
+                    informational_system.code as is_code,
+                    informational_system.name as is_name,
                     support_type.code as support_type_code,
                     year(support_history.start_date) as year,
                     month(support_history.start_date) as month,
                     sum(support_history.support_request_count) as request_count,
                     support_administration_time.hours_count * sum(support_history.support_request_count) as time
-
                 from
-                    department
+                    informational_system
+                    inner join department_info_sys_usage
+                    on informational_system.id = department_info_sys_usage.informational_system_id
+                    inner join department
+                    on department.id = department_info_sys_usage.department_id
                     inner join support_administration_time
                     on department.id = support_administration_time.department_id
                     inner join support_type
@@ -101,17 +107,16 @@ class DepartmentLoadController extends Controller {
                     inner join support_history
                     on support_type.id = support_history.support_type_id
                 group by
-                    department.code,
-                    department.name,
+                    informational_system.code,
+                    informational_system.name,
                     support_type.name,
                     year(support_history.start_date),
                     month(support_history.start_date)
                 order by
-                    year, month, department.name
+                    year, month, is_code
             ) as temp_departments_administration_time
             group by
-                department_code,
-                department_name,
+                is_name,
                 year,
                 month
         ');
