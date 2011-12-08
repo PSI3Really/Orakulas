@@ -3,3 +3,9 @@ OrakulasModelBundle_departmentsLoad_view:
     defaults: { _controller: OrakulasModelBundle:DepartmentLoad:view }
     requirements:
       _method:  GET
+
+OrakulasModelBundle_departmentsLoad_viewFullDate:
+    pattern: /viewFullDate
+    defaults: { _controller: OrakulasModelBundle:DepartmentLoad:viewFullDate }
+    requirements:
+      _method:  GET
