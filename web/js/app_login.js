@@ -9,11 +9,11 @@ var login = function (form) {
                 window.location.href = window.location.href.substring(0, window.location.href.lastIndexOf('/'))+'/redirect/'+LANG_CODE;
             },
             failure: function(form, action) {
-                Ext.Msg.alert('~~Invalid Credentials', '~~You\'ve entered invalid user credentials. Try again.');
+                Ext.Msg.alert('~~Invalid Credentials', '~~Please enter valid user credentials.');
             }
         });
     } else {
-        Ext.Msg.alert('~~Invalid Data', '~~Please correct form errors.');
+        Ext.Msg.alert('~~Invalid Form', '~~Please correct form errors.');
     }
 }
 
