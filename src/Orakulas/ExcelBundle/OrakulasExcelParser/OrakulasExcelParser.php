@@ -39,7 +39,7 @@ class OrakulasExcelParser {
     /**
      * @throws ExcelException
      * @param $sheetName - sheeto vardas
-     * @return int - sheeto numeris
+     * @return int - sheeto numeris. Jei -1, sheetas neegzistuoja
      */
     private function getSheetNumber($sheetName) {
         $this->objReader->setReadDataOnly(true);
@@ -49,9 +49,14 @@ class OrakulasExcelParser {
                 return $i;
             }
         }
-        throw new OrakulasExcelParserException("Sheet ".$sheetName." doesn't exist on file ".$this->filename);
+        return -1;
     }
 
+    /**
+     * @throws OrakulasExcelParserException
+     * @param $sheetName
+     * @return int - 0 if everything ok, -1 if no such sheet exists
+     */
     private function initReading($sheetName) {
         if (!$this->readerIsSet) {
             throw new OrakulasExcelParserException("Reader is not set");
@@ -62,9 +67,16 @@ class OrakulasExcelParser {
         } else {
             $sheetNumber = 0;
         }
-        $this->sheet = $this->objPHPExcel->getSheet($sheetNumber);
-        $this->objReader->setReadDataOnly(true);
-        $this->rowIterator = $this->sheet->getRowIterator();
+
+        if ($sheetNumber != -1) {
+            $this->sheet = $this->objPHPExcel->getSheet($sheetNumber);
+            $this->objReader->setReadDataOnly(true);
+            $this->rowIterator = $this->sheet->getRowIterator();
+            return 0;
+        } else {
+            return -1;
+        }
+
     }
 
     private function nullParameters() {
@@ -171,43 +183,60 @@ class OrakulasExcelParser {
      * @return array - nuskaityti stulepiai masyve array(supportMean->xx, from->yy, to->zz, quantity->ww)
      */
     public function readSupportQuantities($sheetName, $ignoreFirstRow) {
-        $this->initReading($sheetName);
+        $success = true;
+        $failureType = "not failed";
+
+        $initIndex = $this->initReading($sheetName);
+        if ($initIndex == -1) {
+            $success = false;
+            $failureType = "No such sheet";
+        }
 
         $array_data = array();
-        foreach ($this->rowIterator as $row){
-            $rowIndex = $row->getRowIndex();
+        if ($success) {
+            foreach ($this->rowIterator as $row){
+                $rowIndex = $row->getRowIndex();
 
-            if (($rowIndex != 1) || (($rowIndex == 1) && ($ignoreFirstRow == false))) {
-                $cell = $this->sheet->getCell('A'.$rowIndex);
-                $cellAnValue = $cell->getCalculatedValue();
-                $cell = $this->sheet->getCell('B'.$rowIndex);
-                $cellBnValue = $cell->getCalculatedValue();
-                $cell = $this->sheet->getCell('C'.$rowIndex);
-                $cellCnValue = $cell->getCalculatedValue();
-                $cell = $this->sheet->getCell('D'.$rowIndex);
-                $cellDnValue = $cell->getCalculatedValue();
+                if (($rowIndex != 1) || (($rowIndex == 1) && ($ignoreFirstRow == false))) {
+                    $cell = $this->sheet->getCell('A'.$rowIndex);
+                    $cellAnValue = $cell->getCalculatedValue();
+                    $cell = $this->sheet->getCell('B'.$rowIndex);
+                    $cellBnValue = $cell->getCalculatedValue();
+                    $cell = $this->sheet->getCell('C'.$rowIndex);
+                    $cellCnValue = $cell->getCalculatedValue();
+                    $cell = $this->sheet->getCell('D'.$rowIndex);
+                    $cellDnValue = $cell->getCalculatedValue();
 
-                $ts = mktime(0, 0, 0, 1, $cellBnValue-1, 1900);
-                $cellBnValue = $ts;
-                $ts = mktime(0, 0, 0, 1, $cellCnValue-1, 1900);
-                $cellCnValue = $ts;
+                    $ts = mktime(0, 0, 0, 1, $cellBnValue-1, 1900);
+                    $cellBnValue = $ts;
+                    $ts = mktime(0, 0, 0, 1, $cellCnValue-1, 1900);
+                    $cellCnValue = $ts;
 
+                    if ((strlen($cellAnValue) == 0) || (strlen($cellBnValue) == "") || (strlen($cellCnValue) == "") || (strlen($cellDnValue) == 0)) {
+                        $success = false;
+                        $failureType = "Empty row";
+                        break;
+                    }
 
-                if ((strlen($cellAnValue) == 0) || (strlen($cellBnValue) == "") || (strlen($cellCnValue) == "") || (strlen($cellDnValue) == 0)) {
-                    throw new OrakulasExcelParserException("Empty row");
+                    $array_data[] = array(
+                        'supportMean'=>$cellAnValue,
+                        'from'=>$cellBnValue,
+                        'to'=>$cellCnValue,
+                        'quantity'=>$cellDnValue,
+                    );
                 }
-
-                $array_data[] = array(
-                    'supportMean'=>$cellAnValue,
-                    'from'=>$cellBnValue,
-                    'to'=>$cellCnValue,
-                    'quantity'=>$cellDnValue,
-                );
             }
         }
 
+        $dataToReturn = array();
+        $dataToReturn[] = array(
+            'success'=>$success,
+            'failureType'=>$failureType,
+            'data'=>$array_data,
+        );
+
         $this->nullParameters();
-        return json_encode($array_data);
+        return json_encode($dataToReturn);
     }
 
     /**

@@ -14,11 +14,11 @@ class ImportController extends Controller {
      * $_POST["skipFirstLine"] = 0 - praleis pirma eilute, jei ne nulis, nepraleis (arba jei nera parametro)
      * $_POST["sheetName] = sheetName - skaitys parodyta sheeta, jei nera - skaitys pirma sheeta.
      * @throws \Orakulas\ExcelBundle\OrakulasExcelParser\OrakulasExcelParserException
-     * @return array
+     * @return array - success, failureType, data
      */
     public function readSupportHistoriesAction() {
         $filename = $_FILES['dataFile']['tmp_name'];
-
+        
         $reader = new OrakulasExcelParser($filename);
         if ($_FILES['dataFile']['type'] === "application/vnd.ms-excel") {
             $reader->setObjReaderExcel5();
