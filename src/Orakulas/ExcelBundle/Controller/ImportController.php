@@ -25,7 +25,13 @@ class ImportController extends Controller {
         } elseif ($_FILES['dataFile']['type'] === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
             $reader->setObjReaderExcel2007();
         } else {
-            throw new OrakulasExcelParserException("Unrecognisable file format");
+            //throw new OrakulasExcelParserException("Unrecognisable file format");
+            $data = array(
+                'success'=>false,
+                'failureType'=>'Invalid file type',
+                'data'=>null,
+            );
+            return $this->constructResponse(json_encode($data));
         }
 
         $skipFirstLine = 0;
