@@ -30,10 +30,6 @@ OrakulasModelBundle_users:
     resource: "@OrakulasModelBundle/Resources/config/entities/userRouting.yml"
     prefix:   /users
 
-OrakulasModelBundle_departmentsLoad:
-    resource: "@OrakulasModelBundle/Resources/config/entities/departmentLoadRouting.yml"
-    prefix:   /departmentsLoad
-
-OrakulasModelBundle_isLoad:
-    resource: "@OrakulasModelBundle/Resources/config/entities/isLoadRouting.yml"
-    prefix:   /isLoad
+OrakulasModelBundle_loadHistories:
+    resource: "@OrakulasModelBundle/Resources/config/entities/loadHistoriesRouting.yml"
+    prefix:   /loadHistories

@@ -1,0 +1,5 @@
+OrakulasModelBundle_loadHistories:
+    pattern: /{loadType}/{dataType}
+    defaults: { _controller: OrakulasModelBundle:LoadHistories:viewLoadHistories }
+    requirements:
+      _method:  GET
