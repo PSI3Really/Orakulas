@@ -26,3 +26,15 @@
         font-size: 18px;
         text-shadow: 0 1px 0 #FFF;
     }
+#upload-iframe {
+    display: none;
+}
+.dummy-form {
+}
+    .dummy-form .x-panel-body-default {
+        background: transparent;
+        border: 0;
+    }
+    .dummy-form .x-form-item {
+        margin: 1px 0 0;
+    }
