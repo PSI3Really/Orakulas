@@ -7,14 +7,9 @@
     #loading p {
         position: absolute;
         top: 50%; left: 50%;
-        width: 100px; height: 16px;
-        margin: -8px 0 0 -50px;
-        padding-left: 20px;
-        background: url('../images/loading.gif') no-repeat center left;
-        line-height: 16px;
-        color: #596F8F;
-        font-family: Helvetica, Arial, sans-serif;
-        font-size: 14px;
+        width: 120px; height: 120px;
+        margin: -60px 0 0 -60px;
+        background: url('../images/loading.gif') no-repeat center center;
     }
 #toolbar {
     background: none;
