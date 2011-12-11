@@ -9,7 +9,10 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Departments', {
         'Admin.Departments'
     ],
 
-    views: ['Admin.Departments.Departments'],
+    views: [
+        'Admin.Departments.Departments',
+        'Admin.Departments.DepartmentsAddWindow'
+    ],
 
     init: function(){
         this.control({
@@ -23,6 +26,8 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Departments', {
     },
 
     add: function(btn){
+        Ext.create('widget.admindepartmentsaddwindow', {}).show();
+        /*
         var grid = btn.up('admindepartmentsgrid');
         var store = grid.getStore();
 
@@ -33,6 +38,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Departments', {
 
         store.add(record);
         store.sync();
+        */
     },
 
     remove: function(btn){
