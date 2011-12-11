@@ -5,10 +5,10 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Departments.DepartmentsISAddGrid', {
     initComponent: function() {
         this.border = false;
 
-        this.store = Ext.create('widget.adminDepartmentsStore', {});
+        this.store = Ext.create('widget.adminInformationalSystemsStore', {});
 
         this.columns = [
-            {header: '~~Padaliniai',          dataIndex: 'code',  flex: 1}
+            {header: '~~Informacinės sistemos',          dataIndex: 'code',  flex: 1}
         ];
 
         this.multiSelect = true;

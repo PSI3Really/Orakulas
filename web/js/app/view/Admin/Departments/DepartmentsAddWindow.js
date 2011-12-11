@@ -14,7 +14,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Departments.DepartmentsAddWindow', {
         this.height = 350;
         this.width = 600;
 
-        this.title = LANG.ADMIN.ADD_INFORMATIONAL_SYSTEM.TITLE;
+        this.title = '~~Padalinys';
 
         this.items = [
             {
