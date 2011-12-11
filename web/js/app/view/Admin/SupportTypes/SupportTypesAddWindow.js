@@ -1,9 +1,9 @@
-Ext.define(CONFIG.APP_NS+'.view.Admin.InformationalSystems.ISAddWindow', {
+Ext.define(CONFIG.APP_NS+'.view.Admin.SupportTypes.SupportTypesAddWindow', {
     extend: 'Ext.window.Window',
-    alias:  'widget.adminisaddWindow',
+    alias:  'widget.adminsupporttypesaddWindow',
 
     requires:[
-        CONFIG.APP_NS+'.view.Admin.InformationalSystems.ISAddPanel'
+        CONFIG.APP_NS+'.view.Admin.SupportTypes.SupportTypesAddPanel'
     ],
 
     initComponent: function() {
@@ -12,15 +12,15 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.InformationalSystems.ISAddWindow', {
         this.modal      = true;
         this.height     = 350;
         this.width      = 600;
-        this.title      = LANG.ADMIN.ADD_INFORMATIONAL_SYSTEM.TITLE;
+        this.title      = '~~Priemone';
 
         this.items = [
             {
-                xtype: 'adminisaddpanel',
+                xtype:  'adminsupporttypesaddpanel',
                 layout: 'fit'
             }
         ];
-        
+
         this.callParent(arguments);
     }
 });

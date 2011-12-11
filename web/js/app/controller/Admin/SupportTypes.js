@@ -9,7 +9,10 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.SupportTypes', {
         'Admin.SupportTypes'
     ],
 
-    views: ['Admin.SupportTypes.SupportTypes'],
+    views: [
+        'Admin.SupportTypes.SupportTypes',
+        'Admin.SupportTypes.SupportTypesAddWindow'
+    ],
 
     init: function(){
         this.control({
@@ -23,6 +26,8 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.SupportTypes', {
     },
 
     add: function(btn){
+        Ext.create('widget.adminsupporttypesaddWindow', {}).show();
+        /*
         var grid = btn.up('adminsupporttypesgrid');
         var store = grid.getStore();
 
@@ -32,6 +37,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.SupportTypes', {
 
         store.add(record);
         store.sync();
+        */
     },
 
     remove: function(btn){

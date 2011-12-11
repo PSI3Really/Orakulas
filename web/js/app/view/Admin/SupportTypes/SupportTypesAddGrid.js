@@ -1,12 +1,13 @@
-Ext.define(CONFIG.APP_NS+'.view.Admin.InformationalSystems.ISAddGrid', {
+Ext.define(CONFIG.APP_NS+'.view.Admin.SupportTypes.SupportTypesAddGrid', {
     extend: 'Ext.grid.Panel',
-    alias: 'widget.adminisaddgrid',
+    alias: 'widget.adminsupporttypesaddgrid',
 
     initComponent: function() {
         this.border = false;
         this.store = Ext.create('widget.adminDepartmentsStore', {});
         this.columns = [
-            {header: LANG.ENTITY.DEPARTMENT_PLURAL,          dataIndex: 'code',  flex: 1}
+            {header: '~~Padalinys',     dataIndex: 'code',  flex: 1},
+            {header: '~~Valandos',     dataIndex: 'code',  flex: 1}
         ];
 
         this.multiSelect = true;

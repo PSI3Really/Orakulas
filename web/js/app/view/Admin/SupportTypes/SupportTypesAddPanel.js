@@ -1,9 +1,9 @@
-Ext.define(CONFIG.APP_NS+'.view.Admin.InformationalSystems.ISAddPanel', {
+Ext.define(CONFIG.APP_NS+'.view.Admin.SupportTypes.SupportTypesAddPanel', {
     extend: 'Ext.form.Panel',
-    alias: 'widget.adminisaddpanel',
+    alias: 'widget.adminsupporttypesaddpanel',
 
     requires: [
-        CONFIG.APP_NS+'.view.Admin.InformationalSystems.ISAddGrid'
+        CONFIG.APP_NS+'.view.Admin.SupportTypes.SupportTypesAddGrid'
     ],
 
     initComponent: function() {
@@ -11,9 +11,11 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.InformationalSystems.ISAddPanel', {
 
         this.items = [
             {
-                xtype:  'adminisaddgrid'
+                xtype:  'adminsupporttypesaddgrid'
             }
         ];
+
+        var supportTypesStore = Ext.create('widget.adminSupportTypesStore', {});
 
        this.dockedItems = [
             {
@@ -58,9 +60,9 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.InformationalSystems.ISAddPanel', {
                 items: [
                     {
                         xtype:  'label',
-                        text:   LANG.ENTITY.CODE,
+                        text:   '~~Kodas',
                         flex:   0,
-                        
+
                         style: {
                             paddingRight: '5px',
                             paddingTop:   '5px'
@@ -70,16 +72,16 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.InformationalSystems.ISAddPanel', {
                         xtype:  'textfield',
                         name:   'code',
                         flex:   0,
-                        
+
                         style: {
                             width: '40px !Important'
                         }
                     },
                     {
                         xtype:  'label',
-                        text:   LANG.ENTITY.ENTITY_NAME,
+                        text:   '~~Pavadinimas',
                         flex:   0,
-                        
+
                         style: {
                             paddingRight: '5px',
                             paddingLeft:  '15px',
@@ -90,6 +92,51 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.InformationalSystems.ISAddPanel', {
                         xtype:  'textfield',
                         name:   'name',
                         flex:   1
+                    }
+                ]
+            },
+            {
+                xtype: 'toolbar',
+
+                layout: {
+                    type:   'hbox',
+                    pack:   'start',
+                    align:  'stretch'
+                },
+
+                height: 35,
+
+                style: {
+                    paddingTop:     '5px',
+                    paddingBottom:  '5px',
+                    paddingLeft:    '10px',
+                    paddingRight:   '10px'
+                },
+                
+                items: [
+                    {
+                        xtype:  'label',
+                        text:   '~~Kryptis',
+                        flex:   0,
+
+                        style: {
+                            paddingRight: '5px',
+                            paddingTop:   '5px'
+                        }
+                    },
+                    {
+                        xtype: 'combo',
+                        flex: 1,
+
+                        name: "supporttype",
+                        triggerAction: "all",
+                        loadingText: "~~Kraunama...",
+                        store: supportTypesStore,
+                        mode:'local',
+                        displayField: "name",
+                        valueField: "name",
+                        forceSelection: true,
+                        emptyText:  '~~Pasirinkite krypti'
                     }
                 ]
             }

@@ -7,18 +7,16 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Departments.DepartmentsAddWindow', {
     ],
 
     initComponent: function() {
-        this.layout = 'fit';
-        this.floatable = true;
-        this.modal = true;
-
-        this.height = 350;
-        this.width = 600;
-
-        this.title = '~~Padalinys';
+        this.layout     = 'fit';
+        this.floatable  = true;
+        this.modal      = true;
+        this.height     = 350;
+        this.width      = 600;
+        this.title      = '~~Padalinys';
 
         this.items = [
             {
-                xtype: 'admindepartmentsaddpanel',
+                xtype:  'admindepartmentsaddpanel',
                 layout: 'fit'
             }
         ];
