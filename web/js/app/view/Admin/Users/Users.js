@@ -43,7 +43,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Users.Users', {
                                 iconCls: 'icon-arrow-return',
                                 xtype: 'button',
                                 action: 'undo',
-                                text: '~~Atšaukti pakeitimus'
+                                text: LANG.BUTTON.CANCEL_CHANGES
                             }
                         ]
                     }

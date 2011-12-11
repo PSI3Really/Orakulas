@@ -28,15 +28,16 @@ Ext.onReady(function() {
         Ext.Updater.defaults.indicatorText = '<div class="loading-indicator">Loading...</div>';
     }
 
-    if(Ext.data.Types){
+    if(Ext.data && Ext.data.Types){
         Ext.data.Types.stripRe = /[\$,%]/g;
     }
 
-    if(Ext.view.View){
-      Ext.view.View.prototype.emptyText = "";
+
+    if(Ext.view && Ext.view.View){
+        Ext.view.View.prototype.emptyText = "";
     }
 
-    if(Ext.grid.Panel){
+    if(Ext.grid && Ext.grid.Panel){
       Ext.grid.Panel.prototype.ddText = "{0} selected row{1}";
     }
 
@@ -145,7 +146,7 @@ Ext.onReady(function() {
         }
     }
 
-    if(Ext.toolbar.Paging){
+    if(Ext.toolbar && Ext.toolbar.Paging){
       Ext.apply(Ext.PagingToolbar.prototype, {
         beforePageText : "Page",
         afterPageText  : "of {0}",
@@ -159,186 +160,190 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.Basic){
-        Ext.form.Basic.prototype.waitTitle = "Please Wait...";
-    }
-
-    if(Ext.form.field.Base){
-      Ext.form.field.Base.prototype.invalidText = "The value in this field is invalid";
-    }
-
-    if(Ext.form.field.Text){
-      Ext.apply(Ext.form.field.Text.prototype, {
-        minLengthText : "The minimum length for this field is {0}",
-        maxLengthText : "The maximum length for this field is {0}",
-        blankText     : "This field is required",
-        regexText     : "",
-        emptyText     : null
-      });
-    }
-
-    if(Ext.form.field.Number){
-      Ext.apply(Ext.form.field.Number.prototype, {
-        decimalSeparator : ".",
-        decimalPrecision : 2,
-        minText : "The minimum value for this field is {0}",
-        maxText : "The maximum value for this field is {0}",
-        nanText : "{0} is not a valid number"
-      });
-    }
-
-    if(Ext.form.field.Date){
-      Ext.apply(Ext.form.field.Date.prototype, {
-        disabledDaysText  : "Disabled",
-        disabledDatesText : "Disabled",
-        minText           : "The date in this field must be after {0}",
-        maxText           : "The date in this field must be before {0}",
-        invalidText       : "{0} is not a valid date - it must be in the format {1}",
-        format            : "m/d/y",
-        altFormats        : "m/d/Y|m-d-y|m-d-Y|m/d|m-d|md|mdy|mdY|d|Y-m-d"
-      });
-    }
-
-    if(Ext.form.field.ComboBox){
-      Ext.apply(Ext.form.field.ComboBox.prototype, {
-        loadingText       : "Loading...",
-        valueNotFoundText : undefined
-      });
-    }
-
-    if(Ext.form.field.VTypes){
-      Ext.apply(Ext.form.field.VTypes, {
-        emailText    : 'This field should be an e-mail address in the format "user@example.com"',
-        urlText      : 'This field should be a URL in the format "http:/'+'/www.example.com"',
-        alphaText    : 'This field should only contain letters and _',
-        alphanumText : 'This field should only contain letters, numbers and _'
-      });
-    }
-
-    if(Ext.form.field.HtmlEditor){
-      Ext.apply(Ext.form.field.HtmlEditor.prototype, {
-        createLinkText : 'Please enter the URL for the link:',
-        buttonTips : {
-          bold : {
-            title: 'Bold (Ctrl+B)',
-            text: 'Make the selected text bold.',
-            cls: Ext.baseCSSPrefix + 'html-editor-tip'
-          },
-          italic : {
-            title: 'Italic (Ctrl+I)',
-            text: 'Make the selected text italic.',
-            cls: Ext.baseCSSPrefix + 'html-editor-tip'
-          },
-          underline : {
-            title: 'Underline (Ctrl+U)',
-            text: 'Underline the selected text.',
-            cls: Ext.baseCSSPrefix + 'html-editor-tip'
-          },
-          increasefontsize : {
-            title: 'Grow Text',
-            text: 'Increase the font size.',
-            cls: Ext.baseCSSPrefix + 'html-editor-tip'
-          },
-          decreasefontsize : {
-            title: 'Shrink Text',
-            text: 'Decrease the font size.',
-            cls: Ext.baseCSSPrefix + 'html-editor-tip'
-          },
-          backcolor : {
-            title: 'Text Highlight Color',
-            text: 'Change the background color of the selected text.',
-            cls: Ext.baseCSSPrefix + 'html-editor-tip'
-          },
-          forecolor : {
-            title: 'Font Color',
-            text: 'Change the color of the selected text.',
-            cls: Ext.baseCSSPrefix + 'html-editor-tip'
-          },
-          justifyleft : {
-            title: 'Align Text Left',
-            text: 'Align text to the left.',
-            cls: Ext.baseCSSPrefix + 'html-editor-tip'
-          },
-          justifycenter : {
-            title: 'Center Text',
-            text: 'Center text in the editor.',
-            cls: Ext.baseCSSPrefix + 'html-editor-tip'
-          },
-          justifyright : {
-            title: 'Align Text Right',
-            text: 'Align text to the right.',
-            cls: Ext.baseCSSPrefix + 'html-editor-tip'
-          },
-          insertunorderedlist : {
-            title: 'Bullet List',
-            text: 'Start a bulleted list.',
-            cls: Ext.baseCSSPrefix + 'html-editor-tip'
-          },
-          insertorderedlist : {
-            title: 'Numbered List',
-            text: 'Start a numbered list.',
-            cls: Ext.baseCSSPrefix + 'html-editor-tip'
-          },
-          createlink : {
-            title: 'Hyperlink',
-            text: 'Make the selected text a hyperlink.',
-            cls: Ext.baseCSSPrefix + 'html-editor-tip'
-          },
-          sourceedit : {
-            title: 'Source Edit',
-            text: 'Switch to source editing mode.',
-            cls: Ext.baseCSSPrefix + 'html-editor-tip'
-          }
+    if(Ext.form){
+        if(Ext.form.Basic){
+            Ext.form.Basic.prototype.waitTitle = "Please Wait...";
         }
-      });
+
+        if(Ext.form.field.Base){
+          Ext.form.field.Base.prototype.invalidText = "The value in this field is invalid";
+        }
+
+        if(Ext.form.field.Text){
+          Ext.apply(Ext.form.field.Text.prototype, {
+            minLengthText : "The minimum length for this field is {0}",
+            maxLengthText : "The maximum length for this field is {0}",
+            blankText     : "This field is required",
+            regexText     : "",
+            emptyText     : null
+          });
+        }
+
+        if(Ext.form.field.Number){
+          Ext.apply(Ext.form.field.Number.prototype, {
+            decimalSeparator : ".",
+            decimalPrecision : 2,
+            minText : "The minimum value for this field is {0}",
+            maxText : "The maximum value for this field is {0}",
+            nanText : "{0} is not a valid number"
+          });
+        }
+
+        if(Ext.form.field.Date){
+          Ext.apply(Ext.form.field.Date.prototype, {
+            disabledDaysText  : "Disabled",
+            disabledDatesText : "Disabled",
+            minText           : "The date in this field must be after {0}",
+            maxText           : "The date in this field must be before {0}",
+            invalidText       : "{0} is not a valid date - it must be in the format {1}",
+            format            : "m/d/y",
+            altFormats        : "m/d/Y|m-d-y|m-d-Y|m/d|m-d|md|mdy|mdY|d|Y-m-d"
+          });
+        }
+
+        if(Ext.form.field.ComboBox){
+          Ext.apply(Ext.form.field.ComboBox.prototype, {
+            loadingText       : "Loading...",
+            valueNotFoundText : undefined
+          });
+        }
+
+        if(Ext.form.field.VTypes){
+          Ext.apply(Ext.form.field.VTypes, {
+            emailText    : 'This field should be an e-mail address in the format "user@example.com"',
+            urlText      : 'This field should be a URL in the format "http:/'+'/www.example.com"',
+            alphaText    : 'This field should only contain letters and _',
+            alphanumText : 'This field should only contain letters, numbers and _'
+          });
+        }
+
+        if(Ext.form.field.HtmlEditor){
+          Ext.apply(Ext.form.field.HtmlEditor.prototype, {
+            createLinkText : 'Please enter the URL for the link:',
+            buttonTips : {
+              bold : {
+                title: 'Bold (Ctrl+B)',
+                text: 'Make the selected text bold.',
+                cls: Ext.baseCSSPrefix + 'html-editor-tip'
+              },
+              italic : {
+                title: 'Italic (Ctrl+I)',
+                text: 'Make the selected text italic.',
+                cls: Ext.baseCSSPrefix + 'html-editor-tip'
+              },
+              underline : {
+                title: 'Underline (Ctrl+U)',
+                text: 'Underline the selected text.',
+                cls: Ext.baseCSSPrefix + 'html-editor-tip'
+              },
+              increasefontsize : {
+                title: 'Grow Text',
+                text: 'Increase the font size.',
+                cls: Ext.baseCSSPrefix + 'html-editor-tip'
+              },
+              decreasefontsize : {
+                title: 'Shrink Text',
+                text: 'Decrease the font size.',
+                cls: Ext.baseCSSPrefix + 'html-editor-tip'
+              },
+              backcolor : {
+                title: 'Text Highlight Color',
+                text: 'Change the background color of the selected text.',
+                cls: Ext.baseCSSPrefix + 'html-editor-tip'
+              },
+              forecolor : {
+                title: 'Font Color',
+                text: 'Change the color of the selected text.',
+                cls: Ext.baseCSSPrefix + 'html-editor-tip'
+              },
+              justifyleft : {
+                title: 'Align Text Left',
+                text: 'Align text to the left.',
+                cls: Ext.baseCSSPrefix + 'html-editor-tip'
+              },
+              justifycenter : {
+                title: 'Center Text',
+                text: 'Center text in the editor.',
+                cls: Ext.baseCSSPrefix + 'html-editor-tip'
+              },
+              justifyright : {
+                title: 'Align Text Right',
+                text: 'Align text to the right.',
+                cls: Ext.baseCSSPrefix + 'html-editor-tip'
+              },
+              insertunorderedlist : {
+                title: 'Bullet List',
+                text: 'Start a bulleted list.',
+                cls: Ext.baseCSSPrefix + 'html-editor-tip'
+              },
+              insertorderedlist : {
+                title: 'Numbered List',
+                text: 'Start a numbered list.',
+                cls: Ext.baseCSSPrefix + 'html-editor-tip'
+              },
+              createlink : {
+                title: 'Hyperlink',
+                text: 'Make the selected text a hyperlink.',
+                cls: Ext.baseCSSPrefix + 'html-editor-tip'
+              },
+              sourceedit : {
+                title: 'Source Edit',
+                text: 'Switch to source editing mode.',
+                cls: Ext.baseCSSPrefix + 'html-editor-tip'
+              }
+            }
+          });
+        }
     }
 
-    if(Ext.grid.header.Container){
-      Ext.apply(Ext.grid.header.Container.prototype, {
-        sortAscText  : "Sort Ascending",
-        sortDescText : "Sort Descending",
-        columnsText  : "Columns"
-      });
-    }
+    if(Ext.grid){
+        if(Ext.grid.header.Container){
+          Ext.apply(Ext.grid.header.Container.prototype, {
+            sortAscText  : "Sort Ascending",
+            sortDescText : "Sort Descending",
+            columnsText  : "Columns"
+          });
+        }
 
-    if(Ext.grid.GroupingFeature){
-      Ext.apply(Ext.grid.GroupingFeature.prototype, {
-        emptyGroupText : '(None)',
-        groupByText    : 'Group By This Field',
-        showGroupsText : 'Show in Groups'
-      });
-    }
+        if(Ext.grid.GroupingFeature){
+          Ext.apply(Ext.grid.GroupingFeature.prototype, {
+            emptyGroupText : '(None)',
+            groupByText    : 'Group By This Field',
+            showGroupsText : 'Show in Groups'
+          });
+        }
 
-    if(Ext.grid.PropertyColumnModel){
-      Ext.apply(Ext.grid.PropertyColumnModel.prototype, {
-        nameText   : "Name",
-        valueText  : "Value",
-        dateFormat : "m/j/Y",
-        trueText: "true",
-        falseText: "false"
-      });
-    }
+        if(Ext.grid.PropertyColumnModel){
+          Ext.apply(Ext.grid.PropertyColumnModel.prototype, {
+            nameText   : "Name",
+            valueText  : "Value",
+            dateFormat : "m/j/Y",
+            trueText: "true",
+            falseText: "false"
+          });
+        }
 
-    if(Ext.grid.BooleanColumn){
-       Ext.apply(Ext.grid.BooleanColumn.prototype, {
-          trueText  : "true",
-          falseText : "false",
-          undefinedText: '&#160;'
-       });
-    }
+        if(Ext.grid.BooleanColumn){
+           Ext.apply(Ext.grid.BooleanColumn.prototype, {
+              trueText  : "true",
+              falseText : "false",
+              undefinedText: '&#160;'
+           });
+        }
 
-    if(Ext.grid.NumberColumn){
-        Ext.apply(Ext.grid.NumberColumn.prototype, {
-            format : '0,000.00'
-        });
-    }
+        if(Ext.grid.NumberColumn){
+            Ext.apply(Ext.grid.NumberColumn.prototype, {
+                format : '0,000.00'
+            });
+        }
 
-    if(Ext.grid.DateColumn){
-        Ext.apply(Ext.grid.DateColumn.prototype, {
-            format : 'm/d/Y'
-        });
+        if(Ext.grid.DateColumn){
+            Ext.apply(Ext.grid.DateColumn.prototype, {
+                format : 'm/d/Y'
+            });
+        }
     }
-
+    
     if(Ext.layout.BorderLayout && Ext.layout.BorderLayout.SplitRegion){
       Ext.apply(Ext.layout.BorderLayout.SplitRegion.prototype, {
         splitTip            : "Drag to resize.",
@@ -346,25 +351,27 @@ Ext.onReady(function() {
       });
     }
 
-    if(Ext.form.field.Time){
-      Ext.apply(Ext.form.field.Time.prototype, {
-        minText : "The time in this field must be equal to or after {0}",
-        maxText : "The time in this field must be equal to or before {0}",
-        invalidText : "{0} is not a valid time",
-        format : "g:i A",
-        altFormats : "g:ia|g:iA|g:i a|g:i A|h:i|g:i|H:i|ga|ha|gA|h a|g a|g A|gi|hi|gia|hia|g|H"
-      });
-    }
+    if(Ext.form){
+        if(Ext.form.field.Time){
+          Ext.apply(Ext.form.field.Time.prototype, {
+            minText : "The time in this field must be equal to or after {0}",
+            maxText : "The time in this field must be equal to or before {0}",
+            invalidText : "{0} is not a valid time",
+            format : "g:i A",
+            altFormats : "g:ia|g:iA|g:i a|g:i A|h:i|g:i|H:i|ga|ha|gA|h a|g a|g A|gi|hi|gia|hia|g|H"
+          });
+        }
 
-    if(Ext.form.CheckboxGroup){
-      Ext.apply(Ext.form.CheckboxGroup.prototype, {
-        blankText : "You must select at least one item in this group"
-      });
-    }
+        if(Ext.form.CheckboxGroup){
+          Ext.apply(Ext.form.CheckboxGroup.prototype, {
+            blankText : "You must select at least one item in this group"
+          });
+        }
 
-    if(Ext.form.RadioGroup){
-      Ext.apply(Ext.form.RadioGroup.prototype, {
-        blankText : "You must select one item in this group"
-      });
+        if(Ext.form.RadioGroup){
+          Ext.apply(Ext.form.RadioGroup.prototype, {
+            blankText : "You must select one item in this group"
+          });
+        }
     }
 });

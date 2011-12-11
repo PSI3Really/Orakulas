@@ -42,24 +42,24 @@ Ext.define(CONFIG.APP_NS+'.controller.Import', {
         if (form.isValid()) {
             form.submit({
                 url: 'excel/import/supportHistories',
-                waitMsg: '~~Duomenų failas saugomas ir skaitomas&hellip;',
+                waitMsg: LANG.IMPORT.WAIT_MSG,
                 success: function(form, action) {
                     msg('Data Received', 'Populate the grid with action.result.data array', Ext.Msg.INFO);
                 },
                 failure: function(form, action) {
-                    var message = '~~Nepavyko perskaityti duomenų failo.'; // unknown error
+                    var message = LANG.IMPORT.FAIL.UNKNOWN; // unknown error
                     switch (action.result.errors) {
                         case 'INVALID_FILE_TYPE':
-                            message = '~~Klaidingas duomenų failo formatas. Turėtų būti XLS arba XLSX.';
+                            message = LANG.IMPORT.FAIL.INVALID_FILE_TYPE;
                             break;
                         case 'NO_SUCH_SHEET':
-                            message = '~~Tokio puslapio duomenų faile nėra.';
+                            message = LANG.IMPORT.FAIL.NO_SUCH_SHEET;
                             break;
                         case 'INVALID_DATA':
-                            message = '~~Klaidingai suformuotas duomenų failas.';
+                            message = LANG.IMPORT.FAIL.INVALID_DATA;
                             break;
                     }
-                    msg('~~Įvyko klaida', message, Ext.Msg.ERROR);
+                    msg(LANG.IMPORT.FAIL.TITLE, message, Ext.Msg.ERROR);
                 }
             });
         }

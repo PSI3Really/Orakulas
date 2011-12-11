@@ -12,13 +12,13 @@ Ext.application({
     paths: {
         'Ext.ux': '../js/ux'
     },
-    models: [
+    models: [ //TODO: remove, only load when needed
         'Admin.User',
         'Admin.Department',
         'Admin.InformationalSystem',
         'Admin.DepartmentInfoSysUsage'
     ],
-    stores: [
+    stores: [ //TODO: remove, only load when needed
         'Admin.Users',
         'Admin.Departments',
         'Admin.InformationalSystems',
@@ -27,6 +27,8 @@ Ext.application({
     controllers: [
         'Main.Main',
         'Main.Portal',
+        'Main.GridPortlet',
+        'Main.ChartPortlet',
         'Main.Tab',
         'Import',
         'Export',
@@ -37,6 +39,11 @@ Ext.application({
         'Admin.InformationalSystems',
         'Admin.SupportTypes',
         'Admin.PersonalSettings'
+    ],
+
+    require:[
+        CONFIG.APP_NS+'.util.DynamicReader',
+        CONFIG.APP_NS+'.util.DynamicReaderJSON'
     ],
 
     launch: function(){

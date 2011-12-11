@@ -1,12 +1,14 @@
 Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
     extend: 'Ext.app.Controller',
 
-    require: ['Ext.ux.Portlet'],
+    require: [
+        'Ext.ux.Portlet'
+    ],
 
     views: ['Main.Portal', 'Main.GridPortlet', 'Main.ChartPortlet'],
 
-    models: ['Load'],
-    stores: ['Report'],
+    models: ['Load', 'InfoSysRequests', 'InfoSysHours', 'DepartmentRequests', 'DepartmentHours'],
+    stores: ['InfoSysHours', 'InfoSysRequests', 'DepartmentHours', 'DepartmentRequests'],
 
     refs: [
         {ref: 'portalPanel', selector: 'portal'}
@@ -27,8 +29,8 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
         var portletId = portal.portletCount++;
 
         minCol.add(Ext.create('widget.gridportlet', {
-            title: LANG.MAIN.PORTAL.TABLE.TITLE + ' ' + portletId, //TODO: separate by table/chart
-            store: portal.reports.department
+            title: LANG.MAIN.PORTAL.TABLE.TITLE + ' ' + portletId, 
+            store: portal.reports.departmentHours
         }));
     },
 
@@ -38,15 +40,29 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
 
         minCol.add(Ext.create('widget.chartportlet', {
             title: LANG.MAIN.PORTAL.CHART.TITLE + ' ' + portletId,
-            store: portal.reports.department,
-            leftAxisFields: ['supportCount'], //TODO: generalize
-            leftAxisTitle: LANG.ENTITY.SUPPORT_COUNT
+            store: portal.reports.departmentHours,
+            
+            leftAxisTitle: LANG.ENTITY.SUPPORT_COUNT,
+            leftAxisFields: ['supportCount', 'entityName']
         }));
     },
 
     loadReports: function(portal){
-        portal.reports.infoSys = Ext.create('widget.reportStore', {});
-        portal.reports.department = Ext.create('widget.reportStore', {});
+        portal.reports.infoSysHours = Ext.create('widget.infoSysHours', {});
+        portal.reports.infoSysHours.load();
+        //console.log(portal.reports.infoSysHours);
+
+        portal.reports.infoSysRequests = Ext.create('widget.infoSysRequests', {});
+        portal.reports.infoSysRequests.load();
+        //console.log(portal.reports.infoSysRequests);
+
+        portal.reports.departmentHours = Ext.create('widget.departmentHours', {});
+        portal.reports.departmentHours.load();
+        //console.log(portal.reports.departmentHours);
+
+        portal.reports.departmentRequests = Ext.create('widget.departmentRequests', {});
+        portal.reports.departmentRequests.load();
+        //console.log(portal.reports.departmentRequests);
     },
 
     //private

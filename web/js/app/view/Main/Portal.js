@@ -9,8 +9,10 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal', {
 
     border: false,
     reports: {
-        infoSys: null,
-        department: null
+        infoSysHours: null,
+        infoSysRequests: null,
+        departmentHours: null,
+        departmentRequests: null
     },
     parentTab: null,
     portletCount: 0,

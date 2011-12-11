@@ -1,4 +1,4 @@
-Ext.define(CONFIG.APP_NS+'.controller.Main.GridPortlet', {
+Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
     extend: 'Ext.app.Controller',
 
     require: ['Ext.ux.Portlet'],
@@ -7,22 +7,22 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.GridPortlet', {
 
     models: ['Load'],
     stores: ['InfoSysHours', 'InfoSysRequests', 'DepartmentHours', 'DepartmentRequests'],
-    
+
     init: function(){
         this.control({
-            'gridportlet':{
+            'chartportlet':{
 
             },
-            'gridportlet button[action=chooseDepartments]':{
+            'chartportlet button[action=chooseDepartments]':{
                 click: this.chooseDepartments
             },
-            'gridportlet button[action=chooseInfoSys]':{
+            'chartportlet button[action=chooseInfoSys]':{
                 click: this.chooseInfoSys
             },
-            'gridportlet button[action=chooseSupportCount]':{
+            'chartportlet button[action=chooseSupportCount]':{
                 click: this.chooseSupportCount
             },
-            'gridportlet button[action=chooseHoursSpent]':{
+            'chartportlet button[action=chooseHoursSpent]':{
                 click: this.chooseHoursSpent
             }
         });
@@ -30,7 +30,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.GridPortlet', {
 
     chooseDepartments: function(btn){
         if(!btn.pressed){
-            var portlet = btn.up('gridportlet');
+            var portlet = btn.up('chartportlet');
             var portletBar = btn.up('portletbar');
             var portal = portlet.up('portal');
 
@@ -50,7 +50,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.GridPortlet', {
 
     chooseInfoSys: function(btn){
         if(!btn.pressed){
-            var portlet = btn.up('gridportlet');
+            var portlet = btn.up('chartportlet');
             var portletBar = btn.up('portletbar');
             var portal = portlet.up('portal');
 
@@ -70,7 +70,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.GridPortlet', {
 
     chooseSupportCount: function(btn){
         if(!btn.pressed){
-            var portlet = btn.up('gridportlet');
+            var portlet = btn.up('chartportlet');
             var portletBar = btn.up('portletbar');
             var portal = portlet.up('portal');
 
@@ -90,7 +90,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.GridPortlet', {
 
     chooseHoursSpent: function(btn){
         if(!btn.pressed){
-            var portlet = btn.up('gridportlet');
+            var portlet = btn.up('chartportlet');
             var portletBar = btn.up('portletbar');
             var portal = portlet.up('portal');
 
