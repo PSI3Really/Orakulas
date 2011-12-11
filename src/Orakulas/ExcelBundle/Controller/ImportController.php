@@ -14,7 +14,7 @@ class ImportController extends Controller {
      * $_POST["skipFirstLine"] = 0 - praleis pirma eilute, jei ne nulis, nepraleis (arba jei nera parametro)
      * $_POST["sheetName] = sheetName - skaitys parodyta sheeta, jei nera - skaitys pirma sheeta.
      * @throws \Orakulas\ExcelBundle\OrakulasExcelParser\OrakulasExcelParserException
-     * @return array - success, failureType, data
+     * @return array - success, errors, data
      */
     public function readSupportHistoriesAction() {
         $filename = $_FILES['dataFile']['tmp_name'];
@@ -25,11 +25,10 @@ class ImportController extends Controller {
         } elseif ($_FILES['dataFile']['type'] === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
             $reader->setObjReaderExcel2007();
         } else {
-            //throw new OrakulasExcelParserException("Unrecognisable file format");
             $data = array(
-                'success'=>false,
-                'failureType'=>'Invalid file type',
-                'data'=>null,
+                'success' => false,
+                'errors'  => 'INVALID_FILE_TYPE',
+                'data'    => null,
             );
             return $this->constructResponse(json_encode($data));
         }
@@ -53,7 +52,7 @@ class ImportController extends Controller {
      */
     private function constructResponse($string) {
         $response = new Response($string);
-        $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set('Content-Type', 'text/html');
 
         return $response;
     }

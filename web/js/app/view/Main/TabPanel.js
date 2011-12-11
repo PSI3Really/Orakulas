@@ -21,7 +21,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.TabPanel', {
                         xtype: 'portal'
                     }
                 ]
-            },
+            }/*, //TODO: temp so it loads faster
             {
                 title: 'Ataskaita #1',
                 closable: true,
@@ -54,7 +54,9 @@ Ext.define(CONFIG.APP_NS+'.view.Main.TabPanel', {
                     }
                 ]
             }
+            //*/
         ];
+
         
         this.callParent();
     }

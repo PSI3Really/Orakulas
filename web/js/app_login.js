@@ -1,5 +1,8 @@
+//TODO: ext-lang doesnt really localize for some reason
+
 Ext.require(['Ext.container.Viewport']);
 
+var LANG = null;
 var LANG_CODE = 'lt';
 
 var login = function (form) {
@@ -9,11 +12,11 @@ var login = function (form) {
                 window.location.href = window.location.href.substring(0, window.location.href.lastIndexOf('/'))+'/redirect/'+LANG_CODE;
             },
             failure: function(form, action) {
-                Ext.Msg.alert('~~Invalid Credentials', '~~Please enter valid user credentials.');
+                Ext.Msg.alert(LANG.LOGIN.INVALID_CREDENTIALS_TITLE, LANG.LOGIN.INVALID_CREDENTIALS_BODY);
             }
         });
     } else {
-        Ext.Msg.alert('~~Invalid Form', '~~Please correct form errors.');
+        Ext.Msg.alert(LANG.LOGIN.INVALID_FORM_TITLE, LANG.LOGIN.INVALID_FORM_BODY);
     }
 }
 
@@ -22,86 +25,115 @@ Ext.application({
     appFolder: '../js/app_login',
 
     launch: function () {
-        Ext.create('Ext.window.Window', {
-            width: 300,
-            height: 124,
-            title: '~~Prisijungimas',//LANG.???
-            closable: false,
-            draggable: false,
-            layout: 'fit',
-            items: {
-                xtype: 'form',
-                url: 'check_login',
-                border: false,
-                bodyPadding: 5,
-                defaults: {
-                    xtype: 'textfield',
-                    anchor: '100%',
-                    listeners: {
-                        specialkey: function (field, event) {
-                            if (event.getKey() == event.ENTER) {
-                                login(field.up('form').getForm());
-                            };
-                        }
-                    }
-                },
-                items: [
-                    {
-                        fieldLabel: '~~Vartotojas',//LANG.ENTITY.USERNAME
-                        name: '_username',
-                        allowBlank: false
-                    },
-                    {
-                        fieldLabel: '~~Slaptažodis',//LANG.ENTITY.PASSWORD
-                        name: '_password',
-                        allowBlank: false
-                    }
-                ],
-                dockedItems: [{
-                    xtype: 'toolbar',
-                    dock:  'bottom',
-                    items: [
-                        {
-                            xtype: 'buttongroup',
+        var params = Ext.urlDecode(window.location.search.substring(1));
+
+        var lang = params.lang ? params.lang : CONFIG.DEFAULT_LANG;
+
+        var urlExt = Ext.util.Format.format('../js/locale/ext-lang-{0}.js', lang);
+        var urlApp = Ext.util.Format.format('../js/locale/{0}-lang-{1}.json', CONFIG.APP_NS, lang);
+
+        Ext.Ajax.request({ //ExtJS localization
+            url: urlExt,
+            success: function(response){ //change the language
+                eval(response.responseText);
+            },
+            failure: function(){
+                Ext.Msg.alert('Failure', 'Failed to load locale file.');
+            },
+            scope: this
+        });
+
+        Ext.Ajax.request({ //Orakulas localization
+            url: urlApp,
+            success: function(response){
+                var text = response.responseText;
+
+                LANG = Ext.JSON.decode(text, true);
+                LANG_CODE = lang;
+
+                Ext.create('Ext.window.Window', {
+                    width: 300,
+                    height: 124,
+                    title: LANG.LOGIN.TITLE,
+                    closable: false,
+                    draggable: false,
+                    resizable: false,
+                    layout: 'fit',
+                    items: {
+                        xtype: 'form',
+                        url: 'check_login',
+                        border: false,
+                        bodyPadding: 5,
+                        defaults: {
+                            xtype: 'textfield',
+                            anchor: '100%',
+                            listeners: {
+                                specialkey: function (field, event) {
+                                    if (event.getKey() == event.ENTER) {
+                                        login(field.up('form').getForm());
+                                    };
+                                }
+                            }
+                        },
+                        items: [
+                            {
+                                fieldLabel: LANG.ENTITY.USERNAME,
+                                name: '_username',
+                                allowBlank: false
+                            },
+                            {
+                                fieldLabel: LANG.ENTITY.PASSWORD,
+                                name: '_password',
+                                allowBlank: false
+                            }
+                        ],
+                        dockedItems: [{
+                            xtype: 'toolbar',
+                            dock:  'bottom',
                             items: [
                                 {
-                                    pressed: LANG_CODE === 'lt',
-                                    lang: 'lt',
-                                    iconCls: 'icon-flag-lt',
-                                    tooltip: '~~Lietuvių',//LANG.MAIN.TOOLBAR.TOOLTIP.LANG_LT,
-                                    handler: function (btn) {
-                                        LANG_CODE = 'lt';
-                                        btn.toggle(true);
-                                        btn.next().toggle(false);
-                                    }
+                                    xtype: 'buttongroup',
+                                    items: [
+                                        {
+                                            pressed: LANG_CODE === 'lt',
+                                            lang: 'lt',
+                                            iconCls: 'icon-flag-lt',
+                                            tooltip: LANG.MAIN.TOOLBAR.TOOLTIP.LANG_LT,
+                                            handler: function (btn) {
+                                                LANG_CODE = 'lt';
+                                                btn.toggle(true);
+                                                btn.next().toggle(false);
+                                            }
+                                        },
+                                        {
+                                            pressed: LANG_CODE === 'en',
+                                            lang: 'en',
+                                            iconCls: 'icon-flag-gb',
+                                            tooltip: LANG.MAIN.TOOLBAR.TOOLTIP.LANG_EN,
+                                            handler: function (btn) {
+                                                LANG_CODE = 'en';
+                                                btn.toggle(true);
+                                                btn.prev().toggle(false);
+                                            }
+                                        }
+                                    ]
                                 },
+                                '->',
                                 {
-                                    pressed: LANG_CODE === 'en',
-                                    lang: 'en',
-                                    iconCls: 'icon-flag-gb',
-                                    tooltip: '~~Anglų',//LANG.MAIN.TOOLBAR.TOOLTIP.LANG_EN,
-                                    handler: function (btn) {
-                                        LANG_CODE = 'en';
-                                        btn.toggle(true);
-                                        btn.prev().toggle(false);
+                                    xtype: 'button',
+                                    formBind: true,
+                                    disabled: true,
+                                    text: LANG.LOGIN.LOGIN,
+                                    iconCls: 'icon-key',
+                                    handler: function () {
+                                        login(this.up('form').getForm());
                                     }
                                 }
                             ]
-                        },
-                        '->',
-                        {
-                            xtype: 'button',
-                            formBind: true,
-                            disabled: true,
-                            text: '~~Prisijungti',//LANG.???
-                            iconCls: 'icon-key',
-                            handler: function () {
-                                login(this.up('form').getForm());
-                            }
-                        }
-                    ]
-                }]
+                        }]
+                    }
+                }).show();
             }
-        }).show();
+        });
     }
 });

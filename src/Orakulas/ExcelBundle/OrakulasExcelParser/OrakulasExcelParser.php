@@ -184,12 +184,12 @@ class OrakulasExcelParser {
      */
     public function readSupportQuantities($sheetName, $ignoreFirstRow) {
         $success = true;
-        $failureType = "not failed";
+        $errors  = null;
 
         $initIndex = $this->initReading($sheetName);
         if ($initIndex == -1) {
             $success = false;
-            $failureType = "No such sheet";
+            $errors  = "NO_SUCH_SHEET";
         }
 
         $array_data = array();
@@ -214,7 +214,7 @@ class OrakulasExcelParser {
 
                     if ((strlen($cellAnValue) == 0) || (strlen($cellBnValue) == "") || (strlen($cellCnValue) == "") || (strlen($cellDnValue) == 0)) {
                         $success = false;
-                        $failureType = "Empty row";
+                        $errors  = "INVALID_DATA";
                         break;
                     }
 
@@ -228,11 +228,10 @@ class OrakulasExcelParser {
             }
         }
 
-        $dataToReturn = array();
-        $dataToReturn[] = array(
-            'success'=>$success,
-            'failureType'=>$failureType,
-            'data'=>$array_data,
+        $dataToReturn = array(
+            'success' => $success,
+            'errors'  => $errors,
+            'data'    => $array_data,
         );
 
         $this->nullParameters();

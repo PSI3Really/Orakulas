@@ -28,6 +28,10 @@ Ext.define('Ext.ux.Portlet', {
     animCollapse: true,
     draggable: true,
     cls: 'x-portlet',
+    height: 400,
+
+    store: null,
+    dataView: null,
 
     // Override Panel's default doClose to provide a custom fade out effect
     // when a portlet is removed from the portal

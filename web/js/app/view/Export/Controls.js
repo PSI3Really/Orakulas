@@ -15,12 +15,16 @@ Ext.define(CONFIG.APP_NS+'.view.Export.Controls', {
             ]
         });
         
-        this.items = [{
+        this.items = [{ //TODO!important
             xtype: 'panel',
             region: 'center',
-            title: 'Istoriniai duomenys', //TODO
             border: false,
-            html: '<h1>NEED A LIST HERE</h1>' //TODO
+            title: 'Istoriniai duomenys',
+            store: {
+                fields: ['dummy'],
+                data: [{'dummy':'Lentelė 0'}]
+            },
+            columns: {header: 'Istoriniai duomenys', dataIndex: 'dummy'}
         },{
             xtype: 'panel',
             region: 'east',
@@ -28,6 +32,7 @@ Ext.define(CONFIG.APP_NS+'.view.Export.Controls', {
             items: [{
                 xtype: 'textfield',
                 fieldLabel: LANG.ENTITY.FILE_NAME,
+                value: 'Istoriniai duomenys',
                 allowBlank: false
             },{
                 xtype: 'combobox',

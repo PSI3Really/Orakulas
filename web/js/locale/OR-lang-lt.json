@@ -56,6 +56,9 @@
             },
             "CHART":{
                 "TITLE": "Grafikas"
+            },
+            "INFO":{
+                "TITLE":"Analizė"
             }
         }
     },
@@ -66,7 +69,15 @@
     },
 
     "IMPORT":{
-        "TITLE": "Įkelti duomenis"
+        "TITLE": "Įkelti duomenis",
+        "WAIT_MSG": "Duomenų failas saugomas ir skaitomas&hellip;",
+        "FAIL":{
+            "INVALID_FILE_TYPE":"Klaidingas duomenų failo formatas. Turėtų būti Excel dokumentas (.XLS arba .XLSX)",
+            "NO_SUCH_SHEET":"Tokio puslapio duomenų faile nėra",
+            "INVALID_DATA":"Klaidingai suformuotas duomenų failas",
+            "UNKNOWN":"Nepavyko perskaityti duomenų failo",
+            "TITLE":"Įvyko klaida"
+        }
     },
 
     "PREDICT":{
@@ -78,6 +89,15 @@
         }
     },
 
+    "LOGIN":{
+        "TITLE":"Prisijungimas",
+        "INVALID_CREDENTIALS_TITLE":"Neteisingi prisijungimo duomenys",
+        "INVALID_CREDENTIALS_BODY":"Prašome įvesti teisingus prisijungimo duomenis",
+        "INVALID_FORM_TITLE":"Nekorektiški duomenys",
+        "INVALID_FORM_BODY":"Prašome ištaisyti klaidas",
+        "LOGIN":"Prisijungti"
+    },
+
     "BUTTON":{
         "ADD": "Pridėti",
         "REMOVE": "Pašalinti",
@@ -85,12 +105,15 @@
         "CANCEL": "Atšaukti",
         "SAVE": "Išsaugoti",
         "SYNC": "Išsaugoti pakeitimus",
+        "CANCEL_CHANGES":"Atšaukti pakeitimus",
         "OPEN_FILE": "Įkelti iš failo"
     },
     
     "ENTITY":{
         "DEPARTMENT": "Padalinys",
         "INFO_SYS": "Informacinė sistema",
+        "DEPARTMENT_PLURAL": "Padaliniai",
+        "INFO_SYS_PLURAL": "Informacinės sistemos",
         "CODE": "Kodas",
         "SUPPORT_TYPE": "Priemonė",
         "USERNAME": "Vartotojo vardas",
@@ -106,7 +129,11 @@
         "AMOUNT": "Kiekis",
         "SUPPORT_COUNT": "Paramos kiekis",
         "HOURS_SPENT": "Panaudotos valandos",
-        "LOAD": "Apkrova"
+        "SUPPORT_COUNT_PLURAL": "Paramos kiekiai",
+        "LOAD": "Apkrova",
+        "ENTITY_NAME": "Pavadinimas",
+        "ENTITY_TYPE": "Tipas",
+        "MONTH": "Mėnuo"
     },
 
     "FILETYPE":{

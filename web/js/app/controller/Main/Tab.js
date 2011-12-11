@@ -31,9 +31,10 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Tab', {
     },
 
     analyze: function(btn){
-        //alert(btn.ownerCt.ownerCt.getXType());
         var tab = btn.up('tabpanel').getActiveTab();
-        alert('TODO: Analizavimo langas ' + tab.title);
+        var portal = tab.down('portal');
+
+        portal.fireEvent('addInfo', portal);
     },
 
     exportTab: function(btn){

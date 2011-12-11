@@ -22,32 +22,6 @@ class LoadHistoriesController extends Controller
         return new Response(json_encode($this->getPivot($loadType, $dataType)));
     }
 
-    public function viewDepartmentsByHoursAction ()
-    {
-        $departmentsLoad = $this->getDepartmentsLoad();
-        $pivot = Array();
-        $dates = $this->getDates();
-        
-        $pivot['startDate'] = Array();
-        foreach ($dates as $date)
-            $pivot['startDate'][count($pivot['startDate'])] = $date['startDate'];
-
-        foreach ($departmentsLoad as $row)
-        {
-            try
-            {
-                $pivot[$row['entityName']][$this->getDateIndex($pivot, $row['startDate'])] = $row['hoursSpent'];
-            }
-            catch (\Exception $e)
-            {
-                $pivot[$row['entityName']] = Array();
-                $pivot[$row['entityName']][$this->getDateIndex($pivot, $row['startDate'])] = $row['hoursSpent'];
-            }
-        }
-
-        return new Response(json_encode($pivot));
-    }
-
     /**
      * @param $loadType departments or is
      * @param $dataType hours or requests
@@ -81,30 +55,29 @@ class LoadHistoriesController extends Controller
 
         $dates = $this->getDates();
 
-        $pivot['startDate'] = Array();
         foreach ($dates as $date)
-            $pivot['startDate'][count($pivot['startDate'])] = $date['startDate'];
+            $pivot[count($pivot)]['startDate'] = $date['startDate'];
 
         foreach ($data as $row)
-        {
             try
             {
-                $pivot[$row['entityName']][$this->getDateIndex($pivot, $row['startDate'])] = $row[$fieldName];
+                $pivot[$this->getDateIndex($pivot, $row['startDate'])]['entities'][count($pivot[$this->getDateIndex($pivot, $row['startDate'])]['entities'])] = Array('name' => $row['entityName'],
+                                                                                           'value' => $row[$fieldName]);
             }
             catch (\Exception $e)
             {
-                $pivot[$row['entityName']] = Array();
-                $pivot[$row['entityName']][$this->getDateIndex($pivot, $row['startDate'])] = $row[$fieldName];
+                $pivot[$this->getDateIndex($pivot, $row['startDate'])]['entities'] = Array();
+                $pivot[$this->getDateIndex($pivot, $row['startDate'])]['entities'][0] = Array('name' => $row['entityName'],
+                                                                                           'value' => $row[$fieldName]);
             }
-        }
 
         return $pivot;
     }
 
     private function getDateIndex ($pivot, $date)
     {
-        for ($i = 0; $i < count($pivot['startDate']); $i++)
-            if ($pivot['startDate'][$i] == $date)
+        for ($i = 0; $i < count($pivot); $i++)
+            if ($pivot[$i]['startDate'] == $date)
                 return $i;
         return -1;
     }
@@ -178,8 +151,8 @@ class LoadHistoriesController extends Controller
                 year,
                 month
             order by
-                entityName,
-                startDate
+                startDate,
+                entityName
         ');
         $stmt->execute();
         return $stmt->fetchAll();
@@ -235,6 +208,9 @@ class LoadHistoriesController extends Controller
                 is_name,
                 year,
                 month
+            order by
+                startDate,
+                entityName
         ');
         $stmt->execute();
         return $stmt->fetchAll();
