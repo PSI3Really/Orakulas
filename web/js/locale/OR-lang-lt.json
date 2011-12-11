@@ -56,6 +56,9 @@
             },
             "CHART":{
                 "TITLE": "Grafikas"
+            },
+            "INFO":{
+                "TITLE":"Analizė"
             }
         }
     },

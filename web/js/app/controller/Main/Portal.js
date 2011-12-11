@@ -5,7 +5,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
         'Ext.ux.Portlet'
     ],
 
-    views: ['Main.Portal', 'Main.GridPortlet', 'Main.ChartPortlet'],
+    views: ['Main.Portal', 'Main.GridPortlet', 'Main.ChartPortlet', 'Main.InfoPortlet'],
 
     models: ['Load', 'InfoSysRequests', 'InfoSysHours', 'DepartmentRequests', 'DepartmentHours'],
     stores: ['InfoSysHours', 'InfoSysRequests', 'DepartmentHours', 'DepartmentRequests'],
@@ -19,6 +19,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
             'portal':{
                 addTable:       this.addTable,
                 addChart:       this.addChart,
+                addInfo:        this.addInfo,
                 loadReports:    this.loadReports
             }
         });
@@ -44,6 +45,16 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
             
             leftAxisTitle: LANG.ENTITY.SUPPORT_COUNT,
             leftAxisFields: ['supportCount', 'entityName']
+        }));
+    },
+
+    addInfo:function(portal){
+        var minCol = this.findMinColumn(portal);
+        var portletId = portal.portletCount++;
+
+        minCol.add(Ext.create('widget.infoportlet', {
+            title: LANG.MAIN.PORTAL.INFO.TITLE + ' ' + portletId,
+            store: portal.reports.departmentHours
         }));
     },
 

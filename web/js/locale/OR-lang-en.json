@@ -56,6 +56,9 @@
             },
             "CHART":{
                 "TITLE": "Chart"
+            },
+            "INFO":{
+                "TITLE":"Information"
             }
         }
     },
