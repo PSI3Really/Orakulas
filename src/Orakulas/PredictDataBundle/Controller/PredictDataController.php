@@ -5,6 +5,8 @@ namespace Orakulas\PredictDataBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Orakulas\ModelBundle\Facades\SupportHistoryFacade;
 use Orakulas\ModelBundle\Entity\SupportHistory;
+use Orakulas\ModelBundle\Facades\SupportAdministrationTimeFacade;
+use Orakulas\ModelBundle\Entity\SupportAdministrationTime;
 
 class PredictDataController extends Controller {
 
@@ -19,7 +21,9 @@ class PredictDataController extends Controller {
         $this->readSupportQuantitiesFromDatabase();
         $this->readSupportQuantitiesFromJson();
 
-        var_dump($this->supportQuantities);
+        $this->readSupportAdministrationTimesFromDatabase();
+        $this->readSupportAdministrationTimesFromJson();
+        
         exit;
     }
 
@@ -49,6 +53,33 @@ class PredictDataController extends Controller {
                 "startDate"=>$supportQuantityTemp['startDate'],
                 "endDate"=>$supportQuantityTemp['endDate'],
                 "supportRequestCount"=>$supportQuantityTemp['supportRequestCount'],
+            );
+        }
+    }
+
+    private function readSupportAdministrationTimesFromDatabase() {
+        $supportAdministrationTimes = new SupportAdministrationTimeFacade();
+        $supportAdministrationTimes->setDoctrine($this->getDoctrine());
+        $supportAdministrationTimes = $supportAdministrationTimes->loadAll();
+        foreach ($supportAdministrationTimes as $supportAdministrationTime) {
+            $department = $supportAdministrationTime->getDepartment()->getCode();
+            $supportType = $supportAdministrationTime->getSupportType()->getCode();
+            $hoursCount = $supportAdministrationTime->getHoursCount();
+            $this->supportAdministrationTimes[] = array(
+                'department'=>$department,
+                'supportType'=>$supportType,
+                'hoursCount'=>$hoursCount,
+            );
+        }
+    }
+
+    private function readSupportAdministrationTimesFromJson() {
+        $supportAdministrationTimesTemp = $this->jsonData['supportAdministrationTimes'];
+        foreach ($supportAdministrationTimesTemp as $supportAdministrationTimeTemp) {
+            $this->supportAdministrationTimes[] = array(
+                'department'=>$supportAdministrationTimeTemp['department'],
+                'supportType'=>$supportAdministrationTimeTemp['supportType'],
+                'hoursCount'=>$supportAdministrationTimeTemp['hoursCount'],
             );
         }
     }
