@@ -1,7 +1,7 @@
 Ext.define(CONFIG.APP_NS+'.controller.Main.Tab', {
     extend: 'Ext.app.Controller',
 
-    views: ['Main.TabPanel'],
+    views: ['Main.TabPanel', 'Main.Tab'],
 
     init: function(){
         this.control({

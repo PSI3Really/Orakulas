@@ -6,7 +6,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Departments.DepartmentsISAddGrid', {
         this.border = false;
         this.store = Ext.create('widget.adminInformationalSystemsStore', {});
         this.columns = [
-            {header: '~~Informacinės sistemos',          dataIndex: 'code',  flex: 1}
+            {header: LANG.ENTITY.INFO_SYS_PLURAL,          dataIndex: 'code',  flex: 1}
         ];
 
         this.multiSelect = true;

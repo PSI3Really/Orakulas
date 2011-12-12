@@ -12,7 +12,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.SupportTypes.SupportTypesAddWindow', {
         this.modal      = true;
         this.height     = 350;
         this.width      = 600;
-        this.title      = '~~Priemone';
+        this.title      = LANG.ENTITY.SUPPORT_TYPE;
 
         this.items = [
             {

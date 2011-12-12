@@ -10,17 +10,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.TabPanel', {
         this.items = [
             {
                 title: 'Istoriniai duomenys',
-                dockedItems: [
-                    {
-                        xtype: 'subtoolbar'
-                    }
-                ],
-                items: [
-                    {
-                        border: false,
-                        xtype: 'portal'
-                    }
-                ]
+                xtype: 'maintab'
             }/*, //TODO: temp so it loads faster
             {
                 title: 'Ataskaita #1',

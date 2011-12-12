@@ -18,6 +18,9 @@
             "TITLE_CHANGE": "Keičiamas vartotojas: ",
             "TITLE_NEW": "Naujas vartotojas"
         },
+        "SUPPORT_TYPES":{
+            "CHOOSE_DIRECTION":"Pasirinkite kryptį"
+        },
         "ADD_INFORMATIONAL_SYSTEM": {
             "TITLE": "Informacinė sistema"
         }
@@ -36,7 +39,9 @@
                 "LANG_LT": "Perjungti kalbą į lietuvių",
                 "LANG_EN": "Perjungti kalbą į anglų",
                 "LOGOUT": "Atsijungti"
-            }
+            },
+            "LOGOUT_TITLE": "Atsijungimas",
+            "LOGOUT_BODY": "Ar tikrai norite atsijungti nuo sistemos?"
         },
         "SUB_TOOLBAR":{
             "BUTTON":{
@@ -115,6 +120,7 @@
         "DEPARTMENT_PLURAL": "Padaliniai",
         "INFO_SYS_PLURAL": "Informacinės sistemos",
         "CODE": "Kodas",
+        "DIRECTION":"Direction",
         "SUPPORT_TYPE": "Priemonė",
         "USERNAME": "Vartotojo vardas",
         "PASSWORD": "Slaptažodis",
@@ -133,7 +139,8 @@
         "LOAD": "Apkrova",
         "ENTITY_NAME": "Pavadinimas",
         "ENTITY_TYPE": "Tipas",
-        "MONTH": "Mėnuo"
+        "MONTH": "Mėnuo",
+        "LOADING":"Kraunama&hellip;"
     },
 
     "FILETYPE":{

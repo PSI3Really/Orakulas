@@ -18,6 +18,9 @@
             "TITLE_CHANGE": "Changing user: ",
             "TITLE_NEW": "New user"
         },
+        "SUPPORT_TYPES":{
+            "CHOOSE_DIRECTION":"Choose direction"
+        },
         "ADD_INFORMATIONAL_SYSTEM": {
             "TITLE": "Informational system"
         }
@@ -36,7 +39,9 @@
                 "LANG_LT": "Switch language to Lithuanian",
                 "LANG_EN": "Switch language to English",
                 "LOGOUT": "Logout"
-            }
+            },
+            "LOGOUT_TITLE": "Logout",
+            "LOGOUT_BODY": "Do you really want to logout?"
         },
         "SUB_TOOLBAR":{
             "BUTTON":{
@@ -116,6 +121,7 @@
         "DEPARTMENT_PLURAL": "Departments",
         "INFO_SYS_PLURAL": "Informational systems",
         "CODE": "Code",
+        "DIRECTION":"Direction",
         "SUPPORT_TYPE": "Support type",
         "USERNAME": "Username",
         "PASSWORD": "Password",
@@ -134,7 +140,8 @@
         "LOAD": "Load",
         "ENTITY_NAME": "Name",
         "ENTITY_TYPE": "Type",
-        "MONTH": "Month"
+        "MONTH": "Month",
+        "LOADING":"Loading&hellip;"
     },
 
     "FILETYPE":{

@@ -6,8 +6,8 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Departments.DepartmentsSTAddGrid', {
         this.border = false;
         this.store = Ext.create('widget.adminSupportAdministrationTimesStore', {});
         this.columns = [
-            {header: '~~Priemones',     dataIndex: 'hoursCount',  flex: 1},
-            {header: '~~Valandos',      dataIndex: 'hoursCount',  flex: 1}
+            {header: LANG.ENTITY.SUPPORT_COUNT_PLURAL,     dataIndex: 'hoursCount',  flex: 1},
+            {header: LANG.ENTITY.HOURS_SPENT,      dataIndex: 'hoursCount',  flex: 1}
         ];
 
         this.multiSelect = true;

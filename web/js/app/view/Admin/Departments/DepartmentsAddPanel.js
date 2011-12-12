@@ -70,7 +70,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Departments.DepartmentsAddPanel', {
                 items: [
                     {
                         xtype:  'label',
-                        text:   '~~Kodas',
+                        text:   LANG.ENTITY.CODE,
                         flex:   0,
                         style: {
                             paddingRight: '5px',
@@ -87,7 +87,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Departments.DepartmentsAddPanel', {
                     },
                     {
                         xtype:  'label',
-                        text:   '~~Pavadinimas',
+                        text:   LANG.ENTITY.ENTITY_NAME,
                         style: {
                             paddingRight: '5px',
                             paddingLeft:  '15px',

@@ -45,7 +45,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.GridPortlet', {
         var columns = [{header: LANG.ENTITY.MONTH, dataIndex: 'startDate', flex: 1, xtype: 'datecolumn', format: 'Y-m-d', filter:{type: 'date'}}];
         
         var fields = store.model.prototype.fields.keys; //Really ExtJS, really?
-        console.log(fields);
+        //console.log(fields);
         for (var i = 1; i < fields.length; i++){ //TODO: for i = 0 to length (in case 0th field is not startDate)
             columns.push({header: fields[i], dataIndex: fields[i], flex: 1, xtype: 'numbercolumn', filter:{type:'numeric'}});
         }

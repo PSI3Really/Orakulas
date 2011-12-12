@@ -60,7 +60,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.SupportTypes.SupportTypesAddPanel', {
                 items: [
                     {
                         xtype:  'label',
-                        text:   '~~Kodas',
+                        text:   LANG.ENTITY.CODE,
                         flex:   0,
 
                         style: {
@@ -79,7 +79,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.SupportTypes.SupportTypesAddPanel', {
                     },
                     {
                         xtype:  'label',
-                        text:   '~~Pavadinimas',
+                        text:  LANG.ENTITY.ENTITY_NAME,
                         flex:   0,
 
                         style: {
@@ -116,7 +116,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.SupportTypes.SupportTypesAddPanel', {
                 items: [
                     {
                         xtype:  'label',
-                        text:   '~~Kryptis',
+                        text:   LANG.ENTITY.DIRECTION,
                         flex:   0,
 
                         style: {
@@ -130,13 +130,13 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.SupportTypes.SupportTypesAddPanel', {
 
                         name: "supporttype",
                         triggerAction: "all",
-                        loadingText: "~~Kraunama...",
+                        loadingText: LANG.ENTITY.LOADING,
                         store: supportTypesStore,
                         mode:'local',
                         displayField: "name",
                         valueField: "name",
                         forceSelection: true,
-                        emptyText:  '~~Pasirinkite krypti'
+                        emptyText:  LANG.ADMIN.SUPPORT_TYPES.CHOOSE_DIRECTION
                     }
                 ]
             }

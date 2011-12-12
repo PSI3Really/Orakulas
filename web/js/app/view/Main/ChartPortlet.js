@@ -24,7 +24,12 @@ Ext.define(CONFIG.APP_NS+'.view.Main.ChartPortlet', {
                 position: 'bottom',
                 fields: ['startDate'],
                 dateFormat: 'Y m',
-                grid: true
+                grid: true,
+                label: {
+                    rotate: {
+                        degrees: 315
+                    }
+                }
             },{
                 type: 'Numeric',
                 position: 'left',
@@ -53,32 +58,27 @@ Ext.define(CONFIG.APP_NS+'.view.Main.ChartPortlet', {
         this.callParent();
     },
 
-    setStore: function(store){ //TODO
-        this.store = store;
-
-        debugger;
-
+    removeOldSeries: function(){
         for (var i = 0; i<this.dataView.series.getCount(); i++){
             var series = this.dataView.series.getAt(i);
             var group = series.group;
             while(group.getCount() > 0){
                 group.first().remove();
             }
-            /*
 
-            var markerGroup = series.markerGroup;
-            while (markerGroup.getCount() > 0){
-                markerGroup.first().remove();
+            var shadows = series.line.shadows;
+            for (var sIdx = 0; sIdx < shadows.length; sIdx++){
+                shadows[sIdx].remove();
             }
+
             series.line.remove();
-            var shadowGroups = series.shadowGroups;
-            while (shadowGroups.getCount() > 0){
-                shadowGroups.first().remove();
-            }
-            */
         }
+    },
 
-        debugger;
+    setStore: function(store){ //TODO
+        this.store = store;
+
+        this.removeOldSeries();
 
         var fields = this.store.model.prototype.fields.keys;
 
