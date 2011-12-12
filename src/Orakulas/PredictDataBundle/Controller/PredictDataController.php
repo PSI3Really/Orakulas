@@ -23,7 +23,7 @@ class PredictDataController extends Controller {
 
         $this->readSupportAdministrationTimesFromDatabase();
         $this->readSupportAdministrationTimesFromJson();
-        
+        //test
         exit;
     }
 
