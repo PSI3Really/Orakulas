@@ -1,3 +1,7 @@
+OrakulasPredictDataBundle:
+    resource: "@OrakulasPredictDataBundle/Resources/config/routing.yml"
+    prefix:   /
+
 OrakulasRedirectBundle:
     resource: "@OrakulasRedirectBundle/Resources/config/routing.yml"
     prefix:   /redirect

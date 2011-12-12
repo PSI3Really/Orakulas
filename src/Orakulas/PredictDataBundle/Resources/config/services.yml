@@ -1,0 +1,7 @@
+parameters:
+#    orakulas_predict_data.example.class: Orakulas\PredictDataBundle\Example
+
+services:
+#    orakulas_predict_data.example:
+#        class: %orakulas_predict_data.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

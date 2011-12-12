@@ -1,0 +1,3 @@
+OrakulasPredictDataBundle_homepage:
+    pattern:  /predictData
+    defaults: { _controller: OrakulasPredictDataBundle:PredictData:predict }
