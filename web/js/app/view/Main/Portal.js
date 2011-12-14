@@ -14,7 +14,6 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal', {
         departmentHours: null,
         departmentRequests: null
     },
-    parentTab: null,
     portletCount: 0,
 
     initComponent: function(){

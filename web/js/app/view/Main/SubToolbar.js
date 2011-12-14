@@ -6,6 +6,8 @@ Ext.define(CONFIG.APP_NS+'.view.Main.SubToolbar', {
         CONFIG.APP_NS+'.view.Predict.Window'
     ],
 
+    border: false,
+
     initComponent: function () {
         this.height = 30,
         this.items = [

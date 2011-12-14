@@ -6,7 +6,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.TabPanel', {
         CONFIG.APP_NS+'.view.Main.SubToolbar'
     ],
 
-    autoScroll: true,
+    border: false,
 
     initComponent: function() {
         this.items = [

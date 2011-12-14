@@ -11,7 +11,7 @@ Ext.define(CONFIG.APP_NS+'.view.Export.Controls', {
             fields: ['filetype', 'code'],
             data: [
                 {'filetype': LANG.FILETYPE.EXCEL_XLS, 'code':'excel'},
-                {'filetype': LANG.FILETYPE.INTERNAL, 'code':'internal'}
+                //{'filetype': LANG.FILETYPE.INTERNAL, 'code':'internal'}
             ]
         });
         
@@ -19,10 +19,9 @@ Ext.define(CONFIG.APP_NS+'.view.Export.Controls', {
             xtype: 'panel',
             region: 'center',
             border: false,
-            title: 'Istoriniai duomenys',
             store: {
                 fields: ['dummy'],
-                data: [{'dummy':'Lentelė 0'}]
+                data: [{dummy:'Lentelė 0'}]
             },
             columns: {header: 'Istoriniai duomenys', dataIndex: 'dummy'}
         },{

@@ -64,7 +64,8 @@
             },
             "INFO":{
                 "TITLE":"Information"
-            }
+            },
+            "CHOOSE_ENTITIES":"Choose"
         }
     },
 

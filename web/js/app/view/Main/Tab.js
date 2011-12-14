@@ -6,13 +6,16 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Tab', {
         CONFIG.APP_NS+'.view.Main.SubToolbar'
     ],
 
+
+    border: false,
     //autoScroll: true,
 
     initComponent: function(){
 
         this.dockedItems = [
             {
-                xtype: 'subtoolbar'
+                xtype: 'subtoolbar',
+                border: false
             }
         ],
         this.items = [
