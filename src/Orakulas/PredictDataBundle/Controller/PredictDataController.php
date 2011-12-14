@@ -7,11 +7,16 @@ use Orakulas\ModelBundle\Facades\SupportHistoryFacade;
 use Orakulas\ModelBundle\Entity\SupportHistory;
 use Orakulas\ModelBundle\Facades\SupportAdministrationTimeFacade;
 use Orakulas\ModelBundle\Entity\SupportAdministrationTime;
+use Orakulas\ModelBundle\Facades\InformationalSystemFacade;
+use Orakulas\ModelBundle\Entity\InformationalSystem;
+use Orakulas\ModelBundle\Facades\DepartmentInfoSysUsageFacade;
+use Orakulas\ModelBundle\Entity\DepartmentInfoSysUsage;
 
 class PredictDataController extends Controller {
 
     private $supportQuantities = array();
     private $supportAdministrationTimes = array();
+    private $departmentInfoSysUsages = array();
     private $jsonData;
 
     public function predictAction() {
@@ -19,11 +24,14 @@ class PredictDataController extends Controller {
         $this->jsonData = json_decode($this->jsonData, true);
 
         $this->readSupportQuantitiesFromDatabase();
-        $this->readSupportQuantitiesFromJson();
+        $this->readSupportQuantitiesFromJsonAndMerge();
 
         $this->readSupportAdministrationTimesFromDatabase();
-        $this->readSupportAdministrationTimesFromJson();
-        //test
+        $this->readSupportAdministrationTimesFromJsonAndMerge();
+
+        $this->readIsDepartmentsFromDatabase();
+        $this->readIsDepartmentsFromJsonAndMerge();
+
         exit;
     }
 
@@ -45,16 +53,39 @@ class PredictDataController extends Controller {
         }
     }
 
-    private function readSupportQuantitiesFromJson() {
+    private function readSupportQuantitiesFromJsonAndMerge() {
         $supportQuantitiesTemp = $this->jsonData['supportQuantities'];
         foreach ($supportQuantitiesTemp as $supportQuantityTemp) {
-            $this->supportQuantities[] = array(
-                "supportType"=>$supportQuantityTemp['supportType'],
-                "startDate"=>$supportQuantityTemp['startDate'],
-                "endDate"=>$supportQuantityTemp['endDate'],
-                "supportRequestCount"=>$supportQuantityTemp['supportRequestCount'],
-            );
+            if (!$this->sameSupportTypeAtTheSameTime($supportQuantityTemp)) {
+                $this->supportQuantities[] = array(
+                    "supportType"=>$supportQuantityTemp['supportType'],
+                    "startDate"=>$supportQuantityTemp['startDate'],
+                    "endDate"=>$supportQuantityTemp['endDate'],
+                    "supportRequestCount"=>$supportQuantityTemp['supportRequestCount'],
+                );
+            }
         }
+    }
+
+    private function sameSupportTypeAtTheSameTime($supportQuantity) {
+        foreach ($this->supportQuantities as $currentSupQ) {
+            if ($supportQuantity['supportType'] === $currentSupQ['supportType']) {
+                    if ((strtotime($supportQuantity['startDate']) > strtotime($currentSupQ['startDate'])) &&
+                    (strtotime($supportQuantity['startDate']) < strtotime($currentSupQ['endDate']))) {
+                        return true;
+                    } elseif ((strtotime($supportQuantity['endDate']) > strtotime($currentSupQ['startDate'])) &&
+                    (strtotime($supportQuantity['endDate']) < strtotime($currentSupQ['endDate']))) {
+                        return true;
+                    } elseif (($supportQuantity['startDate'] === $currentSupQ['startDate']) ||
+                              ($supportQuantity['startDate'] === $currentSupQ['endDate'])) {
+                        return true;
+                    } elseif (($supportQuantity['endDate'] === $currentSupQ['startDate']) ||
+                              ($supportQuantity['endDate'] === $currentSupQ['endDate'])) {
+                        return true;
+                    }
+            }
+        }
+        return false;
     }
 
     private function readSupportAdministrationTimesFromDatabase() {
@@ -73,14 +104,54 @@ class PredictDataController extends Controller {
         }
     }
 
-    private function readSupportAdministrationTimesFromJson() {
+    private function readSupportAdministrationTimesFromJsonAndMerge() {
         $supportAdministrationTimesTemp = $this->jsonData['supportAdministrationTimes'];
         foreach ($supportAdministrationTimesTemp as $supportAdministrationTimeTemp) {
-            $this->supportAdministrationTimes[] = array(
-                'department'=>$supportAdministrationTimeTemp['department'],
-                'supportType'=>$supportAdministrationTimeTemp['supportType'],
-                'hoursCount'=>$supportAdministrationTimeTemp['hoursCount'],
-            );
+            $alreadyContainsThisSAT = false;
+            foreach ($this->supportAdministrationTimes as $currentSAT) {
+                if ($currentSAT['department'] === $supportAdministrationTimeTemp['department']) {
+                    if ($currentSAT['supportType'] === $supportAdministrationTimeTemp['supportType']) {
+                        $alreadyContainsThisSAT = true;
+                    }
+                }
+            }
+            if (!$alreadyContainsThisSAT) {
+                $this->supportAdministrationTimes[] = array(
+                    'department'=>$supportAdministrationTimeTemp['department'],
+                    'supportType'=>$supportAdministrationTimeTemp['supportType'],
+                    'hoursCount'=>$supportAdministrationTimeTemp['hoursCount'],
+                );
+            }
+        }
+    }
+
+    private function readIsDepartmentsFromDatabase() {
+        $departmentInfoSysUsages = new DepartmentInfoSysUsageFacade();
+        $departmentInfoSysUsages->setDoctrine($this->getDoctrine());
+        $departmentInfoSysUsages = $departmentInfoSysUsages->loadAll();
+        foreach ($departmentInfoSysUsages as $departmentInfoSysUsage) {
+            $department = $departmentInfoSysUsage->getDepartment()->getCode();
+            $informationalSystem = $departmentInfoSysUsage->getInformationalSystem()->getCode();
+            if (!isset($this->departmentInfoSysUsages[$department])) {
+                $this->departmentInfoSysUsages[$department] = array();
+            }
+            array_push($this->departmentInfoSysUsages[$department], $informationalSystem);
+        }
+    }
+
+    private function readIsDepartmentsFromJsonAndMerge() {
+        $departmentInfoSysUsagesTemp = $this->jsonData['departmentInfoSysUsages'];
+        foreach ($departmentInfoSysUsagesTemp as $departmentInfoSysUsageTemp) {
+            $department = $departmentInfoSysUsageTemp['department'];
+            $informationalSystem = $departmentInfoSysUsageTemp['IS'];
+            if (!isset($this->departmentInfoSysUsages[$department])) {
+                $this->departmentInfoSysUsages[$department] = array();
+            }
+            foreach ($informationalSystem as $currentIs) {
+                if (!in_array($currentIs, $this->departmentInfoSysUsages[$department])) {
+                    array_push($this->departmentInfoSysUsages[$department], $currentIs  );
+                }
+            }
         }
     }
 
