@@ -11,6 +11,7 @@ use Orakulas\ModelBundle\Facades\InformationalSystemFacade;
 use Orakulas\ModelBundle\Entity\InformationalSystem;
 use Orakulas\ModelBundle\Facades\DepartmentInfoSysUsageFacade;
 use Orakulas\ModelBundle\Entity\DepartmentInfoSysUsage;
+use Orakulas\PredictDataBundle\Controller\CalculateLoadsController;
 
 class PredictDataController extends Controller {
 
@@ -32,6 +33,9 @@ class PredictDataController extends Controller {
         $this->readIsDepartmentsFromDatabase();
         $this->readIsDepartmentsFromJsonAndMerge();
 
+        $loads = new CalculateLoadsController($this->supportQuantities, $this->supportAdministrationTimes, $this->departmentInfoSysUsages);
+        echo $loads = $loads->calculateLoads();
+        
         exit;
     }
 
