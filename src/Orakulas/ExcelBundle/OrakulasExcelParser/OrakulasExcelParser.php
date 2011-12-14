@@ -219,10 +219,10 @@ class OrakulasExcelParser {
                     }
 
                     $array_data[] = array(
-                        'supportMean'=>$cellAnValue,
-                        'from'=>$cellBnValue,
-                        'to'=>$cellCnValue,
-                        'quantity'=>$cellDnValue,
+                        'type'=>$cellAnValue,
+                        'startDate'=>$cellBnValue,
+                        'endDate'=>$cellCnValue,
+                        'amount'=>$cellDnValue,
                     );
                 }
             }
