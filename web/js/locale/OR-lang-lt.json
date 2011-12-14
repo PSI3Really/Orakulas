@@ -75,7 +75,7 @@
 
     "IMPORT":{
         "TITLE": "Įkelti duomenis",
-        "WAIT_MSG": "Duomenų failas saugomas ir skaitomas&hellip;",
+        "WAIT_MSG": "Skaitomas duomenų failas&hellip;",
         "FAIL":{
             "INVALID_FILE_TYPE":"Klaidingas duomenų failo formatas. Turėtų būti Excel dokumentas (.XLS arba .XLSX)",
             "NO_SUCH_SHEET":"Tokio puslapio duomenų faile nėra",
@@ -90,7 +90,8 @@
 
         "BUTTON":{
             "INFO_SYS_AND_DEPARTMENTS": "IS/Padaliniai&hellip;",
-            "SUPPORT_AND_DEPARTMENTS": "Priemonės/Padaliniai&hellip;"
+            "SUPPORT_AND_DEPARTMENTS": "Priemonės/Padaliniai&hellip;",
+            "EDIT_ENTITIES": "Organizacija&hellip;"
         }
     },
 

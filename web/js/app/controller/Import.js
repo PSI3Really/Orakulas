@@ -13,8 +13,34 @@ Ext.define(CONFIG.APP_NS+'.controller.Import', {
             },
             'importtoolbar filefield[action=openFile]':{
                 change: this.openFile
+            },
+            'importtoolbar button[action=add]':{
+                click: this.add
+            },
+            'importtoolbar button[action=delete]':{
+                click: this.remove
             }
         });
+    },
+    
+    add: function(btn){
+        var grid = btn.up('importwindow').down('importgrid');
+        var store = grid.getStore();
+
+        var rowEditor = grid.plugins[0];
+        rowEditor.cancelEdit();
+        store.insert(0, Ext.create(store.model));
+        rowEditor.startEdit(0, 0);
+    },
+
+    remove: function(btn){
+        var grid = btn.up('importwindow').down('importgrid');
+        var store = grid.getStore();
+        var selected = grid.getSelectionModel().getSelection();
+
+        var rowEditor = grid.plugins[0];
+        rowEditor.cancelEdit();
+        store.remove(selected);
     },
 
     accept: function(btn){

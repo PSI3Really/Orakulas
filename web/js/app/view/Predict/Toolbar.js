@@ -21,12 +21,18 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.Toolbar', {
             }]
         },'-',{
             xtype: 'button',
-            action: 'infoSysDepartments',
-            text: LANG.PREDICT.BUTTON.INFO_SYS_AND_DEPARTMENTS
+            action: 'editEntities',
+            text: LANG.PREDICT.BUTTON.EDIT_ENTITIES
         },{
-            xtype: 'button',
-            action: 'supportDepartments',
-            text: LANG.PREDICT.BUTTON.SUPPORT_AND_DEPARTMENTS
+            iconCls: 'icon-plus-circle',
+            xtype:  'button',
+            action: 'add',
+            text:   LANG.BUTTON.ADD
+        },{
+            iconCls: 'icon-minus-circle',
+            xtype:  'button',
+            action: 'delete',
+            text:   LANG.BUTTON.REMOVE
         },'->',{
             xtype: 'button',
             action: 'accept',

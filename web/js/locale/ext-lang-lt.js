@@ -144,7 +144,7 @@ Ext.onReady(function(){
         if(Ext.picker.Month) {
             Ext.apply(Ext.picker.Month.prototype, {
                 okText            : "&#160;Gerai&#160;",
-                cancelText        : "Atsisaktyi"
+                cancelText        : "Atsisakyti"
             });
         }
     }

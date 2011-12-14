@@ -22,7 +22,7 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.Window', {
 
         this.items = [{
             region: 'center',
-            xtype: 'importgrid',
+            xtype: 'predictgrid',
             border: false
         },{
             region: 'south',

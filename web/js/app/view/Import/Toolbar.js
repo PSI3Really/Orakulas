@@ -20,6 +20,17 @@ Ext.define(CONFIG.APP_NS+'.view.Import.Toolbar', {
                         iconCls: 'icon-folder-open'
                     }
                 }]
+            },{
+                iconCls: 'icon-plus-circle',
+                xtype:  'button',
+                action: 'add',
+                text:   LANG.BUTTON.ADD
+            },
+            {
+                iconCls: 'icon-minus-circle',
+                xtype:  'button',
+                action: 'delete',
+                text:   LANG.BUTTON.REMOVE
             },
             '->',
             {
