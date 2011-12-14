@@ -1,5 +1,5 @@
 Ext.define(CONFIG.APP_NS+'.view.Main.TabPanel', {
-    extend: 'Ext.tab.Panel',
+    extend: 'Ext.panel.Panel',
     alias: 'widget.maintabpanel',
 
     requires: [
@@ -9,9 +9,9 @@ Ext.define(CONFIG.APP_NS+'.view.Main.TabPanel', {
     initComponent: function() {
         this.items = [
             {
-                title: 'Istoriniai duomenys',
+                //title: 'Istoriniai duomenys',
                 xtype: 'maintab'
-            }/*, //TODO: temp so it loads faster
+            }/*,
             {
                 title: 'Ataskaita #1',
                 closable: true,

@@ -1,6 +1,6 @@
-Ext.define(CONFIG.APP_NS+'.view.Import.Grid', {
+Ext.define(CONFIG.APP_NS+'.view.Predict.Grid', {
     extend: 'Ext.grid.Panel',
-    alias: 'widget.importgrid',
+    alias: 'widget.predictgrid',
 
     store: null,
 

@@ -37,13 +37,13 @@ Ext.define(CONFIG.APP_NS+'.view.Main.ChartPortlet', {
                 title: this.leftAxisTitle,
                 grid: true
             }],
-            series: [{
+            series: [/*{
                 type: 'line',
                 axis: 'left',
                 highlight: true,
                 xField: 'startDate',
                 yField: 'Padalinys 1'
-            }]
+            }*/]
         })
 
         this.items = [
@@ -53,6 +53,11 @@ Ext.define(CONFIG.APP_NS+'.view.Main.ChartPortlet', {
         this.dockedItems = [{
             xtype: 'portletbar',
             dock: 'top'
+        }];
+
+        this.tools = [{
+            type: 'save'
+
         }];
 
         this.callParent();
@@ -72,26 +77,28 @@ Ext.define(CONFIG.APP_NS+'.view.Main.ChartPortlet', {
             }
 
             series.line.remove();
+        };
+
+        this.dataView.series.clear();
+    },
+
+    showSeries: function(fields){
+        this.removeOldSeries();
+
+        this.dataView.axes.items[1].fields = fields;
+
+        for (var i = 0; i<fields.length; i++){
+            this.dataView.series.add({type: 'line', axis: 'left', highlight: true, xField: 'startDate', yField: fields[i]});
         }
+
+        this.dataView.refresh();
     },
 
     setStore: function(store){ //TODO
         this.store = store;
 
-        this.removeOldSeries();
-
-        var fields = this.store.model.prototype.fields.keys;
-
-        this.dataView.series.clear();
-        this.dataView.axes.items[1].fields = fields;
-
-        for (var i = 1; i<fields.length; i++){
-            this.dataView.series.add({type: 'line', axis: 'left', highlight: true, xField: 'startDate', yField: fields[i]});
-        }
-
-        //debugger;
-
         this.dataView.store = store;
-        this.dataView.refresh();
+
+        this.showSeries(this.store.model.prototype.fields.keys.slice(1)); //don't show [0] - startDate
     }
 });

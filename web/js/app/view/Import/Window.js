@@ -10,7 +10,7 @@ Ext.define(CONFIG.APP_NS+'.view.Import.Window', {
     floatable: true,
     modal: true,
 
-    height: 250,
+    height: 400,
     width: 500,
 
     initComponent: function () {

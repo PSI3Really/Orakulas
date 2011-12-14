@@ -24,8 +24,31 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
             },
             'chartportlet button[action=chooseHoursSpent]':{
                 click: this.chooseHoursSpent
+            },
+            'chartportlet tool[type=save]':{
+                click: this.saveImage
+            },
+            'chartportlet combobox':{
+                change: this.onPickerChange
             }
         });
+    },
+
+    onPickerChange: function(field, newValue, oldValue, eOpts){ //TODO
+        field.up('chartportlet').showSeries(newValue);
+    },
+
+    setPickerOptions: function(portletBar, store){
+        var picker = portletBar.down('combobox');
+        var entityList = [];
+        var fields = store.model.prototype.fields.keys;
+        for (var i = 0; i < fields.length; i++){
+            if (fields[i] != 'startDate'){
+                entityList.push({'entity':fields[i]});
+            }
+        }
+
+        picker.store.loadData(entityList);
     },
 
     chooseDepartments: function(btn){
@@ -45,6 +68,8 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
             } else {
                 portlet.setStore(portal.reports.departmentRequests);
             }
+
+            this.setPickerOptions(portletBar, portlet.store);
         }
     },
 
@@ -65,6 +90,8 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
             } else {
                 portlet.setStore(portal.reports.infoSysRequests);
             }
+
+            this.setPickerOptions(portletBar, portlet.store);
         }
     },
 
@@ -85,6 +112,8 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
             } else {
                 portlet.setStore(portal.reports.departmentRequests);
             }
+
+            this.setPickerOptions(portletBar, portlet.store);
         }
     },
 
@@ -105,6 +134,12 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
             } else {
                 portlet.setStore(portal.reports.departmentHours);
             }
+
+            this.setPickerOptions(portletBar, portlet.store);
         }
+    },
+
+    saveImage: function(tool, e, eOpts){
+        alert("omg");
     }
 });

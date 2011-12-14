@@ -6,17 +6,26 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.Toolbar', {
 
     initComponent: function(){
         this.items = [{
-            xtype: 'button',
-            iconCls: 'icon-folder-open',
-            action: 'openFile',
-            text: LANG.BUTTON.OPEN_FILE
+            cls: "dummy-form",
+            xtype: 'form',
+            items: [{
+                xtype: 'filefield', //TODO: make every button look the same
+                name: 'dataFile',
+                action: 'openFile',
+                buttonOnly: true,
+                hideLabel: true,
+                buttonText: LANG.BUTTON.OPEN_FILE,
+                buttonConfig: {
+                    iconCls: 'icon-folder-open'
+                }
+            }]
         },'-',{
             xtype: 'button',
-            action: 'infoSysAndDepartments',
+            action: 'infoSysDepartments',
             text: LANG.PREDICT.BUTTON.INFO_SYS_AND_DEPARTMENTS
         },{
             xtype: 'button',
-            action: 'supportAndDepartments',
+            action: 'supportDepartments',
             text: LANG.PREDICT.BUTTON.SUPPORT_AND_DEPARTMENTS
         },'->',{
             xtype: 'button',
