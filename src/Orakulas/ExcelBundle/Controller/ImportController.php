@@ -33,12 +33,12 @@ class ImportController extends Controller {
             return $this->constructResponse(json_encode($data));
         }
 
-        $skipFirstLine = 0;
+        $skipFirstLine = 1;
         if (isset($_POST['skipFirstLine'])) {
             $skipFirstLine = $_POST['skipFirstLine'];
         }
 
-        $sheetName = null;
+        $sheetName = "Paramos kiekiai";
         if (isset($_POST['sheetName'])) {
             $sheetName = $_POST['sheetName'];
         }
