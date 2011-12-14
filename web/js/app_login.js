@@ -84,6 +84,7 @@ Ext.application({
                             {
                                 fieldLabel: LANG.ENTITY.PASSWORD,
                                 name: '_password',
+                                inputType:'password',
                                 allowBlank: false
                             }
                         ],

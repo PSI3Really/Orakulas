@@ -50,8 +50,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Predict', {
                 url: 'excel/import/supportHistories',
                 waitMsg: LANG.IMPORT.WAIT_MSG,
                 success: function(form, action) {
-                    msg('Data Received', 'Populate the grid with action.result.data array', Ext.Msg.INFO);
-                    var grid = form.up('importwindow').down('predictgrid');
+                    var grid = form.owner.up('predictwindow').down('predictgrid');
 
                     grid.store.loadData(action.result.data, false); //replace old data
                 },
