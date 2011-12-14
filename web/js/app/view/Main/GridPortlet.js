@@ -19,7 +19,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.GridPortlet', {
         this.dataView = Ext.create('Ext.grid.Panel',{
             store: this.store,
             columns: [
-                {header: LANG.ENTITY.MONTH, dataIndex: 'startDate', flex: 1, xtype: 'datecolumn', format: 'Y-m-d'} //TODO
+                {header: LANG.ENTITY.MONTH, dataIndex: 'startDate', flex: 1, xtype: 'datecolumn', format: 'Y-m'} //TODO
             ],
             features: [this.filters]
         });
