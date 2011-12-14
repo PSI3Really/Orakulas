@@ -5,14 +5,16 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.Window', {
     requires: [
         CONFIG.APP_NS+'.view.Predict.Toolbar'
     ],
-    //*/
 
     layout: 'border',
     floatable: true,
     modal: true,
 
-    height: 250,
+    height: 400,
     width: 500,
+
+    infoSysDepartmentsStore: null,
+    supportDepartmentsStore: null,
 
     initComponent: function () {
 
@@ -20,9 +22,8 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.Window', {
 
         this.items = [{
             region: 'center',
-            xtype: 'panel',
-            border: false,
-            html: '<h1>NEED A GRID HERE</h1>' //TODO
+            xtype: 'importgrid',
+            border: false
         },{
             region: 'south',
             border: false,

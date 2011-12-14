@@ -46,7 +46,7 @@
         "SUB_TOOLBAR":{
             "BUTTON":{
                 "PREDICT": "Predict&hellip;",
-                "ANALYZE": "Analyze&hellip;",
+                "ANALYZE": "Information",
                 "EXPORT": "Export&hellip;",
                 "TABLE": "Table",
                 "CHART": "Chart"

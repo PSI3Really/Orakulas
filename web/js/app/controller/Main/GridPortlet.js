@@ -24,8 +24,42 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.GridPortlet', {
             },
             'gridportlet button[action=chooseHoursSpent]':{
                 click: this.chooseHoursSpent
+            },
+            'gridportlet combobox':{
+                change: this.onPickerChange
             }
         });
+    },
+
+    onPickerChange: function(field, newValue, oldValue, eOpts){
+        var grid = field.up('gridportlet').dataView;
+        var columns = grid.columns;
+        for (var i = 0; i < columns.length; i++){
+            if (columns[i].dataIndex == 'startDate'){ //date column
+                continue;
+            }
+
+            columns[i].hide();
+            for (var j = 0; j < newValue.length; j++){ //TODO: optimize from worst n^2 to 2n - use hashtable
+                if (newValue[j] == columns[i].dataIndex){
+                    columns[i].show();
+                    break;
+                }
+            }
+        }
+    },
+
+    setPickerOptions: function(portletBar, store){
+        var picker = portletBar.down('combobox');
+        var entityList = [];
+        var fields = store.model.prototype.fields.keys;
+        for (var i = 0; i < fields.length; i++){
+            if (fields[i] != 'startDate'){
+                entityList.push({'entity':fields[i]});
+            }
+        }
+        
+        picker.store.loadData(entityList);
     },
 
     chooseDepartments: function(btn){
@@ -45,6 +79,8 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.GridPortlet', {
             } else {
                 portlet.setStore(portal.reports.departmentRequests);
             }
+
+            this.setPickerOptions(portletBar, portlet.store);
         }
     },
 
@@ -65,6 +101,8 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.GridPortlet', {
             } else {
                 portlet.setStore(portal.reports.infoSysRequests);
             }
+
+            this.setPickerOptions(portletBar, portlet.store);
         }
     },
 
@@ -85,6 +123,8 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.GridPortlet', {
             } else {
                 portlet.setStore(portal.reports.departmentRequests);
             }
+
+            this.setPickerOptions(portletBar, portlet.store);
         }
     },
 
@@ -105,6 +145,8 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.GridPortlet', {
             } else {
                 portlet.setStore(portal.reports.departmentHours);
             }
+
+            this.setPickerOptions(portletBar, portlet.store);
         }
     }
 });

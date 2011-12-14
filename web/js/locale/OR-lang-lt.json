@@ -46,7 +46,7 @@
         "SUB_TOOLBAR":{
             "BUTTON":{
                 "PREDICT": "Prognozuoti&hellip;",
-                "ANALYZE": "Analizuoti&hellip;",
+                "ANALYZE": "Analizė",
                 "EXPORT": "Eksportuoti&hellip;",
                 "TABLE": "Lentelė",
                 "CHART": "Grafikas"

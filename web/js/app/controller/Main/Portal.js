@@ -29,33 +29,48 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
         var minCol = this.findMinColumn(portal);
         var portletId = portal.portletCount++;
 
-        minCol.add(Ext.create('widget.gridportlet', {
-            title: LANG.MAIN.PORTAL.TABLE.TITLE + ' ' + portletId, 
-            store: portal.reports.departmentHours
-        }));
+        var newPortlet = Ext.create('widget.gridportlet', {
+            title: LANG.MAIN.PORTAL.TABLE.TITLE + ' ' + portletId,
+            store: {            //portal.reports.departmentHours,
+                fields: [],
+                data: []
+            }
+        });
+
+        minCol.add(newPortlet);
     },
 
     addChart: function(portal){
         var minCol = this.findMinColumn(portal);
         var portletId = portal.portletCount++;
 
-        minCol.add(Ext.create('widget.chartportlet', {
+        var newPortlet = Ext.create('widget.chartportlet', {
             title: LANG.MAIN.PORTAL.CHART.TITLE + ' ' + portletId,
-            store: portal.reports.departmentHours,
-            
+            store: {            //portal.reports.departmentHours,
+                fields: [],
+                data: []
+            },
+
             leftAxisTitle: LANG.ENTITY.SUPPORT_COUNT,
             leftAxisFields: ['supportCount', 'entityName']
-        }));
+        });
+        
+        minCol.add(newPortlet);
     },
 
     addInfo:function(portal){
         var minCol = this.findMinColumn(portal);
         var portletId = portal.portletCount++;
 
-        minCol.add(Ext.create('widget.infoportlet', {
+        var newPortlet = Ext.create('widget.infoportlet', {
             title: LANG.MAIN.PORTAL.INFO.TITLE + ' ' + portletId,
-            store: portal.reports.departmentHours
-        }));
+            store: {            //portal.reports.departmentHours,
+                fields: [],
+                data: []
+            }
+        });
+
+        minCol.add(newPortlet);
     },
 
     loadReports: function(portal){

@@ -45,6 +45,9 @@ Ext.define(CONFIG.APP_NS+'.controller.Import', {
                 waitMsg: LANG.IMPORT.WAIT_MSG,
                 success: function(form, action) {
                     msg('Data Received', 'Populate the grid with action.result.data array', Ext.Msg.INFO);
+                    var grid = form.up('importwindow').down('importgrid');
+
+                    grid.store.loadData(action.result.data, false); //replace old data
                 },
                 failure: function(form, action) {
                     var message = LANG.IMPORT.FAIL.UNKNOWN; // unknown error

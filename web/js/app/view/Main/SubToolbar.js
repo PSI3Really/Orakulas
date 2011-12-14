@@ -15,38 +15,46 @@ Ext.define(CONFIG.APP_NS+'.view.Main.SubToolbar', {
                 action: 'predict'
             },
             {
-                text: LANG.MAIN.SUB_TOOLBAR.BUTTON.ANALYZE,
-                iconCls: 'icon-light-bulb',
-                action: 'analyze'
-            },
-            {
                 text: LANG.MAIN.SUB_TOOLBAR.BUTTON.EXPORT,
                 iconCls: 'icon-table-export',
                 action: 'export'
             },
-            '->',
+            '->',{
+                text: LANG.MAIN.SUB_TOOLBAR.BUTTON.TABLE,
+                iconCls: 'icon-table',
+                action: 'addTable'
+            },
             {
+                text: LANG.MAIN.SUB_TOOLBAR.BUTTON.CHART,
+                iconCls: 'icon-chart',
+                action: 'addChart'
+            },
+            {
+                text: LANG.MAIN.SUB_TOOLBAR.BUTTON.ANALYZE,
+                iconCls: 'icon-light-bulb',
+                action: 'analyze'
+            }
+            /*{
                 xtype: 'splitbutton',
                 iconCls: 'icon-application-plus',
                 tooltip: LANG.MAIN.SUB_TOOLBAR.TOOLTIP.NEW_PORTLET,
                 handler: function () {
                     this.showMenu();
                 },
+
                 menu: { //TODO: does not point upwards to the parent tab for some reason, might need to change to 2 buttons
-                    items: [
-                        {
-                            text: LANG.MAIN.SUB_TOOLBAR.BUTTON.TABLE,
-                            iconCls: 'icon-table',
-                            action: 'addTable'
-                        },
-                        {
-                            text: LANG.MAIN.SUB_TOOLBAR.BUTTON.CHART,
-                            iconCls: 'icon-chart',
-                            action: 'addChart'
-                        }
-                    ]
+                    items: [{
+                        text: LANG.MAIN.SUB_TOOLBAR.BUTTON.TABLE,
+                        iconCls: 'icon-table',
+                        action: 'addTable'
+                    },
+                    {
+                        text: LANG.MAIN.SUB_TOOLBAR.BUTTON.CHART,
+                        iconCls: 'icon-chart',
+                        action: 'addChart'
+                    }]
                 }
-            }
+            }*/
         ];
 
         this.callParent();

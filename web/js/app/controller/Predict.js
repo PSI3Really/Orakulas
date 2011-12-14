@@ -11,14 +11,14 @@ Ext.define(CONFIG.APP_NS+'.controller.Predict', {
             'predicttoolbar button[action=cancel]':{
                 click: this.cancel
             },
-            'predicttoolbar button[action=openFile]':{
-                click: this.openFile
+            'predicttoolbar filefield[action=openFile]':{
+                change: this.openFile
             },
-            'predicttoolbar button[action=infoSysAndDepartments]':{
-                click: this.infSysAndDepartments
+            'predicttoolbar button[action=infoSysDepartments]':{
+                click: this.infSysDepartments
             },
-            'predicttoolbar button[action=supportAndDepartments]':{
-                click: this.supportAndDepartments
+            'predicttoolbar button[action=supportDepartments]':{
+                click: this.supportDepartments
             }
         });
     },
@@ -32,15 +32,53 @@ Ext.define(CONFIG.APP_NS+'.controller.Predict', {
         btn.up('predictwindow').close();
     },
 
-    openFile: function(btn){
-        alert('TODO: Pressed OpenFile');
+    openFile: function(field, value){
+        var msg = function(title, msg, icon) {
+            Ext.Msg.show({
+                title: title,
+                msg: msg,
+                minWidth: 200,
+                modal: true,
+                icon: icon,
+                buttons: Ext.Msg.OK
+            });
+        };
+
+        var form = field.up('form').getForm();
+        if (form.isValid()) {
+            form.submit({
+                url: 'excel/import/supportHistories',
+                waitMsg: LANG.IMPORT.WAIT_MSG,
+                success: function(form, action) {
+                    msg('Data Received', 'Populate the grid with action.result.data array', Ext.Msg.INFO);
+                    var grid = form.up('importwindow').down('predictgrid');
+
+                    grid.store.loadData(action.result.data, false); //replace old data
+                },
+                failure: function(form, action) {
+                    var message = LANG.IMPORT.FAIL.UNKNOWN; // unknown error
+                    switch (action.result.errors) {
+                        case 'INVALID_FILE_TYPE':
+                            message = LANG.IMPORT.FAIL.INVALID_FILE_TYPE;
+                            break;
+                        case 'NO_SUCH_SHEET':
+                            message = LANG.IMPORT.FAIL.NO_SUCH_SHEET;
+                            break;
+                        case 'INVALID_DATA':
+                            message = LANG.IMPORT.FAIL.INVALID_DATA;
+                            break;
+                    }
+                    msg(LANG.IMPORT.FAIL.TITLE, message, Ext.Msg.ERROR);
+                }
+            });
+        }
     },
 
-    infSysAndDepartments: function(btn){
+    infSysDepartments: function(btn){
         alert('TODO: Pressed infSysAndDepartments');
     },
 
-    supportAndDepartments: function(btn){
+    supportDepartments: function(btn){
         alert('TODO: Pressed supportAndDepartments');
     }
 });
