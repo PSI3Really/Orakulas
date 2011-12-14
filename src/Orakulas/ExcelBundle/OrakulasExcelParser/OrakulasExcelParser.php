@@ -218,10 +218,13 @@ class OrakulasExcelParser {
                         break;
                     }
 
+                    $startDate = date("Y-m-d", $cellBnValue);
+                    $endDate = date("Y-m-d", $cellCnValue);
+
                     $array_data[] = array(
                         'type'=>$cellAnValue,
-                        'startDate'=>$cellBnValue,
-                        'endDate'=>$cellCnValue,
+                        'startDate'=>$startDate,
+                        'endDate'=>$endDate,
                         'amount'=>$cellDnValue,
                     );
                 }
