@@ -32,7 +32,11 @@ class CalculateLoadsController extends Controller {
 
     public function calculateLoads() {
         $this->setAvailableDates();
+        //var_dump($this->supportQuantities);
+        //var_dump($this->supportAdministrationTimes);
+        //var_dump($this->departmentInfoSysUsages);
         $this->quantitiesForDepartments();
+        //var_dump($this->supportQuantitiesForDepartments);
         $this->quantitiesForInformationSystems();
         $loads = array("departmentRequests"=>$this->supportQuantitiesForDepartments,
             "departmentHours"=>$this->hourQuantitiesForDepartments,
@@ -47,11 +51,13 @@ class CalculateLoadsController extends Controller {
         $this->hourQuantitiesForDepartments = array();
         foreach ($this->supportQuantities as $supportQuantity) {
             $supportType = $supportQuantity['supportType'];
+            //echo $supportType;
             $startDate = $supportQuantity['startDate'];
             $supportRequestCount = $supportQuantity['supportRequestCount'];
             foreach ($this->supportAdministrationTimes as $supportAdministrationTime) {
                 $department = $supportAdministrationTime['department'];
                 $hoursCount = $supportAdministrationTime['hoursCount'];
+                //echo $supportAdministrationTime['supportType'];
                 if ($supportAdministrationTime['supportType'] === $supportType) {
                     if (!isset($this->supportQuantitiesForDepartments[$startDate][$department])) {
                         $this->supportQuantitiesForDepartments[$startDate][$department] = $supportRequestCount;

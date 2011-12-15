@@ -39,8 +39,10 @@ class PredictDataController extends Controller {
             $this->readSupportAdministrationTimesFromDatabase();
             $this->readIsDepartmentsFromDatabase();
         }
+
         $loads = new CalculateLoadsController($this->supportQuantities, $this->supportAdministrationTimes, $this->departmentInfoSysUsages);
         $loads = $loads->calculateLoads();
+
         $loads = $this->formSuitableArrays($loads);
         $loads = json_encode($loads);
 
@@ -125,7 +127,7 @@ class PredictDataController extends Controller {
         $supportAdministrationTimes->setDoctrine($this->getDoctrine());
         $supportAdministrationTimes = $supportAdministrationTimes->loadAll();
         foreach ($supportAdministrationTimes as $supportAdministrationTime) {
-            $department = $supportAdministrationTime->getDepartment()->getCode();
+            $department = $supportAdministrationTime->getDepartment()->getName();
             $supportType = $supportAdministrationTime->getSupportType()->getCode();
             $hoursCount = $supportAdministrationTime->getHoursCount();
             $this->supportAdministrationTimes[] = array(
@@ -162,8 +164,8 @@ class PredictDataController extends Controller {
         $departmentInfoSysUsages->setDoctrine($this->getDoctrine());
         $departmentInfoSysUsages = $departmentInfoSysUsages->loadAll();
         foreach ($departmentInfoSysUsages as $departmentInfoSysUsage) {
-            $department = $departmentInfoSysUsage->getDepartment()->getCode();
-            $informationalSystem = $departmentInfoSysUsage->getInformationalSystem()->getCode();
+            $department = $departmentInfoSysUsage->getDepartment()->getName();
+            $informationalSystem = $departmentInfoSysUsage->getInformationalSystem()->getName();
             if (!isset($this->departmentInfoSysUsages[$informationalSystem])) {
                 $this->departmentInfoSysUsages[$informationalSystem] = array();
             }
