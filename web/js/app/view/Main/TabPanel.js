@@ -19,6 +19,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.TabPanel', {
             {
                 title: LANG.MAIN.PORTAL_VIEW,
                 bodyBorder: false,
+                layout: 'fit',
                 xtype: 'maintab'
             }, {
                 title: LANG.MAIN.ALTERNATIVE_VIEW,
