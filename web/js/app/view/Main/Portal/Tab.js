@@ -10,7 +10,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.Tab', {
     border: false,
     //autoScroll: true,
 
-    initComponent: function(){
+    initComponent: function() {
 
         this.dockedItems = [
             {
@@ -20,8 +20,8 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.Tab', {
         ],
         this.items = [
             {
-                border: false,
-                xtype: 'portal'
+                xtype: 'portal',
+                border: false
             }
         ]
 

@@ -11,7 +11,6 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Toolbar', {
 
     initComponent: function () {
 
-
         this.id = 'toolbar';
         this.height = 30;
         this.items = [

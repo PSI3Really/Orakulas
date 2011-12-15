@@ -6,6 +6,8 @@
 }
 .x-portal-body {
     padding: 0 0 0 8px;
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
 }
 .x-portal .x-portal-column {
     /* columns must have vertical padding to avoid losing dimensions when empty */
@@ -19,7 +21,7 @@
     margin-bottom: 10px;
 }
 .x-portlet {
-    margin-bottom:10px;
+    margin-bottom:8px;
     padding: 1px;
 }
 .x-portlet .x-panel-body {
