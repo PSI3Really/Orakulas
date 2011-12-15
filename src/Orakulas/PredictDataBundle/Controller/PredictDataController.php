@@ -11,6 +11,7 @@ use Orakulas\ModelBundle\Facades\InformationalSystemFacade;
 use Orakulas\ModelBundle\Entity\InformationalSystem;
 use Orakulas\ModelBundle\Facades\DepartmentInfoSysUsageFacade;
 use Orakulas\ModelBundle\Entity\DepartmentInfoSysUsage;
+use Orakulas\PredictDataBundle\Controller\CalculateLoadsController;
 
 class PredictDataController extends Controller {
 
@@ -32,6 +33,10 @@ class PredictDataController extends Controller {
         $this->readIsDepartmentsFromDatabase();
         $this->readIsDepartmentsFromJsonAndMerge();
 
+        $loads = new CalculateLoadsController($this->supportQuantities, $this->supportAdministrationTimes, $this->departmentInfoSysUsages);
+        $loads = $loads->calculateLoads();
+        var_dump($loads);
+        
         exit;
     }
 
@@ -132,24 +137,24 @@ class PredictDataController extends Controller {
         foreach ($departmentInfoSysUsages as $departmentInfoSysUsage) {
             $department = $departmentInfoSysUsage->getDepartment()->getCode();
             $informationalSystem = $departmentInfoSysUsage->getInformationalSystem()->getCode();
-            if (!isset($this->departmentInfoSysUsages[$department])) {
-                $this->departmentInfoSysUsages[$department] = array();
+            if (!isset($this->departmentInfoSysUsages[$informationalSystem])) {
+                $this->departmentInfoSysUsages[$informationalSystem] = array();
             }
-            array_push($this->departmentInfoSysUsages[$department], $informationalSystem);
+            array_push($this->departmentInfoSysUsages[$informationalSystem], $department);
         }
     }
 
     private function readIsDepartmentsFromJsonAndMerge() {
         $departmentInfoSysUsagesTemp = $this->jsonData['departmentInfoSysUsages'];
         foreach ($departmentInfoSysUsagesTemp as $departmentInfoSysUsageTemp) {
-            $department = $departmentInfoSysUsageTemp['department'];
+            $departments = $departmentInfoSysUsageTemp['departments'];
             $informationalSystem = $departmentInfoSysUsageTemp['IS'];
-            if (!isset($this->departmentInfoSysUsages[$department])) {
-                $this->departmentInfoSysUsages[$department] = array();
+            if (!isset($this->departmentInfoSysUsages[$informationalSystem])) {
+                $this->departmentInfoSysUsages[$informationalSystem] = array();
             }
-            foreach ($informationalSystem as $currentIs) {
-                if (!in_array($currentIs, $this->departmentInfoSysUsages[$department])) {
-                    array_push($this->departmentInfoSysUsages[$department], $currentIs  );
+            foreach ($departments as $currentDepartment) {
+                if (!in_array($currentDepartment, $this->departmentInfoSysUsages[$informationalSystem])) {
+                    array_push($this->departmentInfoSysUsages[$informationalSystem], $currentDepartment);
                 }
             }
         }
