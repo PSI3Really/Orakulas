@@ -6,10 +6,10 @@ Ext.define(CONFIG.APP_NS+'.store.DepartmentRequests', {
     model: CONFIG.APP_NS+'.model.DepartmentRequests',
 
     proxy: {
-        type: 'ajax',
-        api: {
-            read: 'model/loadHistories/departments/requests'
-        },
+        type: 'memory',
+        //api: {
+        //    read: 'model/loadHistories/departments/requests'
+        //},
         reader: Ext.create(CONFIG.APP_NS+'.util.DynamicReaderJSON', {})
     }
 });

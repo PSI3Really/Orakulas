@@ -28,7 +28,7 @@ Ext.define('Ext.ux.PortalPanel', {
     bodyCls: 'x-portal-body',
     defaultType: 'portalcolumn',
     componentLayout: 'body',
-    bodyBorder: false,
+    //bodyBorder: false,
     autoScroll: true,
 
     initComponent : function() {

@@ -60,21 +60,40 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Tab', {
     },
 
     loadReports: function(tabpanel){
-        tabpanel.reports.infoSysHours = Ext.create('widget.infoSysHours', {});
-        tabpanel.reports.infoSysHours.load();
-        //console.log(tabpanel.reports.infoSysHours);
+        tabpanel.setLoading("~~Kraunami duomenys");
+        Ext.Ajax.request({
+            url: 'predictData',
+            params: 'data={"supportQuantities":{},"supportAdministrationTimes":{},"departmentInfoSysUsages":{}}',
+            success: function(response){
+                var data = Ext.JSON.decode(response.responseText);
+                console.log(data);
 
-        tabpanel.reports.infoSysRequests = Ext.create('widget.infoSysRequests', {});
-        tabpanel.reports.infoSysRequests.load();
-        //console.log(tabpanel.reports.infoSysRequests);
+                tabpanel.reports.infoSysHours = Ext.create('widget.infoSysHours', {
+                    data: data.infoSysHours
+                });
+                tabpanel.reports.infoSysHours.load();
 
-        tabpanel.reports.departmentHours = Ext.create('widget.departmentHours', {});
-        tabpanel.reports.departmentHours.load();
-        //console.log(tabpanel.reports.departmentHours);
+                tabpanel.reports.infoSysRequests = Ext.create('widget.infoSysRequests', {
+                    data: data.infoSysRequests
+                });
+                tabpanel.reports.infoSysRequests.load();
 
-        tabpanel.reports.departmentRequests = Ext.create('widget.departmentRequests', {});
-        tabpanel.reports.departmentRequests.load();
-        //console.log(tabpanel.reports.departmentRequests);
+                tabpanel.reports.departmentHours = Ext.create('widget.departmentHours', {
+                    data: data.departmentHours
+                });
+                tabpanel.reports.departmentHours.load();
+
+                tabpanel.reports.departmentRequests = Ext.create('widget.departmentRequests', {
+                    data: data.departmentRequests
+                });
+                tabpanel.reports.departmentRequests.load();
+
+                tabpanel.setLoading(false);
+            },
+            failure: function(response){
+                Ext.Msg.alert("~~Error", "~~Could not establish connection to the database");
+            }
+        });
     },
 
     predict: function(btn){

@@ -16,7 +16,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
             'portal':{
                 addTable:       this.addTable,
                 addChart:       this.addChart,
-                addInfo:        this.addInfo,
+                addInfo:        this.addInfo
                 //loadReports:    this.loadReports
             }
         });

@@ -6,10 +6,10 @@ Ext.define(CONFIG.APP_NS+'.store.InfoSysRequests', {
     model: CONFIG.APP_NS+'.model.InfoSysRequests',
 
     proxy: {
-        type: 'ajax',
-        api: {
-            read: 'model/loadHistories/is/requests'
-        },
+        type: 'memory',
+        //api: {
+        //    read: 'model/loadHistories/is/requests'
+        //},
         reader: Ext.create(CONFIG.APP_NS+'.util.DynamicReaderJSON', {})
     }
 });
