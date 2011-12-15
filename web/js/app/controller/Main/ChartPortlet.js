@@ -65,8 +65,12 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
 
             if (hours){
                 portlet.setStore(maintabpanel.reports.departmentHours);
+                portletBar.down('button[action=chooseHoursSpent]').toggle(true);
+                portletBar.down('button[action=chooseSupportCount]').toggle(false);
             } else {
                 portlet.setStore(maintabpanel.reports.departmentRequests);
+                portletBar.down('button[action=chooseHoursSpent]').toggle(false);
+                portletBar.down('button[action=chooseSupportCount]').toggle(true);
             }
 
             this.setPickerOptions(portletBar, portlet.store);
@@ -87,8 +91,12 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
 
             if (hours){
                 portlet.setStore(maintabpanel.reports.infoSysHours);
+                portletBar.down('button[action=chooseHoursSpent]').toggle(true);
+                portletBar.down('button[action=chooseSupportCount]').toggle(false);
             } else {
                 portlet.setStore(maintabpanel.reports.infoSysRequests);
+                portletBar.down('button[action=chooseHoursSpent]').toggle(false);
+                portletBar.down('button[action=chooseSupportCount]').toggle(true);
             }
 
             this.setPickerOptions(portletBar, portlet.store);
@@ -109,8 +117,12 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
 
             if (infoSys){
                 portlet.setStore(maintabpanel.reports.infoSysRequests);
+                portletBar.down('button[action=chooseDepartments]').toggle(false);
+                portletBar.down('button[action=chooseInfoSys]').toggle(true);
             } else {
                 portlet.setStore(maintabpanel.reports.departmentRequests);
+                portletBar.down('button[action=chooseDepartments]').toggle(true);
+                portletBar.down('button[action=chooseInfoSys]').toggle(false);
             }
 
             this.setPickerOptions(portletBar, portlet.store);
@@ -131,8 +143,12 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
 
             if (infoSys){
                 portlet.setStore(maintabpanel.reports.infoSysHours);
+                portletBar.down('button[action=chooseDepartments]').toggle(false);
+                portletBar.down('button[action=chooseInfoSys]').toggle(true);
             } else {
                 portlet.setStore(maintabpanel.reports.departmentHours);
+                portletBar.down('button[action=chooseDepartments]').toggle(true);
+                portletBar.down('button[action=chooseInfoSys]').toggle(false);
             }
 
             this.setPickerOptions(portletBar, portlet.store);
