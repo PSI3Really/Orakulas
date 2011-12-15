@@ -12,15 +12,13 @@ class CalculateLoadsController extends Controller {
     private $availableDates = array();
     private $supportQuantitiesForDepartments = null;
     private $hourQuantitiesForDepartments = null;
+    private $supportQuantitiesForInformationSystems = null;
+    private $hourQuantitiesForInformationSystems = null;
 
     function __construct($supportQuantities, $supportAdministrationTimes, $departmentInfoSysUsages) {
         $this->supportQuantities = $supportQuantities;
         $this->supportAdministrationTimes = $supportAdministrationTimes;
         $this->departmentInfoSysUsages = $departmentInfoSysUsages;
-        //var_dump($departmentInfoSysUsages);
-        //var_dump($supportQuantities);
-        //var_dump($this->supportAdministrationTimes);
-        //var_dump($this->departmentInfoSysUsages);
     }
 
     private function setAvailableDates() {
@@ -28,27 +26,29 @@ class CalculateLoadsController extends Controller {
             $startDate = $quantity['startDate'];
             $endDate = $quantity['endDate'];
             if (!isset($this->availableDate[$startDate])) {
-                $this->availableDates[$startDate] = array();
-            }
-            if (!isset($this->availableDate[$startDate][$endDate])) {
-                $this->availableDates[$startDate][$endDate] = null;
+                $this->availableDates[$startDate] = null;
             }
         }
     }
 
     public function calculateLoads() {
         $this->setAvailableDates();
-        $this->supportQuantitiesForDepartments();
-        var_dump($this->hourQuantitiesForDepartments );
+        $this->quantitiesForDepartments();
+        $this->quantitiesForInformationSystems();
+        $loads = array("supportQuantitiesForDepartments"=>$this->supportQuantitiesForDepartments,
+            "hourQuantitiesForDepartments"=>$this->hourQuantitiesForDepartments,
+            "supportQuantitiesForInformationalSystems"=>$this->supportQuantitiesForInformationSystems,
+            "hourQuantitiesForInformationalSystems"=>$this->hourQuantitiesForInformationSystems
+        );
+        return $loads;
     }
 
-    private function supportQuantitiesForDepartments() {
+    private function quantitiesForDepartments() {
         $this->supportQuantitiesForDepartments = array();
         $this->hourQuantitiesForDepartments = array();
         foreach ($this->supportQuantities as $supportQuantity) {
             $supportType = $supportQuantity['supportType'];
             $startDate = $supportQuantity['startDate'];
-            $endDate = $supportQuantity['endDate'];
             $supportRequestCount = $supportQuantity['supportRequestCount'];
             foreach ($this->supportAdministrationTimes as $supportAdministrationTime) {
                 $department = $supportAdministrationTime['department'];
@@ -58,7 +58,6 @@ class CalculateLoadsController extends Controller {
                         $this->supportQuantitiesForDepartments[$startDate][$department] = $supportRequestCount;
                         $this->hourQuantitiesForDepartments[$startDate][$department] = $supportRequestCount * $hoursCount;
                     } else {
-                        //$this->supportQuantitiesForDepartments[$department][$startDate][$endDate] += $supportRequestCount;
                         $this->supportQuantitiesForDepartments[$startDate][$department] += $supportRequestCount;
                         $hours = $supportRequestCount * $hoursCount;
                         $this->hourQuantitiesForDepartments[$startDate][$department] += $hours;
@@ -66,7 +65,27 @@ class CalculateLoadsController extends Controller {
                 }
             }
         }
-        //var_dump($supportQuantitiesForEachDepartment);
+    }
+
+    private function quantitiesForInformationSystems() {
+        $this->supportQuantitiesForInformationSystems = array();
+        $this->hourQuantitiesForInformationSystems = array();
+        foreach ($this->availableDates as $currentDate=>$fakeValue) {
+            foreach ($this->departmentInfoSysUsages as $informationalSystem=>$departments) {
+                foreach ($departments as $department) {
+                    if (!isset($this->supportQuantitiesForDepartments[$currentDate][$department])) {
+                        continue;
+                    }
+                    if (!isset($this->supportQuantitiesForInformationSystems[$currentDate][$informationalSystem])) {
+                        $this->supportQuantitiesForInformationSystems[$currentDate][$informationalSystem] = $this->supportQuantitiesForDepartments[$currentDate][$department];
+                        $this->hourQuantitiesForInformationSystems[$currentDate][$informationalSystem] = $this->hourQuantitiesForDepartments[$currentDate][$department];
+                    } else {
+                        $this->supportQuantitiesForInformationSystems[$currentDate][$informationalSystem] += $this->supportQuantitiesForDepartments[$currentDate][$department];
+                        $this->hourQuantitiesForInformationSystems[$currentDate][$informationalSystem] += $this->hourQuantitiesForDepartments[$currentDate][$department];
+                    }
+                }
+            }
+        }
     }
 
 }
