@@ -11,8 +11,8 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Tab', {
             'maintabpanel button[action=predict]':{
                 click: this.predict
             },
-            'maintabpanel button[action=export]':{
-                click: this.exportTab
+            'maintab button[action=export]':{
+                click: this.exportPortal
             },
             'maintab button[action=addTable]':{
                 click: this.addTable
@@ -22,6 +22,9 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Tab', {
             },
             'maintab button[action=analyze]':{
                 click: this.addInfo
+            },
+            'alternativetab button[action=export]':{
+                click: this.exportAlternative
             },
             'alternativetab button[action=addTable]':{
                 click: this.showTable
@@ -88,9 +91,34 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Tab', {
         portal.fireEvent('addInfo', portal);
     },
 
-    exportTab: function(btn){
-        var tab = btn.up('maintab'); //.getActiveTab();
-        var wnd = Ext.create('widget.exportwindow', {});
+    exportPortal: function(btn){
+        var portal = btn.up('maintab').down('portal'); //.getActiveTab();
+
+        var panels = [];
+
+        portal.items.each(function(column){
+            column.items.each(function(panel){
+                //console.log(panel);
+                panels.push(panel);
+            });
+        });
+
+        var wnd = Ext.create('widget.exportwindow', {panels: panels});
+
+        wnd.show();
+    },
+
+    exportAlternative: function(btn){
+        var parentPanel = btn.up('alternativetab'); //.getActiveTab();
+
+        var panels = [];
+
+        parentPanel.items.each(function(panel){
+            console.log(panel);
+            panels.push(panel);
+        });
+
+        var wnd = Ext.create('widget.exportwindow', {panels: panels});
 
         wnd.show();
     },

@@ -6,6 +6,8 @@ Ext.define(CONFIG.APP_NS+'.view.Export.Controls', {
 
     layout: 'border',
 
+    panels: null,
+
     initComponent: function(){
         this.fileTypes = Ext.create('Ext.data.Store', {
             fields: ['filetype', 'code'],
@@ -14,16 +16,21 @@ Ext.define(CONFIG.APP_NS+'.view.Export.Controls', {
                 //{'filetype': LANG.FILETYPE.INTERNAL, 'code':'internal'}
             ]
         });
-        
-        this.items = [{ //TODO!important
-            xtype: 'panel',
+
+
+        var panelCheckBoxes = [];
+        for (var i = 0; i < this.panels.length; i++){
+            var checked = !this.panels[i].collapsed;
+            panelCheckBoxes.push({boxLabel: this.panels[i].title, inputValue: i, checked:checked});
+        }
+
+        this.items = [{
+            xtype: 'checkboxgroup',
             region: 'center',
             border: false,
-            store: {
-                fields: ['dummy'],
-                data: [{dummy:'Lentelė 0'}]
-            },
-            columns: {header: 'Istoriniai duomenys', dataIndex: 'dummy'}
+            columns: 2,
+            allowBlank: false,
+            items: panelCheckBoxes
         },{
             xtype: 'panel',
             region: 'east',
@@ -45,7 +52,7 @@ Ext.define(CONFIG.APP_NS+'.view.Export.Controls', {
                 valueField: 'code',
                 displayField: 'filetype',
                 value: 'excel'
-        }]
+            }]
         }];
 
         this.dockedItems = {
