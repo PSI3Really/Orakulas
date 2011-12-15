@@ -12,6 +12,7 @@ use Orakulas\ModelBundle\Entity\InformationalSystem;
 use Orakulas\ModelBundle\Facades\DepartmentInfoSysUsageFacade;
 use Orakulas\ModelBundle\Entity\DepartmentInfoSysUsage;
 use Orakulas\PredictDataBundle\Controller\CalculateLoadsController;
+use Symfony\Component\HttpFoundation\Response;
 
 class PredictDataController extends Controller {
 
@@ -35,9 +36,30 @@ class PredictDataController extends Controller {
 
         $loads = new CalculateLoadsController($this->supportQuantities, $this->supportAdministrationTimes, $this->departmentInfoSysUsages);
         $loads = $loads->calculateLoads();
-        var_dump($loads);
-        
-        exit;
+        $loads = $this->formSuitableArrays($loads);
+        $loads = json_encode($loads);
+
+        return $this->constructResponse($loads);
+    }
+
+    private function formSuitableArrays($array) {
+        $loads = null;
+        foreach ($array as $rootName=>$currentArray) {
+            foreach ($currentArray as $startDate=>$valuesAndEntities) {
+                $insideArray = array(
+                    'startDate'=>$startDate,
+                    'entities'=>array()
+                );
+                foreach ($valuesAndEntities as $name=>$value) {
+                    $insideArray['entities'][] = array(
+                        'name'=>$name,
+                        'value'=>$value
+                    );
+                }
+                $loads[$rootName][] = $insideArray;
+            }
+        }
+        return $loads;
     }
 
     private function readSupportQuantitiesFromDatabase() {
@@ -158,6 +180,17 @@ class PredictDataController extends Controller {
                 }
             }
         }
+    }
+
+    /**
+     * @param \string $string
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    protected function constructResponse($string) {
+        $response = new Response($string);
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
     }
 
 }

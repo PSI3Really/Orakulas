@@ -24,7 +24,6 @@ class CalculateLoadsController extends Controller {
     private function setAvailableDates() {
         foreach ($this->supportQuantities as $quantity) {
             $startDate = $quantity['startDate'];
-            $endDate = $quantity['endDate'];
             if (!isset($this->availableDate[$startDate])) {
                 $this->availableDates[$startDate] = null;
             }
@@ -35,10 +34,10 @@ class CalculateLoadsController extends Controller {
         $this->setAvailableDates();
         $this->quantitiesForDepartments();
         $this->quantitiesForInformationSystems();
-        $loads = array("supportQuantitiesForDepartments"=>$this->supportQuantitiesForDepartments,
-            "hourQuantitiesForDepartments"=>$this->hourQuantitiesForDepartments,
-            "supportQuantitiesForInformationalSystems"=>$this->supportQuantitiesForInformationSystems,
-            "hourQuantitiesForInformationalSystems"=>$this->hourQuantitiesForInformationSystems
+        $loads = array("departmentRequests"=>$this->supportQuantitiesForDepartments,
+            "departmentHours"=>$this->hourQuantitiesForDepartments,
+            "infoSysRequests"=>$this->supportQuantitiesForInformationSystems,
+            "infoSysHours"=>$this->hourQuantitiesForInformationSystems
         );
         return $loads;
     }
@@ -65,6 +64,15 @@ class CalculateLoadsController extends Controller {
                 }
             }
         }
+    }
+
+    private function getGivenStartDateIndexInArray($startDate, $array) {
+        foreach ($array as $key=>$value) {
+            if ($value['startDate'] === $startDate) {
+                return $key;
+            }
+        }
+        return -1;
     }
 
     private function quantitiesForInformationSystems() {
