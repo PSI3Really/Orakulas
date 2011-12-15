@@ -35,6 +35,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
         });
 
         minCol.add(newPortlet);
+        newPortlet.doLayout();
     },
 
     addChart: function(portal){
@@ -53,6 +54,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
         });
         
         minCol.add(newPortlet);
+        newPortlet.doLayout();
     },
 
     addInfo:function(portal){
