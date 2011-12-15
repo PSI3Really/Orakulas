@@ -18,9 +18,11 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.PortletBar', {
             action: 'chooseHoursSpent'
         },'->',{
             xtype: 'combobox',
-            fieldLabel: LANG.MAIN.PORTAL.CHOOSE_ENTITIES,
+            //fieldLabel: LANG.MAIN.PORTAL.CHOOSE_ENTITIES,
             multiSelect: true,
             editable: false,
+            //disabled: true,
+            emptyText: LANG.MAIN.PORTAL.CHOOSE_ENTITIES,
             store:{
                 fields: ['entity'],
                 data: []
