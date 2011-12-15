@@ -1,4 +1,4 @@
-Ext.define(CONFIG.APP_NS+'.view.Main.ChartPortlet', {
+Ext.define(CONFIG.APP_NS+'.view.Main.Portal.ChartPortlet', {
     extend: 'Ext.ux.Portlet',
     alias: 'widget.chartportlet',
 

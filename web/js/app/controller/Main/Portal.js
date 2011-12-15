@@ -5,10 +5,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
         'Ext.ux.Portlet'
     ],
 
-    views: ['Main.Portal', 'Main.GridPortlet', 'Main.ChartPortlet', 'Main.InfoPortlet'],
-
-    models: ['Load', 'InfoSysRequests', 'InfoSysHours', 'DepartmentRequests', 'DepartmentHours'],
-    stores: ['InfoSysHours', 'InfoSysRequests', 'DepartmentHours', 'DepartmentRequests'],
+    views: ['Main.Portal.Portal', 'Main.Portal.GridPortlet', 'Main.Portal.ChartPortlet', 'Main.Portal.InfoPortlet'],
 
     refs: [
         {ref: 'portalPanel', selector: 'portal'}
@@ -20,7 +17,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
                 addTable:       this.addTable,
                 addChart:       this.addChart,
                 addInfo:        this.addInfo,
-                loadReports:    this.loadReports
+                //loadReports:    this.loadReports
             }
         });
     },
@@ -73,6 +70,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
         minCol.add(newPortlet);
     },
 
+    /*
     loadReports: function(portal){
         portal.reports.infoSysHours = Ext.create('widget.infoSysHours', {});
         portal.reports.infoSysHours.load();
@@ -90,6 +88,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
         portal.reports.departmentRequests.load();
         //console.log(portal.reports.departmentRequests);
     },
+    */
 
     //private
     findMinColumn: function(portal){

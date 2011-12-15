@@ -1,55 +1,34 @@
 Ext.define(CONFIG.APP_NS+'.view.Main.TabPanel', {
-    extend: 'Ext.panel.Panel',
+    extend: 'Ext.tab.Panel',
     alias: 'widget.maintabpanel',
 
     requires: [
-        CONFIG.APP_NS+'.view.Main.SubToolbar'
+        CONFIG.APP_NS+'.view.Main.Portal.SubToolbar'
     ],
 
     border: false,
+    reports: {
+        infoSysHours: null,
+        infoSysRequests: null,
+        departmentHours: null,
+        departmentRequests: null
+    },
 
     initComponent: function() {
         this.items = [
             {
-                //title: 'Istoriniai duomenys',
+                title: LANG.MAIN.PORTAL_VIEW,
+                bodyBorder: false,
                 xtype: 'maintab'
-            }/*,
-            {
-                title: 'Ataskaita #1',
-                closable: true,
-                autoScroll: true,
-                dockedItems: [
-                    {
-                        xtype: 'subtoolbar'
-                    }
-                ],
-                items: [
-                    {
-                        border: false,
-                        xtype: 'portal'
-                    }
-                ]
-            },
-            {
-                title: 'Ataskaita #2',
-                closable: true,
-                autoScroll: true,
-                dockedItems: [
-                    {
-                        xtype: 'subtoolbar'
-                    }
-                ],
-                items: [
-                    {
-                        border: false,
-                        xtype: 'portal'
-                    }
-                ]
+            }, {
+                title: LANG.MAIN.ALTERNATIVE_VIEW,
+                bodyBorder: false,
+                xtype: 'alternativetab'
             }
-            //*/
         ];
 
-        
+        this.fireEvent('loadReports', this);
+
         this.callParent();
     }
 });

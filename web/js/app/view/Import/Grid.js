@@ -14,7 +14,15 @@ Ext.define(CONFIG.APP_NS+'.view.Import.Grid', { //TODO: merge with predictgrid
                 {name: 'endDate', type: 'date'},
                 {name: 'amount', type: 'int'}
             ],
-            data: []
+            data: [],
+            proxy: {
+                type: 'ajax',
+                writer: 'json',
+                api: {
+                    //create: 'model/supportHistories/create',
+                    //update: 'model/supportHistories/update'
+                }
+            }
         });
         
         this.columns = [{
@@ -22,8 +30,20 @@ Ext.define(CONFIG.APP_NS+'.view.Import.Grid', { //TODO: merge with predictgrid
             dataIndex: 'type',
             flex: 1,
             editor: {
-                xtype: 'textfield',
-                allowBlank: false
+                xtype: 'combobox',
+                allowBlank: false,
+                queryMode: 'remote',
+                displayField: 'name',
+                valueField: 'code',
+                forceSelection: true,
+                store: {
+                    fields: ['id', 'name', 'code'],
+                    proxy: {
+                        type: 'ajax',
+                        reader: 'json',
+                        api: {read: 'model/supportTypes/read'}
+                    }
+                }
             }
         },{
             header: LANG.ENTITY.START_DATE,

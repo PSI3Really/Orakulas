@@ -1,9 +1,9 @@
-Ext.define(CONFIG.APP_NS+'.view.Main.Tab', {
+Ext.define(CONFIG.APP_NS+'.view.Main.Portal.Tab', {
     extend: 'Ext.panel.Panel',
     alias: 'widget.maintab',
 
     requires: [
-        CONFIG.APP_NS+'.view.Main.SubToolbar'
+        CONFIG.APP_NS+'.view.Main.Portal.SubToolbar'
     ],
 
 

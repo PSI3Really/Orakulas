@@ -44,8 +44,13 @@ Ext.define(CONFIG.APP_NS+'.controller.Import', {
     },
 
     accept: function(btn){
-        alert('Pressed Accept');
+        var grid = btn.up('importwindow').down('importgrid');
+        var store = grid.getStore();
         btn.up('importwindow').close();
+
+        var jsonData = Ext.encode(Ext.pluck(store.data.items, 'data')); //store.sync();
+        //TODO: Then push the jsonData to server
+        debugger;
     },
 
     cancel: function(btn){

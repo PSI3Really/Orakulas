@@ -1,4 +1,4 @@
-Ext.define(CONFIG.APP_NS+'.view.Main.SubToolbar', {
+Ext.define(CONFIG.APP_NS+'.view.Main.Portal.SubToolbar', {
     extend: 'Ext.toolbar.Toolbar',
     alias: 'widget.subtoolbar',
 

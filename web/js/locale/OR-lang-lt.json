@@ -27,6 +27,9 @@
     },
 
     "MAIN":{
+        "PORTAL_VIEW":"Portalo vaizdas",
+        "ALTERNATIVE_VIEW":"Alternatyvus vaizdas",
+
         "TOOLBAR":{
             "BUTTON":{
                 "IMPORT_DATA": "Įkelti istorinius duomenis&hellip;",
@@ -117,6 +120,7 @@
     },
     
     "ENTITY":{
+        "REPORT":"Ataskaita",
         "DEPARTMENT": "Padalinys",
         "INFO_SYS": "Informacinė sistema",
         "DEPARTMENT_PLURAL": "Padaliniai",

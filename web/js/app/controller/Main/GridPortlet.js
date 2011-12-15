@@ -3,7 +3,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.GridPortlet', {
 
     require: ['Ext.ux.Portlet'],
 
-    views: ['Main.GridPortlet', 'Main.PortletBar'],
+    views: ['Main.Portal.GridPortlet', 'Main.Portal.PortletBar'],
 
     models: ['Load'],
     stores: ['InfoSysHours', 'InfoSysRequests', 'DepartmentHours', 'DepartmentRequests'],
@@ -66,7 +66,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.GridPortlet', {
         if(!btn.pressed){
             var portlet = btn.up('gridportlet');
             var portletBar = btn.up('portletbar');
-            var portal = portlet.up('portal');
+            var maintabpanel = portlet.up('maintabpanel');
 
             portletBar.down('button[action=chooseInfoSys]').toggle(false);
             btn.toggle(true);
@@ -75,9 +75,9 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.GridPortlet', {
             var hours = portletBar.down('button[action=chooseHoursSpent]').pressed;
 
             if (hours){
-                portlet.setStore(portal.reports.departmentHours);
+                portlet.setStore(maintabpanel.reports.departmentHours);
             } else {
-                portlet.setStore(portal.reports.departmentRequests);
+                portlet.setStore(maintabpanel.reports.departmentRequests);
             }
 
             this.setPickerOptions(portletBar, portlet.store);
@@ -88,7 +88,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.GridPortlet', {
         if(!btn.pressed){
             var portlet = btn.up('gridportlet');
             var portletBar = btn.up('portletbar');
-            var portal = portlet.up('portal');
+            var maintabpanel = portlet.up('maintabpanel');
 
             portletBar.down('button[action=chooseDepartments]').toggle(false);
             btn.toggle(true);
@@ -97,9 +97,9 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.GridPortlet', {
             var hours = portletBar.down('button[action=chooseHoursSpent]').pressed;
 
             if (hours){
-                portlet.setStore(portal.reports.infoSysHours);
+                portlet.setStore(maintabpanel.reports.infoSysHours);
             } else {
-                portlet.setStore(portal.reports.infoSysRequests);
+                portlet.setStore(maintabpanel.reports.infoSysRequests);
             }
 
             this.setPickerOptions(portletBar, portlet.store);
@@ -110,7 +110,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.GridPortlet', {
         if(!btn.pressed){
             var portlet = btn.up('gridportlet');
             var portletBar = btn.up('portletbar');
-            var portal = portlet.up('portal');
+            var maintabpanel = portlet.up('maintabpanel');
 
             portletBar.down('button[action=chooseHoursSpent]').toggle(false);
             btn.toggle(true);
@@ -119,9 +119,9 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.GridPortlet', {
             var infoSys = portletBar.down('button[action=chooseInfoSys]').pressed;
 
             if (infoSys){
-                portlet.setStore(portal.reports.infoSysRequests);
+                portlet.setStore(maintabpanel.reports.infoSysRequests);
             } else {
-                portlet.setStore(portal.reports.departmentRequests);
+                portlet.setStore(maintabpanel.reports.departmentRequests);
             }
 
             this.setPickerOptions(portletBar, portlet.store);
@@ -132,7 +132,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.GridPortlet', {
         if(!btn.pressed){
             var portlet = btn.up('gridportlet');
             var portletBar = btn.up('portletbar');
-            var portal = portlet.up('portal');
+            var maintabpanel = portlet.up('maintabpanel');
 
             portletBar.down('button[action=chooseSupportCount]').toggle(false);
             btn.toggle(true);
@@ -141,9 +141,9 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.GridPortlet', {
             var infoSys = portletBar.down('button[action=chooseInfoSys]').pressed;
 
             if (infoSys){
-                portlet.setStore(portal.reports.infoSysHours);
+                portlet.setStore(maintabpanel.reports.infoSysHours);
             } else {
-                portlet.setStore(portal.reports.departmentHours);
+                portlet.setStore(maintabpanel.reports.departmentHours);
             }
 
             this.setPickerOptions(portletBar, portlet.store);

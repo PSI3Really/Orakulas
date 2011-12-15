@@ -1,4 +1,4 @@
-Ext.define(CONFIG.APP_NS+'.view.Main.PortletBar', {
+Ext.define(CONFIG.APP_NS+'.view.Main.Portal.PortletBar', {
     extend: 'Ext.toolbar.Toolbar',
     alias: 'widget.portletbar',
 

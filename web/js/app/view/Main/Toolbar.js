@@ -40,28 +40,6 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Toolbar', {
             },
             '->',
             {
-                xtype: 'splitbutton',
-                text: LANG.MAIN.TOOLBAR.BUTTON.NEW_REPORT,
-                iconCls: 'icon-tab-plus',
-                handler: function () {
-                    this.showMenu();
-                },
-                menu: new Ext.menu.Menu({
-                    items: [
-                        {
-                            text: LANG.MAIN.TOOLBAR.BUTTON.CLONE_TAB,
-                            iconCls: 'icon-document-copy',
-                            action: 'cloneTab'
-                        },
-                        {
-                            text: LANG.MAIN.TOOLBAR.BUTTON.IMPORT_REPORT,
-                            iconCls: 'icon-folder-open',
-                            action: 'importReport'
-                        }
-                    ]
-                })
-            },
-            {
                 text: LANG.MAIN.TOOLBAR.BUTTON.IMPORT_DATA,
                 iconCls: 'icon-arrow-270',
                 action: 'importData'

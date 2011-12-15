@@ -27,6 +27,9 @@
     },
 
     "MAIN":{
+        "PORTAL_VIEW":"Portal view",
+        "ALTERNATIVE_VIEW":"Alternative view",
+
         "TOOLBAR":{
             "BUTTON":{
                 "IMPORT_DATA": "Import historical data&hellip;",
@@ -118,6 +121,7 @@
     },
     
     "ENTITY":{
+        "REPORT":"Report",
         "DEPARTMENT": "Department",
         "INFO_SYS": "Informational system",
         "DEPARTMENT_PLURAL": "Departments",

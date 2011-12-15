@@ -1,11 +1,10 @@
 Ext.require('Ext.ux.grid.FiltersFeature');
 
-Ext.define(CONFIG.APP_NS+'.view.Main.GridPortlet', {
+Ext.define(CONFIG.APP_NS+'.view.Main.Portal.GridPortlet', {
     extend: 'Ext.ux.Portlet',
     alias: 'widget.gridportlet',
 
     filters: null,
-
     //TODO: scrolling doesn't work :/
 
     initComponent: function(){
