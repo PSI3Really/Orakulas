@@ -4,6 +4,7 @@ Ext.require('Ext.chart.*');
 
 var LANG = null;
 var LANG_CODE = 'lt';
+var CURRENT_USER = null;
 
 Ext.application({
     name: CONFIG.APP_NS,
@@ -54,27 +55,40 @@ Ext.application({
         var urlExt = Ext.util.Format.format('../js/locale/ext-lang-{0}.js', lang);
         var urlApp = Ext.util.Format.format('../js/locale/{0}-lang-{1}.json', CONFIG.APP_NS, lang);
 
-        Ext.Ajax.request({ //ExtJS localization
-            url: urlExt,
-            success: function(response){ //change the language
-                eval(response.responseText);
+        Ext.Ajax.request({
+            url:  'model/users/current',
+            success: function(response){
+                CURRENT_USER = Ext.create('widget.adminUserModel', Ext.JSON.decode(response.responseText, true));
+
+                Ext.Ajax.request({ //ExtJS localization
+                    url: urlExt,
+                    success: function(response){ //change the language
+                        eval(response.responseText);
+                    },
+                    failure: function(){
+                        Ext.Msg.alert('Failure', 'Failed to load locale file.');
+                    },
+                    scope: this
+                });
+
+                Ext.Ajax.request({ //Orakulas localization
+                    url: urlApp,
+                    success: function(response){
+                        var text = response.responseText;
+
+                        LANG = Ext.JSON.decode(text, true);
+                        LANG_CODE = lang;
+                        Ext.create(CONFIG.APP_NS+'.view.Viewport');
+                    }
+                });
             },
             failure: function(){
-                Ext.Msg.alert('Failure', 'Failed to load locale file.');
+                Ext.Msg.alert('Failure', 'Could not get user');
             },
             scope: this
         });
 
-        Ext.Ajax.request({ //Orakulas localization
-            url: urlApp,
-            success: function(response){
-                var text = response.responseText;
 
-                LANG = Ext.JSON.decode(text, true);
-                LANG_CODE = lang;
-                Ext.create(CONFIG.APP_NS+'.view.Viewport');
-            }
-        });
     }
 });
 

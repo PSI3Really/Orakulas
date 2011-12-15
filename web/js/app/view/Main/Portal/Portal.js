@@ -1,4 +1,4 @@
-Ext.define(CONFIG.APP_NS+'.view.Main.Portal', {
+Ext.define(CONFIG.APP_NS+'.view.Main.Portal.Portal', {
     extend: 'Ext.ux.PortalPanel',
     alias: 'widget.portal',
     
@@ -8,13 +8,6 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal', {
     ],
 
     border: false,
-    reports: {
-        infoSysHours: null,
-        infoSysRequests: null,
-        departmentHours: null,
-        departmentRequests: null
-    },
-    parentTab: null,
     portletCount: 0,
 
     initComponent: function(){
@@ -26,7 +19,5 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal', {
         }];
 
         this.callParent();
-
-        this.fireEvent('loadReports', this);
     }
 });

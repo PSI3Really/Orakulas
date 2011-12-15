@@ -25,7 +25,8 @@ Ext.define('Ext.ux.PortalColumn', {
     },
     defaultType: 'portlet',
     cls: 'x-portal-column',
-    autoHeight: true
+    autoHeight: true,
+    border: false
     //
     // This is a class so that it could be easily extended
     // if necessary to provide additional behavior.

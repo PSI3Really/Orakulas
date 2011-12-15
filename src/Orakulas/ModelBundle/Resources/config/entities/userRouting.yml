@@ -21,3 +21,9 @@ OrakulasModelBundle_users_delete:
     defaults: { _controller: OrakulasModelBundle:User:delete }
     requirements:
       _method: POST
+
+OrakulasModelBundle_users_current:
+    pattern: /current
+    defaults: { _controller: OrakulasModelBundle:User:currentUser }
+    requirements:
+        _method: GET

@@ -8,7 +8,7 @@ Ext.define(CONFIG.APP_NS+'.util.DynamicReader', {
                 "<someName>":"<someValue>",
                 <...>,
                 "entities":[
-                    {"name":"<entityName>","value":"<entityValue"},
+                    {"name":"<entityName>","value":"<entityValue>"},
                     <...>
                 ]
             }

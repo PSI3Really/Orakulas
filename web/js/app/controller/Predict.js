@@ -1,7 +1,7 @@
 Ext.define(CONFIG.APP_NS+'.controller.Predict', {
     extend: 'Ext.app.Controller',
 
-    views: ['Predict.Window', 'Predict.Toolbar'],
+    views: ['Predict.Window', 'Predict.Toolbar', 'Predict.Grid'],
 
     init: function(){
         this.control({
@@ -14,13 +14,36 @@ Ext.define(CONFIG.APP_NS+'.controller.Predict', {
             'predicttoolbar filefield[action=openFile]':{
                 change: this.openFile
             },
-            'predicttoolbar button[action=infoSysDepartments]':{
-                click: this.infSysDepartments
+            'predicttoolbar button[action=editEntities]':{
+                click: this.editEntities
             },
-            'predicttoolbar button[action=supportDepartments]':{
-                click: this.supportDepartments
+            'predicttoolbar button[action=add]':{
+                click: this.add
+            },
+            'predicttoolbar button[action=delete]':{
+                click: this.remove
             }
         });
+    },
+
+    add: function(btn){
+        var grid = btn.up('predictwindow').down('predictgrid');
+        var store = grid.getStore();
+
+        var rowEditor = grid.plugins[0];
+        rowEditor.cancelEdit();
+        store.insert(0, Ext.create(store.model));
+        rowEditor.startEdit(0, 0);
+    },
+
+    remove: function(btn){
+        var grid = btn.up('predictwindow').down('predictgrid');
+        var store = grid.getStore();
+        var selected = grid.getSelectionModel().getSelection();
+
+        var rowEditor = grid.plugins[0];
+        rowEditor.cancelEdit();
+        store.remove(selected);
     },
 
     accept: function(btn){
@@ -50,8 +73,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Predict', {
                 url: 'excel/import/supportHistories',
                 waitMsg: LANG.IMPORT.WAIT_MSG,
                 success: function(form, action) {
-                    msg('Data Received', 'Populate the grid with action.result.data array', Ext.Msg.INFO);
-                    var grid = form.up('importwindow').down('predictgrid');
+                    var grid = form.owner.up('predictwindow').down('predictgrid');
 
                     grid.store.loadData(action.result.data, false); //replace old data
                 },
@@ -74,11 +96,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Predict', {
         }
     },
 
-    infSysDepartments: function(btn){
-        alert('TODO: Pressed infSysAndDepartments');
-    },
-
-    supportDepartments: function(btn){
-        alert('TODO: Pressed supportAndDepartments');
+    editEntities: function(btn){
+        alert("TODO");
     }
 });

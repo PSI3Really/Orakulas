@@ -1,26 +1,77 @@
 Ext.define(CONFIG.APP_NS+'.controller.Main.Tab', {
     extend: 'Ext.app.Controller',
 
-    views: ['Main.TabPanel', 'Main.Tab'],
+    views: ['Main.TabPanel', 'Main.Portal.Tab', 'Main.Alternative.Panel'],
+
+    models: ['Load', 'InfoSysRequests', 'InfoSysHours', 'DepartmentRequests', 'DepartmentHours'],
+    stores: ['InfoSysHours', 'InfoSysRequests', 'DepartmentHours', 'DepartmentRequests'],
 
     init: function(){
         this.control({
             'maintabpanel button[action=predict]':{
                 click: this.predict
             },
-            'maintabpanel button[action=analyze]':{
-                click: this.analyze
-            },
             'maintabpanel button[action=export]':{
                 click: this.exportTab
             },
-            'maintabpanel button[action=addTable]':{
+            'maintab button[action=addTable]':{
                 click: this.addTable
             },
-            'maintabpanel button[action=addChart]':{
+            'maintab button[action=addChart]':{
                 click: this.addChart
+            },
+            'maintab button[action=analyze]':{
+                click: this.addInfo
+            },
+            'alternativetab button[action=addTable]':{
+                click: this.showTable
+            },
+            'alternativetab button[action=addChart]':{
+                click: this.showChart
+            },
+            'alternativetab button[action=analyze]':{
+                click: this.showInfo
+            },
+            'maintabpanel':{
+                loadReports: this.loadReports
             }
         });
+    },
+
+    showTable: function(btn){
+        var tab = btn.up('alternativetab');
+
+        tab.down('gridportlet').expand(true);
+    },
+
+    showInfo: function(btn){
+        var tab = btn.up('alternativetab');
+
+        tab.down('infoportlet').expand(true);
+    },
+
+    showChart: function(btn){
+        var tab = btn.up('alternativetab');
+        
+        tab.down('chartportlet').expand(true);
+    },
+
+    loadReports: function(tabpanel){
+        tabpanel.reports.infoSysHours = Ext.create('widget.infoSysHours', {});
+        tabpanel.reports.infoSysHours.load();
+        //console.log(tabpanel.reports.infoSysHours);
+
+        tabpanel.reports.infoSysRequests = Ext.create('widget.infoSysRequests', {});
+        tabpanel.reports.infoSysRequests.load();
+        //console.log(tabpanel.reports.infoSysRequests);
+
+        tabpanel.reports.departmentHours = Ext.create('widget.departmentHours', {});
+        tabpanel.reports.departmentHours.load();
+        //console.log(tabpanel.reports.departmentHours);
+
+        tabpanel.reports.departmentRequests = Ext.create('widget.departmentRequests', {});
+        tabpanel.reports.departmentRequests.load();
+        //console.log(tabpanel.reports.departmentRequests);
     },
 
     predict: function(btn){
@@ -30,7 +81,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Tab', {
         wnd.show();
     },
 
-    analyze: function(btn){
+    addInfo: function(btn){
         var tab = btn.up('maintab'); //.getActiveTab();
         var portal = tab.down('portal');
 

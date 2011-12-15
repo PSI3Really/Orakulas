@@ -10,8 +10,8 @@ Ext.define(CONFIG.APP_NS+'.view.Export.Controls', {
         this.fileTypes = Ext.create('Ext.data.Store', {
             fields: ['filetype', 'code'],
             data: [
-                {'filetype': LANG.FILETYPE.EXCEL_XLS, 'code':'excel'},
-                {'filetype': LANG.FILETYPE.INTERNAL, 'code':'internal'}
+                {'filetype': LANG.FILETYPE.EXCEL_XLS, 'code':'excel'}
+                //{'filetype': LANG.FILETYPE.INTERNAL, 'code':'internal'}
             ]
         });
         
@@ -19,10 +19,9 @@ Ext.define(CONFIG.APP_NS+'.view.Export.Controls', {
             xtype: 'panel',
             region: 'center',
             border: false,
-            title: 'Istoriniai duomenys',
             store: {
                 fields: ['dummy'],
-                data: [{'dummy':'Lentelė 0'}]
+                data: [{dummy:'Lentelė 0'}]
             },
             columns: {header: 'Istoriniai duomenys', dataIndex: 'dummy'}
         },{
@@ -32,7 +31,7 @@ Ext.define(CONFIG.APP_NS+'.view.Export.Controls', {
             items: [{
                 xtype: 'textfield',
                 fieldLabel: LANG.ENTITY.FILE_NAME,
-                value: 'Istoriniai duomenys',
+                value: LANG.ENTITY.REPORT,
                 allowBlank: false
             },{
                 xtype: 'combobox',
@@ -44,7 +43,8 @@ Ext.define(CONFIG.APP_NS+'.view.Export.Controls', {
                 store: this.fileTypes,
                 queryMode: 'local',
                 valueField: 'code',
-                displayField: 'filetype'
+                displayField: 'filetype',
+                value: 'excel'
         }]
         }];
 

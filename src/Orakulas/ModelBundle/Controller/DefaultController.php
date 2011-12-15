@@ -63,7 +63,7 @@ class DefaultController extends Controller {
      * @param \string $string
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    private function constructResponse($string) {
+    protected function constructResponse($string) {
         $response = new Response($string);
         $response->headers->set('Content-Type', 'application/json');
 

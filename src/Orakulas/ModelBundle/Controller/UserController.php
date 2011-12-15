@@ -21,4 +21,13 @@ class UserController extends DefaultController {
         return $entityFacade;
     }
 
+    public function currentUserAction() {
+        $user = $this->get('security.context')->getToken()->getUser();
+        $associativeUserArray = $this->getEntityFacade()->toArray($user);
+
+        $jsonUser = json_encode($associativeUserArray);
+
+        return $this->constructResponse($jsonUser);
+    }
+
 }

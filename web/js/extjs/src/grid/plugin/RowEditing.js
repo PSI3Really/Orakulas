@@ -231,6 +231,8 @@ grid.on('validateedit', function(e) {
         if (me.editing) {
             me.getEditor().cancelEdit();
             me.callParent(arguments);
+
+            me.fireEvent('canceledit', me.context);
         }
     },
 

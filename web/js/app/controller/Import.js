@@ -13,13 +13,44 @@ Ext.define(CONFIG.APP_NS+'.controller.Import', {
             },
             'importtoolbar filefield[action=openFile]':{
                 change: this.openFile
+            },
+            'importtoolbar button[action=add]':{
+                click: this.add
+            },
+            'importtoolbar button[action=delete]':{
+                click: this.remove
             }
         });
     },
+    
+    add: function(btn){
+        var grid = btn.up('importwindow').down('importgrid');
+        var store = grid.getStore();
+
+        var rowEditor = grid.plugins[0];
+        rowEditor.cancelEdit();
+        store.insert(0, Ext.create(store.model));
+        rowEditor.startEdit(0, 0);
+    },
+
+    remove: function(btn){
+        var grid = btn.up('importwindow').down('importgrid');
+        var store = grid.getStore();
+        var selected = grid.getSelectionModel().getSelection();
+
+        var rowEditor = grid.plugins[0];
+        rowEditor.cancelEdit();
+        store.remove(selected);
+    },
 
     accept: function(btn){
-        alert('Pressed Accept');
+        var grid = btn.up('importwindow').down('importgrid');
+        var store = grid.getStore();
         btn.up('importwindow').close();
+
+        var jsonData = Ext.encode(Ext.pluck(store.data.items, 'data')); //store.sync();
+        //TODO: Then push the jsonData to server
+        debugger;
     },
 
     cancel: function(btn){
@@ -44,8 +75,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Import', {
                 url: 'excel/import/supportHistories',
                 waitMsg: LANG.IMPORT.WAIT_MSG,
                 success: function(form, action) {
-                    msg('Data Received', 'Populate the grid with action.result.data array', Ext.Msg.INFO);
-                    var grid = form.up('importwindow').down('importgrid');
+                    var grid = form.owner.up('importwindow').down('importgrid');
 
                     grid.store.loadData(action.result.data, false); //replace old data
                 },

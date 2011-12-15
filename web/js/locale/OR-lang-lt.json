@@ -27,6 +27,9 @@
     },
 
     "MAIN":{
+        "PORTAL_VIEW":"Portalo vaizdas",
+        "ALTERNATIVE_VIEW":"Alternatyvus vaizdas",
+
         "TOOLBAR":{
             "BUTTON":{
                 "IMPORT_DATA": "Įkelti istorinius duomenis&hellip;",
@@ -64,7 +67,8 @@
             },
             "INFO":{
                 "TITLE":"Analizė"
-            }
+            },
+            "CHOOSE_ENTITIES":"Pasirinkite"
         }
     },
 
@@ -75,7 +79,7 @@
 
     "IMPORT":{
         "TITLE": "Įkelti duomenis",
-        "WAIT_MSG": "Duomenų failas saugomas ir skaitomas&hellip;",
+        "WAIT_MSG": "Skaitomas duomenų failas&hellip;",
         "FAIL":{
             "INVALID_FILE_TYPE":"Klaidingas duomenų failo formatas. Turėtų būti Excel dokumentas (.XLS arba .XLSX)",
             "NO_SUCH_SHEET":"Tokio puslapio duomenų faile nėra",
@@ -90,7 +94,8 @@
 
         "BUTTON":{
             "INFO_SYS_AND_DEPARTMENTS": "IS/Padaliniai&hellip;",
-            "SUPPORT_AND_DEPARTMENTS": "Priemonės/Padaliniai&hellip;"
+            "SUPPORT_AND_DEPARTMENTS": "Priemonės/Padaliniai&hellip;",
+            "EDIT_ENTITIES": "Organizacija&hellip;"
         }
     },
 
@@ -115,6 +120,7 @@
     },
     
     "ENTITY":{
+        "REPORT":"Ataskaita",
         "DEPARTMENT": "Padalinys",
         "INFO_SYS": "Informacinė sistema",
         "DEPARTMENT_PLURAL": "Padaliniai",

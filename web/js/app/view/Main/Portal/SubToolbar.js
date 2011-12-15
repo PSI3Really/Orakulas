@@ -1,10 +1,12 @@
-Ext.define(CONFIG.APP_NS+'.view.Main.SubToolbar', {
+Ext.define(CONFIG.APP_NS+'.view.Main.Portal.SubToolbar', {
     extend: 'Ext.toolbar.Toolbar',
     alias: 'widget.subtoolbar',
 
     requires: [
         CONFIG.APP_NS+'.view.Predict.Window'
     ],
+
+    border: false,
 
     initComponent: function () {
         this.height = 30,

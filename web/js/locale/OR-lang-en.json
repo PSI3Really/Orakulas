@@ -27,6 +27,9 @@
     },
 
     "MAIN":{
+        "PORTAL_VIEW":"Portal view",
+        "ALTERNATIVE_VIEW":"Alternative view",
+
         "TOOLBAR":{
             "BUTTON":{
                 "IMPORT_DATA": "Import historical data&hellip;",
@@ -64,7 +67,8 @@
             },
             "INFO":{
                 "TITLE":"Information"
-            }
+            },
+            "CHOOSE_ENTITIES":"Choose"
         }
     },
 
@@ -75,7 +79,7 @@
 
     "IMPORT":{
         "TITLE": "Import data",
-        "WAIT_MSG": "The file is being loaded&hellip;",
+        "WAIT_MSG": "Loading data file&hellip;",
         "FAIL":{
             "INVALID_FILE_TYPE":"The file format should be an Excel document (.XLS or .XLSX)",
             "NO_SUCH_SHEET":"No such worksheet found",
@@ -90,7 +94,8 @@
 
         "BUTTON":{
             "INFO_SYS_AND_DEPARTMENTS": "IS/Departments&hellip;",
-            "SUPPORT_AND_DEPARTMENTS": "Support types/Departments&hellip;"
+            "SUPPORT_AND_DEPARTMENTS": "Support types/Departments&hellip;",
+            "EDIT_ENTITIES": "Entities&hellip;"
         }
     },
 
@@ -116,6 +121,7 @@
     },
     
     "ENTITY":{
+        "REPORT":"Report",
         "DEPARTMENT": "Department",
         "INFO_SYS": "Informational system",
         "DEPARTMENT_PLURAL": "Departments",

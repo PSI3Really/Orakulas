@@ -1,4 +1,4 @@
-Ext.define(CONFIG.APP_NS+'.view.Main.InfoPortlet', {
+Ext.define(CONFIG.APP_NS+'.view.Main.Portal.InfoPortlet', {
     extend: 'Ext.ux.Portlet',
     alias: 'widget.infoportlet',
     initComponent: function(){

@@ -11,12 +11,6 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Main', {
             'maintoolbar > button[action=importData]': {
                 click: this.importData
             },
-            'maintoolbar menuitem[action=cloneTab]': {
-                click: this.cloneTab
-            },
-            'maintoolbar menuitem[action=importReport]': {
-                click: this.importReport
-            },
             'maintoolbar button[action=admin]': {
                 click: this.admin
             },
@@ -41,14 +35,6 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Main', {
         var wnd = Ext.create('widget.importwindow', {});
 
         wnd.show();
-    },
-
-    cloneTab: function(){
-        alert('TODO: Nauja kortelė');
-    },
-
-    importReport: function(){
-        alert('TODO: Dialogas įkėlimui iš failo');
     },
 
     admin: function(){

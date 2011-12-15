@@ -1,4 +1,4 @@
-Ext.define(CONFIG.APP_NS+'.view.Main.PortletBar', {
+Ext.define(CONFIG.APP_NS+'.view.Main.Portal.PortletBar', {
     extend: 'Ext.toolbar.Toolbar',
     alias: 'widget.portletbar',
 
@@ -18,7 +18,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.PortletBar', {
             action: 'chooseHoursSpent'
         },'->',{
             xtype: 'combobox',
-            fieldLabel: '~~Objektai', //TODO
+            fieldLabel: LANG.MAIN.PORTAL.CHOOSE_ENTITIES,
             multiSelect: true,
             editable: false,
             store:{

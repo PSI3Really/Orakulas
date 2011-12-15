@@ -10,6 +10,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Toolbar', {
     ],
 
     initComponent: function () {
+
         this.id = 'toolbar';
         this.height = 30;
         this.items = [
@@ -38,28 +39,6 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Toolbar', {
             },
             '->',
             {
-                xtype: 'splitbutton',
-                text: LANG.MAIN.TOOLBAR.BUTTON.NEW_REPORT,
-                iconCls: 'icon-tab-plus',
-                handler: function () {
-                    this.showMenu();
-                },
-                menu: new Ext.menu.Menu({
-                    items: [
-                        {
-                            text: LANG.MAIN.TOOLBAR.BUTTON.CLONE_TAB,
-                            iconCls: 'icon-document-copy',
-                            action: 'cloneTab'
-                        },
-                        {
-                            text: LANG.MAIN.TOOLBAR.BUTTON.IMPORT_REPORT,
-                            iconCls: 'icon-folder-open',
-                            action: 'importReport'
-                        }
-                    ]
-                })
-            },
-            {
                 text: LANG.MAIN.TOOLBAR.BUTTON.IMPORT_DATA,
                 iconCls: 'icon-arrow-270',
                 action: 'importData'
@@ -71,8 +50,8 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Toolbar', {
                 action: 'admin'
             },
             {
-                text: 'Vardenis Pavardenis (dev)',
-                iconCls: 'icon-user-admin', // TODO: icon-user or icon-user-admin based on current user role
+                text: CURRENT_USER.data.firstName + ' ' + CURRENT_USER.data.lastName + ' (' + CURRENT_USER.data.username + ')',
+                iconCls: CURRENT_USER.data.admin ? 'icon-user-admin' : 'icon-user', 
                 action: 'adminpersonalsettings'
             },
             {
