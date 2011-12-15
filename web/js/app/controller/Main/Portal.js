@@ -49,13 +49,11 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
                 data: []
             },
 
-            animate: true,
             leftAxisTitle: LANG.ENTITY.SUPPORT_COUNT,
             leftAxisFields: ['supportCount', 'entityName']
         });
         
         minCol.add(newPortlet);
-        newPortlet.doLayout();
     },
 
     addInfo:function(portal){
