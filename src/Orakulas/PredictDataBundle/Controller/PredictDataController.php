@@ -22,18 +22,23 @@ class PredictDataController extends Controller {
     private $jsonData;
 
     public function predictAction() {
-        $this->jsonData = $_POST['data'];
-        $this->jsonData = json_decode($this->jsonData, true);
+        if (isset($_POST['data'])) {
+            $this->jsonData = $_POST['data'];
+            $this->jsonData = json_decode($this->jsonData, true);
 
-        $this->readSupportQuantitiesFromDatabase();
-        $this->readSupportQuantitiesFromJsonAndMerge();
+            $this->readSupportQuantitiesFromDatabase();
+            $this->readSupportQuantitiesFromJsonAndMerge();
 
-        $this->readSupportAdministrationTimesFromDatabase();
-        $this->readSupportAdministrationTimesFromJsonAndMerge();
+            $this->readSupportAdministrationTimesFromDatabase();
+            $this->readSupportAdministrationTimesFromJsonAndMerge();
 
-        $this->readIsDepartmentsFromDatabase();
-        $this->readIsDepartmentsFromJsonAndMerge();
-
+            $this->readIsDepartmentsFromDatabase();
+            $this->readIsDepartmentsFromJsonAndMerge();
+        } else {
+            $this->readSupportQuantitiesFromDatabase();
+            $this->readSupportAdministrationTimesFromDatabase();
+            $this->readIsDepartmentsFromDatabase();
+        }
         $loads = new CalculateLoadsController($this->supportQuantities, $this->supportAdministrationTimes, $this->departmentInfoSysUsages);
         $loads = $loads->calculateLoads();
         $loads = $this->formSuitableArrays($loads);
