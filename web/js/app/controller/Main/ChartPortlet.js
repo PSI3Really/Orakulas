@@ -155,7 +155,26 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
         }
     },
 
-    saveImage: function(tool, e, eOpts){
-        alert("omg");
+    saveImage: function(tool, e, eOpts) {
+        var chart = tool.up('chartportlet').down('chart');
+
+        var popup = Ext.create('widget.window', {
+            id: 'canvas-window',
+            title: '~~To save generated image right-click and choose "Save Image As&hellip;"',
+            resizable: false,
+            layout: 'fit',
+            plain: false,
+            html: '<canvas width="'+chart.getWidth()+'" height="'+chart.getHeight()+'"></canvas>',
+            listeners: {
+                afterrender: function (window, eOpts) {
+                    var canvas = $('#'+window.getId()).find('canvas')[0];
+                    canvg(canvas, $('#'+chart.getId()).html().trim());
+                    var img = canvas.toDataURL('image/png');
+                    $('canvas').replaceWith('<img src="'+img+'">');
+
+                    window.center();
+                }
+            }
+        }).show();
     }
 });

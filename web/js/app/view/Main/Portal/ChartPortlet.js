@@ -43,7 +43,12 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.ChartPortlet', {
                 highlight: true,
                 xField: 'startDate',
                 yField: 'Padalinys 1'
-            }*/]
+            }*/],
+
+            shadow: false,
+            background: {
+                fill: '#FFF'
+            }
         })
 
         this.items = [
@@ -71,10 +76,12 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.ChartPortlet', {
                 group.first().remove();
             }
 
+            /* shadows were removed
             var shadows = series.line.shadows;
             for (var sIdx = 0; sIdx < shadows.length; sIdx++){
                 shadows[sIdx].remove();
             }
+            */
 
             series.line.remove();
         };
@@ -88,7 +95,32 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.ChartPortlet', {
         this.dataView.axes.items[1].fields = fields;
 
         for (var i = 0; i<fields.length; i++){
-            this.dataView.series.add({type: 'line', axis: 'left', highlight: true, xField: 'startDate', yField: fields[i]});
+            this.dataView.series.add({
+                type: 'line',
+                axis: 'left',
+                xField: 'startDate',
+                yField: fields[i],
+                /*
+                tips: {
+                    trackMouse: true,
+                    width: 80,
+                    height: 40,
+                    renderer: function(storeItem, item) {
+                        //this.setTitle();
+                    }
+                },
+                */
+                smooth: true,
+                style: {
+                    'stroke-width': 2
+                },
+                markerConfig: {
+                    type: 'circle',
+                    size: 3,
+                    radius: 3,
+                    'stroke-width': 0
+                }
+            });
         }
 
         this.dataView.refresh();
