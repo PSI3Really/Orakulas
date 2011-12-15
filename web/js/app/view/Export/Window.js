@@ -9,12 +9,15 @@ Ext.define(CONFIG.APP_NS+'.view.Export.Window', {
     height: 250,
     width: 500,
 
+    panels: null,
+
     initComponent: function () {
 
         this.title = LANG.EXPORT.TITLE;
 
         this.items = {
             xtype: 'exportcontrols',
+            panels: this.panels,
             border: false
         }
 
