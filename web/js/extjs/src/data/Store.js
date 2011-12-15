@@ -980,6 +980,26 @@ store.load(function(records, operation, success) {
     },
 
     /**
+     * Loads data via the bound Proxy's reader
+     *
+     * Use this method if you are attempting to load data and want to utilize the configured data reader.
+     *
+     * @param {Object[]} data The full JSON object you'd like to load into the Data store.
+     * @param {Boolean} [append=false] True to add the records to the existing records in the store, false
+     * to remove the old ones first.
+     */
+    loadRawData : function(data, append) {
+         var me      = this,
+             result  = me.proxy.reader.read(data),
+             records = result.records;
+
+         if (result.success) {
+             me.loadRecords(records, { addRecords: append });
+             me.fireEvent('load', me, records, true);
+         }
+     },
+
+    /**
      * @private
      * Called internally when a Proxy has completed a load request
      */
@@ -1391,7 +1411,6 @@ store.load(function(records, operation, success) {
      * @param {Number} page The page to prefetch
      * @param {Object} options Optional config object, passed into the Ext.data.Operation object before loading.
      * See {@link #load}
-     * @param
      */
     prefetchPage: function(page, options) {
         var me = this,

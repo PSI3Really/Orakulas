@@ -60,35 +60,20 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Tab', {
     },
 
     loadReports: function(tabpanel){
-        tabpanel.setLoading("~~Kraunami duomenys");
         Ext.Ajax.request({
             url: 'predictData',
             params: 'data={"supportQuantities":{},"supportAdministrationTimes":{},"departmentInfoSysUsages":{}}',
             success: function(response){
                 var data = Ext.JSON.decode(response.responseText);
-                console.log(data);
+                //console.log(data);
+                
+                tabpanel.reports.infoSysHours.loadRawData(data.infoSysHours);
 
-                tabpanel.reports.infoSysHours = Ext.create('widget.infoSysHours', {
-                    data: data.infoSysHours
-                });
-                tabpanel.reports.infoSysHours.load();
+                tabpanel.reports.infoSysRequests.loadRawData(data.infoSysRequests);
 
-                tabpanel.reports.infoSysRequests = Ext.create('widget.infoSysRequests', {
-                    data: data.infoSysRequests
-                });
-                tabpanel.reports.infoSysRequests.load();
+                tabpanel.reports.departmentHours.loadRawData(data.departmentHours);
 
-                tabpanel.reports.departmentHours = Ext.create('widget.departmentHours', {
-                    data: data.departmentHours
-                });
-                tabpanel.reports.departmentHours.load();
-
-                tabpanel.reports.departmentRequests = Ext.create('widget.departmentRequests', {
-                    data: data.departmentRequests
-                });
-                tabpanel.reports.departmentRequests.load();
-
-                tabpanel.setLoading(false);
+                tabpanel.reports.departmentRequests.loadRawData(data.departmentRequests);
             },
             failure: function(response){
                 Ext.Msg.alert("~~Error", "~~Could not establish connection to the database");

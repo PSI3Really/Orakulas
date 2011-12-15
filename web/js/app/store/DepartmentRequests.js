@@ -4,7 +4,7 @@ Ext.define(CONFIG.APP_NS+'.store.DepartmentRequests', {
 
     requires: CONFIG.APP_NS+'.model.DepartmentRequests',
     model: CONFIG.APP_NS+'.model.DepartmentRequests',
-
+    
     proxy: {
         type: 'memory',
         //api: {
