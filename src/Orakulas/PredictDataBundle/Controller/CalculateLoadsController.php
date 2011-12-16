@@ -71,11 +71,12 @@ class CalculateLoadsController extends Controller {
 
     private function forecast(){
         $totalPeriod = 24; //months
-        $window = 10;
+        $window = 12;
+        $uptrend = 0.02;
 
-        $averages = array();
+        $fData = array();
         foreach ($this->supportTypes as $supportType){
-            $averages[$supportType] = array(
+            $fData[$supportType] = array(
                 "winterSum" => 0,
                 "winterCount" => 0,
                 "springSum" => 0,
@@ -88,9 +89,7 @@ class CalculateLoadsController extends Controller {
             );
         };
 
-        foreach (array_slice($this->requests, $window) as $date => $values){//TODO: check loop limits carefully
-            $seasonality[$date] = array();
-            
+        foreach (array_slice($this->requests, $window) as $date => $values){ //Calculate seasonalities
             $month = intval(date('n', strtotime($date)));
 
             foreach($this->supportTypes as $supportType){
@@ -102,25 +101,23 @@ class CalculateLoadsController extends Controller {
 
                 $val = $avg ? $values[$supportType]/$avg : 0;
 
-                $seasonality[$date][$supportType] = $val;
-
                 if ($month == 1 || $month == 2 || $month == 12){
-                    $averages[$supportType]['winterSum'] += $val; $averages[$supportType]['winterCount']++; //$winterSum += $val; $winterCount++;
+                    $fData[$supportType]['winterSum'] += $val; $fData[$supportType]['winterCount']++; //$winterSum += $val; $winterCount++;
                 } else if ($month == 3 || $month == 4 || $month == 5){
-                    $averages[$supportType]['springSum'] += $val; $averages[$supportType]['springCount']++; //$springSum += $val; $springCount++;
+                    $fData[$supportType]['springSum'] += $val; $fData[$supportType]['springCount']++; //$springSum += $val; $springCount++;
                 } else if ($month == 6 || $month == 7 || $month == 8){
-                    $averages[$supportType]['summerSum'] += $val; $averages[$supportType]['summerCount']++; //$summerSum += $val; $summerCount++;
+                    $fData[$supportType]['summerSum'] += $val; $fData[$supportType]['summerCount']++; //$summerSum += $val; $summerCount++;
                 } else if ($month == 9 || $month == 10 || $month == 11){
-                    $averages[$supportType]['autumnSum'] += $val; $averages[$supportType]['autumnCount']++; //$autumnSum += $val; $autumnCount++;
+                    $fData[$supportType]['autumnSum'] += $val; $fData[$supportType]['autumnCount']++; //$autumnSum += $val; $autumnCount++;
                 }
             }
         }
 
-        foreach($averages as $supportType => $values){
-            $winterAvg = $averages[$supportType]['winterSum']/$averages[$supportType]['winterCount'];
-            $springAvg = $averages[$supportType]['springSum']/$averages[$supportType]['springCount'];
-            $summerAvg = $averages[$supportType]['summerSum']/$averages[$supportType]['summerCount'];
-            $autumnAvg = $averages[$supportType]['autumnSum']/$averages[$supportType]['autumnCount'];
+        foreach($fData as $supportType => $values){ //Construct seasonal index
+            $winterAvg = $fData[$supportType]['winterSum']/$fData[$supportType]['winterCount'];
+            $springAvg = $fData[$supportType]['springSum']/$fData[$supportType]['springCount'];
+            $summerAvg = $fData[$supportType]['summerSum']/$fData[$supportType]['summerCount'];
+            $autumnAvg = $fData[$supportType]['autumnSum']/$fData[$supportType]['autumnCount'];
 
             $sumAvg = $winterAvg + $springAvg + $summerAvg + $autumnAvg;
 
@@ -133,18 +130,18 @@ class CalculateLoadsController extends Controller {
             $summerAvg = 4*$summerAvg/$sumAvg;
             $autumnAvg = 4*$autumnAvg/$sumAvg;
 
-            $averages[$supportType]['seasonalIndex'][12] = $winterAvg;
-            $averages[$supportType]['seasonalIndex'][1] = $winterAvg;
-            $averages[$supportType]['seasonalIndex'][2] = $winterAvg;
-            $averages[$supportType]['seasonalIndex'][3] = $springAvg;
-            $averages[$supportType]['seasonalIndex'][4] = $springAvg;
-            $averages[$supportType]['seasonalIndex'][5] = $springAvg;
-            $averages[$supportType]['seasonalIndex'][6] = $summerAvg;
-            $averages[$supportType]['seasonalIndex'][7] = $summerAvg;
-            $averages[$supportType]['seasonalIndex'][8] = $summerAvg;
-            $averages[$supportType]['seasonalIndex'][9] = $autumnAvg;
-            $averages[$supportType]['seasonalIndex'][10] = $autumnAvg;
-            $averages[$supportType]['seasonalIndex'][11] = $autumnAvg;
+            $fData[$supportType]['seasonalIndex'][12] = $winterAvg;
+            $fData[$supportType]['seasonalIndex'][1] = $winterAvg;
+            $fData[$supportType]['seasonalIndex'][2] = $winterAvg;
+            $fData[$supportType]['seasonalIndex'][3] = $springAvg;
+            $fData[$supportType]['seasonalIndex'][4] = $springAvg;
+            $fData[$supportType]['seasonalIndex'][5] = $springAvg;
+            $fData[$supportType]['seasonalIndex'][6] = $summerAvg;
+            $fData[$supportType]['seasonalIndex'][7] = $summerAvg;
+            $fData[$supportType]['seasonalIndex'][8] = $summerAvg;
+            $fData[$supportType]['seasonalIndex'][9] = $autumnAvg;
+            $fData[$supportType]['seasonalIndex'][10] = $autumnAvg;
+            $fData[$supportType]['seasonalIndex'][11] = $autumnAvg;
         }
 
         //var_dump($averages);
@@ -163,7 +160,9 @@ class CalculateLoadsController extends Controller {
 
             $this->requests[$date] = array();
             foreach($this->supportTypes as $supportType){
-                $this->requests[$date][$supportType] = intval($this->getMovingAverage($date, $supportType, $window) * $averages[$supportType]['seasonalIndex'][$month]);
+                $forecast = $this->getMovingAverage($date, $supportType, $window);
+
+                $this->requests[$date][$supportType] = intval( $forecast * $fData[$supportType]['seasonalIndex'][$month] * (1 + $uptrend));
             }
         }
         reset($this->requests);
@@ -188,7 +187,22 @@ class CalculateLoadsController extends Controller {
     private function getMovingAverage($date, $supportType, $window){
         $sum = 0;
 
+        $weights = array();
+        for ($i = $window; $i >= 1; $i--){
+            $weights[$window + 1 - $i] = $i;
+        }
+        
+        //normalize
+        $sumWeights = 0;
+        foreach ($weights as $weight){
+            $sumWeights += $weight;
+        }
+        foreach ($weights as $idx => $weight){
+            $weights[$idx] /= $sumWeights;
+        }
+        
         //echo '<p><b>', $date, '</b> ::: ';
+        $expAvg = 0;
 
         for($i = 1; $i <= $window; $i++){ //Compute moving average
             $prevDate = date('Y-m-d', strtotime($date . ' -' . $i . ' months'));
@@ -203,12 +217,14 @@ class CalculateLoadsController extends Controller {
 
             //echo $prevCount, ' | ';
 
+            $expAvg += $weights[$i] * $prevCount;
+
             $sum += $prevCount;
         }
 
         //echo '<b>', intval($sum/$window),'</b></p>';
-
-        return intval($sum/$window);
+        return $expAvg;
+        //return intval($sum/$window);
     }
 
     private function quantitiesForDepartments() {
