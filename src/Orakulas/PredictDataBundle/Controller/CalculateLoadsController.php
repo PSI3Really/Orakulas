@@ -24,6 +24,24 @@ class CalculateLoadsController extends Controller {
         $this->departmentInfoSysUsages = $departmentInfoSysUsages;
     }
 
+    public function calculateLoads() {
+        $this->setSupportTypes();
+        $this->generateRequests();
+        $this->forecast();
+
+        $this->setAvailableDates();
+
+        $this->quantitiesForDepartments();
+
+        $this->quantitiesForInformationSystems();
+        $loads = array("departmentRequests"=>$this->supportQuantitiesForDepartments,
+            "departmentHours"=>$this->hourQuantitiesForDepartments,
+            "infoSysRequests"=>$this->supportQuantitiesForInformationSystems,
+            "infoSysHours"=>$this->hourQuantitiesForInformationSystems
+        );
+        return $loads;
+    }
+
     private function setSupportTypes(){
         foreach($this->supportAdministrationTimes as $adminTime){
             $this->supportTypes[$adminTime['supportType']] = $adminTime['supportType'];
@@ -36,14 +54,18 @@ class CalculateLoadsController extends Controller {
             if (!isset($this->availableDate[$startDate])) {
                 $this->availableDates[$startDate] = null;
             }
+        }
+    }
+
+    private function generateRequests(){
+        foreach ($this->supportQuantities as $quantity) {
+            $startDate = $quantity['startDate'];
 
             if (!isset($this->requests[$startDate])){
                 $this->requests[$startDate] = array();
             }
             $this->requests[$startDate][$quantity['supportType']] = $quantity['supportRequestCount'];
         }
-
-        $this->forecast();
     }
 
     private function forecast(){
@@ -166,26 +188,6 @@ class CalculateLoadsController extends Controller {
 
         return intval($sum/$window);
     }
-
-    public function calculateLoads() {
-        $this->setSupportTypes();
-        $this->setAvailableDates();
-        //var_dump($this->availableDates);
-        //var_dump($this->supportQuantities);
-        //var_dump($this->supportAdministrationTimes);
-        //var_dump($this->departmentInfoSysUsages);
-        $this->quantitiesForDepartments();
-        //var_dump($this->supportQuantitiesForDepartments);
-        $this->quantitiesForInformationSystems();
-        $loads = array("departmentRequests"=>$this->supportQuantitiesForDepartments,
-            "departmentHours"=>$this->hourQuantitiesForDepartments,
-            "infoSysRequests"=>$this->supportQuantitiesForInformationSystems,
-            "infoSysHours"=>$this->hourQuantitiesForInformationSystems
-        );
-        return $loads;
-    }
-
-
 
     private function quantitiesForDepartments() {
         $this->supportQuantitiesForDepartments = array();
