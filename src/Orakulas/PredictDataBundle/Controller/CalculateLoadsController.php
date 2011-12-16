@@ -70,22 +70,16 @@ class CalculateLoadsController extends Controller {
     }
 
     private function forecast(){
-        $totalPeriod = 24; //months
+        $totalPeriod = 60; //months
         $window = 12;
-        $uptrend = 0.02;
+        $uptrend = 0.025;
 
         $fData = array();
         foreach ($this->supportTypes as $supportType){
             $fData[$supportType] = array(
-                "winterSum" => 0,
-                "winterCount" => 0,
-                "springSum" => 0,
-                "springCount" => 0,
-                "summerSum" => 0,
-                "summerCount" => 0,
-                "autumnSum" => 0,
-                "autumnCount" => 0,
-                "seasonalIndex" => array_fill(1, 12, 0)
+                "seasonalIndex" => array_fill(1, 12, 0),
+                "seasonalSums" => array_fill(1, 12, 0),
+                "seasonalCounts" => array_fill(1, 12, 0)
             );
         };
 
@@ -101,54 +95,27 @@ class CalculateLoadsController extends Controller {
 
                 $val = $avg ? $values[$supportType]/$avg : 0;
 
-                if ($month == 1 || $month == 2 || $month == 12){
-                    $fData[$supportType]['winterSum'] += $val; $fData[$supportType]['winterCount']++; //$winterSum += $val; $winterCount++;
-                } else if ($month == 3 || $month == 4 || $month == 5){
-                    $fData[$supportType]['springSum'] += $val; $fData[$supportType]['springCount']++; //$springSum += $val; $springCount++;
-                } else if ($month == 6 || $month == 7 || $month == 8){
-                    $fData[$supportType]['summerSum'] += $val; $fData[$supportType]['summerCount']++; //$summerSum += $val; $summerCount++;
-                } else if ($month == 9 || $month == 10 || $month == 11){
-                    $fData[$supportType]['autumnSum'] += $val; $fData[$supportType]['autumnCount']++; //$autumnSum += $val; $autumnCount++;
-                }
+                $fData[$supportType]['seasonalSums'][$month] += $val;
+                $fData[$supportType]['seasonalCounts'][$month]++;
             }
         }
 
         foreach($fData as $supportType => $values){ //Construct seasonal index
-            $winterAvg = $fData[$supportType]['winterSum']/$fData[$supportType]['winterCount'];
-            $springAvg = $fData[$supportType]['springSum']/$fData[$supportType]['springCount'];
-            $summerAvg = $fData[$supportType]['summerSum']/$fData[$supportType]['summerCount'];
-            $autumnAvg = $fData[$supportType]['autumnSum']/$fData[$supportType]['autumnCount'];
+            $avgs = array_fill(1, 12, 0);
+            $avgSum = 0;
+            for ($i = 1; $i <= 12; $i++){
+                $avgs[$i] = $fData[$supportType]['seasonalSums'][$i]/$fData[$supportType]['seasonalCounts'][$i];
+                $avgSum += $avgs[$i];
+            }
 
-            $sumAvg = $winterAvg + $springAvg + $summerAvg + $autumnAvg;
+            for ($i = 1; $i <= 12; $i++){
+                $avgs[$i] = 12*$avgs[$i]/$avgSum;
+            }
 
-            if ($sumAvg == 0)
-                continue;
-
-            //Normalize
-            $winterAvg = 4*$winterAvg/$sumAvg;
-            $springAvg = 4*$springAvg/$sumAvg;
-            $summerAvg = 4*$summerAvg/$sumAvg;
-            $autumnAvg = 4*$autumnAvg/$sumAvg;
-
-            $fData[$supportType]['seasonalIndex'][12] = $winterAvg;
-            $fData[$supportType]['seasonalIndex'][1] = $winterAvg;
-            $fData[$supportType]['seasonalIndex'][2] = $winterAvg;
-            $fData[$supportType]['seasonalIndex'][3] = $springAvg;
-            $fData[$supportType]['seasonalIndex'][4] = $springAvg;
-            $fData[$supportType]['seasonalIndex'][5] = $springAvg;
-            $fData[$supportType]['seasonalIndex'][6] = $summerAvg;
-            $fData[$supportType]['seasonalIndex'][7] = $summerAvg;
-            $fData[$supportType]['seasonalIndex'][8] = $summerAvg;
-            $fData[$supportType]['seasonalIndex'][9] = $autumnAvg;
-            $fData[$supportType]['seasonalIndex'][10] = $autumnAvg;
-            $fData[$supportType]['seasonalIndex'][11] = $autumnAvg;
+            for ($i = 1; $i <= 12; $i++){
+                $fData[$supportType]['seasonalIndex'][$i] = $avgs[$i];
+            }
         }
-
-        //var_dump($averages);
-        //exit();
-
-        //now the fun begins
-        //echo '<pre><hr>';
 
         end($this->requests);
         $oldSize = sizeof($this->requests);

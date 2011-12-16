@@ -1,17 +1,65 @@
 $winterAvg = $winterSum/$winterCount;
-            $springAvg = $springSum/$springCount;
-            $summerAvg = $summerSum/$summerCount;
-            $autumnAvg = $autumnSum/$autumnCount;
-            $sumAvg = $winterAvg + $springAvg + $summerAvg + $autumnAvg;
+$springAvg = $springSum/$springCount;
+$summerAvg = $summerSum/$summerCount;
+$autumnAvg = $autumnSum/$autumnCount;
+$sumAvg = $winterAvg + $springAvg + $summerAvg + $autumnAvg;
 
-            //Normalize
-            $winterAvg = 4*$winterAvg/$sumAvg;
-            $springAvg = 4*$springAvg/$sumAvg;
-            $summerAvg = 4*$summerAvg/$sumAvg;
-            $autumnAvg = 4*$autumnAvg/$sumAvg;
+//Normalize
+$winterAvg = 4*$winterAvg/$sumAvg;
+$springAvg = 4*$springAvg/$sumAvg;
+$summerAvg = 4*$summerAvg/$sumAvg;
+$autumnAvg = 4*$autumnAvg/$sumAvg;
 
-            $seasonalIndex = array();
-            $seasonalIndex[12] = $winterAvg; $seasonalIndex[1] = $winterAvg; $seasonalIndex[2] = $winterAvg;
-            $seasonalIndex[3] = $springAvg; $seasonalIndex[4] = $springAvg; $seasonalIndex[5] = $springAvg;
-            $seasonalIndex[6] = $summerAvg; $seasonalIndex[7] = $summerAvg; $seasonalIndex[8] = $summerAvg;
-            $seasonalIndex[9] = $autumnAvg; $seasonalIndex[10] = $autumnAvg; $seasonalIndex[11] = $autumnAvg;
+$seasonalIndex = array();
+$seasonalIndex[12] = $winterAvg; $seasonalIndex[1] = $winterAvg; $seasonalIndex[2] = $winterAvg;
+$seasonalIndex[3] = $springAvg; $seasonalIndex[4] = $springAvg; $seasonalIndex[5] = $springAvg;
+$seasonalIndex[6] = $summerAvg; $seasonalIndex[7] = $summerAvg; $seasonalIndex[8] = $summerAvg;
+$seasonalIndex[9] = $autumnAvg; $seasonalIndex[10] = $autumnAvg; $seasonalIndex[11] = $autumnAvg;
+
+$winterAvg = $fData[$supportType]['winterSum']/$fData[$supportType]['winterCount'];
+$springAvg = $fData[$supportType]['springSum']/$fData[$supportType]['springCount'];
+$summerAvg = $fData[$supportType]['summerSum']/$fData[$supportType]['summerCount'];
+$autumnAvg = $fData[$supportType]['autumnSum']/$fData[$supportType]['autumnCount'];
+
+$sumAvg = $winterAvg + $springAvg + $summerAvg + $autumnAvg;
+
+if ($sumAvg == 0)
+    continue;
+
+//Normalize
+$winterAvg = 4*$winterAvg/$sumAvg;
+$springAvg = 4*$springAvg/$sumAvg;
+$summerAvg = 4*$summerAvg/$sumAvg;
+$autumnAvg = 4*$autumnAvg/$sumAvg;
+
+$fData[$supportType]['seasonalIndex'][12] = $winterAvg;
+$fData[$supportType]['seasonalIndex'][1] = $winterAvg;
+$fData[$supportType]['seasonalIndex'][2] = $winterAvg;
+$fData[$supportType]['seasonalIndex'][3] = $springAvg;
+$fData[$supportType]['seasonalIndex'][4] = $springAvg;
+$fData[$supportType]['seasonalIndex'][5] = $springAvg;
+$fData[$supportType]['seasonalIndex'][6] = $summerAvg;
+$fData[$supportType]['seasonalIndex'][7] = $summerAvg;
+$fData[$supportType]['seasonalIndex'][8] = $summerAvg;
+$fData[$supportType]['seasonalIndex'][9] = $autumnAvg;
+$fData[$supportType]['seasonalIndex'][10] = $autumnAvg;
+$fData[$supportType]['seasonalIndex'][11] = $autumnAvg;
+
+if ($month == 1 || $month == 2 || $month == 12){
+    $fData[$supportType]['winterSum'] += $val; $fData[$supportType]['winterCount']++; //$winterSum += $val; $winterCount++;
+} else if ($month == 3 || $month == 4 || $month == 5){
+    $fData[$supportType]['springSum'] += $val; $fData[$supportType]['springCount']++; //$springSum += $val; $springCount++;
+} else if ($month == 6 || $month == 7 || $month == 8){
+    $fData[$supportType]['summerSum'] += $val; $fData[$supportType]['summerCount']++; //$summerSum += $val; $summerCount++;
+} else if ($month == 9 || $month == 10 || $month == 11){
+    $fData[$supportType]['autumnSum'] += $val; $fData[$supportType]['autumnCount']++; //$autumnSum += $val; $autumnCount++;
+}
+
+"winterSum" => 0,
+"winterCount" => 0,
+"springSum" => 0,
+"springCount" => 0,
+"summerSum" => 0,
+"summerCount" => 0,
+"autumnSum" => 0,
+"autumnCount" => 0,
