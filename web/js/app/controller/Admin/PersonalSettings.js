@@ -30,7 +30,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.PersonalSettings', {
         }
         else {
             if(newpassword.value == repeatpassword.value) {
-                var paramet = {
+                var params = {
                     id: CURRENT_USER.get('id'),
                     password: newpassword.value
                 };
@@ -39,7 +39,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.PersonalSettings', {
                     url : 'model/users/update',
                     method: 'POST',
                     params: {
-                        jsonValue: Ext.encode(paramet)
+                        jsonValue: Ext.encode(params)
                     }
                 });
 
