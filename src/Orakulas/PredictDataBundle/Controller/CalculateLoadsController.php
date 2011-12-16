@@ -24,7 +24,7 @@ class CalculateLoadsController extends Controller {
         $this->departmentInfoSysUsages = $departmentInfoSysUsages;
     }
 
-    private function setSupportTyoes(){
+    private function setSupportTypes(){
         foreach($this->supportAdministrationTimes as $adminTime){
             $this->supportTypes[$adminTime['supportType']] = $adminTime['supportType'];
         }
@@ -168,7 +168,7 @@ class CalculateLoadsController extends Controller {
     }
 
     public function calculateLoads() {
-        $this->setSupportTyoes();
+        $this->setSupportTypes();
         $this->setAvailableDates();
         //var_dump($this->availableDates);
         //var_dump($this->supportQuantities);
