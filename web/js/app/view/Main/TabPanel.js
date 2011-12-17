@@ -18,13 +18,13 @@ Ext.define(CONFIG.APP_NS+'.view.Main.TabPanel', {
         this.items = [
             {
                 title: LANG.MAIN.PORTAL_VIEW,
-                bodyBorder: false,
-                layout: 'fit',
-                xtype: 'maintab'
+                xtype: 'maintab',
+                layout: 'fit'
             }, {
                 title: LANG.MAIN.ALTERNATIVE_VIEW,
-                bodyBorder: false,
-                xtype: 'alternativetab'
+                xtype: 'maintab',
+                layout: 'fit',
+                _alternative: true
             }
         ];
 

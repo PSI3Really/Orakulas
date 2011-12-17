@@ -13,10 +13,17 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
 
     init: function(){
         this.control({
-            'portal':{
+            portal: {
                 addTable:       this.addTable,
                 addChart:       this.addChart,
-                addInfo:        this.addInfo
+                addInfo:        this.addInfo,
+                render: function (view) {
+                    if (view.alternative) {
+                        var table = this.addTable(view),
+                            chart = this.addChart(view),
+                            info  = this.addInfo(view);
+                    }
+                }
                 //loadReports:    this.loadReports
             }
         });

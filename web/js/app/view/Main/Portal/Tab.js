@@ -6,24 +6,20 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.Tab', {
         CONFIG.APP_NS+'.view.Main.Portal.SubToolbar'
     ],
 
-
-    border: false,
     //autoScroll: true,
 
     initComponent: function() {
-
         this.dockedItems = [
             {
-                xtype: 'subtoolbar',
-                border: false
+                xtype: 'subtoolbar'
             }
-        ],
+        ];
         this.items = [
             {
                 xtype: 'portal',
-                border: false
+                _alternative: (this._alternative !== undefined) ? this._alternative : false
             }
-        ]
+        ];
 
         this.callParent(arguments);
     }

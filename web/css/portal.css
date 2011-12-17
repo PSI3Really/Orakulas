@@ -1,3 +1,6 @@
+.x-portal-body {
+    border: 0;
+}
 .x-panel-ghost {
     z-index: 1;
 }

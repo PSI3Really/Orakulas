@@ -62,7 +62,6 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.ChartPortlet', {
 
         this.tools = [{
             type: 'save'
-
         }];
 
         this.callParent();

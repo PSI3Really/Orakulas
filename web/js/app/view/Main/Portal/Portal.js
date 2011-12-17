@@ -7,16 +7,18 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.Portal', {
         'Ext.ux.PortalPanel'
     ],
 
-    border: false,
+    alternative: false,
     portletCount: 0,
 
     initComponent: function(){
-        //TODO: dynamic number of columns
-        this.items = [{
+        this.alternative = this._alternative;
+        delete(this._alternative);
 
-        },{
+        this.items = [{}];
 
-        }];
+        if (!this.alternative) {
+            this.items.push({});
+        }
 
         this.callParent();
     }

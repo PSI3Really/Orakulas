@@ -6,8 +6,6 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.SubToolbar', {
         CONFIG.APP_NS+'.view.Predict.Window'
     ],
 
-    border: false,
-
     initComponent: function () {
         this.height = 30,
         this.items = [
@@ -21,7 +19,8 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.SubToolbar', {
                 iconCls: 'icon-table-export',
                 action: 'export'
             },
-            '->',{
+            '->',
+            {
                 text: LANG.MAIN.SUB_TOOLBAR.BUTTON.TABLE,
                 iconCls: 'icon-table',
                 action: 'addTable'
