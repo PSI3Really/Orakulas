@@ -20,6 +20,34 @@ class InformationalSystemController extends DefaultController {
         return $entityFacade;
     }
 
+    public function updateAction() {
+        $jsonValue = $_POST["jsonValue"];
+
+        $decodedArray = json_decode($jsonValue, true);
+
+        $departments = explode(" ", $decodedArray['departments']);
+
+        $informationalSystemArray = array(
+            'id' => $decodedArray['id'],
+            'code' => $decodedArray['code'],
+            'name' => $decodedArray['name']
+        );
+
+        $returnValue = array('success' => true);
+
+        try {
+            $informationalSystem = $this->getEntityFacade()->load($informationalSystemArray['id']);
+
+            $this->getEntityFacade()->merge($informationalSystem, $informationalSystemArray);
+
+            $this->getEntityFacade()->setUsedByDepartments($informationalSystem, $departments);
+        } catch (\Exception $e) {
+            $returnValue['success'] = false;
+        }
+
+        return $this->constructResponse(json_encode($returnValue));
+    }
+
     public function usedByAction() {
         $jsonValue = $_POST["jsonValue"];
 

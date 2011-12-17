@@ -4,10 +4,43 @@ namespace Orakulas\ModelBundle\Facades;
 
 use \Orakulas\ModelBundle\Facades\EntityFacade;
 use \Orakulas\ModelBundle\Entity\InformationalSystem;
+use \Orakulas\ModelBundle\Entity\DepartmentInfoSysUsage;
 
 class InformationalSystemFacade extends EntityFacade {
 
     const INFORMATIONAL_SYSTEM = 'InformationalSystem';
+
+    /**
+     * @var \Orakulas\ModelBundle\Facades\DepartmentFacade
+     */
+    private $departmentFacade;
+
+    /**
+     * @var \Orakulas\ModelBundle\Facades\DepartmentInfoSysUsageFacade
+     */
+    private $departmentInfoSysUsageFacade;
+
+    public function getDepartmentFacade() {
+        if ($this->departmentFacade == NULL) {
+            $this->departmentFacade = new DepartmentFacade();
+            $this->departmentFacade->setDoctrine($this->getDoctrine());
+        }
+
+        return $this->departmentFacade;
+    }
+
+    public function getDepartmentInfoSysUsageFacade() {
+        if ($this->departmentInfoSysUsageFacade == NULL) {
+            $this->departmentInfoSysUsageFacade = new DepartmentInfoSysUsageFacade();
+
+            $this->departmentInfoSysUsageFacade->setDoctrine($this->getDoctrine());
+
+            $this->departmentInfoSysUsageFacade->setDepartmentFacade($this->getDepartmentFacade());
+            $this->departmentInfoSysUsageFacade->setInformationalSystemFacade($this);
+        }
+
+        return $this->departmentInfoSysUsageFacade;
+    }
 
     /**
      * @param int $id
@@ -65,6 +98,79 @@ class InformationalSystemFacade extends EntityFacade {
         }
 
         return $departmentIds;
+    }
+
+    /**
+     * @param \Orakulas\ModelBundle\Entity\InformationalSystem $informationalSystem
+     * @param $departmentIds
+     */
+    public function setUsedByDepartments($informationalSystem, $departmentIds) {
+        $this->deleteOldValues($informationalSystem, $departmentIds);
+
+        $stmtString = '
+            SELECT
+              department_id
+            FROM
+              department_info_sys_usage
+            WHERE
+              informational_system_id = :infoSysId';
+
+        $entityManager = $this->getDoctrine()->getEntityManager();
+
+        $stmt = $entityManager->getConnection()->prepare($stmtString);
+
+        $stmt->bindValue('infoSysId', $informationalSystem->getId());
+
+        $stmt->execute();
+
+        $resultArray = $stmt->fetchAll();
+
+        $dbDepartmentIds = array();
+        foreach ($resultArray as $result) {
+            $dbDepartmentIds[] = (int) $result['department_id'];
+        }
+
+        $diffedArray = array_diff($departmentIds, $dbDepartmentIds);
+
+        if (count($diffedArray) > 0) {
+            foreach ($diffedArray as $id) {
+                $departmentInfoSysUsage = new DepartmentInfoSysUsage();
+
+                $departmentInfoSysUsage->setInformationalSystem($informationalSystem);
+                $departmentInfoSysUsage->setDepartment($this->getDepartmentFacade()->load($id));
+
+                $this->getDepartmentInfoSysUsageFacade()->save($departmentInfoSysUsage);
+            }
+        }
+    }
+
+    private function deleteOldValues($informationalSystem, $departmentIds) {
+        $stmtString = '
+            DELETE FROM department_info_sys_usage
+            WHERE
+              informational_system_id = :infoSysId AND
+              department_id not in (';
+
+        foreach ($departmentIds as $key => $id) {
+            $stmtString .= ':id' . $id;
+            if ($key < count($departmentIds) - 1) {
+                $stmtString .= ', ';
+            }
+        }
+
+        $stmtString .= ')';
+
+        $entityManager = $this->getDoctrine()->getEntityManager();
+
+        $stmt = $entityManager->getConnection()->prepare($stmtString);
+
+        $stmt->bindValue('infoSysId', (int)$informationalSystem->getId());
+
+        foreach ($departmentIds as $id) {
+            $stmt->bindValue('id' . $id, (int)$id);
+        }
+
+        $stmt->execute();
     }
 
     /**

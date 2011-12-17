@@ -87,7 +87,7 @@ abstract class EntityFacade {
      * @param $source
      * @param $destination
      */
-    public abstract function merge($source, $destination);
+    public abstract function merge($destination, $source);
 
     /**
      * @param $entity
