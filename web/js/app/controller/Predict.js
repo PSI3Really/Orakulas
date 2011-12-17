@@ -58,8 +58,8 @@ Ext.define(CONFIG.APP_NS+'.controller.Predict', {
         //params: 'data={"supportQuantities":{},"supportAdministrationTimes":{},"departmentInfoSysUsages":{}}'
 
         var jsonData = 'data={"supportQuantities":' + supportQuantities +
-            ',"supportAdministrationTimes":' + wnd.supportJson +
-            ',"departmentInfoSysUsages":' + wnd.infoSysJson + '}';
+            ',"supportAdministrationTimes":' + wnd.supportJson ? wnd.supportJson : '{}' +
+            ',"departmentInfoSysUsages":' + wnd.infoSysJson ? wnd.infoSysJson : '{}'+ '}';
         
         wnd.setLoading(LANG.LOADING.PREDICTING);
 
@@ -106,6 +106,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Predict', {
                     grid.store.loadData(action.result.data, false); //replace old data
                 },
                 failure: function(form, action) {
+                    console.log(action.result);
                     var message = LANG.IMPORT.FAIL.UNKNOWN; // unknown error
                     switch (action.result.errors) {
                         case 'INVALID_FILE_TYPE':
