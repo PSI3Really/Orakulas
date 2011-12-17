@@ -30,4 +30,16 @@ class SupportHistoryController extends DefaultController {
         return $entityFacade;
     }
 
+    public function importAction() {
+        $responseArray = array('success' => true);
+
+        try {
+            $this->getEntityFacade()->import($_POST["jsonValue"]);
+        } catch (\Exception $e) {
+            $responseArray['success'] = false;
+        }
+
+        return $this->constructResponse(json_encode($responseArray));
+    }
+
 }
