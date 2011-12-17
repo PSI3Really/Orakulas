@@ -2,6 +2,10 @@ OrakulasExcelBundle_import_support_histories:
     pattern:  /excel/import/supportHistories
     defaults: { _controller: OrakulasExcelBundle:Import:readSupportHistories }
 
+OrakulasExcelBundle_export:
+    pattern: /excel/export
+    defaults: { _controller: OrakulasExcelBundle:Export:exportData}
+
 OrakulasExcelBundle_save_png:
     pattern:  /excel/savePng
     defaults: { _controller: OrakulasExcelBundle:SavePng:savePng }
