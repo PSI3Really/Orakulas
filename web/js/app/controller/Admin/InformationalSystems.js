@@ -18,13 +18,15 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.InformationalSystems', {
             },
             'adminispanel button[action=delete]':{
                 click: this.remove
+            },
+            'adminisgrid button[action=sync]': {
+                click: this.sync
             }
         });
     },
 
     add: function(btn){
         Ext.create('widget.adminisaddWindow', {}).show();
-        /*
         var grid = btn.up('adminisgrid');
         var store = grid.getStore();
         
@@ -34,15 +36,12 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.InformationalSystems', {
 
         store.add(record);
         store.sync();
-        */
     },
 
     remove: function(btn){
         var grid = btn.up('adminisgrid');
         var store = grid.getStore();
         var selected = grid.getSelectionModel().getSelection();
-        
-        //alert('Selected: ' + selected[0].getId());
 
         for (var index in selected){
             var item = selected[index];
@@ -59,5 +58,12 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.InformationalSystems', {
                 }
             });
         }
+    },
+
+
+    sync: function(btn) {
+        var grid = btn.up('adminisgrid');
+        var store = grid.getStore();
+        store.sync();
     }
 });

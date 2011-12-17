@@ -155,7 +155,7 @@ class UserFacade extends EntityFacade {
      */
     public function load($id) {
         if ($id == NULL) {
-            throw new \InvalidArgumentException('parameter $id and cannot be null');
+            throw new \InvalidArgumentException('parameter $id cannot be null');
         }
 
         if ($this->getDoctrine() == NULL) {

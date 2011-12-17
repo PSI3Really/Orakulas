@@ -142,9 +142,11 @@ class PredictDataController extends Controller {
         $supportAdministrationTimesTemp = $this->jsonData['supportAdministrationTimes'];
         foreach ($supportAdministrationTimesTemp as $supportAdministrationTimeTemp) {
             $alreadyContainsThisSAT = false;
-            foreach ($this->supportAdministrationTimes as $currentSAT) {
+            $indexToChange = null;
+            foreach ($this->supportAdministrationTimes as $index=>$currentSAT) {
                 if ($currentSAT['department'] === $supportAdministrationTimeTemp['department']) {
                     if ($currentSAT['supportType'] === $supportAdministrationTimeTemp['supportType']) {
+                        $indexToChange = $index;
                         $alreadyContainsThisSAT = true;
                     }
                 }
@@ -155,6 +157,8 @@ class PredictDataController extends Controller {
                     'supportType'=>$supportAdministrationTimeTemp['supportType'],
                     'hoursCount'=>$supportAdministrationTimeTemp['hoursCount'],
                 );
+            } else { //jei neperrasyti reiksmiu senu, sita else'a nafik trinti
+                $this->supportAdministrationTimes[$indexToChange]['hoursCount'] = $supportAdministrationTimeTemp['hoursCount'];
             }
         }
     }
@@ -178,9 +182,10 @@ class PredictDataController extends Controller {
         foreach ($departmentInfoSysUsagesTemp as $departmentInfoSysUsageTemp) {
             $departments = $departmentInfoSysUsageTemp['departments'];
             $informationalSystem = $departmentInfoSysUsageTemp['IS'];
-            if (!isset($this->departmentInfoSysUsages[$informationalSystem])) {
+            //atkomentuoti, jei reikia palikti padalinius is istoriniu duomenu - dabar nebepalieka
+            //if (!isset($this->departmentInfoSysUsages[$informationalSystem])) {
                 $this->departmentInfoSysUsages[$informationalSystem] = array();
-            }
+            //}
             foreach ($departments as $currentDepartment) {
                 if (!in_array($currentDepartment, $this->departmentInfoSysUsages[$informationalSystem])) {
                     array_push($this->departmentInfoSysUsages[$informationalSystem], $currentDepartment);

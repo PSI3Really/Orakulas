@@ -75,7 +75,7 @@ class InformationalSystemFacade extends EntityFacade {
      * @param \Orakulas\ModelBundle\Entity\InformationalSystem $source
      * @param \Orakulas\ModelBundle\Entity\InformationalSystem $destination
      */
-    public function merge($source, $destination) {
+    public function merge($destination, $source) {
         if (isset($source['code']))
             $destination->setCode($source['code']);
         if (isset($source['name']))

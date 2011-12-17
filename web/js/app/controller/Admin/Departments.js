@@ -21,6 +21,9 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Departments', {
             },
             'admindepartmentsgrid button[action=delete]':{
                 click: this.remove
+            },
+            'admindepartmentsgrid button[action=sync]': {
+                click: this.sync
             }
         });
     },
@@ -47,6 +50,12 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Departments', {
         var store = grid.getStore();
 
         store.removeAt(store.getCount() - 1);
+        store.sync();
+    },
+
+    sync: function(btn) {
+        var grid = btn.up('admindepartmentsgrid');
+        var store = grid.getStore();
         store.sync();
     }
 });

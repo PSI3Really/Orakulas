@@ -79,6 +79,6 @@ class DepartmentFacade extends EntityFacade {
         if (isset($source['code']))
             $destination->setCode($source['code']);
         if (isset($source['name']))
-            $destination->setCode($source['name']);
+            $destination->setName($source['name']);
     }
 }
