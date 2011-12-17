@@ -123,29 +123,6 @@ class SupportHistoryFacade extends EntityFacade {
             $destination->setSupportType($this->getSupportTypeFacade()->fromArray($source['supportType']));
     }
 
-    /*public function searchByTypeAndRange($supportType, $startDate, $endDate) {
-        $entityManager = $this->getDoctrine()->getEntityManager();
-
-        $queryString = '
-        SELECT
-          sh
-        FROM
-          OrakulasModelBundle:SupportHistory sh
-        WHERE
-          sh.startDate = :startDate and
-          sh.endDate = :endDate and
-          sh.supportType = :supportType';
-
-        $query = $entityManager->createQuery($queryString);
-        $query->setParameters(array(
-            'startDate' => $startDate,
-            'endDate' => $endDate,
-            'supportType' => $supportType
-        ));
-
-        return $query->getSingleResult();
-    }*/
-
     public function import($jsonData) {
         $supportTypes = array();
         foreach ($this->getSupportTypeFacade()->loadAll() as $supportType) {
@@ -194,6 +171,4 @@ class SupportHistoryFacade extends EntityFacade {
 
         $this->getDoctrine()->getEntityManager()->flush();
     }
-
-    /*{"type":"p1-1","startDate":"2008-01-01T02:00:00","endDate":"2008-01-31T02:00:00","amount":15}*/
 }
