@@ -18,8 +18,9 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.ChartPortlet', {
 
             legend: {
                 position: 'right',
-                itemSpacing: 0,
-                boxFill: '#F3F6FC'
+                boxFill: '#F3F6FC',
+                itemSpacing: 5,
+                labelFont: '11px Helvetica, Arial, sans-serif'
             },
             axes: [{
                 type: 'Time',
@@ -30,13 +31,17 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.ChartPortlet', {
                 label: {
                     rotate: {
                         degrees: 315
-                    }
+                    },
+                    font: '10px Helvetica, Arial, sans-serif'
                 }
             },{
                 type: 'Numeric',
                 position: 'left',
                 title: this.leftAxisTitle,
-                grid: true
+                grid: true,
+                label: {
+                    font: '10px Helvetica, Arial, sans-serif'
+                }
             }],
             series: [],
 
