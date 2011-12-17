@@ -4,7 +4,10 @@ namespace Orakulas\ModelBundle\Facades;
 
 use \Orakulas\ModelBundle\Facades\EntityFacade;
 use \Orakulas\ModelBundle\Facades\SupportCategoryFacade;
+use \Orakulas\ModelBundle\Facades\DepartmentFacade;
+use \Orakulas\ModelBundle\Facades\SupportAdministrationTimeFacade;
 use \Orakulas\ModelBundle\Entity\SupportType;
+use \Orakulas\ModelBundle\Entity\SupportAdministrationTime;
 
 class SupportTypeFacade extends EntityFacade {
 
@@ -14,6 +17,45 @@ class SupportTypeFacade extends EntityFacade {
      * @var \Orakulas\ModelBundle\Facades\SupportCategoryFacade
      */
     private $supportCategoryFacade;
+
+    /**
+     * @var \Orakulas\ModelBundle\Facades\DepartmentFacade
+     */
+    private $departmentFacade;
+
+    /**
+     * @var \Orakulas\ModelBundle\Facades\SupportAdministrationTimeFacade
+     */
+    private $supportAdministrationTimeFacade;
+
+    /**
+     * @return \Orakulas\ModelBundle\Facades\DepartmentFacade
+     */
+    public function getDepartmentFacade() {
+        if ($this->departmentFacade == null) {
+            $this->departmentFacade = new DepartmentFacade();
+
+            $this->departmentFacade->setDoctrine($this->getDoctrine());
+        }
+
+        return $this->departmentFacade;
+    }
+
+    /**
+     * @return \Orakulas\ModelBundle\Facades\SupportAdministrationTimeFacade
+     */
+    public function getSupportAdministrationTimeFacade() {
+        if ($this->supportAdministrationTimeFacade == null) {
+            $this->supportAdministrationTimeFacade = new SupportAdministrationTimeFacade();
+
+            $this->supportAdministrationTimeFacade->setDoctrine($this->getDoctrine());
+
+            $this->supportAdministrationTimeFacade->setDepartmentFacade($this->getDepartmentFacade());
+            $this->supportAdministrationTimeFacade->setSupportTypeFacade($this);
+        }
+
+        return $this->supportAdministrationTimeFacade;
+    }
 
     /**
      * @param \Orakulas\ModelBundle\Facades\SupportCategoryFacade $supportCategoryFacade
@@ -70,6 +112,123 @@ class SupportTypeFacade extends EntityFacade {
     }
 
     /**
+     * @param \Orakulas\ModelBundle\Entity\SupportType $supportType
+     * @param $departments
+     */
+    public function setSupportAdministrationTimes($supportType, $departments) {
+        $this->deleteOldValues($supportType, array_keys($departments));
+
+        $stmtString = '
+            SELECT
+              department_id
+            FROM
+              support_administration_time
+            WHERE
+              support_type_id = :supportTypeId';
+
+        $entityManager = $this->getDoctrine()->getEntityManager();
+
+        $stmt = $entityManager->getConnection()->prepare($stmtString);
+
+        $stmt->bindValue('supportTypeId', $supportType->getId());
+
+        $stmt->execute();
+
+        $resultArray = $stmt->fetchAll();
+
+        $dbDepartmentIds = array();
+        foreach ($resultArray as $result) {
+            $dbDepartmentIds[] = (int) $result['department_id'];
+        }
+
+        $diffedArray = array_diff(array_keys($departments), $dbDepartmentIds);
+        $intersectedArray = array_intersect(array_keys($departments), $dbDepartmentIds);
+
+        if (count($diffedArray) > 0) {
+            foreach ($diffedArray as $id) {
+                $supportAdministrationTime = new SupportAdministrationTime();
+
+                $supportAdministrationTime->setDepartment($this->getDepartmentFacade()->load($id));
+                $supportAdministrationTime->setSupportType($supportType);
+                $supportAdministrationTime->setHoursCount($departments[$id]);
+
+                $this->getSupportAdministrationTimeFacade()->save($supportAdministrationTime);
+            }
+        }
+
+        $stmtString = '
+            SELECT
+              id
+            FROM
+              support_administration_time
+            WHERE
+              support_type_id = :supportTypeId AND
+              department_id in (';
+
+        foreach ($intersectedArray as $key => $id) {
+            $stmtString .= ':id'.$id;
+            if ($key < count($intersectedArray) - 1) {
+                $stmtString .= ", ";
+            }
+        }
+        $stmtString .= ")";
+
+        $stmt = $entityManager->getConnection()->prepare($stmtString);
+
+        $stmt->bindValue('supportTypeId', $supportType->getId());
+        foreach ($intersectedArray as $key => $id) {
+            $stmt->bindValue('id'.$id, $id);
+        }
+
+        $stmt->execute();
+
+        $resultArray = $stmt->fetchAll();
+        $dbSupportAdministrationTimeIds = array();
+        foreach ($resultArray as $result) {
+            $dbSupportAdministrationTimeIds[] = (int) $result['id'];
+        }
+
+        if (count($dbSupportAdministrationTimeIds) > 0) {
+            foreach($dbSupportAdministrationTimeIds as $id) {
+                $supportAdministrationTime = $this->getSupportAdministrationTimeFacade()->load($id);
+
+                $supportAdministrationTime->setHoursCount($departments[$supportAdministrationTime->getDepartment()->getId()]);
+            }
+        }
+
+        $entityManager->flush();
+    }
+
+    private function deleteOldValues($supportType, $departmentIds) {
+        $stmtString = '
+            DELETE FROM support_administration_time
+            WHERE
+              support_type_id = :supportTypeId AND
+              department_id not in (';
+
+        foreach ($departmentIds as $key => $id) {
+            $stmtString .= ':id' . $id;
+            if ($key < count($departmentIds) - 1) {
+                $stmtString .= ', ';
+            }
+        }
+
+        $stmtString .= ')';
+
+        $entityManager = $this->getDoctrine()->getEntityManager();
+
+        $stmt = $entityManager->getConnection()->prepare($stmtString);
+
+        $stmt->bindValue('supportTypeId', (int) $supportType->getId());
+
+        foreach ($departmentIds as $id) {
+            $stmt->bindValue('id' . $id, (int) $id);
+        }
+
+        $stmt->execute();
+    }
+
+    /**
      * @param \Orakulas\ModelBundle\Entity\SupportType $entity
      * @return array
      */
@@ -77,6 +236,7 @@ class SupportTypeFacade extends EntityFacade {
         $supportCategory = $this->getSupportCategoryFacade()->load($entity->getSupportCategory()->getId());
 
         $array = array(
+
             'id' => $entity->getId(),
             'name' => $entity->getName(),
             'code' => $entity->getCode(),
