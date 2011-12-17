@@ -21,3 +21,9 @@ OrakulasModelBundle_departments_delete:
     defaults: { _controller: OrakulasModelBundle:Department:delete }
     requirements:
       _method:  POST
+
+OrakulasModelBundle_departments_usedInfoSys:
+    pattern: /usedInfoSys
+    defaults: { _controller: OrakulasModelBundle:Department:usedInfoSys }
+    requirements:
+      _method: POST
