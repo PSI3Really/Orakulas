@@ -23,5 +23,11 @@ Ext.define(CONFIG.APP_NS+'.view.Viewport', {
         ];
         
         this.callParent();
+    },
+
+    listeners: {
+        beforerender: function () {
+            Ext.get('loading').fadeOut({ remove: true });
+        }
     }
 });

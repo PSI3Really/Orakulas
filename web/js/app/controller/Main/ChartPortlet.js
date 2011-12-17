@@ -163,7 +163,9 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
             title: '~~To save generated image right-click and choose "Save Image As&hellip;"',
             resizable: false,
             layout: 'fit',
-            plain: false,
+            modal: true,
+            width: chart.getWidth() + 12,
+            height: chart.getHeight() + 34,
             html: '<canvas width="'+chart.getWidth()+'" height="'+chart.getHeight()+'"></canvas>',
             listeners: {
                 afterrender: function (window, eOpts) {

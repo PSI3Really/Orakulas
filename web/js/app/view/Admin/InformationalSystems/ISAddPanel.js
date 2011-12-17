@@ -70,7 +70,10 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.InformationalSystems.ISAddPanel', {
                         xtype:  'textfield',
                         name:   'code',
                         flex:   0,
-                        
+                        value: this.record.get("code"),
+
+                        allowBlank: false,
+
                         style: {
                             width: '40px !Important'
                         }
@@ -89,11 +92,28 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.InformationalSystems.ISAddPanel', {
                     {
                         xtype:  'textfield',
                         name:   'name',
-                        flex:   1
+                        flex:   1,
+
+                        value: this.record.get("name"),
+                        allowBlank: false
                     }
                 ]
             }
         ];
+
+        if(this.editing) {
+            var params = {
+                id: this.record.get("id")
+            };
+
+            Ext.Ajax.request({
+                url : '/model/informationalSystems/usedBy',
+                method: 'POST',
+                params: {
+                    jsonValue: Ext.encode(params)
+                }
+            });
+        }
 
         this.callParent(arguments);
     }
