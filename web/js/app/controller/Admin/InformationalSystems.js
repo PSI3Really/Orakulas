@@ -30,12 +30,19 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.InformationalSystems', {
             },
             'adminisaddpanel button[action=confirm]': {
                 click: this.addConfirm
+            },
+            'adminisaddpanel button[action=cancel]': {
+                click: this.addCancel
+            },
+            'adminisgrid':{
+                itemdblclick: this.edit
             }
         });
     },
 
     add: function(btn){
         Ext.create('widget.adminisaddWindow', {}).show();
+        /*
         var grid = btn.up('adminisgrid');
         var store = grid.getStore();
         
@@ -45,6 +52,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.InformationalSystems', {
 
         store.add(record);
         store.sync();
+        */
     },
 
     remove: function(btn){
@@ -81,8 +89,10 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.InformationalSystems', {
 
     addConfirm: function(btn) {
         var grid = btn.up('adminisaddWindow').down('adminisaddgrid');
-        var selected = grid.getSelectionModel().getSelection();
+        var code = btn.up('adminisaddpanel').down('textfield[name=code]');
+        var name = btn.up('adminisaddpanel').down('textfield[name=name]');
 
+        var selected = grid.getSelectionModel().getSelection();
         var selected_id = "";
 
         for (var index in selected){
@@ -90,6 +100,39 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.InformationalSystems', {
             selected_id += item.get("id")+" ";
         }
 
-        Ext.Msg.alert('Pasirinkti depatamentai', selected_id);
+        var params = {
+            code: code.value,
+            name: name.value,
+            departments: selected_id
+        };
+
+        Ext.Ajax.request({
+            url : 'model/informationalSystems/create',
+            method: 'POST',
+            params: {
+                jsonValue: Ext.encode(params)
+            },
+            success:
+                function(response, opts) {
+                    var obj = Ext.decode(response.responseText);
+                    var store = Ext.getCmp('adminisgridid').getStore();
+                    store.loadRawData(obj, true);
+                    btn.up('adminisaddWindow').close();
+                }
+        });
+    },
+
+    addCancel: function(btn) {
+        btn.up('adminisaddWindow').close();
+    },
+
+    edit: function(view, record, item, index){
+        var wnd = Ext.create('widget.adminisaddWindow', {
+            editing: true,
+            record: record,
+            store: record.store
+        });
+
+        wnd.show();
     }
 });
