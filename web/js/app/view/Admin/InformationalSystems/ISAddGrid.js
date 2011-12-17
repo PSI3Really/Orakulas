@@ -1,11 +1,11 @@
-var adminisaddgridsm = Ext.create('Ext.selection.CheckboxModel');
 Ext.define(CONFIG.APP_NS+'.view.Admin.InformationalSystems.ISAddGrid', {
     extend: 'Ext.grid.Panel',
     alias: 'widget.adminisaddgrid',
 
     initComponent: function() {
 
-        this.selModel = adminisaddgridsm;
+        this.selModel = Ext.create('Ext.selection.CheckboxModel', {
+        });
         this.border = false;
         this.store = Ext.create('widget.adminDepartmentsStore', {});
 
@@ -13,7 +13,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.InformationalSystems.ISAddGrid', {
             {header: LANG.ENTITY.DEPARTMENT_PLURAL,          dataIndex: 'code',  flex: 1}
         ];
 
-        this.multiSelect = true;
+        this.multiSelect = false;
         this.store.load();
         this.callParent(arguments);
     }
