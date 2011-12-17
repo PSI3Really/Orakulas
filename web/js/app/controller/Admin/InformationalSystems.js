@@ -9,7 +9,10 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.InformationalSystems', {
         'Admin.InformationalSystems'
     ],
 
-    views: ['Admin.InformationalSystems.IS', 'Admin.InformationalSystems.ISAddWindow'],
+    views: [
+        'Admin.InformationalSystems.IS',
+        'Admin.InformationalSystems.ISAddWindow'
+    ],
 
     init: function(){
         this.control({
@@ -21,6 +24,12 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.InformationalSystems', {
             },
             'adminisgrid button[action=sync]': {
                 click: this.sync
+            },
+            'adminisgrid button[action=undo]': {
+                click: this.undo
+            },
+            'adminisaddpanel button[action=confirm]': {
+                click: this.addConfirm
             }
         });
     },
@@ -65,5 +74,22 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.InformationalSystems', {
         var grid = btn.up('adminisgrid');
         var store = grid.getStore();
         store.sync();
+    },
+
+    undo: function(btn) {
+    },
+
+    addConfirm: function(btn) {
+        var grid = btn.up('adminisaddWindow').down('adminisaddgrid');
+        var selected = grid.getSelectionModel().getSelection();
+
+        var selected_id = "";
+
+        for (var index in selected){
+            var item = selected[index];
+            selected_id += item.get("id")+" ";
+        }
+
+        Ext.Msg.alert('Pasirinkti depatamentai', selected_id);
     }
 });

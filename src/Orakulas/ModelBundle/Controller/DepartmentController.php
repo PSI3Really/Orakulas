@@ -20,4 +20,16 @@ class DepartmentController extends DefaultController {
         return $entityFacade;
     }
 
+    public function usedInfoSysAction() {
+        $jsonValue = $_POST["jsonValue"];
+
+        $decodedArray = json_decode($jsonValue, true);
+
+        $id = $decodedArray['id'];
+
+        $infoSysIds = $this->getEntityFacade()->getUsedInfoSysIds($id);
+
+        return $this->constructResponse(json_encode($infoSysIds));
+    }
+
 }

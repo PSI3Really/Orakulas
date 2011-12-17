@@ -112,7 +112,7 @@ class SupportHistoryFacade extends EntityFacade {
      * @param \Orakulas\ModelBundle\Entity\SupportHistory $source
      * @param \Orakulas\ModelBundle\Entity\SupportHistory $destination
      */
-    public function merge($source, $destination) {
+    public function merge($destination, $destination) {
         if (isset($source['startDate']))
             $destination->setStartDate($source['startDate']);
         if (isset($source['endDate']))
@@ -121,5 +121,54 @@ class SupportHistoryFacade extends EntityFacade {
             $destination->setSupportRequestCount($source['supportRequestCount']);
         if (isset($source['supportType']))
             $destination->setSupportType($this->getSupportTypeFacade()->fromArray($source['supportType']));
+    }
+
+    public function import($jsonData) {
+        $supportTypes = array();
+        foreach ($this->getSupportTypeFacade()->loadAll() as $supportType) {
+            $supportTypes[strtolower($supportType->getCode())] = $supportType;
+        }
+
+        $supportHistories = array();
+        foreach ($this->loadAll() as $supportHistory) {
+            if (!isset($supportHistories[$supportHistory->getStartDate()->getTimestamp()])) {
+                $supportHistories[$supportHistory->getStartDate()->getTimestamp()] = array();
+            }
+            $supportHistories[$supportHistory->getStartDate()->getTimestamp()][strtolower($supportHistory->getSupportType()->getCode())] = $supportHistory;
+        }
+
+        $arrayData = json_decode($jsonData, true);
+        $newHistories = array();
+
+        foreach ($arrayData as $key => $value) {
+            $startDate = date("Y-m-01", strtotime($value['startDate']));
+            $endDate = date("Y-m-d", strtotime("-1 second", strtotime("+1 month", strtotime(date("Y-m-01", strtotime($value['endDate']))))));
+
+            $startDateKey = strtotime($startDate);
+            $typeKey = strtolower($value['type']);
+
+            $supportHistory = null;
+            if ((!isset($supportHistories[$startDateKey]) || !isset($supportHistories[$startDateKey][$typeKey]))) {
+                $supportHistory = new SupportHistory();
+                $supportHistory->setStartDate(new \DateTime($startDate));
+                $supportHistory->setEndDate(new \DateTime($endDate));
+                $supportHistory->setSupportRequestCount($value['amount']);
+                $supportHistory->setSupportType($supportTypes[$typeKey]);
+
+                $newHistories[] = $supportHistory;
+            } else {
+                $supportHistory = $supportHistories[strtotime($startDate)][strtolower($value['type'])];
+
+                $supportHistory->setSupportRequestCount($supportHistory->getSupportRequestCount() + $value['amount']);
+
+                $supportHistories[strtotime($startDate)][strtolower($value['type'])] = $supportHistory;
+            }
+        }
+
+        foreach ($newHistories as $key => $history) {
+            $this->save($history);
+        }
+
+        $this->getDoctrine()->getEntityManager()->flush();
     }
 }

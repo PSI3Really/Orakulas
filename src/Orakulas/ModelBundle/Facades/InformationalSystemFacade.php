@@ -41,6 +41,33 @@ class InformationalSystemFacade extends EntityFacade {
      }
 
     /**
+     * @param int $id
+     */
+    public function getUsedByDepartmentsIds($id) {
+        $queryString = '
+        SELECT
+          disu.department_id
+        FROM
+          department_info_sys_usage disu
+        WHERE
+          disu.informational_system_id = ?';
+
+        $entityManager = $this->getDoctrine()->getEntityManager();
+
+        $query = $entityManager->getConnection()->prepare($queryString);
+        $query->bindValue(1, $id);
+
+        $query->execute();
+
+        $departmentIds = array();
+        foreach ($query->fetchAll() as $value) {
+            $departmentIds[] = (int) $value['department_id'];
+        }
+
+        return $departmentIds;
+    }
+
+    /**
      * @param \Orakulas\ModelBundle\Entity\InformationalSystem $entity
      * @return array
      */

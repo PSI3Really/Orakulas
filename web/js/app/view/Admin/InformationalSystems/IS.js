@@ -12,6 +12,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.InformationalSystems.IS', {
         this.items = [
             {
                 xtype: 'adminisgrid',
+                multiSelect: true,
                 border: false,
                 dockedItems: [
                     {

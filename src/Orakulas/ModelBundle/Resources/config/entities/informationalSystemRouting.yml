@@ -21,3 +21,9 @@ OrakulasModelBundle_informationalSystems_delete:
     defaults: { _controller: OrakulasModelBundle:InformationalSystem:delete }
     requirements:
       _method:  POST
+
+OrakulasModelBundle_informationalSystems_usedBy:
+    pattern: /usedBy
+    defaults: { _controller: OrakulasModelBundle:InformationalSystem:usedBy }
+    requirements:
+      _method:  POST

@@ -81,4 +81,31 @@ class DepartmentFacade extends EntityFacade {
         if (isset($source['name']))
             $destination->setName($source['name']);
     }
+
+    /**
+     * @param int $id
+     */
+    public function getUsedInfoSysIds($id) {
+        $queryString = '
+        SELECT
+          disu.informational_system_id
+        FROM
+          department_info_sys_usage disu
+        WHERE
+          disu.department_id = ?';
+
+        $entityManager = $this->getDoctrine()->getEntityManager();
+
+        $query = $entityManager->getConnection()->prepare($queryString);
+        $query->bindValue(1, $id);
+
+        $query->execute();
+
+        $infoSysIds = array();
+        foreach ($query->fetchAll() as $value) {
+            $infoSysIds[] = (int) $value['informational_system_id'];
+        }
+
+        return $infoSysIds;
+    }
 }

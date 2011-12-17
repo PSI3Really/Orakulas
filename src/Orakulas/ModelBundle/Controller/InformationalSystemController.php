@@ -20,4 +20,16 @@ class InformationalSystemController extends DefaultController {
         return $entityFacade;
     }
 
+    public function usedByAction() {
+        $jsonValue = $_POST["jsonValue"];
+
+        $decodedArray = json_decode($jsonValue, true);
+
+        $id = $decodedArray['id'];
+
+        $departmentIds = $this->getEntityFacade()->getUsedByDepartmentsIds($id);
+
+        return $this->constructResponse(json_encode($departmentIds));
+    }
+
 }

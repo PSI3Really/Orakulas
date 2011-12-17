@@ -21,3 +21,9 @@ OrakulasModelBundle_supportHistories_delete:
     defaults: { _controller: OrakulasModelBundle:SupportHistory:delete }
     requirements:
       _method:  POST
+
+OrakulasModelBundle_supportHistories_import:
+    pattern: /import
+    defaults: { _controller: OrakulasModelBundle:SupportHistory:import }
+    requirements:
+      _method:  POST
