@@ -27,25 +27,29 @@ class InformationalSystemController extends DefaultController {
 
         $departments = explode(" ", $decodedArray['departments']);
 
-        $informationalSystemArray = array(
-            'id' => $decodedArray['id'],
-            'code' => $decodedArray['code'],
-            'name' => $decodedArray['name']
-        );
+        $informationalSystem = $this->getEntityFacade()->load($decodedArray['id']);
 
-        $returnValue = array('success' => true);
+        $this->getEntityFacade()->merge($informationalSystem, $decodedArray);
 
-        try {
-            $informationalSystem = $this->getEntityFacade()->load($informationalSystemArray['id']);
+        $this->getEntityFacade()->setUsedByDepartments($informationalSystem, $departments);
 
-            $this->getEntityFacade()->merge($informationalSystem, $informationalSystemArray);
+        return $this->constructResponse($this->getEntityFacade()->toJson($informationalSystem));
+    }
 
-            $this->getEntityFacade()->setUsedByDepartments($informationalSystem, $departments);
-        } catch (\Exception $e) {
-            $returnValue['success'] = false;
-        }
+    public function createAction() {
+        $jsonValue = $_POST["jsonValue"];
 
-        return $this->constructResponse(json_encode($returnValue));
+        $decodedArray = json_decode($jsonValue, true);
+
+        $departments = explode(" ", $decodedArray['departments']);
+
+        $informationalSystem = $this->getEntityFacade()->fromArray($decodedArray);
+
+        $this->getEntityFacade()->save($informationalSystem);
+
+        $this->getEntityFacade()->setUsedByDepartments($informationalSystem, $departments);
+
+        return $this->constructResponse($this->getEntityFacade()->toJson($informationalSystem));
     }
 
     public function usedByAction() {
