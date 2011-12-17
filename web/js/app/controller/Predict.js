@@ -55,21 +55,21 @@ Ext.define(CONFIG.APP_NS+'.controller.Predict', {
 
         var supportQuantities = Ext.encode(Ext.pluck(store.data.items, 'data'));
 
-        var jsonData = '{supportQuantities":' + supportQuantities +
+        //params: 'data={"supportQuantities":{},"supportAdministrationTimes":{},"departmentInfoSysUsages":{}}'
+
+        var jsonData = 'data={"supportQuantities":' + supportQuantities +
             ',"supportAdministrationTimes":' + wnd.supportJson +
             ',"departmentInfoSysUsages":' + wnd.infoSysJson + '}';
-
-
+        
         wnd.setLoading(LANG.LOADING.PREDICTING);
 
         Ext.Ajax.request({
             url: 'predictData',
             method: 'POST',
-            params: {
-                jsonValue: jsonData
-            },
+            params: jsonData,
             success: function(response){
-                wnd.parentTab.fireEvent('loadPrediction', wnd.parentTab, Ext.JSON.decode(response.responseText));
+                var tabpanel = wnd.parentTab.up('maintabpanel');
+                tabpanel.fireEvent('loadPrediction', tabpanel, Ext.JSON.decode(response.responseText));
                 wnd.setLoading(false);
                 wnd.close();
             },
@@ -125,6 +125,11 @@ Ext.define(CONFIG.APP_NS+'.controller.Predict', {
     },
 
     editEntities: function(btn){
-        Ext.create('widget.editEntitiesWnd', {parentWnd: btn.up('predictwindow')}).show();
+        var parentWnd = btn.up('predictwindow');
+        if (!parentWnd.editEntitiesWnd) {
+            parentWnd.editEntitiesWnd = Ext.create('widget.editEntitiesWnd', {parentWnd: parentWnd});
+        }
+        
+        parentWnd.editEntitiesWnd.show();
     }
 });

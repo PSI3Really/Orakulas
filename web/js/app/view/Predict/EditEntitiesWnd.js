@@ -254,13 +254,13 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.EditEntitiesWnd', {
 
                     me.parentWnd.infoSysJson = jsonInfoSys;
                     me.parentWnd.supportJson = jsonSupport;
-                    me.close();
+                    me.hide();
                 }
             },{
                 xtype: 'button',
                 text: LANG.BUTTON.CANCEL,
                 handler: function(btn){
-                    me.close();
+                    me.hide();
                 }
             }]
         }]
