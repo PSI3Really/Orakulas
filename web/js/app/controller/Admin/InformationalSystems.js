@@ -42,8 +42,6 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.InformationalSystems', {
         var grid = btn.up('adminisgrid');
         var store = grid.getStore();
         var selected = grid.getSelectionModel().getSelection();
-        
-        //alert('Selected: ' + selected[0].getId());
 
         for (var index in selected){
             var item = selected[index];

@@ -21,8 +21,17 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.SupportTypes', {
             },
             'adminsupporttypes button[action=delete]':{
                 click: this.remove
+            },
+            'adminsupporttypesgrid button[action=sync]': {
+                click: this.sync
             }
         });
+    },
+
+    sync: function(btn) {
+        var grid = btn.up('adminsupporttypesgrid');
+        var store = grid.getStore();
+        store.sync();
     },
 
     add: function(btn){
