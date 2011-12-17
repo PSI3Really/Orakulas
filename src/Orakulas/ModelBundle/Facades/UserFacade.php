@@ -240,14 +240,14 @@ class UserFacade extends EntityFacade {
             $destination->setFirstName($source['firstName']);
         if (isset($source['lastName']))
             $destination->setLastName($source['lastName']);
-        if (isset($source['password'])) {
+        if (isset($source['password']) && $source['password'] != '') {
             $destination->setPassword($source['password']);
             $destination->setSalt('');
         }
-        if (isset($source['salt'])) {
+        /*if (isset($source['salt'])) {
             $destination->setSalt($source['salt']);
             $destination->setPassword('');
-        }
+        }*/
         if (isset($source['username']))
             $destination->setUsername($source['username']);
     }
