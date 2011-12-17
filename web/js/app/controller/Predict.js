@@ -1,7 +1,9 @@
 Ext.define(CONFIG.APP_NS+'.controller.Predict', {
     extend: 'Ext.app.Controller',
 
-    views: ['Predict.Window', 'Predict.Toolbar', 'Predict.Grid'],
+    views: ['Predict.Window', 'Predict.Toolbar', 'Predict.Grid', 'Predict.EditEntitiesWnd'],
+
+    models: ['Admin.InformationalSystem'],
 
     init: function(){
         this.control({
@@ -47,8 +49,34 @@ Ext.define(CONFIG.APP_NS+'.controller.Predict', {
     },
 
     accept: function(btn){
-        alert('TODO: Pressed Accept');
-        btn.up('predictwindow').close();
+        var grid = btn.up('predictwindow').down('predictgrid');
+        var store = grid.getStore();
+        var wnd = btn.up('predictwindow');
+
+        var supportQuantities = Ext.encode(Ext.pluck(store.data.items, 'data'));
+
+        var jsonData = '{supportQuantities":' + supportQuantities +
+            ',"supportAdministrationTimes":' + wnd.supportJson +
+            ',"departmentInfoSysUsages":' + wnd.infoSysJson + '}';
+
+
+        wnd.setLoading(LANG.LOADING.PREDICTING);
+
+        Ext.Ajax.request({
+            url: 'predictData',
+            method: 'POST',
+            params: {
+                jsonValue: jsonData
+            },
+            success: function(response){
+                wnd.parentTab.fireEvent('loadPrediction', wnd.parentTab, Ext.JSON.decode(response.responseText));
+                wnd.setLoading(false);
+                wnd.close();
+            },
+            failure: function(response){
+                wnd.setLoading(false);
+            }
+        });
     },
 
     cancel: function(btn){
@@ -97,6 +125,6 @@ Ext.define(CONFIG.APP_NS+'.controller.Predict', {
     },
 
     editEntities: function(btn){
-        alert("TODO");
+        Ext.create('widget.editEntitiesWnd', {parentWnd: btn.up('predictwindow')}).show();
     }
 });

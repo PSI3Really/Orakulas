@@ -92,10 +92,10 @@ class PredictDataController extends Controller {
         foreach ($supportQuantitiesTemp as $supportQuantityTemp) {
             if (!$this->sameSupportTypeAtTheSameTime($supportQuantityTemp)) {
                 $this->supportQuantities[] = array(
-                    "supportType"=>$supportQuantityTemp['supportType'],
+                    "supportType"=>$supportQuantityTemp['type'], //"supportType"=>$supportQuantityTemp['supportType'],
                     "startDate"=>$supportQuantityTemp['startDate'],
                     "endDate"=>$supportQuantityTemp['endDate'],
-                    "supportRequestCount"=>$supportQuantityTemp['supportRequestCount'],
+                    "supportRequestCount"=>$supportQuantityTemp['amount'], //"supportRequestCount"=>$supportQuantityTemp['supportRequestCount'],
                 );
             }
         }

@@ -46,11 +46,20 @@ Ext.define(CONFIG.APP_NS+'.controller.Import', {
     accept: function(btn){
         var grid = btn.up('importwindow').down('importgrid');
         var store = grid.getStore();
-        btn.up('importwindow').close();
+
 
         var jsonData = Ext.encode(Ext.pluck(store.data.items, 'data')); //store.sync();
-        //TODO: Then push the jsonData to server
-        debugger;
+
+        Ext.Ajax.request({
+            url: 'model/supportHistories/import',
+            method: 'POST',
+            params: {
+                jsonValue: jsonData
+            },
+            success: function(response){
+                btn.up('importwindow').close();
+            }
+        });
     },
 
     cancel: function(btn){
