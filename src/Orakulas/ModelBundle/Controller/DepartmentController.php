@@ -25,27 +25,31 @@ class DepartmentController extends DefaultController {
 
         $decodedArray = json_decode($jsonValue, true);
 
-        $informationalSystems = explode(" ", $decodedArray['informationalSystems']);
+        $informationalSystems = explode(" ", trim($decodedArray['informationalSystems']));
 
-        $departmentArray = array(
-            'id' => $decodedArray['id'],
-            'code' => $decodedArray['code'],
-            'name' => $decodedArray['name']
-        );
+        $department = $this->getEntityFacade()->load($decodedArray['id']);
 
-        $returnValue = array('success' => true);
+        $this->getEntityFacade()->merge($department, $decodedArray);
 
-        try {
-            $department = $this->getEntityFacade()->load($departmentArray['id']);
+        $this->getEntityFacade()->setUsedInfoSystems($department, $informationalSystems);
 
-            $this->getEntityFacade()->merge($department, $departmentArray);
+        return $this->constructResponse($this->getEntityFacade()->toJson($department));
+    }
 
-            $this->getEntityFacade()->setUsedInfoSystems($department, $informationalSystems);
-        } catch (\Exception $e) {
-            $returnValue['success'] = false;
-        }
+    public function createAction() {
+        $jsonValue = $_POST["jsonValue"];
 
-        return $this->constructResponse(json_encode($returnValue));
+        $decodedArray = json_decode($jsonValue, true);
+
+        $informationalSystems = explode(" ", trim($decodedArray['informationalSystems']));
+
+        $department = $this->getEntityFacade()->fromArray($decodedArray);
+
+        $this->getEntityFacade()->save($department);
+
+        $this->getEntityFacade()->setUsedInfoSystems($department, $informationalSystems);
+
+        return $this->constructResponse($this->getEntityFacade()->toJson($department));
     }
 
     public function usedInfoSysAction() {
