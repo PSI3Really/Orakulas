@@ -13,6 +13,8 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.InformationalSystems.ISAddGrid', {
             {header: LANG.ENTITY.DEPARTMENT_PLURAL,          dataIndex: 'code',  flex: 1}
         ];
 
+        this.id = 'adminisaddgridid';
+
         this.multiSelect = false;
         this.store.load();
         this.callParent(arguments);
