@@ -23,7 +23,7 @@ class PredictDataController extends Controller {
 
     public function predictAction() {
         if (isset($_POST['data'])) {
-            $this->jsonData = stripslashes($_POST['data']);
+            $this->jsonData = $_POST['data'];
             $this->jsonData = json_decode($this->jsonData, true);
 
             $this->readSupportQuantitiesFromDatabase();
