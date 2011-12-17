@@ -32,13 +32,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.InformationalSystems.ISGrid', {
 
         this.plugins = [
             Ext.create('Ext.grid.plugin.RowEditing', {
-                clicksToEdit: 2,
-                listeners: { //It doesn't work if put in the controller :/
-                    canceledit: {
-                        fn: function(element, eOpts){
-                        }
-                    }
-                }
+                clicksToEdit: 2
             })
         ];
 
