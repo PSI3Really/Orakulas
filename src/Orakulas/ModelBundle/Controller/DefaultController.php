@@ -42,7 +42,7 @@ class DefaultController extends Controller {
 
         $user = $this->getEntityFacade()->load($decodedArray['id']);
 
-        $this->getEntityFacade()->merge($decodedArray, $user);
+        $this->getEntityFacade()->merge($user, $decodedArray);
 
         $this->getEntityFacade()->save($user);
 
