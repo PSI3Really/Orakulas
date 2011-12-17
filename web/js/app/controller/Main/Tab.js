@@ -1,7 +1,7 @@
 Ext.define(CONFIG.APP_NS+'.controller.Main.Tab', {
     extend: 'Ext.app.Controller',
 
-    views: ['Main.TabPanel', 'Main.Portal.Tab', 'Main.Alternative.Panel'],
+    views: ['Main.TabPanel', 'Main.Portal.Tab'],
 
     models: ['Load', 'InfoSysRequests', 'InfoSysHours', 'DepartmentRequests', 'DepartmentHours'],
     stores: ['InfoSysHours', 'InfoSysRequests', 'DepartmentHours', 'DepartmentRequests'],
