@@ -3,6 +3,8 @@
 namespace Orakulas\ModelBundle\Facades;
 
 use \Orakulas\ModelBundle\Facades\EntityFacade;
+use \Orakulas\ModelBundle\Facades\DepartmentInfoSysUsageFacade;
+use \Orakulas\ModelBundle\Facades\DepartmentFacade;
 use \Orakulas\ModelBundle\Entity\InformationalSystem;
 use \Orakulas\ModelBundle\Entity\DepartmentInfoSysUsage;
 
