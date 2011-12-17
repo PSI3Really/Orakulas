@@ -25,7 +25,7 @@ class InformationalSystemController extends DefaultController {
 
         $decodedArray = json_decode($jsonValue, true);
 
-        $departments = explode(" ", $decodedArray['departments']);
+        $departments = explode(" ", trim($decodedArray['departments']));
 
         $informationalSystem = $this->getEntityFacade()->load($decodedArray['id']);
 
@@ -41,7 +41,7 @@ class InformationalSystemController extends DefaultController {
 
         $decodedArray = json_decode($jsonValue, true);
 
-        $departments = explode(" ", $decodedArray['departments']);
+        $departments = explode(" ", trim($decodedArray['departments']));
 
         $informationalSystem = $this->getEntityFacade()->fromArray($decodedArray);
 
