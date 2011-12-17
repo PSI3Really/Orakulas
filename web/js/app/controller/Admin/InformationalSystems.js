@@ -100,14 +100,30 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.InformationalSystems', {
             selected_id += item.get("id")+" ";
         }
 
-        var params = {
-            code: code.value,
-            name: name.value,
-            departments: selected_id
-        };
+        var params;
+        var url = "";
+        var panel = btn.up('adminisaddpanel');
+        if(panel.editing) {
+            url = "model/informationalSystems/update";
+            params = {
+                id: panel.record.get("id"),
+                code: code.value,
+                name: name.value,
+                departments: selected_id
+            };
+        }
+        else {
+            url = "model/informationalSystems/create"
+            params = {
+                code: code.value,
+                name: name.value,
+                departments: selected_id
+            };
+
+        }
 
         Ext.Ajax.request({
-            url : 'model/informationalSystems/create',
+            url : url,
             method: 'POST',
             params: {
                 jsonValue: Ext.encode(params)
