@@ -1,10 +1,14 @@
+var adminisaddgridsm = Ext.create('Ext.selection.CheckboxModel');
 Ext.define(CONFIG.APP_NS+'.view.Admin.InformationalSystems.ISAddGrid', {
     extend: 'Ext.grid.Panel',
     alias: 'widget.adminisaddgrid',
 
     initComponent: function() {
+
+        this.selModel = adminisaddgridsm;
         this.border = false;
         this.store = Ext.create('widget.adminDepartmentsStore', {});
+
         this.columns = [
             {header: LANG.ENTITY.DEPARTMENT_PLURAL,          dataIndex: 'code',  flex: 1}
         ];
