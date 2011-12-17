@@ -93,8 +93,8 @@
         "TITLE": "Prognozuoti",
 
         "BUTTON":{
-            "INFO_SYS_AND_DEPARTMENTS": "IS/Padaliniai&hellip;",
-            "SUPPORT_AND_DEPARTMENTS": "Priemonės/Padaliniai&hellip;",
+            "INFO_SYS_AND_DEPARTMENTS": "IS/Padaliniai",
+            "SUPPORT_AND_DEPARTMENTS": "Priemonės/Padaliniai",
             "EDIT_ENTITIES": "Organizacija&hellip;"
         }
     },
@@ -117,6 +117,11 @@
         "SYNC": "Išsaugoti pakeitimus",
         "CANCEL_CHANGES":"Atšaukti pakeitimus",
         "OPEN_FILE": "Įkelti iš failo"
+    },
+
+    "LOADING":{
+        "IMPORTING":"Importuojama&hellip;",
+        "PREDICTING":"Prognozuojama&hellip;"
     },
     
     "ENTITY":{

@@ -13,8 +13,15 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.Window', {
     height: 400,
     width: 500,
 
+    parentTab: null,
+
     infoSysDepartmentsStore: null,
     supportDepartmentsStore: null,
+
+    infoSysJson: null,
+    supportJson: null,
+
+    editEntitiesWnd: null,
 
     initComponent: function () {
 
@@ -29,6 +36,12 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.Window', {
             border: false,
             xtype: 'predicttoolbar'
         }];
+
+        this.infoSysDepartmentsStore = Ext.create('widget.adminDepartmentInfoSysUsagesStore', {});
+        this.infoSysDepartmentsStore.load();
+
+        this.supportDepartmentsStore = Ext.create('widget.adminSupportAdministrationTimesStore', {});
+        this.supportDepartmentsStore.load();
 
         this.callParent(arguments);
     }

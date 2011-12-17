@@ -5,7 +5,6 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.GridPortlet', {
     alias: 'widget.gridportlet',
 
     filters: null,
-    //TODO: scrolling doesn't work :/
 
     initComponent: function(){
 
