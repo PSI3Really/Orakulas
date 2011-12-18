@@ -11,7 +11,16 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
         {ref: 'portalPanel', selector: 'portal'}
     ],
 
+    defaultCfg: {},
+
     init: function(){
+        this.defaultCfg = {
+            listeners: {
+                beforeexpand: this.onAltBeforeExpand
+            },
+            collapsed: true
+        };
+
         var selectors = {
             portal: {
                 addTable:       this.addTable,
@@ -19,13 +28,9 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
                 addInfo:        this.addInfo,
                 render: function (view) {
                     if (view.alternative) {
-                        var cfg = {
-                            listeners: {
-                                beforeexpand: this.onAltBeforeExpand
-                            },
-                            collapsed: false
-                        };
+                        var cfg = $.extend({}, this.defaultCfg);
 
+                        cfg.collapsed = false;
                         this.addTable(view, cfg);
                         cfg.collapsed = true;
                         this.addChart(view, cfg);
@@ -39,6 +44,14 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
     },
 
     addTable: function(portal, cfg){
+        if ((portal.id == 'alternative') && ((cfg === undefined) || (cfg.collapsed === undefined))) {
+            if (cfg === undefined) {
+                var cfg = this.defaultCfg;
+            } else {
+                cfg = this.defaultCfg;
+            }
+        }
+
         var minCol = this.findMinColumn(portal);
         var portletId = portal.portletCount++;
 
@@ -56,6 +69,14 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
     },
 
     addChart: function(portal, cfg){
+        if ((portal.id == 'alternative') && ((cfg === undefined) || (cfg.collapsed === undefined))) {
+            if (cfg === undefined) {
+                var cfg = this.defaultCfg;
+            } else {
+                cfg = this.defaultCfg;
+            }
+        }
+
         var minCol = this.findMinColumn(portal);
         var portletId = portal.portletCount++;
 
@@ -75,6 +96,14 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
     },
 
     addInfo:function(portal, cfg){
+        if ((portal.id == 'alternative') && ((cfg === undefined) || (cfg.collapsed === undefined))) {
+            if (cfg === undefined) {
+                var cfg = this.defaultCfg;
+            } else {
+                cfg = this.defaultCfg;
+            }
+        }
+
         var minCol = this.findMinColumn(portal);
         var portletId = portal.portletCount++;
 

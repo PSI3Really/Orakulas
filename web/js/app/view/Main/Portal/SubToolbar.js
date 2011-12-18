@@ -7,7 +7,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.SubToolbar', {
     ],
 
     initComponent: function () {
-        this.height = 30,
+        this.height = 30;
         this.items = [
             {
                 text: LANG.MAIN.SUB_TOOLBAR.BUTTON.PREDICT,

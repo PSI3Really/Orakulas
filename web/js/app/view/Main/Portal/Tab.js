@@ -20,6 +20,9 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.Tab', {
                 _alternative: (this._alternative !== undefined) ? this._alternative : false
             }
         ];
+        if ((this._alternative !== undefined) && this._alternative) {
+            this.items[0].id = 'alternative';
+        }
 
         this.callParent(arguments);
     }
