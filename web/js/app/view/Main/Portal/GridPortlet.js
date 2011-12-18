@@ -28,7 +28,8 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.GridPortlet', {
 
         this.dockedItems = [{
             xtype: 'portletbar',
-            dock: 'top'
+            dock: 'top',
+            gridlet: true
         }];
 
         this.callParent();
