@@ -18,7 +18,8 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Toolbar', {
                 id: 'logo',
                 xtype: 'box',
                 html: '<h1>'+CONFIG.APP_NAME+'</h1>'
-            },{
+            },
+            /*{
                 xtype: 'buttongroup',
                 items: [
                     {
@@ -36,7 +37,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Toolbar', {
                         action: 'switchLang'
                     }
                 ]
-            },
+            },*/
             '->',
             {
                 text: LANG.MAIN.TOOLBAR.BUTTON.IMPORT_DATA,
