@@ -64,4 +64,16 @@ class DepartmentController extends DefaultController {
         return $this->constructResponse(json_encode($infoSysIds));
     }
 
+    public function administeredSupportTypesAction() {
+        $jsonValue = $_POST["jsonValue"];
+
+        $decodedArray = json_decode($jsonValue, true);
+
+        $id = $decodedArray['id'];
+
+        $supportTypeIds = $this->getEntityFacade()->getAdministeredSupportTypeIds($id);
+
+        return $this->constructResponse(json_encode($supportTypeIds));
+    }
+
 }

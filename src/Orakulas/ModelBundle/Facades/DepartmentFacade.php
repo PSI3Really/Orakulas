@@ -216,4 +216,34 @@ class DepartmentFacade extends EntityFacade {
 
         return $infoSysIds;
     }
+
+    public function getAdministeredSupportTypeIds($departmentId) {
+        $stmtString = '
+            SELECT
+              support_type_id, hours_count
+            FROM
+              support_administration_time
+            WHERE
+              department_id = :departmentId';
+
+        $entityManager = $this->getDoctrine()->getEntityManager();
+
+        $stmt = $entityManager->getConnection()->prepare($stmtString);
+
+        $stmt->bindValue('departmentId', $departmentId);
+
+        $stmt->execute();
+
+        $resultArray = $stmt->fetchAll();
+
+        $dbSupportTypeIds = array();
+        foreach ($resultArray as $result) {
+            $dbSupportTypeIds[] = array(
+                'id' => (int) $result['support_type_id'],
+                'hours' => (float) $result['hours_count']
+            );
+        }
+
+        return $dbSupportTypeIds;
+    }
 }
