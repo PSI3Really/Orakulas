@@ -212,7 +212,7 @@ class SupportTypeFacade extends EntityFacade {
     public function getAdministeredByDepartmentIds($supportTypeId) {
         $stmtString = '
             SELECT
-              department_id
+              department_id, hours_count
             FROM
               support_administration_time
             WHERE
@@ -230,7 +230,10 @@ class SupportTypeFacade extends EntityFacade {
 
         $dbDepartmentIds = array();
         foreach ($resultArray as $result) {
-            $dbDepartmentIds[] = (int) $result['department_id'];
+            $dbDepartmentIds[] = array(
+                'id' => (int) $result['department_id'],
+                'hours' => (float) $result['hours_count']
+            );
         }
 
         return $dbDepartmentIds;
