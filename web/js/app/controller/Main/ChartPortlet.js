@@ -201,29 +201,31 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
             datefield_from = filterbar.child('datefield'),
             datefield_to   = datefield_from.next(),
             range_from     = datefield_from.getValue(),
-            range_to       = datefield_to.getValue();
+            range_to       = datefield_to.getValue(),
+            selected       = combobox.getValue();
 
-        if (range_from || range_to) {
-            portlet.store.filterBy(function (record, id) {
-                var start_date = record.get('startDate');
-                if (range_from && !range_to) {
-                    return (start_date >= range_from);
-                } else if (range_to && !range_from) {
-                    return (start_date <= range_to);
-                }
-                return ((start_date >= range_from) && (start_date <= range_to));
-            });
+        if (range_from || range_to || selected.length) {
+            if (range_from || range_to) {
+                portlet.store.filterBy(function (record, id) {
+                    var start_date = record.get('startDate');
+                    if (range_from && !range_to) {
+                        return (start_date >= range_from);
+                    } else if (range_to && !range_from) {
+                        return (start_date <= range_to);
+                    }
+                    return ((start_date >= range_from) && (start_date <= range_to));
+                });
+            }
+
+            if (selected.length) {
+                portlet.showSeries(selected);
+            } else {
+                portlet.setStore(portlet.store);
+            }
+            portlet.store.clearFilter();
+
+            btn.next().enable();
         }
-
-        var selected = combobox.getValue();
-        if (selected.length) {
-            portlet.showSeries(selected);
-        } else {
-            portlet.setStore(portlet.store);
-        }
-        portlet.store.clearFilter();
-
-        btn.next().enable();
     },
 
     resetFilters: function(btn) {
