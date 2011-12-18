@@ -27,3 +27,9 @@ OrakulasModelBundle_departments_usedInfoSys:
     defaults: { _controller: OrakulasModelBundle:Department:usedInfoSys }
     requirements:
       _method: POST
+
+OrakulasModelBundle_departments_administeredSupportTypes:
+    pattern: /administeredSupportTypes
+    defaults: { _controller: OrakulasModelBundle:Department:administeredSupportTypes }
+    requirements:
+      _method: POST

@@ -21,3 +21,9 @@ OrakulasModelBundle_supportTypes_delete:
     defaults: { _controller: OrakulasModelBundle:SupportType:delete }
     requirements:
       _method:  POST
+
+OrakulasModelBundle_supportTypes_administeredBy:
+    pattern: /administeredBy
+    defaults: { _controller: OrakulasModelBundle:SupportType:administeredBy }
+    requirements:
+      _method:  POST

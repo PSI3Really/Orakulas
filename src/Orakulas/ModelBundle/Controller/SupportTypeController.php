@@ -46,9 +46,11 @@ class SupportTypeController extends DefaultController {
 
         $tempDepartments = explode(", ", trim($decodedArray['departments']));
         $departments = array();
-        foreach ($tempDepartments as $value) {
-            $tempArray = explode(" ", $value);
-            $departments[(int) $tempArray[0]] = (float) $tempArray[1];
+        if (count($tempDepartments) > 0 && $tempDepartments[0] != '') {
+            foreach ($tempDepartments as $value) {
+                $tempArray = explode(" ", $value);
+                $departments[(int) $tempArray[0]] = (float) $tempArray[1];
+            }
         }
 
         $supportType = $this->getEntityFacade()->load($decodedArray['id']);
@@ -67,9 +69,11 @@ class SupportTypeController extends DefaultController {
 
         $tempDepartments = explode(", ", trim($decodedArray['departments']));
         $departments = array();
-        foreach ($tempDepartments as $value) {
-            $tempArray = explode(" ", $value);
-            $departments[(int) $tempArray[0]] = (float) $tempArray[1];
+        if (count($tempDepartments) > 0 && $tempDepartments[0] != '') {
+            foreach ($tempDepartments as $value) {
+                $tempArray = explode(" ", $value);
+                $departments[(int) $tempArray[0]] = (float) $tempArray[1];
+            }
         }
 
         $supportType = $this->getEntityFacade()->fromArray($decodedArray);
@@ -80,6 +84,18 @@ class SupportTypeController extends DefaultController {
         $this->getEntityFacade()->setSupportAdministrationTimes($supportType, $departments);
 
         return $this->constructResponse($this->getEntityFacade()->toJson($supportType));
+    }
+
+    public function administeredByAction() {
+        $jsonValue = $_POST["jsonValue"];
+
+        $decodedArray = json_decode($jsonValue, true);
+
+        $id = $decodedArray['id'];
+
+        $departmentIds = $this->getEntityFacade()->getAdministeredByDepartmentIds($id);
+
+        return $this->constructResponse(json_encode($departmentIds));
     }
 
 }
