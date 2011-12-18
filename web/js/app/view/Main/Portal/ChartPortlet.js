@@ -90,7 +90,9 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.ChartPortlet', {
             }
             */
 
-            series.line.remove();
+            if (series.line !== undefined) {
+                series.line.remove();
+            }
         };
 
         this.dataView.series.clear();
