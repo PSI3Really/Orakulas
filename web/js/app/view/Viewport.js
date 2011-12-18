@@ -27,7 +27,7 @@ Ext.define(CONFIG.APP_NS+'.view.Viewport', {
 
     listeners: {
         beforerender: function () {
-            Ext.get('loading').fadeOut({ remove: true });
+            $('#loading').fadeOut({ remove: true });
         }
     }
 });
