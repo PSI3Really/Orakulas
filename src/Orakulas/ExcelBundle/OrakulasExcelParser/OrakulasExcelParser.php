@@ -194,7 +194,7 @@ class OrakulasExcelParser {
 
         $array_data = array();
         if ($success) {
-            foreach ($this->rowIterator as $row){
+            foreach ($this->rowIterator as $index=>$row){
                 $rowIndex = $row->getRowIndex();
 
                 if (($rowIndex != 1) || (($rowIndex == 1) && ($ignoreFirstRow == false))) {
@@ -212,9 +212,9 @@ class OrakulasExcelParser {
                     $ts = mktime(0, 0, 0, 1, $cellCnValue-1, 1900);
                     $cellCnValue = $ts;
 
-                    if ((strlen($cellAnValue) == 0) || (strlen($cellBnValue) == "") || (strlen($cellCnValue) == "") || (strlen($cellDnValue) == 0)) {
+                    if ((strlen($cellAnValue) == 0) || (strlen($cellBnValue) == 0) || (strlen($cellCnValue) == 0) || (strlen($cellDnValue) == 0)) {
                         $success = false;
-                        $errors  = "INVALID_DATA";
+                        $errors  = "INVALID_DATA"."_$index";
                         break;
                     }
 
