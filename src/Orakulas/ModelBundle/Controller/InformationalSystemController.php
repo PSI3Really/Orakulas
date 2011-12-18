@@ -20,6 +20,38 @@ class InformationalSystemController extends DefaultController {
         return $entityFacade;
     }
 
+    public function updateAction() {
+        $jsonValue = $_POST["jsonValue"];
+
+        $decodedArray = json_decode($jsonValue, true);
+
+        $departments = explode(" ", trim($decodedArray['departments']));
+
+        $informationalSystem = $this->getEntityFacade()->load($decodedArray['id']);
+
+        $this->getEntityFacade()->merge($informationalSystem, $decodedArray);
+
+        $this->getEntityFacade()->setUsedByDepartments($informationalSystem, $departments);
+
+        return $this->constructResponse($this->getEntityFacade()->toJson($informationalSystem));
+    }
+
+    public function createAction() {
+        $jsonValue = $_POST["jsonValue"];
+
+        $decodedArray = json_decode($jsonValue, true);
+
+        $departments = explode(" ", trim($decodedArray['departments']));
+
+        $informationalSystem = $this->getEntityFacade()->fromArray($decodedArray);
+
+        $this->getEntityFacade()->save($informationalSystem);
+
+        $this->getEntityFacade()->setUsedByDepartments($informationalSystem, $departments);
+
+        return $this->constructResponse($this->getEntityFacade()->toJson($informationalSystem));
+    }
+
     public function usedByAction() {
         $jsonValue = $_POST["jsonValue"];
 

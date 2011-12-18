@@ -107,11 +107,30 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.InformationalSystems.ISAddPanel', {
             };
 
             Ext.Ajax.request({
-                url : '/model/informationalSystems/usedBy',
+                url : 'model/informationalSystems/usedBy',
                 method: 'POST',
                 params: {
                     jsonValue: Ext.encode(params)
-                }
+                },
+                success:
+                    function(response, opts) {
+                        
+                        var obj = Ext.decode(response.responseText);
+                        if(obj.length > 0) {
+                            var grid = Ext.getCmp('adminisaddgridid');
+                            var store = grid.getStore();
+                            store.load({
+                                callback: function(ret, options, success) {
+                                    if (success) {
+                                        for(var i=0; i<obj.length; i++) {
+                                            var ats = store.find('id', obj[i]);
+                                            grid.selModel.select(ats, true, false);
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    }
             });
         }
 

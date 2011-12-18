@@ -108,14 +108,18 @@ class CalculateLoadsController extends Controller {
                 $avgSum += $avgs[$i];
             }
 
-            for ($i = 1; $i <= 12; $i++){
-                $avgs[$i] = 12*$avgs[$i]/$avgSum;
+            if ($avgSum){
+                for ($i = 1; $i <= 12; $i++){
+                    $avgs[$i] = 12*$avgs[$i]/$avgSum;
+                }
             }
 
             for ($i = 1; $i <= 12; $i++){
                 $fData[$supportType]['seasonalIndex'][$i] = $avgs[$i];
             }
         }
+
+
 
         end($this->requests);
         $oldSize = sizeof($this->requests);

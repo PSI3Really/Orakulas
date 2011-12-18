@@ -1,7 +1,9 @@
 Ext.define(CONFIG.APP_NS+'.controller.Predict', {
     extend: 'Ext.app.Controller',
 
-    views: ['Predict.Window', 'Predict.Toolbar', 'Predict.Grid'],
+    views: ['Predict.Window', 'Predict.Toolbar', 'Predict.Grid', 'Predict.EditEntitiesWnd'],
+
+    models: ['Admin.InformationalSystem'],
 
     init: function(){
         this.control({
@@ -47,8 +49,34 @@ Ext.define(CONFIG.APP_NS+'.controller.Predict', {
     },
 
     accept: function(btn){
-        alert('TODO: Pressed Accept');
-        btn.up('predictwindow').close();
+        var grid = btn.up('predictwindow').down('predictgrid');
+        var store = grid.getStore();
+        var wnd = btn.up('predictwindow');
+
+        var supportQuantities = Ext.encode(Ext.pluck(store.data.items, 'data'));
+
+        //params: 'data={"supportQuantities":{},"supportAdministrationTimes":{},"departmentInfoSysUsages":{}}'
+
+        var jsonData = 'data={"supportQuantities":' + supportQuantities +
+            ',"supportAdministrationTimes":' + wnd.supportJson ? wnd.supportJson : '{}' +
+            ',"departmentInfoSysUsages":' + wnd.infoSysJson ? wnd.infoSysJson : '{}'+ '}';
+        
+        wnd.setLoading(LANG.LOADING.PREDICTING);
+
+        Ext.Ajax.request({
+            url: 'predictData',
+            method: 'POST',
+            params: jsonData,
+            success: function(response){
+                var tabpanel = wnd.parentTab.up('maintabpanel');
+                tabpanel.fireEvent('loadPrediction', tabpanel, Ext.JSON.decode(response.responseText));
+                wnd.setLoading(false);
+                wnd.close();
+            },
+            failure: function(response){
+                wnd.setLoading(false);
+            }
+        });
     },
 
     cancel: function(btn){
@@ -78,6 +106,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Predict', {
                     grid.store.loadData(action.result.data, false); //replace old data
                 },
                 failure: function(form, action) {
+                    console.log(action.result);
                     var message = LANG.IMPORT.FAIL.UNKNOWN; // unknown error
                     switch (action.result.errors) {
                         case 'INVALID_FILE_TYPE':
@@ -97,6 +126,11 @@ Ext.define(CONFIG.APP_NS+'.controller.Predict', {
     },
 
     editEntities: function(btn){
-        alert("TODO");
+        var parentWnd = btn.up('predictwindow');
+        if (!parentWnd.editEntitiesWnd) {
+            parentWnd.editEntitiesWnd = Ext.create('widget.editEntitiesWnd', {parentWnd: parentWnd});
+        }
+        
+        parentWnd.editEntitiesWnd.show();
     }
 });

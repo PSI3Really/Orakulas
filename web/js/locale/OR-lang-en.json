@@ -93,8 +93,8 @@
         "TITLE": "Predict",
 
         "BUTTON":{
-            "INFO_SYS_AND_DEPARTMENTS": "IS/Departments&hellip;",
-            "SUPPORT_AND_DEPARTMENTS": "Support types/Departments&hellip;",
+            "INFO_SYS_AND_DEPARTMENTS": "IS/Departments",
+            "SUPPORT_AND_DEPARTMENTS": "Support types/Departments",
             "EDIT_ENTITIES": "Entities&hellip;"
         }
     },
@@ -118,6 +118,11 @@
         "SYNC": "Save changes",
         "CANCEL_CHANGES":"Cancel changes",
         "OPEN_FILE": "Open file"
+    },
+
+    "LOADING":{
+        "IMPORTING":"Importing&hellip;",
+        "PREDICTING":"Predicting&hellip;"
     },
     
     "ENTITY":{

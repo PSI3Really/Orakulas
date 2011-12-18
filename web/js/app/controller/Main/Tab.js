@@ -36,7 +36,8 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Tab', {
                 click: this.showInfo
             },
             'maintabpanel':{
-                loadReports: this.loadReports
+                loadReports: this.loadReports,
+                loadPrediction: this.loadPrediction
             }
         });
     },
@@ -66,13 +67,9 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Tab', {
             success: function(response){
                 var data = Ext.JSON.decode(response.responseText);
                 //console.log(data);
-                
                 tabpanel.reports.infoSysHours.loadRawData(data.infoSysHours);
-
                 tabpanel.reports.infoSysRequests.loadRawData(data.infoSysRequests);
-
                 tabpanel.reports.departmentHours.loadRawData(data.departmentHours);
-
                 tabpanel.reports.departmentRequests.loadRawData(data.departmentRequests);
             },
             failure: function(response){
@@ -81,9 +78,16 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Tab', {
         });
     },
 
+    loadPrediction: function(tabpanel, data){
+        tabpanel.reports.infoSysHours.loadRawData(data.infoSysHours);
+        tabpanel.reports.infoSysRequests.loadRawData(data.infoSysRequests);
+        tabpanel.reports.departmentHours.loadRawData(data.departmentHours);
+        tabpanel.reports.departmentRequests.loadRawData(data.departmentRequests);
+    },
+
     predict: function(btn){
         var tab = btn.up('maintab'); //.getActiveTab();
-        var wnd = Ext.create('widget.predictwindow', {});
+        var wnd = Ext.create('widget.predictwindow', {parentTab: tab});
 
         wnd.show();
     },

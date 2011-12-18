@@ -92,10 +92,10 @@ class PredictDataController extends Controller {
         foreach ($supportQuantitiesTemp as $supportQuantityTemp) {
             if (!$this->sameSupportTypeAtTheSameTime($supportQuantityTemp)) {
                 $this->supportQuantities[] = array(
-                    "supportType"=>$supportQuantityTemp['supportType'],
+                    "supportType"=>$supportQuantityTemp['type'], //supportType
                     "startDate"=>$supportQuantityTemp['startDate'],
                     "endDate"=>$supportQuantityTemp['endDate'],
-                    "supportRequestCount"=>$supportQuantityTemp['supportRequestCount'],
+                    "supportRequestCount"=>$supportQuantityTemp['amount'], //supportRequestCount
                 );
             }
         }
@@ -103,7 +103,7 @@ class PredictDataController extends Controller {
 
     private function sameSupportTypeAtTheSameTime($supportQuantity) {
         foreach ($this->supportQuantities as $currentSupQ) {
-            if ($supportQuantity['supportType'] === $currentSupQ['supportType']) {
+            if ($supportQuantity['type'] === $currentSupQ['supportType']) {
                     if ((strtotime($supportQuantity['startDate']) > strtotime($currentSupQ['startDate'])) &&
                     (strtotime($supportQuantity['startDate']) < strtotime($currentSupQ['endDate']))) {
                         return true;
