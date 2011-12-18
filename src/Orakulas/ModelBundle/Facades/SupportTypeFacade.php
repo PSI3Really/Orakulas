@@ -118,28 +118,7 @@ class SupportTypeFacade extends EntityFacade {
     public function setSupportAdministrationTimes($supportType, $departments) {
         $this->deleteOldValues($supportType, array_keys($departments));
 
-        $stmtString = '
-            SELECT
-              department_id
-            FROM
-              support_administration_time
-            WHERE
-              support_type_id = :supportTypeId';
-
-        $entityManager = $this->getDoctrine()->getEntityManager();
-
-        $stmt = $entityManager->getConnection()->prepare($stmtString);
-
-        $stmt->bindValue('supportTypeId', $supportType->getId());
-
-        $stmt->execute();
-
-        $resultArray = $stmt->fetchAll();
-
-        $dbDepartmentIds = array();
-        foreach ($resultArray as $result) {
-            $dbDepartmentIds[] = (int) $result['department_id'];
-        }
+        $dbDepartmentIds = $this->getAdministeredByDepartmentIds($supportType->getId());
 
         $diffedArray = array_diff(array_keys($departments), $dbDepartmentIds);
         $intersectedArray = array_intersect(array_keys($departments), $dbDepartmentIds);
@@ -172,6 +151,8 @@ class SupportTypeFacade extends EntityFacade {
             }
         }
         $stmtString .= ")";
+
+        $entityManager = $this->getDoctrine()->getEntityManager();
 
         $stmt = $entityManager->getConnection()->prepare($stmtString);
 
@@ -226,6 +207,33 @@ class SupportTypeFacade extends EntityFacade {
         }
 
         $stmt->execute();
+    }
+
+    public function getAdministeredByDepartmentIds($supportTypeId) {
+        $stmtString = '
+            SELECT
+              department_id
+            FROM
+              support_administration_time
+            WHERE
+              support_type_id = :supportTypeId';
+
+        $entityManager = $this->getDoctrine()->getEntityManager();
+
+        $stmt = $entityManager->getConnection()->prepare($stmtString);
+
+        $stmt->bindValue('supportTypeId', $supportTypeId);
+
+        $stmt->execute();
+
+        $resultArray = $stmt->fetchAll();
+
+        $dbDepartmentIds = array();
+        foreach ($resultArray as $result) {
+            $dbDepartmentIds[] = (int) $result['department_id'];
+        }
+
+        return $dbDepartmentIds;
     }
 
     /**

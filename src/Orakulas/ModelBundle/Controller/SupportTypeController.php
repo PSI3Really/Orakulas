@@ -82,4 +82,16 @@ class SupportTypeController extends DefaultController {
         return $this->constructResponse($this->getEntityFacade()->toJson($supportType));
     }
 
+    public function administeredByAction() {
+        $jsonValue = $_POST["jsonValue"];
+
+        $decodedArray = json_decode($jsonValue, true);
+
+        $id = $decodedArray['id'];
+
+        $departmentIds = $this->getEntityFacade()->getAdministeredByDepartmentIds($id);
+
+        return $this->constructResponse(json_encode($departmentIds));
+    }
+
 }
