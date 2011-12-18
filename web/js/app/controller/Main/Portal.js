@@ -12,44 +12,54 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
     ],
 
     init: function(){
-        this.control({
+        var selectors = {
             portal: {
                 addTable:       this.addTable,
                 addChart:       this.addChart,
                 addInfo:        this.addInfo,
                 render: function (view) {
                     if (view.alternative) {
-                        var table = this.addTable(view),
-                            chart = this.addChart(view),
-                            info  = this.addInfo(view);
+                        var cfg = {
+                            listeners: {
+                                beforeexpand: this.onAltBeforeExpand
+                            },
+                            collapsed: false
+                        };
+
+                        this.addTable(view, cfg);
+                        cfg.collapsed = true;
+                        this.addChart(view, cfg);
+                        this.addInfo(view, cfg);
                     }
                 }
                 //loadReports:    this.loadReports
             }
-        });
+        };
+        this.control(selectors);
     },
 
-    addTable: function(portal){
+    addTable: function(portal, cfg){
         var minCol = this.findMinColumn(portal);
         var portletId = portal.portletCount++;
 
-        var newPortlet = Ext.create('widget.gridportlet', {
+        var config = $.extend({
             title: LANG.MAIN.PORTAL.TABLE.TITLE + ' ' + portletId,
             store: {            //portal.reports.departmentHours,
                 fields: [],
                 data: []
             }
-        });
+        }, (cfg !== undefined) ? cfg : {});
+        var newPortlet = Ext.create('widget.gridportlet', config);
 
         minCol.add(newPortlet);
         newPortlet.doLayout();
     },
 
-    addChart: function(portal){
+    addChart: function(portal, cfg){
         var minCol = this.findMinColumn(portal);
         var portletId = portal.portletCount++;
 
-        var newPortlet = Ext.create('widget.chartportlet', {
+        var config = $.extend({
             title: LANG.MAIN.PORTAL.CHART.TITLE + ' ' + portletId,
             store: {            //portal.reports.departmentHours,
                 fields: [],
@@ -58,22 +68,24 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
 
             leftAxisTitle: LANG.ENTITY.SUPPORT_COUNT,
             leftAxisFields: ['supportCount', 'entityName']
-        });
+        }, (cfg !== undefined) ? cfg : {});
+        var newPortlet = Ext.create('widget.chartportlet', config);
         
         minCol.add(newPortlet);
     },
 
-    addInfo:function(portal){
+    addInfo:function(portal, cfg){
         var minCol = this.findMinColumn(portal);
         var portletId = portal.portletCount++;
 
-        var newPortlet = Ext.create('widget.infoportlet', {
+        var config = $.extend({
             title: LANG.MAIN.PORTAL.INFO.TITLE + ' ' + portletId,
             store: {            //portal.reports.departmentHours,
                 fields: [],
                 data: []
             }
-        });
+        }, (cfg !== undefined) ? cfg : {});
+        var newPortlet = Ext.create('widget.infoportlet', config);
 
         minCol.add(newPortlet);
     },
@@ -97,6 +109,14 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
         //console.log(portal.reports.departmentRequests);
     },
     */
+
+    onAltBeforeExpand: function (panel) {
+        Ext.each(panel.up('portal').query('portlet'), function () {
+            if (this != panel) {
+                this.collapse(panel.collapseDirection);
+            }
+        });
+    },
 
     //private
     findMinColumn: function(portal){
