@@ -26,12 +26,25 @@ class DepartmentController extends DefaultController {
         $decodedArray = json_decode($jsonValue, true);
 
         $informationalSystems = explode(" ", trim($decodedArray['informationalSystems']));
+        if (count($informationalSystems) <= 0 || $informationalSystems[0] == '') {
+            $informationalSystems = array();
+        }
+
+        $tempSupportTypes = explode(", ", trim($decodedArray['supportTypes']));
+        $supportTypes = array();
+        if (count($tempSupportTypes) > 0 && $tempSupportTypes[0] != '') {
+            foreach ($tempSupportTypes as $value) {
+                $tempArray = explode(" ", $value);
+                $supportTypes[(int) $tempArray[0]] = (float) $tempArray[1];
+            }
+        }
 
         $department = $this->getEntityFacade()->load($decodedArray['id']);
 
         $this->getEntityFacade()->merge($department, $decodedArray);
 
         $this->getEntityFacade()->setUsedInfoSystems($department, $informationalSystems);
+        $this->getEntityFacade()->setSupportAdministrationTimes($department, $supportTypes);
 
         return $this->constructResponse($this->getEntityFacade()->toJson($department));
     }
@@ -42,12 +55,24 @@ class DepartmentController extends DefaultController {
         $decodedArray = json_decode($jsonValue, true);
 
         $informationalSystems = explode(" ", trim($decodedArray['informationalSystems']));
+        if (count($informationalSystems) <= 0 || $informationalSystems[0] == '') {
+            $informationalSystems = array();
+        }
+
+        $tempSupportTypes = explode(", ", trim($decodedArray['supportTypes']));
+        $supportTypes = array();
+        if (count($tempSupportTypes) > 0 && $tempSupportTypes[0] != '') {
+            foreach ($tempSupportTypes as $value) {
+                $tempArray = explode(" ", $value);
+                $supportTypes[(int) $tempArray[0]] = (float) $tempArray[1];
+            }
+        }
 
         $department = $this->getEntityFacade()->fromArray($decodedArray);
 
         $this->getEntityFacade()->save($department);
-
         $this->getEntityFacade()->setUsedInfoSystems($department, $informationalSystems);
+        $this->getEntityFacade()->setSupportAdministrationTimes($department, $supportTypes);
 
         return $this->constructResponse($this->getEntityFacade()->toJson($department));
     }

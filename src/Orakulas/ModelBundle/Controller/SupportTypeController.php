@@ -46,9 +46,11 @@ class SupportTypeController extends DefaultController {
 
         $tempDepartments = explode(", ", trim($decodedArray['departments']));
         $departments = array();
-        foreach ($tempDepartments as $value) {
-            $tempArray = explode(" ", $value);
-            $departments[(int) $tempArray[0]] = (float) $tempArray[1];
+        if (count($tempDepartments) > 0 && $tempDepartments[0] != '') {
+            foreach ($tempDepartments as $value) {
+                $tempArray = explode(" ", $value);
+                $departments[(int) $tempArray[0]] = (float) $tempArray[1];
+            }
         }
 
         $supportType = $this->getEntityFacade()->load($decodedArray['id']);
@@ -67,9 +69,11 @@ class SupportTypeController extends DefaultController {
 
         $tempDepartments = explode(", ", trim($decodedArray['departments']));
         $departments = array();
-        foreach ($tempDepartments as $value) {
-            $tempArray = explode(" ", $value);
-            $departments[(int) $tempArray[0]] = (float) $tempArray[1];
+        if (count($tempDepartments) > 0 && $tempDepartments[0] != '') {
+            foreach ($tempDepartments as $value) {
+                $tempArray = explode(" ", $value);
+                $departments[(int) $tempArray[0]] = (float) $tempArray[1];
+            }
         }
 
         $supportType = $this->getEntityFacade()->fromArray($decodedArray);

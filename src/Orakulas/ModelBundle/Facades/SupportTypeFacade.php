@@ -141,25 +141,29 @@ class SupportTypeFacade extends EntityFacade {
             FROM
               support_administration_time
             WHERE
-              support_type_id = :supportTypeId AND
+              support_type_id = :supportTypeId';
+
+        if (count($intersectedArray) > 0) {
+            $stmtString .= ' AND
               department_id in (';
 
-        foreach ($intersectedArray as $key => $id) {
-            $stmtString .= ':id'.$id;
-            if ($key < count($intersectedArray) - 1) {
-                $stmtString .= ", ";
+            foreach ($intersectedArray as $key => $id) {
+                $stmtString .= ':id'.$id;
+                if ($key < count($intersectedArray) - 1) {
+                    $stmtString .= ", ";
+                }
+            }
+            $stmtString .= ")";
+
+            $entityManager = $this->getDoctrine()->getEntityManager();
+
+            $stmt = $entityManager->getConnection()->prepare($stmtString);
+
+            foreach ($intersectedArray as $key => $id) {
+                $stmt->bindValue('id'.$id, $id);
             }
         }
-        $stmtString .= ")";
-
-        $entityManager = $this->getDoctrine()->getEntityManager();
-
-        $stmt = $entityManager->getConnection()->prepare($stmtString);
-
         $stmt->bindValue('supportTypeId', $supportType->getId());
-        foreach ($intersectedArray as $key => $id) {
-            $stmt->bindValue('id'.$id, $id);
-        }
 
         $stmt->execute();
 

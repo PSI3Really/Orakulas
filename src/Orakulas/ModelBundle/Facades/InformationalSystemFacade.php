@@ -134,15 +134,13 @@ class InformationalSystemFacade extends EntityFacade {
 
         $diffedArray = array_diff($departmentIds, $dbDepartmentIds);
 
-        if (count($diffedArray) > 0) {
-            foreach ($diffedArray as $id) {
-                $departmentInfoSysUsage = new DepartmentInfoSysUsage();
+        foreach ($diffedArray as $id) {
+            $departmentInfoSysUsage = new DepartmentInfoSysUsage();
 
-                $departmentInfoSysUsage->setInformationalSystem($informationalSystem);
-                $departmentInfoSysUsage->setDepartment($this->getDepartmentFacade()->load($id));
+            $departmentInfoSysUsage->setInformationalSystem($informationalSystem);
+            $departmentInfoSysUsage->setDepartment($this->getDepartmentFacade()->load($id));
 
-                $this->getDepartmentInfoSysUsageFacade()->save($departmentInfoSysUsage);
-            }
+            $this->getDepartmentInfoSysUsageFacade()->save($departmentInfoSysUsage);
         }
     }
 
@@ -150,27 +148,31 @@ class InformationalSystemFacade extends EntityFacade {
         $stmtString = '
             DELETE FROM department_info_sys_usage
             WHERE
-              informational_system_id = :infoSysId AND
+              informational_system_id = :infoSysId';
+
+        if (count($departmentIds) > 0) {
+            $stmtString .= ' AND
               department_id not in (';
 
-        foreach ($departmentIds as $key => $id) {
-            $stmtString .= ':id' . $id;
-            if ($key < count($departmentIds) - 1) {
-                $stmtString .= ', ';
+            foreach ($departmentIds as $key => $id) {
+                $stmtString .= ':id' . $id;
+                if ($key < count($departmentIds) - 1) {
+                    $stmtString .= ', ';
+                }
+            }
+
+            $stmtString .= ')';
+
+            $entityManager = $this->getDoctrine()->getEntityManager();
+
+            $stmt = $entityManager->getConnection()->prepare($stmtString);
+
+
+            foreach ($departmentIds as $id) {
+                $stmt->bindValue('id' . $id, (int)$id);
             }
         }
-
-        $stmtString .= ')';
-
-        $entityManager = $this->getDoctrine()->getEntityManager();
-
-        $stmt = $entityManager->getConnection()->prepare($stmtString);
-
         $stmt->bindValue('infoSysId', (int)$informationalSystem->getId());
-
-        foreach ($departmentIds as $id) {
-            $stmt->bindValue('id' . $id, (int)$id);
-        }
 
         $stmt->execute();
     }
