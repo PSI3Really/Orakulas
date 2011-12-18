@@ -16,19 +16,6 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.PortletBar', {
         },{
             text: LANG.ENTITY.HOURS_SPENT,
             action: 'chooseHoursSpent'
-        },'->',{
-            xtype: 'combobox',
-            multiSelect: true,
-            editable: false,
-            //disabled: true,
-            emptyText: LANG.MAIN.PORTAL.CHOOSE_ENTITIES,
-            store:{
-                fields: ['entity'],
-                data: []
-            },
-            queryMode: 'local',
-            displayField: 'entity',
-            valueField: 'entity'
         }];
 
         this.callParent();

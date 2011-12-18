@@ -26,6 +26,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.ChartPortlet', {
                 type: 'Time',
                 position: 'bottom',
                 fields: ['startDate'],
+                step: [Ext.Date.MONTH, 1],
                 dateFormat: 'Y m',
                 grid: true,
                 label: {
@@ -49,19 +50,26 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.ChartPortlet', {
             background: {
                 fill: '#FFF'
             }
-        })
+        });
 
         this.items = [
             this.dataView
         ];
 
-        this.dockedItems = [{
-            xtype: 'portletbar',
-            dock: 'top'
-        }];
+        this.dockedItems = [
+            {
+                xtype: 'portletbar',
+                dock: 'top'
+            },
+            {
+                xtype: 'filterbar',
+                dock: 'bottom'
+            }
+        ];
 
         this.tools = [{
-            type: 'save'
+            type: 'save',
+            disabled: true
         }];
 
         this.callParent();
@@ -108,7 +116,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.ChartPortlet', {
                 yField: fields[i],
                 selectionTolerance: 3,
                 tips: {
-                    trackMouse: true,
+                    trackMouse: false,
                     renderer: function (storeItem, item) {
                         var date  = storeItem.get('startDate'),
                             value = item.value[1],

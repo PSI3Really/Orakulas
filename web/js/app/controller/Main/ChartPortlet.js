@@ -3,16 +3,13 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
 
     require: ['Ext.ux.Portlet'],
 
-    views: ['Main.Portal.GridPortlet', 'Main.Portal.PortletBar'],
+    views: ['Main.Portal.GridPortlet', 'Main.Portal.PortletBar', 'Main.Portal.FilterBar'],
 
     models: ['Load'],
     stores: ['InfoSysHours', 'InfoSysRequests', 'DepartmentHours', 'DepartmentRequests'],
 
     init: function(){
         this.control({
-            'chartportlet':{
-
-            },
             'chartportlet button[action=chooseDepartments]':{
                 click: this.chooseDepartments
             },
@@ -25,16 +22,26 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
             'chartportlet button[action=chooseHoursSpent]':{
                 click: this.chooseHoursSpent
             },
+            'chartportlet button[action=applyFilters]':{
+                click: this.applyFilters
+            },
+            'chartportlet button[action=resetFilters]':{
+                click: this.resetFilters
+            },
             'chartportlet tool[type=save]':{
                 click: this.saveImage
-            },
+            }
+            /*
             'chartportlet combobox':{
                 change: this.onPickerChange
             }
+            */
         });
     },
 
+    /*
     onPickerChange: function(field, newValue, oldValue, eOpts){ //TODO
+        console.log(newValue);
         field.up('chartportlet').showSeries(newValue);
     },
 
@@ -48,6 +55,34 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
             }
         }
 
+        picker.store.loadData(entityList);
+    },
+    */
+
+    afterRedraw: function(portlet) {
+        var filterBar = portlet.down('filterbar');
+
+        portlet.down('tool[type=save]').setDisabled(false);
+
+        var children = filterBar.query('*');
+        Ext.each(children, function () {
+            if (this.isDisabled()) {
+                this.setDisabled(false);
+            }
+            if (['combobox', 'datefield'].indexOf(this.getXType()) != -1) {
+                this.reset();
+            }
+        });
+        filterBar.child('button[action=resetFilters]').setDisabled(true);
+
+        var picker     = filterBar.down('combobox'),
+            entityList = [],
+            fields     = portlet.store.model.prototype.fields.keys;
+        for (var i = 0; i < fields.length; i++){
+            if (fields[i] != 'startDate'){
+                entityList.push({ entity: fields[i] });
+            }
+        }
         picker.store.loadData(entityList);
     },
 
@@ -73,7 +108,8 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
                 portletBar.down('button[action=chooseSupportCount]').toggle(true);
             }
 
-            this.setPickerOptions(portletBar, portlet.store);
+            //this.setPickerOptions(portletBar, portlet.store);
+            this.afterRedraw(portlet);
         }
     },
 
@@ -99,7 +135,8 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
                 portletBar.down('button[action=chooseSupportCount]').toggle(true);
             }
 
-            this.setPickerOptions(portletBar, portlet.store);
+            //this.setPickerOptions(portletBar, portlet.store);
+            this.afterRedraw(portlet);
         }
     },
 
@@ -125,7 +162,8 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
                 portletBar.down('button[action=chooseInfoSys]').toggle(false);
             }
 
-            this.setPickerOptions(portletBar, portlet.store);
+            //this.setPickerOptions(portletBar, portlet.store);
+            this.afterRedraw(portlet);
         }
     },
 
@@ -151,8 +189,55 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
                 portletBar.down('button[action=chooseInfoSys]').toggle(false);
             }
 
-            this.setPickerOptions(portletBar, portlet.store);
+            //this.setPickerOptions(portletBar, portlet.store);
+            this.afterRedraw(portlet);
         }
+    },
+
+    applyFilters: function(btn) {
+        var portlet        = btn.up('chartportlet'),
+            filterbar      = btn.up('filterbar'),
+            combobox       = filterbar.child('combobox'),
+            datefield_from = filterbar.child('datefield'),
+            datefield_to   = datefield_from.next(),
+            range_from     = datefield_from.getValue(),
+            range_to       = datefield_to.getValue();
+
+        if (range_from || range_to) {
+            portlet.store.filterBy(function (record, id) {
+                var start_date = record.get('startDate');
+                if (range_from && !range_to) {
+                    return (start_date >= range_from);
+                } else if (range_to && !range_from) {
+                    return (start_date <= range_to);
+                }
+                return ((start_date >= range_from) && (start_date <= range_to));
+            });
+        }
+
+        var selected = combobox.getValue();
+        if (selected.length) {
+            portlet.showSeries(selected);
+        } else {
+            portlet.setStore(portlet.store);
+        }
+        portlet.store.clearFilter();
+
+        btn.next().enable();
+    },
+
+    resetFilters: function(btn) {
+        var portlet   = btn.up('chartportlet'),
+            filterbar = btn.up('filterbar');
+
+        portlet.setStore(portlet.store);
+
+        filterbar.child('combobox').reset();
+        Ext.each(filterbar.query('datefield'), function () {
+            this.reset();
+        });
+
+        btn.disable();
     },
 
     saveImage: function(tool, e, eOpts) {
