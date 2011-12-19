@@ -64,6 +64,9 @@
 .icon-arrow-return {
     background: url(../images/icons/arrow-return.png) no-repeat center center;
 }
+.icon-reload{
+    background: url(../images/icons/arrow-reload.png) no-repeat center center;
+}
 
 /* Flags */
 .icon-flag-lt {

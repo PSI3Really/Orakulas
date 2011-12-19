@@ -11,6 +11,9 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Tab', {
             'maintabpanel button[action=predict]':{
                 click: this.predict
             },
+            'maintabpanel button[action=reload]':{
+                click: this.reload
+            },
             'maintab button[action=export]':{
                 click: this.exportPortal
             },
@@ -60,17 +63,23 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Tab', {
         tab.down('chartportlet').expand(true);
     },
 
+    reload: function(btn){
+        var tabpanel = btn.up('maintabpanel');
+        this.loadReports(tabpanel);
+    },
+
     loadReports: function(tabpanel){
+        tabpanel.setLoading(LANG.LOADING.RELOADING);
+        var me = this;
         Ext.Ajax.request({
             url: 'predictData',
             params: 'data={"supportQuantities":{},"supportAdministrationTimes":{},"departmentInfoSysUsages":{}}',
             success: function(response){
                 var data = Ext.JSON.decode(response.responseText);
-                //console.log(data);
-                tabpanel.reports.infoSysHours.loadRawData(data.infoSysHours);
-                tabpanel.reports.infoSysRequests.loadRawData(data.infoSysRequests);
-                tabpanel.reports.departmentHours.loadRawData(data.departmentHours);
-                tabpanel.reports.departmentRequests.loadRawData(data.departmentRequests);
+
+                me.loadPrediction(tabpanel, data);
+                
+                tabpanel.setLoading(false);
             },
             failure: function(response){
                 Ext.Msg.alert(LANG.ERROR.TITLE, LANG.ERROR.CANNOT_CONNECT);
@@ -79,6 +88,11 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Tab', {
     },
 
     loadPrediction: function(tabpanel, data){
+        tabpanel.reports.infoSysHours.sort('startDate', 'ASC');
+        tabpanel.reports.infoSysRequests.sort('startDate', 'ASC');
+        tabpanel.reports.departmentHours.sort('startDate', 'ASC');
+        tabpanel.reports.departmentRequests.sort('startDate', 'ASC');
+
         tabpanel.reports.infoSysHours.loadRawData(data.infoSysHours);
         tabpanel.reports.infoSysRequests.loadRawData(data.infoSysRequests);
         tabpanel.reports.departmentHours.loadRawData(data.departmentHours);

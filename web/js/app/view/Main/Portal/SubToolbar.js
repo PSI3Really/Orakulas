@@ -10,6 +10,11 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.SubToolbar', {
         this.height = 30;
         this.items = [
             {
+                text: LANG.MAIN.SUB_TOOLBAR.BUTTON.RELOAD,
+                iconCls: 'icon-reload',
+                action: 'reload'
+            },
+            {
                 text: LANG.MAIN.SUB_TOOLBAR.BUTTON.PREDICT,
                 iconCls: 'icon-chart-up',
                 action: 'predict'

@@ -6,6 +6,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.TabPanel', {
         CONFIG.APP_NS+'.view.Main.Portal.SubToolbar'
     ],
 
+    id: 'maintabpanel',
     border: false,
     reports: {
         infoSysHours: null,
