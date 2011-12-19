@@ -30,6 +30,7 @@ Ext.application({
         'Main.Portal',
         'Main.GridPortlet',
         'Main.ChartPortlet',
+        'Main.InfoPortlet',
         'Main.Tab',
         'Import',
         'Export',

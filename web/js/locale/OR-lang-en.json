@@ -68,7 +68,16 @@
                 "TITLE": "Chart"
             },
             "INFO":{
-                "TITLE":"Information"
+                "TITLE":"Information",
+
+                "RANGE_FROM": "Searched from",
+                "RANGE_TO": "Searched to",
+                "SELECTED": "Selected entities",
+                "INTERVAL_SIZE":"Interval size (months)",
+                "MIN_VALUE": "Minimum value",
+                "MIN_DATE": "Start date for minimum value",
+                "MAX_VALUE": "Maximum value",
+                "MAX_DATE": "Start date for maximum value"
             },
             "CHOOSE_ENTITIES":"Choose what to display",
             "SAVE_PICTURE_AS":"To save generated image right-click and choose 'Save Image As&hellip;'"
@@ -132,7 +141,8 @@
         "CANCEL_CHANGES":"Cancel changes",
         "OPEN_FILE": "Open file",
         "FILTER": "Filter",
-        "RESET_FILTER": "Reset filter"
+        "RESET_FILTER": "Reset filter",
+        "ANALYZE": "Analyze"
     },
 
     "LOADING":{

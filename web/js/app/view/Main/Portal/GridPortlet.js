@@ -35,7 +35,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.GridPortlet', {
         this.callParent();
     },
 
-    setStore: function(store){ //TODO: make filters work
+    setStore: function(store){ 
         this.store = store;
 
         this.filters.removeAll();

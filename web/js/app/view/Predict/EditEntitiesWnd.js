@@ -163,7 +163,7 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.EditEntitiesWnd', {
                         store.insert(0, Ext.create(store.model));
                         rowEditor.startEdit(0, 0);
                     }
-                },{
+                }/*,{
                     iconCls: 'icon-minus-circle',
                     xtype:  'button',
                     text:   LANG.BUTTON.REMOVE,
@@ -176,7 +176,7 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.EditEntitiesWnd', {
                         rowEditor.cancelEdit();
                         store.remove(selected);
                     }
-                }]
+                }*/]
             }]
         },{
             title: LANG.PREDICT.BUTTON.SUPPORT_AND_DEPARTMENTS,
@@ -252,7 +252,7 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.EditEntitiesWnd', {
                         store.insert(0, Ext.create(store.model));
                         rowEditor.startEdit(0, 0);
                     }
-                },{
+                }/*,{
                     iconCls: 'icon-minus-circle',
                     xtype:  'button',
                     text:   LANG.BUTTON.REMOVE,
@@ -265,7 +265,7 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.EditEntitiesWnd', {
                         rowEditor.cancelEdit();
                         store.remove(selected);
                     }
-                }]
+                }*/]
             }]
         },{
             title: LANG.PREDICT.BUTTON.OPTIONS, //NEED TOOLTIPS

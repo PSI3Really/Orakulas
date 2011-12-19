@@ -68,7 +68,16 @@
                 "TITLE": "Grafikas"
             },
             "INFO":{
-                "TITLE":"Analizė"
+                "TITLE":"Analizė",
+
+                "RANGE_FROM": "Ieškota nuo",
+                "RANGE_TO": "Ieškota iki",
+                "SELECTED": "Pasirinkti objektai",
+                "INTERVAL_SIZE":"Intervalo ilgis (mėn.)",
+                "MIN_VALUE": "Mažiausia vertė",
+                "MIN_DATE": "Pradžios data mažiausiai reikšmei",
+                "MAX_VALUE": "Didžiausia vertė",
+                "MAX_DATE": "Pradžios data didžiausiai reišmei"
             },
             "CHOOSE_ENTITIES":"Pasirinkite ką rodyti",
             "SAVE_PICTURE_AS":"Paveiksliuką galite išsaugoti paspaudę dešinyjį pelės klavišą"
@@ -131,7 +140,8 @@
         "CANCEL_CHANGES":"Atšaukti pakeitimus",
         "OPEN_FILE": "Įkelti iš failo",
         "FILTER": "Filtruoti",
-        "RESET_FILTER": "Nuimti filtravimą"
+        "RESET_FILTER": "Nuimti filtravimą",
+        "ANALYZE": "Analizuoti"
     },
 
     "LOADING":{
