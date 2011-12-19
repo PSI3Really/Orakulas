@@ -26,6 +26,8 @@ class PredictDataController extends Controller {
             $this->jsonData = $_POST['data'];
             $this->jsonData = json_decode($this->jsonData, true);
 
+            $this->formatJson();
+
             $this->readSupportQuantitiesFromDatabase();
             $this->readSupportQuantitiesFromJsonAndMerge();
 
@@ -41,12 +43,33 @@ class PredictDataController extends Controller {
         }
 
         $loads = new CalculateLoadsController($this->supportQuantities, $this->supportAdministrationTimes, $this->departmentInfoSysUsages);
-        $loads = $loads->calculateLoads();
+
+        $ignoreLast = 1;
+        $window = 12;
+        $totalPeriod = null;
+        $uptrend = null;
+
+        if(isset($this->jsonData['options'])){
+            $options = $this->jsonData['options'];
+            if (isset($options['ignoreLast'])) $ignoreLast = $options['ignoreLast'];
+            if (isset($options['window'])) $window = $options['window'];
+            if (isset($options['uptrend'])) $uptrend = $options['uptrend']/100.0;
+        }
+
+        $loads = $loads->calculateLoads($ignoreLast, $window, $totalPeriod, $uptrend); //TODO
 
         $loads = $this->formSuitableArrays($loads);
         $loads = json_encode($loads);
 
         return $this->constructResponse($loads);
+    }
+
+    private function formatJson(){
+        foreach($this->jsonData['supportQuantities'] as $idx => $supportQuantity){
+            $this->jsonData['supportQuantities'][$idx]['type'] = strtoupper($supportQuantity['type']);
+            $this->jsonData['supportQuantities'][$idx]['startDate'] = date('Y-m-d', strtotime($supportQuantity['startDate']));
+            $this->jsonData['supportQuantities'][$idx]['endDate'] = date('Y-m-d', strtotime($supportQuantity['endDate']));
+        }
     }
 
     private function formSuitableArrays($array) {
@@ -95,7 +118,7 @@ class PredictDataController extends Controller {
                     "supportType"=>$supportQuantityTemp['type'], //supportType
                     "startDate"=>$supportQuantityTemp['startDate'],
                     "endDate"=>$supportQuantityTemp['endDate'],
-                    "supportRequestCount"=>$supportQuantityTemp['amount'], //supportRequestCount
+                    "supportRequestCount"=>$supportQuantityTemp['amount'] //supportRequestCount
                 );
             }
         }

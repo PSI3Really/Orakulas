@@ -6,14 +6,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use \Orakulas\ExcelBundle\OrakulasExcelWriter\OrakulasExcelWriter;
 
-class ExportController
+class ExportController extends Controller
 {
+    private $filename;
+
     public function exportDataAction()
     {
         $jsonData = json_decode($_POST['data'], true);
-        $filename = $jsonData['filename'];
+        $this->filename = $jsonData['filename'];
 
-        $writer = new OrakulasExcelWriter($filename);
+        $writer = new OrakulasExcelWriter($this->filename);
 
         if (isset($jsonData['tables'])) {
             $writer->writeData($jsonData['tables']);
@@ -29,23 +31,33 @@ class ExportController
         }
 
         $success = $writer->saveFile();
-
-        if ($success === "false") {
-            $success = '{"success":"false"}';
+        
+        if ($success != false) {
+            return $this->constructResponse($success);
         } else {
-            $success = '{"success":"true"}';
+            $response = new Response('"success":"false"');
+            $response->headers->set('Content-Type', 'application/json');
+            
+            return $response;
         }
 
-        return $this->constructResponse($success);
     }
 
-    /**
-     * @param \string $string
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    protected function constructResponse($string) {
-        $response = new Response($string);
-        $response->headers->set('Content-Type', 'application/json');
+    protected function constructResponse()
+    {
+        $response = new Response();
+        $response->headers->set('Content-Disposition', "attachment; filename=$this->filename");
+        //if (preg_match('/\.xls$/', $this->filename)) {
+            //$response->headers->set('Content-Type', 'application/vnd.ms-excel');
+        //$response->headers->set('Content-Type', 'application/force-download');
+
+          //  $response->headers->set('Content-Type', 'application/octet-stream');
+           // $response->headers->set('Content-Type', 'application/download');
+
+        //} else {
+            
+        //}
+        $response->setContent(readfile("./savedExcels/".$this->filename));
 
         return $response;
     }

@@ -57,10 +57,15 @@ Ext.define(CONFIG.APP_NS+'.controller.Predict', {
 
         //params: 'data={"supportQuantities":{},"supportAdministrationTimes":{},"departmentInfoSysUsages":{}}'
 
+        wnd.supportJson = wnd.supportJson ? wnd.supportJson : '{}';
+        wnd.infoSysJson = wnd.infoSysJson ? wnd.infoSysJson : '{}';
+        wnd.optionsJson = wnd.optionsJson ? wnd.optionsJson : '{}';
+
         var jsonData = 'data={"supportQuantities":' + supportQuantities +
-            ',"supportAdministrationTimes":' + wnd.supportJson ? wnd.supportJson : '{}' +
-            ',"departmentInfoSysUsages":' + wnd.infoSysJson ? wnd.infoSysJson : '{}'+ '}';
-        
+            ',"supportAdministrationTimes":' + wnd.supportJson +
+            ',"departmentInfoSysUsages":' + wnd.infoSysJson +
+            ',"options":' + wnd.optionsJson + '}';
+
         wnd.setLoading(LANG.LOADING.PREDICTING);
 
         Ext.Ajax.request({
@@ -70,10 +75,13 @@ Ext.define(CONFIG.APP_NS+'.controller.Predict', {
             success: function(response){
                 var tabpanel = wnd.parentTab.up('maintabpanel');
                 tabpanel.fireEvent('loadPrediction', tabpanel, Ext.JSON.decode(response.responseText));
-                wnd.setLoading(false);
+                //wnd.setLoading(false);
                 wnd.close();
             },
             failure: function(response){
+                Ext.Msg.alert(LANG.ERROR.TITLE, LANG.ERROR.CANNOT_CONNECT + ': ' + response.responseText);
+            },
+            callback: function(){
                 wnd.setLoading(false);
             }
         });

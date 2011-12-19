@@ -20,6 +20,7 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.Window', {
 
     infoSysJson: null,
     supportJson: null,
+    optionsJson: null,
 
     editEntitiesWnd: null,
 

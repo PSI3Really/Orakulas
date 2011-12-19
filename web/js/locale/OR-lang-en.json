@@ -53,7 +53,8 @@
                 "ANALYZE": "Information",
                 "EXPORT": "Export&hellip;",
                 "TABLE": "Table",
-                "CHART": "Chart"
+                "CHART": "Chart",
+                "RELOAD": "Reload factual data"
             },
             "TOOLTIP":{
                 "NEW_PORTLET": "New view"
@@ -93,11 +94,15 @@
 
     "PREDICT":{
         "TITLE": "Predict",
+        "IGNORE_LAST_DATE": "Ignore last month",
+        "WINDOW_SIZE": "Forecasting window (months)",
+        "UPTREND": "Uptrend %",
 
         "BUTTON":{
             "INFO_SYS_AND_DEPARTMENTS": "IS/Departments",
             "SUPPORT_AND_DEPARTMENTS": "Support types/Departments",
-            "EDIT_ENTITIES": "Entities&hellip;"
+            "EDIT_ENTITIES": "Advanced&hellip;",
+            "OPTIONS":"Options"
         }
     },
 
@@ -132,7 +137,8 @@
 
     "LOADING":{
         "IMPORTING":"Importing&hellip;",
-        "PREDICTING":"Predicting&hellip;"
+        "PREDICTING":"Predicting&hellip;",
+        "RELOADING":"Reloading data&hellip;"
     },
     
     "ENTITY":{

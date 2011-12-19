@@ -53,7 +53,8 @@
                 "ANALYZE": "Analizė",
                 "EXPORT": "Eksportuoti&hellip;",
                 "TABLE": "Lentelė",
-                "CHART": "Grafikas"
+                "CHART": "Grafikas",
+                "RELOAD": "Atnaujinti pagal faktinius duomenis"
             },
             "TOOLTIP":{
                 "NEW_PORTLET": "Naujas vaizdas"
@@ -76,7 +77,6 @@
 
     "EXPORT":{
         "TITLE": "Eksportuoti"
-        
     },
 
     "IMPORT":{
@@ -93,11 +93,15 @@
 
     "PREDICT":{
         "TITLE": "Prognozuoti",
+        "IGNORE_LAST_DATE": "Ignoruoti paskutinį mėnesį",
+        "WINDOW_SIZE": "Prognozavimo langas (mėn.)",
+        "UPTREND": "Prieaugis %",
 
         "BUTTON":{
             "INFO_SYS_AND_DEPARTMENTS": "IS/Padaliniai",
             "SUPPORT_AND_DEPARTMENTS": "Priemonės/Padaliniai",
-            "EDIT_ENTITIES": "Organizacija&hellip;"
+            "EDIT_ENTITIES": "Išsamiau&hellip;",
+            "OPTIONS":"Parinktys"
         }
     },
 
@@ -132,7 +136,8 @@
 
     "LOADING":{
         "IMPORTING":"Importuojama&hellip;",
-        "PREDICTING":"Prognozuojama&hellip;"
+        "PREDICTING":"Prognozuojama&hellip;",
+        "RELOADING":"Atnaujinami duomenys&hellip;"
     },
     
     "ENTITY":{
