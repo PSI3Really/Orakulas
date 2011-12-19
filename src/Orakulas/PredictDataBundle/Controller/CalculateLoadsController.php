@@ -24,10 +24,13 @@ class CalculateLoadsController extends Controller {
         $this->departmentInfoSysUsages = $departmentInfoSysUsages;
     }
 
-    public function calculateLoads() {
+    public function calculateLoads($ignoreLast, $window, $totalPeriod, $uptrend) {
+        //$ignoreLast - how many months to ignore counting from the last existing date
         $this->setSupportTypes();
         $this->generateRequests();
-        $this->forecast();
+
+        $ignoredDates = $ignoreLast == 1 ? "lastDate" : null; //TODO
+        $this->forecast($ignoredDates, $window, $totalPeriod, $uptrend);
 
         $this->setAvailableDates();
 
@@ -69,10 +72,23 @@ class CalculateLoadsController extends Controller {
         }
     }
 
-    private function forecast(){
-        $totalPeriod = 60; //months
-        $window = 12;
-        $uptrend = 0.025;
+    //$uptrend in decimals
+    private function forecast($ignoredDates, $window, $totalPeriod, $uptrend){
+        if (!$totalPeriod) $totalPeriod = 60; //months
+        if (!$window) $window = 12;
+        if (!$uptrend) $uptrend = 0.025;
+
+        if (!$ignoredDates){ //no dates ignored
+            $ignoredDates = array();
+        } else if (!is_array($ignoredDates)){ //just a string (hopefully)
+            if ($ignoredDates == "lastDate"){ //ignore just the last date
+                end($this->requests);
+                $ignoredDates = key($this->requests);
+                reset($this->requests);
+            }
+            $ignoredDates = array($ignoredDates);
+        }
+
 
         $fData = array();
         foreach ($this->supportTypes as $supportType){
@@ -82,12 +98,12 @@ class CalculateLoadsController extends Controller {
                 "seasonalCounts" => array_fill(1, 12, 0)
             );
         };
-
+        
         foreach (array_slice($this->requests, $window) as $date => $values){ //Calculate seasonalities
             $month = intval(date('n', strtotime($date)));
 
             foreach($this->supportTypes as $supportType){
-                $avg = $this->getMovingAverage($date, $supportType, $window);
+                $avg = $this->getMovingAverage($date, $supportType, $window, $ignoredDates);
 
                 if (!isset($values[$supportType])){
                     $values[$supportType] = 0;
@@ -119,22 +135,26 @@ class CalculateLoadsController extends Controller {
             }
         }
 
-
-
-        end($this->requests);
         $oldSize = sizeof($this->requests);
-        
+        end($this->requests);
+
         for ($period = 1; $period <= $totalPeriod; $period++){ //TODO: optimize
             $date = date('Y-m-d', strtotime(key($this->requests) . ' +' . $period . ' months'));
+
+            //echo $date, ' ';
 
             $month = intval(date('n', strtotime($date)));
 
             $this->requests[$date] = array();
             foreach($this->supportTypes as $supportType){
-                $forecast = $this->getMovingAverage($date, $supportType, $window);
+                $forecast = $this->getMovingAverage($date, $supportType, $window, $ignoredDates);
+
+                //echo $forecast, ' ';
 
                 $this->requests[$date][$supportType] = intval( $forecast * $fData[$supportType]['seasonalIndex'][$month] * (1 + $uptrend));
             }
+
+            //echo '<br/>';
         }
         reset($this->requests);
 
@@ -155,12 +175,12 @@ class CalculateLoadsController extends Controller {
         };
     }
 
-    private function getMovingAverage($date, $supportType, $window){
+    private function getMovingAverage($date, $supportType, $window, $ignoredDates){
         $sum = 0;
 
         $weights = array();
-        for ($i = $window; $i >= 1; $i--){
-            $weights[$window + 1 - $i] = $i;
+        for ($checkedMonths = $window; $checkedMonths >= 1; $checkedMonths--){
+            $weights[$window + 1 - $checkedMonths] = $checkedMonths;
         }
         
         //normalize
@@ -175,27 +195,33 @@ class CalculateLoadsController extends Controller {
         //echo '<p><b>', $date, '</b> ::: ';
         $expAvg = 0;
 
-        for($i = 1; $i <= $window; $i++){ //Compute moving average
-            $prevDate = date('Y-m-d', strtotime($date . ' -' . $i . ' months'));
+        //for($i = 1; $i <= $window; $i++){
+
+        $monthsBack = 1;
+        $checkedMonths = 1;
+        while ($checkedMonths <= $window){//Compute moving average
+            $prevDate = date('Y-m-d', strtotime($date . ' -' . $monthsBack . ' months'));
 
             //echo $prevDate, ' : ';
-
-            if (!isset($this->requests[$prevDate])){
+            $monthsBack++;
+            
+            if (in_array($prevDate, $ignoredDates)){
                 continue;
             }
+
+            if (isset($this->requests[$prevDate])){
+                $prevCount = isset($this->requests[$prevDate][$supportType]) ? $this->requests[$prevDate][$supportType] : 0;
+
+                //echo $prevCount, ' | ';
+
+                $expAvg += $weights[$checkedMonths] * $prevCount;
+            }
             
-            $prevCount = isset($this->requests[$prevDate][$supportType]) ? $this->requests[$prevDate][$supportType] : 0;
-
-            //echo $prevCount, ' | ';
-
-            $expAvg += $weights[$i] * $prevCount;
-
-            $sum += $prevCount;
+            $checkedMonths++;
         }
 
-        //echo '<b>', intval($sum/$window),'</b></p>';
+        //echo '<b>', $expAvg,'</b></p>';
         return $expAvg;
-        //return intval($sum/$window);
     }
 
     private function quantitiesForDepartments() {

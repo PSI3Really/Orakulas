@@ -14,6 +14,9 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.EditEntitiesWnd', {
     support: null,
     departments: null,
     supportTypes: null,
+    ignoreLast: null,
+    windowSize: null,
+    uptrend: null,
 
     generateGrids: function(){
         this.infoSys = Ext.create('Ext.data.Store', {
@@ -59,7 +62,7 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.EditEntitiesWnd', {
             var record = this.parentWnd.supportDepartmentsStore.getAt(i);
 
             var department = record.get('department').name;
-            var supportType = record.get('supportType').name;
+            var supportType = record.get('supportType').code;
             var hoursCount = record.get('hoursCount');
 
             this.supportTypes.add(supportType, {'name': supportType});
@@ -74,6 +77,30 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.EditEntitiesWnd', {
         this.generateGrids();
 
         this.title = LANG.PREDICT.BUTTON.EDIT_ENTITIES;
+
+        this.ignoreLast = Ext.create('Ext.form.field.Checkbox', { //TODO: remake to choose dates
+            value: 1,
+            allowDecimals: false,
+            checked: true,
+            minValue: 0,
+            maxValue: 12,
+            fieldLabel: LANG.PREDICT.IGNORE_LAST_DATE
+        });
+
+        this.windowSize = Ext.create('Ext.form.field.Number', {
+            xtype: 'numberfield', //TODO: check boundaries
+            value: 12,
+            allowDecimals: false,
+            minValue: 0,
+            maxValue: 24, //TODO
+            fieldLabel: LANG.PREDICT.WINDOW_SIZE
+        });
+
+        this.uptrend = Ext.create('Ext.form.field.Number', {
+            xtype: 'numberfield',
+            value: 2.5,
+            fieldLabel: LANG.PREDICT.UPTREND
+        });
 
         this.items = [{
             title: LANG.PREDICT.BUTTON.INFO_SYS_AND_DEPARTMENTS,
@@ -240,6 +267,10 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.EditEntitiesWnd', {
                     }
                 }]
             }]
+        },{
+            title: LANG.PREDICT.BUTTON.OPTIONS, //NEED TOOLTIPS
+            xtype: 'form',
+            items: [this.ignoreLast, this.windowSize, this.uptrend]
         }]
 
         this.dockedItems = [{
@@ -252,8 +283,17 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.EditEntitiesWnd', {
                     var jsonInfoSys = Ext.encode(Ext.pluck(me.infoSys.data.items, 'data'));
                     var jsonSupport = Ext.encode(Ext.pluck(me.support.data.items, 'data'));
 
+                    var options = {
+                        ignoreLast: me.ignoreLast.getValue() ? 1 : 0,
+                        window: me.windowSize.getValue(),
+                        uptrend: me.uptrend.getValue()
+                    }
+
+                    var jsonOptions = Ext.encode(options);
+
                     me.parentWnd.infoSysJson = jsonInfoSys;
                     me.parentWnd.supportJson = jsonSupport;
+                    me.parentWnd.optionsJson = jsonOptions;
                     me.hide();
                 }
             },{

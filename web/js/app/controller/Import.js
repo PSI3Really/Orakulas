@@ -47,6 +47,9 @@ Ext.define(CONFIG.APP_NS+'.controller.Import', {
         var grid = btn.up('importwindow').down('importgrid');
         var store = grid.getStore();
 
+        var wnd = btn.up('importwindow');
+
+        wnd.setLoading(LANG.LOADING.IMPORTING);
 
         var jsonData = Ext.encode(Ext.pluck(store.data.items, 'data')); //store.sync();
 
@@ -57,7 +60,16 @@ Ext.define(CONFIG.APP_NS+'.controller.Import', {
                 jsonValue: jsonData
             },
             success: function(response){
+                //var tabpanel = Ext.getCmp('maintabpanel');
+                //tabpanel.fireEvent('loadReports', tabpanel);
                 btn.up('importwindow').close();
+
+            },
+            failure: function(response){
+                Ext.Msg.alert(LANG.ERROR.TITLE, LANG.ERROR.CANNOT_CONNECT + ': ' + response.responseText);
+            },
+            callback: function(){
+                wnd.setLoading(false);
             }
         });
     },

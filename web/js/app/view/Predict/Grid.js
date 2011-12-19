@@ -10,8 +10,8 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.Grid', { //TODO: merge with importgrid
         this.store = Ext.create('Ext.data.Store', {
             fields: [
                 {name: 'type', type: 'string'},
-                {name: 'startDate', type: 'date'},
-                {name: 'endDate', type: 'date'},
+                {name: 'startDate', type: 'date', dateFormat: 'Y-m-d'},
+                {name: 'endDate', type: 'date', dateFormat: 'Y-m-d'},
                 {name: 'amount', type: 'int'}
             ],
             data: []

@@ -179,6 +179,20 @@ class InformationalSystemFacade extends EntityFacade {
 
     /**
      * @param \Orakulas\ModelBundle\Entity\InformationalSystem $entity
+     * @throws \InvalidArgumentException
+     */
+    public function save($entity) {
+        if ($entity == NULL) {
+            throw new \InvalidArgumentException('parameter $entity cannot be null');
+        }
+
+        $entity->setCode(strtoupper($entity->getCode()));
+
+        parent::save($entity);
+    }
+
+    /**
+     * @param \Orakulas\ModelBundle\Entity\InformationalSystem $entity
      * @return array
      */
     public function toArray($entity) {

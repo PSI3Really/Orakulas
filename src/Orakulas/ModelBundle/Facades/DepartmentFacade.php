@@ -104,12 +104,26 @@ class DepartmentFacade extends EntityFacade {
     }
 
     /**
+     * @param \Orakulas\ModelBundle\Entity\Department $entity
+     * @throws \InvalidArgumentException
+     */
+    public function save($entity) {
+        if ($entity == NULL) {
+            throw new \InvalidArgumentException('parameter $entity cannot be null');
+        }
+
+        $entity->setCode(strtoupper($entity->getCode()));
+
+        parent::save($entity);
+    }
+
+    /**
      * @param int $id
      * @return \Orakulas\ModelBundle\Entity\Department
      */
      public function load($id) {
          if ($id == NULL) {
-             throw new \InvalidArgumentException('parameter $id and cannot be null');
+             throw new \InvalidArgumentException('parameter $id cannot be null');
          }
 
          if ($this->getDoctrine() == NULL) {
