@@ -30,6 +30,9 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
             },
             'chartportlet tool[type=save]':{
                 click: this.saveImage
+            },
+            'chartportlet datefield':{
+                change: this.onDateFieldChange
             }
             /*
             'chartportlet combobox':{
@@ -204,6 +207,8 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
             range_to       = datefield_to.getValue(),
             selected       = combobox.getValue();
 
+        range_from = Ext.Date.add(range_from, Ext.Date.MONTH, -1);
+
         if (range_from || range_to || selected.length) {
             if (range_from || range_to) {
                 portlet.store.filterBy(function (record, id) {
@@ -225,6 +230,31 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
             portlet.store.clearFilter();
 
             btn.next().enable();
+        }
+    },
+
+    onDateFieldChange: function(field) {
+        var sibling = null;
+        if (field.prev().getXType() == 'datefield') {
+            sibling = field.prev();
+        } else {
+            sibling = field.next();
+        }
+
+        var sibling_value = sibling.getValue(),
+            value         = field.getValue();
+        if (value && sibling_value) {
+            if ((value.getMonth() == sibling_value.getMonth() && (value.getDay() == sibling_value.getDay()))) {
+                Ext.Msg.show({
+                    title: '~~Klaidingas pasirinkimas',
+                    msg:   '~~Rėžius turi skirti bent vienas mėnuo.',
+                    icon:  Ext.MessageBox.ERROR,
+                    buttons: Ext.MessageBox.OK,
+                    fn: function () {
+                        field.reset();
+                    }
+                });
+            }
         }
     },
 
