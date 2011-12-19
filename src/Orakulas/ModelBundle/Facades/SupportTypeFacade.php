@@ -73,9 +73,16 @@ class SupportTypeFacade extends EntityFacade {
 
     /**
      * @param \Orakulas\ModelBundle\Entity\SupportType $entity
+     * @throws \InvalidArgumentException
      */
     public function save($entity) {
+        if ($entity == NULL) {
+            throw new \InvalidArgumentException('parameter $id cannot be null');
+        }
+
         $this->supportCategoryFacade->save($entity->getSupportCategory());
+
+        $entity->setCode(strtoupper($entity->getCode()));
 
         parent::save($entity);
     }
