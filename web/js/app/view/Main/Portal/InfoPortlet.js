@@ -50,7 +50,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.InfoPortlet', {
                 this.minValueField,
                 this.minDateStartField,
                 this.maxValueField,
-                this.maxDateStartField,
+                this.maxDateStartField
             ]
         });
 
