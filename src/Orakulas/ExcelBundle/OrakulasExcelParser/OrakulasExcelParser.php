@@ -213,8 +213,8 @@ class OrakulasExcelParser {
                     $cellCnValue = $ts;
 
                     if ((strlen($cellAnValue) == 0) || (strlen($cellBnValue) == 0) || (strlen($cellCnValue) == 0) || (strlen($cellDnValue) == 0)) {
-                        $success = false;
-                        $errors  = "INVALID_DATA"."_$index";
+                        //$success = false;
+                        //$errors  = "INVALID_DATA"."_$index";
                         break;
                     }
 
