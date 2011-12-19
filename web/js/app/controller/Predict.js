@@ -106,18 +106,13 @@ Ext.define(CONFIG.APP_NS+'.controller.Predict', {
                     grid.store.loadData(action.result.data, false); //replace old data
                 },
                 failure: function(form, action) {
-                    console.log(action.result);
                     var message = LANG.IMPORT.FAIL.UNKNOWN; // unknown error
-                    switch (action.result.errors) {
-                        case 'INVALID_FILE_TYPE':
-                            message = LANG.IMPORT.FAIL.INVALID_FILE_TYPE;
-                            break;
-                        case 'NO_SUCH_SHEET':
-                            message = LANG.IMPORT.FAIL.NO_SUCH_SHEET;
-                            break;
-                        case 'INVALID_DATA':
-                            message = LANG.IMPORT.FAIL.INVALID_DATA;
-                            break;
+                    if (action.result.errors == 'INVALID_FILE_TYPE'){
+                        message = LANG.IMPORT.FAIL.INVALID_FILE_TYPE;
+                    } else if (action.result.errors == 'NO_SUCH_SHEET'){
+                        message = LANG.IMPORT.FAIL.NO_SUCH_SHEET;
+                    } else if (action.result.errors.substring(0, 12) == 'INVALID_DATA'){
+                        message = LANG.IMPORT.FAIL.INVALID_DATA + action.result.errors.substring(13);
                     }
                     msg(LANG.IMPORT.FAIL.TITLE, message, Ext.Msg.ERROR);
                 }

@@ -73,7 +73,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Tab', {
                 tabpanel.reports.departmentRequests.loadRawData(data.departmentRequests);
             },
             failure: function(response){
-                Ext.Msg.alert("~~Error", "~~Could not establish connection to the database");
+                Ext.Msg.alert(LANG.ERROR.TITLE, LANG.ERROR.CANNOT_CONNECT);
             }
         });
     },

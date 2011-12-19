@@ -21,21 +21,21 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.FilterBar', {
                 xtype: 'datefield',
                 editable: false,
                 format: 'Y m',
-                emptyText: '~~Nuo'
+                emptyText: LANG.ENTITY.START_DATE
             },
             {
                 xtype: 'datefield',
                 editable: false,
                 format: 'Y m',
-                emptyText: '~~Iki'
+                emptyText: LANG.ENTITY.END_DATE
             },
             '->',
             {
-                text: '~~Filtruoti',
+                text: LANG.BUTTON.FILTER,
                 action: 'applyFilters'
             },
             {
-                text: '~~Atstatyti',
+                text: LANG.BUTTON.RESET_FILTER,
                 action: 'resetFilters',
                 disabled: true
             }

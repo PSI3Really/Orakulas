@@ -17,7 +17,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.PersonalSettings', {
         });
     },
 
-    confirm: function(btn) {
+    confirm: function(btn) { //TODO: change error messages to validations
         var panel = btn.up('adminpersonalsettingspanel');
         var oldpassword = panel.down('textfield[name=oldpassword]');
         var newpassword = panel.down('textfield[name=newpassword]');
@@ -25,7 +25,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.PersonalSettings', {
 
 
         if((oldpassword.value.length == 0) || (newpassword.value.length == 0) || (repeatpassword.value.length == 0)) {
-            Ext.Msg.alert('~~Klaida', '~~Visus laukelius užpildyti būtina');
+            Ext.Msg.alert(LANG.ERROR.TITLE, LANG.ERROR.EMPTY_FIELDS);
             repeatpassword.setValue('');
         }
         else {
@@ -46,7 +46,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.PersonalSettings', {
                 btn.up('adminpersonalsettingswindow').close();
             }
             else {
-                Ext.Msg.alert('~~Klaida', '~~Slaptazodziai nesutampa');
+                Ext.Msg.alert(LANG.ERROR.TITLE, LANG.ERROR.PASSWORD_MISMATCH);
             }
         }
 

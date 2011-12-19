@@ -21,8 +21,9 @@
         "SUPPORT_TYPES":{
             "CHOOSE_DIRECTION":"Pasirinkite kryptį"
         },
-        "ADD_INFORMATIONAL_SYSTEM": {
-            "TITLE": "Informacinė sistema"
+        "INFORMATIONAL_SYSTEMS":{
+            "TITLE_CHANGE": "Keičiama Informacinė Sistema: ",
+            "TITLE_NEW": "Pridedama nauja Informacinė Sistema"
         }
     },
 
@@ -68,7 +69,8 @@
             "INFO":{
                 "TITLE":"Analizė"
             },
-            "CHOOSE_ENTITIES":"Pasirinkite"
+            "CHOOSE_ENTITIES":"Pasirinkite ką rodyti",
+            "SAVE_PICTURE_AS":"Paveiksliuką galite išsaugoti paspaudę dešinyjį pelės klavišą"
         }
     },
 
@@ -83,7 +85,7 @@
         "FAIL":{
             "INVALID_FILE_TYPE":"Klaidingas duomenų failo formatas. Turėtų būti Excel dokumentas (.XLS arba .XLSX)",
             "NO_SUCH_SHEET":"Tokio puslapio duomenų faile nėra",
-            "INVALID_DATA":"Klaidingai suformuotas duomenų failas",
+            "INVALID_DATA":"Klaidingai suformuotas duomenų failas eilutėje ",
             "UNKNOWN":"Nepavyko perskaityti duomenų failo",
             "TITLE":"Įvyko klaida"
         }
@@ -108,6 +110,13 @@
         "LOGIN":"Prisijungti"
     },
 
+    "ERROR":{
+        "TITLE":"Klaida",
+        "EMPTY_FIELDS":"Visus laukelius užpildyti būtina",
+        "PASSWORD_MISMATCH":"Naujas ir pakartotas slaptažodžiai nesutampa",
+        "CANNOT_CONNECT":"Nepavyko susisiekti su sistemos duomenų baze"
+    },
+
     "BUTTON":{
         "ADD": "Pridėti",
         "REMOVE": "Pašalinti",
@@ -116,7 +125,9 @@
         "SAVE": "Išsaugoti",
         "SYNC": "Išsaugoti pakeitimus",
         "CANCEL_CHANGES":"Atšaukti pakeitimus",
-        "OPEN_FILE": "Įkelti iš failo"
+        "OPEN_FILE": "Įkelti iš failo",
+        "FILTER": "Filtruoti",
+        "RESET_FILTER": "Nuimti filtravimą"
     },
 
     "LOADING":{

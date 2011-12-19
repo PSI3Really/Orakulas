@@ -19,9 +19,9 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.InformationalSystems.ISAddWindow', {
         this.width      = 600;
 
         if (this.editing){
-            this.title = "~~IS Redagavimas";
+            this.title = LANG.ADMIN.INFORMATIONAL_SYSTEMS.TITLE_CHANGE;
         } else {
-            this.title = LANG.ADMIN.ADD_INFORMATIONAL_SYSTEM.TITLE;
+            this.title = LANG.ADMIN.INFORMATIONAL_SYSTEMS.TITLE_NEW;
         }
 
         this.items = [

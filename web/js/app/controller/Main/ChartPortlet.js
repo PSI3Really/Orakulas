@@ -247,7 +247,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
 
         var popup = Ext.create('widget.window', {
             id: 'canvas-window',
-            title: '~~To save generated image right-click and choose "Save Image As&hellip;"',
+            title: LANG.MAIN.PORTAL.SAVE_PICTURE_AS,
             resizable: false,
             layout: 'fit',
             modal: true,

@@ -21,8 +21,9 @@
         "SUPPORT_TYPES":{
             "CHOOSE_DIRECTION":"Choose direction"
         },
-        "ADD_INFORMATIONAL_SYSTEM": {
-            "TITLE": "Informational system"
+        "INFORMATIONAL_SYSTEMS":{
+            "TITLE_CHANGE": "Changing Informational System: ",
+            "TITLE_NEW": "New Informational System"
         }
     },
 
@@ -68,7 +69,8 @@
             "INFO":{
                 "TITLE":"Information"
             },
-            "CHOOSE_ENTITIES":"Choose"
+            "CHOOSE_ENTITIES":"Choose what to display",
+            "SAVE_PICTURE_AS":"To save generated image right-click and choose 'Save Image As&hellip;'"
         }
     },
 
@@ -83,7 +85,7 @@
         "FAIL":{
             "INVALID_FILE_TYPE":"The file format should be an Excel document (.XLS or .XLSX)",
             "NO_SUCH_SHEET":"No such worksheet found",
-            "INVALID_DATA":"Wrong file format",
+            "INVALID_DATA":"Syntax error at line ",
             "UNKNOWN":"Failed to read from file",
             "TITLE":"Error"
         }
@@ -108,6 +110,12 @@
         "LOGIN":"Login"
     },
 
+    "ERROR":{
+        "TITLE":"Error",
+        "EMPTY_FIELDS":"All fields are required",
+        "PASSWORD_MISMATCH":"Passwords do not match",
+        "CANNOT_CONNECT":"Could not establish connection to the database"
+    },
 
     "BUTTON":{
         "ADD": "Add",
@@ -117,7 +125,9 @@
         "SAVE": "Save",
         "SYNC": "Save changes",
         "CANCEL_CHANGES":"Cancel changes",
-        "OPEN_FILE": "Open file"
+        "OPEN_FILE": "Open file",
+        "FILTER": "Filter",
+        "RESET_FILTER": "Reset filter"
     },
 
     "LOADING":{
