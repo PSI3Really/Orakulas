@@ -65,9 +65,12 @@ class OrakulasExcelWriter
         } elseif (preg_match('/\.xlsx$/', $this->filename)) {
             $objWriter = PHPExcel_IOFactory::createWriter($this->objPHPExcel, 'Excel2007');
         } else {
-            return "false";
+            return false;
         }
-        $objWriter->save($this->filename);
+        
+        $directory = "savedExcels/";
+        $objWriter->save($directory.$this->filename);
+        return true;
     }
 
 }
