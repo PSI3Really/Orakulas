@@ -31,33 +31,25 @@ class ExportController extends Controller
         }
 
         $success = $writer->saveFile();
-        
-        if ($success != false) {
-            return $this->constructResponse($success);
-        } else {
-            $response = new Response('"success":"false"');
-            $response->headers->set('Content-Type', 'application/json');
-            
-            return $response;
-        }
 
+
+        $response = array(
+            'success' => $success,
+            'url' => "excel/download/$this->filename"
+        );
+        $response = json_encode($response);
+
+        return $this->constructResponse($response);
     }
 
-    protected function constructResponse()
+    /**
+     * @param \string $string
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    protected function constructResponse($string)
     {
-        $response = new Response();
-        $response->headers->set('Content-Disposition', "attachment; filename=$this->filename");
-        //if (preg_match('/\.xls$/', $this->filename)) {
-            //$response->headers->set('Content-Type', 'application/vnd.ms-excel');
-        //$response->headers->set('Content-Type', 'application/force-download');
-
-          //  $response->headers->set('Content-Type', 'application/octet-stream');
-           // $response->headers->set('Content-Type', 'application/download');
-
-        //} else {
-            
-        //}
-        $response->setContent(readfile("./savedExcels/".$this->filename));
+        $response = new Response($string);
+        $response->headers->set('Content-Type', 'application/json');
 
         return $response;
     }

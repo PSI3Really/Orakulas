@@ -4,8 +4,12 @@ OrakulasExcelBundle_import_support_histories:
 
 OrakulasExcelBundle_export:
     pattern: /excel/export
-    defaults: { _controller: OrakulasExcelBundle:Export:exportData}
+    defaults: { _controller: OrakulasExcelBundle:Export:exportData }
 
 OrakulasExcelBundle_save_png:
     pattern:  /excel/savePng
     defaults: { _controller: OrakulasExcelBundle:SavePng:savePng }
+
+OrakulasExcelBundle_download:
+    pattern:  /excel/download/{filename}
+    defaults: { _controller: OrakulasExcelBundle:Download:download }

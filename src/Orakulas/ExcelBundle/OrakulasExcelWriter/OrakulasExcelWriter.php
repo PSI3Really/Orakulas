@@ -33,8 +33,8 @@ class OrakulasExcelWriter
                     $sheet->setCellValueByColumnAndRow($columnIndex, $rowIndex, $data);
                 }
                 $rowIndex++;
-            }
-            
+            }       
+
             $this->sheetIndex++;
         }
 
