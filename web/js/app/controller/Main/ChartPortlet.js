@@ -33,6 +33,11 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
             },
             'chartportlet datefield':{
                 change: this.onDateFieldChange
+            },
+            'chartportlet portletbar button':{
+                click: function (btn) {
+                    $('#'+btn.up('chartportlet').id+' .or-placeholder').fadeOut('fast');
+                }
             }
             /*
             'chartportlet combobox':{

@@ -34,3 +34,17 @@
     padding: 10px;
     font-size: 11px;
 }
+
+.or-placeholder {
+    position: absolute;
+    top: 5px; left: 10px;
+    z-index: 9999;
+    width: 400px; height: 55px;
+    padding-top: 37px;
+    background: rgba(255, 255, 255, 0.75) url('../images/portlet_placeholder.png') no-repeat center 5px;
+    color: #15498B;
+    text-align: center;
+    -webkit-border-radius: 10px;
+       -moz-border-radius: 10px;
+            border-radius: 10px;
+}

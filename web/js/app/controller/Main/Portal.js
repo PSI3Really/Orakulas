@@ -66,6 +66,8 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
 
         minCol.add(newPortlet);
         newPortlet.doLayout();
+
+        this.addPlaceholder(newPortlet, 29);
     },
 
     addChart: function(portal, cfg){
@@ -93,6 +95,8 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
         var newPortlet = Ext.create('widget.chartportlet', config);
         
         minCol.add(newPortlet);
+
+        this.addPlaceholder(newPortlet);
     },
 
     addInfo:function(portal, cfg){
@@ -117,6 +121,8 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
         var newPortlet = Ext.create('widget.infoportlet', config);
 
         minCol.add(newPortlet);
+
+        this.addPlaceholder(newPortlet);
     },
 
     /*
@@ -138,6 +144,16 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Portal', {
         //console.log(portal.reports.departmentRequests);
     },
     */
+
+    addPlaceholder: function (portlet, top) {
+        var $body        = $('#'+portlet.getId()+' > .x-panel-body');
+        $body.append('<div class="or-placeholder">~~Norėdami pradėti, pasirinkite ataskaitos tipą</div>');
+
+        var $placeholder = $body.children('.or-placeholder');
+        if (top !== undefined) {
+            $placeholder.css('top', top);
+        }
+    },
 
     onAltBeforeExpand: function (panel) {
         Ext.each(panel.up('portal').query('portlet'), function () {

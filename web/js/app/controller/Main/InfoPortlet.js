@@ -30,6 +30,11 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.InfoPortlet', {
             },
             'infoportlet combobox':{
                 //change: this.onPickerChange
+            },
+            'infoportlet portletbar button':{
+                click: function (btn) {
+                    $('#'+btn.up('infoportlet').id+' .or-placeholder').fadeOut('fast');
+                }
             }
         });
     },

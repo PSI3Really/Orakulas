@@ -27,6 +27,11 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.GridPortlet', {
             },
             'gridportlet combobox':{
                 change: this.onPickerChange
+            },
+            'gridportlet portletbar button':{
+                click: function (btn) {
+                    $('#'+btn.up('gridportlet').id+' .or-placeholder').fadeOut('fast');
+                }
             }
         });
     },

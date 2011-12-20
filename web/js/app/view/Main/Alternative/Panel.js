@@ -12,13 +12,14 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Alternative.Panel', {
     layout: 'accordion',
 
     initComponent: function(){
+        var me = this;
 
         this.dockedItems = [
             {
                 xtype: 'subtoolbar',
                 border: false
             }
-        ],
+        ];
         this.items = [
             {
                 border: false,
@@ -33,6 +34,11 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Alternative.Panel', {
                 store: {
                     fields: [],
                     data: []
+                },
+                listeners: {
+                    afterrender: function () {
+                        me.addPlaceholder(this, 29);
+                    }
                 }
             },{
                 border: false,
@@ -47,6 +53,11 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Alternative.Panel', {
                 store: {
                     fields: [],
                     data: []
+                },
+                listeners: {
+                    afterrender: function () {
+                        me.addPlaceholder(this);
+                    }
                 }
             },{
                 border: false,
@@ -61,10 +72,25 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Alternative.Panel', {
                 store: {
                     fields: [],
                     data: []
+                },
+                listeners: {
+                    afterrender: function () {
+                        me.addPlaceholder(this);
+                    }
                 }
             }
         ]
 
         this.callParent(arguments);
+    },
+
+    addPlaceholder: function (portlet, top) {
+        var $body        = $('#'+portlet.getId()+' > .x-panel-body');
+        $body.append('<div class="or-placeholder">~~Norėdami pradėti, pasirinkite ataskaitos tipą</div>');
+
+        var $placeholder = $body.children('.or-placeholder');
+        if (top !== undefined) {
+            $placeholder.css('top', top);
+        }
     }
 })
