@@ -112,7 +112,8 @@
             "INFO_SYS_AND_DEPARTMENTS": "IS/Departments",
             "SUPPORT_AND_DEPARTMENTS": "Support types/Departments",
             "EDIT_ENTITIES": "Advanced&hellip;",
-            "OPTIONS":"Options"
+            "OPTIONS":"Options",
+            "RESTORE":"Restore default settings"
         }
     },
 
@@ -145,7 +146,8 @@
         "OPEN_FILE": "Open file",
         "FILTER": "Filter",
         "RESET_FILTER": "Reset filter",
-        "ANALYZE": "Analyze"
+        "ANALYZE": "Analyze",
+        "FILTERS": "Filters"
     },
 
     "LOADING":{
@@ -164,6 +166,7 @@
         "CODE": "Code",
         "DIRECTION":"Direction",
         "SUPPORT_TYPE": "Support type",
+        "SUPPORT_TYPE_CODE": "Priemonės kodas",
         "USERNAME": "Username",
         "PASSWORD": "Password",
         "FIRST_NAME": "First name",

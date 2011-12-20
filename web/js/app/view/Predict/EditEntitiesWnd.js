@@ -19,16 +19,28 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.EditEntitiesWnd', {
     uptrend: null,
 
     generateGrids: function(){
-        this.infoSys = Ext.create('Ext.data.Store', {
-            fields: [
-                {name: 'IS'},
-                {name: 'departments'}
-            ],
-            data: []
-        });
+        if (!this.infoSys) {
+            this.infoSys = Ext.create('Ext.data.Store', {
+                fields: [
+                    {name: 'IS'},
+                    {name: 'departments'}
+                ],
+                data: []
+            });
+        } else {
+            this.infoSys.loadData([]);
+        }
 
-        this.departments = new Ext.util.HashMap();
-        this.supportTypes = new Ext.util.HashMap();
+        if (!this.departments){
+            this.departments = new Ext.util.HashMap();
+        } else {
+            this.departments.clear();
+        }
+        if (!this.supportTypes){
+            this.supportTypes = new Ext.util.HashMap();
+        } else{
+            this.supportTypes.clear();
+        }
 
         for(var i = 0; i < this.parentWnd.infoSysDepartmentsStore.getCount(); i++){
             var record = this.parentWnd.infoSysDepartmentsStore.getAt(i);
@@ -49,14 +61,18 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.EditEntitiesWnd', {
             Ext.Array.include(record.data.departments, department);
         }
 
-        this.support = Ext.create('Ext.data.Store', { //TODO: convert to something more user friendly
-            fields: [
-                {name: 'supportType'},
-                {name: 'department'},
-                {name: 'hoursCount'}
-            ],
-            data: []
-        });
+        if (!this.support){
+            this.support = Ext.create('Ext.data.Store', { //TODO: convert to something more user friendly
+                fields: [
+                    {name: 'supportType'},
+                    {name: 'department'},
+                    {name: 'hoursCount'}
+                ],
+                data: []
+            });
+        } else {
+            this.support.loadData([]);
+        }
 
         for(var i = 0; i < this.parentWnd.supportDepartmentsStore.getCount(); i++){
             var record = this.parentWnd.supportDepartmentsStore.getAt(i);
@@ -102,9 +118,8 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.EditEntitiesWnd', {
             fieldLabel: LANG.PREDICT.UPTREND
         });
 
-        this.items = [{
+        this.infoSysGrid = Ext.create('Ext.grid.Panel', {
             title: LANG.PREDICT.BUTTON.INFO_SYS_AND_DEPARTMENTS,
-            xtype: 'grid',
             store: this.infoSys,
             columns: [ //TODO: can change IS name?
                 {
@@ -178,9 +193,10 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.EditEntitiesWnd', {
                     }
                 }*/]
             }]
-        },{
+        })
+
+        this.supportGrid = Ext.create('Ext.grid.Panel', {
             title: LANG.PREDICT.BUTTON.SUPPORT_AND_DEPARTMENTS,
-            xtype: 'grid',
             store: this.support,
             columns: [ //TODO: can change IS name?
                 {
@@ -267,7 +283,9 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.EditEntitiesWnd', {
                     }
                 }*/]
             }]
-        },{
+        })
+
+        this.items = [this.infoSysGrid, this.supportGrid,{
             title: LANG.PREDICT.BUTTON.OPTIONS, //NEED TOOLTIPS
             xtype: 'form',
             items: [this.ignoreLast, this.windowSize, this.uptrend]
@@ -276,7 +294,18 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.EditEntitiesWnd', {
         this.dockedItems = [{
             dock: 'bottom',
             xtype: 'toolbar',
-            items: ['->',{
+            items: [{
+                xtype: 'button',
+                text: LANG.PREDICT.BUTTON.RESTORE,
+                handler: function(btn){
+                    me.generateGrids();
+
+                    var fields = Ext.ComponentQuery.query('field', me);
+                    for (var i in fields){
+                        fields[i].reset();
+                    }
+                }
+            },'->',{
                 xtype: 'button',
                 text: LANG.BUTTON.OK,
                 handler: function(btn){ 

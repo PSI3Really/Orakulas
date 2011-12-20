@@ -111,7 +111,8 @@
             "INFO_SYS_AND_DEPARTMENTS": "IS/Padaliniai",
             "SUPPORT_AND_DEPARTMENTS": "Priemonės/Padaliniai",
             "EDIT_ENTITIES": "Išsamiau&hellip;",
-            "OPTIONS":"Parinktys"
+            "OPTIONS":"Parinktys",
+            "RESTORE":"Atstatyti numatytuosius nustatymus"
         }
     },
 
@@ -144,7 +145,8 @@
         "OPEN_FILE": "Įkelti iš failo",
         "FILTER": "Filtruoti",
         "RESET_FILTER": "Nuimti filtravimą",
-        "ANALYZE": "Analizuoti"
+        "ANALYZE": "Analizuoti",
+        "FILTERS": "Filtrai"
     },
 
     "LOADING":{
@@ -163,6 +165,7 @@
         "CODE": "Kodas",
         "DIRECTION":"Kryptis",
         "SUPPORT_TYPE": "Priemonė",
+        "SUPPORT_TYPE_CODE": "Priemonės kodas",
         "USERNAME": "Vartotojo vardas",
         "PASSWORD": "Slaptažodis",
         "FIRST_NAME": "Vardas",

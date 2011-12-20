@@ -24,8 +24,47 @@ Ext.define(CONFIG.APP_NS+'.controller.Predict', {
             },
             'predicttoolbar button[action=delete]':{
                 click: this.remove
+            },
+            'predictwindow':{
+                beforeshow: this.beforeShow
             }
         });
+    },
+
+    beforeShow: function(window){
+        var entitiesButton = window.down('[action=editEntities]');
+        entitiesButton.setDisabled(true);
+        window.oneStoreLoaded = false;
+
+        //entitiesButton.setLoading(true);
+
+        var loadCallback = function(){
+            if (window.oneStoreLoaded){
+                entitiesButton.setDisabled(false);
+                //entitiesButton.setLoading(false);
+            } else {
+                window.oneStoreLoaded = true;
+            }
+        }
+
+        if (!window.infoSysDepartmentsStore){
+            window.infoSysDepartmentsStore = Ext.create('widget.adminDepartmentInfoSysUsagesStore', {
+                listeners:{
+                    load: loadCallback
+                }
+            });
+        } 
+
+        if (!window.supportDepartmentsStore){
+            window.supportDepartmentsStore = Ext.create('widget.adminSupportAdministrationTimesStore', {
+                listeners:{
+                    load: loadCallback
+                }
+            });
+        }
+
+        window.infoSysDepartmentsStore.load();
+        window.supportDepartmentsStore.load();
     },
 
     add: function(btn){
@@ -73,10 +112,10 @@ Ext.define(CONFIG.APP_NS+'.controller.Predict', {
             method: 'POST',
             params: jsonData,
             success: function(response){
-                var tabpanel = wnd.parentTab.up('maintabpanel');
+                var tabpanel = wnd.parentTab;
                 tabpanel.fireEvent('loadPrediction', tabpanel, Ext.JSON.decode(response.responseText));
                 //wnd.setLoading(false);
-                wnd.close();
+                wnd.hide();
             },
             failure: function(response){
                 Ext.Msg.alert(LANG.ERROR.TITLE, LANG.ERROR.CANNOT_CONNECT + ': ' + response.responseText);
@@ -88,7 +127,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Predict', {
     },
 
     cancel: function(btn){
-        btn.up('predictwindow').close();
+        btn.up('predictwindow').hide();
     },
 
     openFile: function(field, value){
