@@ -49,13 +49,32 @@ Ext.application({
     ],
 
     launch: function(){
+
+        Ext.override(Ext.view.Table, { //Allows the selecting of grid cells
+           afterRender: function() {
+               var me = this;
+
+               me.callParent();
+               me.mon(me.el, {
+                   scroll: me.fireBodyScroll,
+                   scope: me
+               });
+               if (!me.featuresMC &&
+                   (me.featuresMC.findIndex('ftype', 'unselectable') >= 0)) {
+                   me.el.unselectable();
+               }
+
+               me.attachEventsForFeatures();
+           }
+        });
+
         var params = Ext.urlDecode(window.location.search.substring(1));
-        
+
         var lang = params.lang ? params.lang : CONFIG.DEFAULT_LANG;
 
         var urlExt = Ext.util.Format.format('../js/locale/ext-lang-{0}.js', lang);
         var urlApp = Ext.util.Format.format('../js/locale/{0}-lang-{1}.json', CONFIG.APP_NS, lang);
-
+        
         Ext.Ajax.request({
             url:  'model/users/current',
             success: function(response){

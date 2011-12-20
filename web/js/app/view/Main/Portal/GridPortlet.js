@@ -1,4 +1,5 @@
 Ext.require('Ext.ux.grid.FiltersFeature');
+Ext.require('Ext.ux.grid.SelectFeature');
 
 Ext.define(CONFIG.APP_NS+'.view.Main.Portal.GridPortlet', {
     extend: 'Ext.ux.Portlet',
@@ -19,7 +20,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.GridPortlet', {
             columns: [
                 {header: LANG.ENTITY.MONTH, dataIndex: 'startDate', flex: 1, xtype: 'datecolumn', format: 'Y-m'} //TODO
             ],
-            features: [this.filters]
+            features: [this.filters, {ftype: 'selectable'}]
         });
 
         this.items = [
@@ -35,7 +36,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.GridPortlet', {
         this.callParent();
     },
 
-    setStore: function(store){ 
+    setStore: function(store){
         this.store = store;
 
         this.filters.removeAll();
