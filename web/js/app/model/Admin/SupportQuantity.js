@@ -11,7 +11,8 @@ Ext.define(CONFIG.APP_NS+'.model.Admin.SupportQuantity', {
     
     fields: [
         {name: 'id',                    type: 'int', persist:false},
-        {name: 'supportType',           model: CONFIG.APP_NS+'.model.Admin.SupportType'},
+        {name: 'supportTypeObject',     mapping: 'supportType', model: CONFIG.APP_NS+'.model.Admin.SupportType'},
+        {name: 'supportType',           mapping: 'supportType.id'},
         {name: 'startDate',             type: 'date'},
         {name: 'endDate',               type: 'date'},
         {name: 'supportRequestCount',   type: 'int'},

@@ -23,9 +23,8 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Alternative.Panel', {
             {
                 border: false,
                 xtype: 'gridportlet',
-                //xtype: 'panel',
                 title: LANG.MAIN.PORTAL.TABLE.TITLE,
-                frame: true,
+                frame: false,
                 closable: false,
                 collapsible: false,
                 animCollapse: false,
@@ -38,9 +37,8 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Alternative.Panel', {
             },{
                 border: false,
                 xtype: 'chartportlet',
-                //xtype: 'panel',
                 title: LANG.MAIN.PORTAL.CHART.TITLE,
-                frame: true,
+                frame: false,
                 closable: false,
                 collapsible: false,
                 animCollapse: false,
@@ -53,9 +51,8 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Alternative.Panel', {
             },{
                 border: false,
                 xtype: 'infoportlet',
-                //xtype: 'panel',
                 title: LANG.MAIN.PORTAL.INFO.TITLE,
-                frame: true,
+                frame: false,
                 closable: false,
                 collapsible: false,
                 animCollapse: false,

@@ -16,7 +16,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.SupportQuantities.Grid', {
             editor: {
                 xtype: 'combobox',
                 allowBlank: false,
-                queryMode: 'remote',
+                queryMode: 'local',
                 displayField: 'name',
                 valueField: 'code',
                 forceSelection: true,
@@ -26,7 +26,8 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.SupportQuantities.Grid', {
                         type: 'ajax',
                         reader: 'json',
                         api: {read: 'model/supportTypes/read'}
-                    }
+                    },
+                    autoLoad: true
                 }
             }
         },{
@@ -71,6 +72,18 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.SupportQuantities.Grid', {
                             var data = element.record.data;
                             if (data.supportTypeCode == "" || data.endDate == null || data.startDate == ""){
                                 this.grid.store.remove(element.record);
+                            }
+                        }
+                    },
+                    edit: {
+                        fn: function(event){
+                            if (event.field == 'supportTypeCode'){
+                                var editorStore = event.column.getEditor().store;
+                                var newValue = event.record.get('supportTypeCode');
+                                var recordIdx = editorStore.find('code', newValue);
+                                var supportId = editorStore.getAt(recordIdx).get('id');
+
+                                event.record.set('supportType', supportId);
                             }
                         }
                     }

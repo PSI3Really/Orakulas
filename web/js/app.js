@@ -51,6 +51,7 @@ Ext.application({
 
     launch: function(){
 
+        /*
         Ext.override(Ext.view.Table, { //Allows the selecting of grid cells
            afterRender: function() {
                var me = this;
@@ -68,6 +69,7 @@ Ext.application({
                me.attachEventsForFeatures();
            }
         });
+        */
 
         var params = Ext.urlDecode(window.location.search.substring(1));
 

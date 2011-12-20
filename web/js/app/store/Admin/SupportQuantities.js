@@ -6,12 +6,26 @@ Ext.define(CONFIG.APP_NS+'.store.Admin.SupportQuantities', {
     
     proxy: {
         type: 'ajax',
-        writer: 'json',
         api: {
             create: 'model/supportHistories/create',
             read: 'model/supportHistories/read',
             update: 'model/supportHistories/update',
-            delete: 'model/supportHistories/delete'
+            destroy: 'model/supportHistories/delete'
+        },
+        reader: {
+            type: 'json'
+        },
+        writer: {
+            type: 'json',
+            root: 'jsonValue',
+            encode: true,
+            writeAllFields: false
+        }
+    },
+
+    listeners:{
+        update: function (store, record, operation){
+            console.log(record);
         }
     }
 })

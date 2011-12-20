@@ -20,7 +20,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.GridPortlet', {
             columns: [
                 {header: LANG.ENTITY.MONTH, dataIndex: 'startDate', flex: 1, xtype: 'datecolumn', format: 'Y-m'} //TODO
             ],
-            features: [this.filters, {ftype: 'selectable'}]
+            features: [this.filters]
         });
 
         this.items = [
