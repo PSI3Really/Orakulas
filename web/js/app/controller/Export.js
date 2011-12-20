@@ -39,7 +39,6 @@ Ext.define(CONFIG.APP_NS+'.controller.Export', {
                         data.tables[name] = [];
 
                         this.store.each(function (rec) {
-                            debugger;
                             if (!data.tables[name].length) {
                                 var fields = [];
                                 rec.fields.each(function () {
