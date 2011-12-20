@@ -33,6 +33,7 @@
 
 .dummy-form .x-panel-body-default {
     background: transparent;
+    width: 90px;
     border: 0;
 }
 
