@@ -93,7 +93,11 @@ Ext.define(CONFIG.APP_NS+'.controller.Export', {
                                             data.images[LANG.MAIN.PORTAL.CHART.TITLE+(++j)] = images[k];
                                         }
 
-                                        this.finalRequest(data, windw);
+                                        this.finalRequest(data, function (url) {
+                                            windw.location.href = url;
+
+                                            btn.up('exportwindow').close()
+                                        });
                                     }
                                 }
                             }
@@ -101,10 +105,12 @@ Ext.define(CONFIG.APP_NS+'.controller.Export', {
                     });
                 }
             } else {
-                this.finalRequest(data, windw);
-            }
+                this.finalRequest(data, function (url) {
+                    windw.location.href = url;
 
-            //btn.up('exportwindow').close();
+                    btn.up('exportwindow').close()
+                });
+            }
         }
     },
 
@@ -122,7 +128,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Export', {
         callback(img);
     },
 
-    finalRequest: function (data, windw) {
+    finalRequest: function (data, callback) {
         Ext.Ajax.request({
             url: 'excel/export',
             params: {
@@ -131,7 +137,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Export', {
             success: function (response) {
                 var response_json = Ext.JSON.decode(response.responseText);
 
-                windw.location.href = response_json.url;
+                callback(response_json.url);
             }
         });
     }
