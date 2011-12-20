@@ -13,11 +13,13 @@ var login = function (form) {
             },
             failure: function(form, action) {
                 Ext.Msg.alert(LANG.LOGIN.INVALID_CREDENTIALS_TITLE, LANG.LOGIN.INVALID_CREDENTIALS_BODY);
+                Ext.getCmp('loginButton').toggle(false);
             }
         });
     } else {
         Ext.Msg.alert(LANG.LOGIN.INVALID_FORM_TITLE, LANG.LOGIN.INVALID_FORM_BODY);
     }
+
 }
 
 Ext.application({
@@ -70,6 +72,8 @@ Ext.application({
                             listeners: {
                                 specialkey: function (field, event) {
                                     if (event.getKey() == event.ENTER) {
+                                        var btn = Ext.getCmp('loginButton');
+                                        btn.toggle(true);
                                         login(field.up('form').getForm());
                                     };
                                 }
@@ -101,9 +105,12 @@ Ext.application({
                                             iconCls: 'icon-flag-lt',
                                             tooltip: LANG.MAIN.TOOLBAR.TOOLTIP.LANG_LT,
                                             handler: function (btn) {
-                                                LANG_CODE = 'lt';
-                                                btn.toggle(true);
-                                                btn.next().toggle(false);
+                                                if (!btn.pressed){
+                                                    LANG_CODE = 'lt';
+                                                    btn.toggle(true);
+                                                    btn.next().toggle(false);
+                                                    window.location.search = Ext.urlEncode({"lang":btn.lang});
+                                                }
                                             }
                                         },
                                         {
@@ -112,9 +119,12 @@ Ext.application({
                                             iconCls: 'icon-flag-gb',
                                             tooltip: LANG.MAIN.TOOLBAR.TOOLTIP.LANG_EN,
                                             handler: function (btn) {
-                                                LANG_CODE = 'en';
-                                                btn.toggle(true);
-                                                btn.prev().toggle(false);
+                                                if (!btn.pressed){
+                                                    LANG_CODE = 'en';
+                                                    btn.toggle(true);
+                                                    btn.prev().toggle(false);
+                                                    window.location.search = Ext.urlEncode({"lang":btn.lang});
+                                                }
                                             }
                                         }
                                     ]
@@ -124,6 +134,7 @@ Ext.application({
                                     xtype: 'button',
                                     formBind: true,
                                     disabled: true,
+                                    id: 'loginButton',
                                     text: LANG.LOGIN.LOGIN,
                                     iconCls: 'icon-key',
                                     handler: function () {

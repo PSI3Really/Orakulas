@@ -40,16 +40,18 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.InfoPortlet', {
             combobox        = analysisBar.child('combobox'),
             datefieldFrom   = analysisBar.child('datefield'),
             datefieldTo     = datefieldFrom.next(),
-            intervalPicker  = analysisBar.child('numberfield');
+            intervalPicker  = analysisBar.child('numberfield'),
             rangeFrom       = datefieldFrom.getValue(),
             rangeTo         = datefieldTo.getValue(),
-            selected        = combobox.getValue();
+            selected        = combobox.getValue(),
             intervalSize    = intervalPicker.getValue();
 
-        //TODO search from bounds if one not set
+        if (!selected || selected == ""){
+            return;
+        }
 
-        rangeFrom.setDate(1);
-        rangeTo.setDate(1);
+        if (rangeFrom) rangeFrom.setDate(1);
+        if (rangeTo) rangeTo.setDate(1);
         
         if (!intervalSize){
             intervalSize = 1;
@@ -57,11 +59,12 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.InfoPortlet', {
 
         var records = portlet.store.queryBy(function(record){
             var startDate = record.get('startDate');
-            if (rangeFrom <= startDate && startDate <= rangeTo){
-                return true;
-            } else {
-                return false;
+            if (!rangeFrom || rangeFrom <= startDate){
+                if (!rangeTo || startDate <= rangeTo){
+                    return true;
+                }
             }
+            return false;
         })
 
         records.sort('startDate', 'ASC');
