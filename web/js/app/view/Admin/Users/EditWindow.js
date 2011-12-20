@@ -1,9 +1,7 @@
 Ext.define(CONFIG.APP_NS+'.view.Admin.Users.EditWindow', {
     extend: 'Ext.window.Window',
     alias:  'widget.adminUsersEditWindow',
-
-    //TODO: disallow changing your own admin rights
-
+    
     editing: false, //Are we creating a new user or editing an existing one?
     record: Ext.create('widget.adminUserModel'),
     store: null,
@@ -59,6 +57,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Users.EditWindow', {
                     name: 'admin',
                     checked: this.record.get('admin'),
                     inputValue: 'true',
+                    disabled: this.record.get('id') == CURRENT_USER.get('id'),
                     xtype: 'checkbox'
                 }],
 

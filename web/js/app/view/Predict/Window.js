@@ -37,7 +37,7 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.Window', {
             border: false,
             xtype: 'predicttoolbar'
         }];
-
+        
         this.infoSysDepartmentsStore = Ext.create('widget.adminDepartmentInfoSysUsagesStore', {});
         this.infoSysDepartmentsStore.load();
 
