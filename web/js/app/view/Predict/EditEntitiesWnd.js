@@ -288,6 +288,17 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.EditEntitiesWnd', {
         this.items = [this.infoSysGrid, this.supportGrid,{
             title: LANG.PREDICT.BUTTON.OPTIONS, //NEED TOOLTIPS
             xtype: 'form',
+            plain: true,
+            border: 0,
+            bodyPadding: 5,
+            fieldDefaults: {
+                labelWidth: 200,
+                anchor: '100%'
+            },
+            layout: {
+                type: 'vbox',
+                align: 'stretch'
+            },
             items: [this.ignoreLast, this.windowSize, this.uptrend]
         }]
 
