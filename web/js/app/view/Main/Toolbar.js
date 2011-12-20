@@ -42,13 +42,15 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Toolbar', {
             {
                 text: LANG.MAIN.TOOLBAR.BUTTON.IMPORT_DATA,
                 iconCls: 'icon-arrow-270',
-                action: 'importData'
+                action: 'importData',
+                hidden: CURRENT_USER.data.admin ? false : true
             },
             ' ',
             {
                 text: LANG.MAIN.TOOLBAR.BUTTON.ADMIN,
                 iconCls: 'icon-building',
-                action: 'admin'
+                action: 'admin',
+                hidden: CURRENT_USER.data.admin ? false : true
             },
             {
                 text: CURRENT_USER.data.firstName + ' ' + CURRENT_USER.data.lastName + ' (' + CURRENT_USER.data.username + ')',
