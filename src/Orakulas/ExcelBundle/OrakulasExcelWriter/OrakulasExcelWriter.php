@@ -42,9 +42,8 @@ class OrakulasExcelWriter
 
     public function insertImages($images)
     {
-        $objDrawing = new PHPExcel_Worksheet_Drawing();
-
         foreach ($images as $sheetName=>$image) {
+            $objDrawing = new PHPExcel_Worksheet_Drawing();
             if ($this->sheetIndex != 0) {
                 $this->objPHPExcel->createSheet();
             }
