@@ -19,14 +19,22 @@ Ext.define(CONFIG.APP_NS+'.view.Main.TabPanel', {
         this.items = [
             {
                 title: LANG.MAIN.PORTAL_VIEW,
+                border: false,
                 xtype: 'maintab',
                 layout: 'fit'
-            }, {
+            },{
+                border: false,
                 title: LANG.MAIN.ALTERNATIVE_VIEW,
-                xtype: 'maintab',
-                layout: 'fit',
-                _alternative: true
+                //bodyBorder: false,
+                xtype: 'alternativetab'
             }
+            /*{
+                 title: LANG.MAIN.ALTERNATIVE_VIEW,
+                 xtype: 'maintab',
+                 layout: 'fit',
+                 _alternative: true
+                 }
+            }*/
         ];
 
         this.setupStores();

@@ -6,8 +6,8 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.ChartPortlet', {
 
     leftAxisTitle: null,
 
-    colors:       ['#FF3333', '#FF8533', '#FFAD33', '#FFD633', '#FFFF33', '#BCEB2F', '#2BD62B', '#2BABD6', '#2B72D6', '#472BD6', '#9D2BD6', '#E02D96'],
-    colorsBright: ['#FF9999', '#FFC299', '#FFD699', '#FFEB99', '#FFFF99', '#DCF593', '#8DEB8D', '#8DD3EB', '#8DB4EB', '#9C8DEB', '#CB8DEB', '#F090C8'],
+    colors:       ['#FF3333', '#FF8533', '#FFAD33', '#FFD633', '#FFCC99', '#BCEB2F', '#2BD62B', '#2BABD6', '#2B72D6', '#472BD6', '#9D2BD6', '#E02D96'],
+    colorsBright: ['#FF9999', '#FFC299', '#FFD699', '#FFEB99', '#FFCC00', '#DCF593', '#8DEB8D', '#8DD3EB', '#8DB4EB', '#9C8DEB', '#CB8DEB', '#F090C8'],
 
     initComponent: function(){
         this.shuffle(this.colors);

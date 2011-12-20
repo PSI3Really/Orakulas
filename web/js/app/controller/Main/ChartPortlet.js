@@ -207,7 +207,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
             range_to       = datefield_to.getValue(),
             selected       = combobox.getValue();
 
-        range_from = Ext.Date.add(range_from, Ext.Date.MONTH, -1);
+        if (range_from) range_from = Ext.Date.add(range_from, Ext.Date.MONTH, -1);
 
         if (range_from || range_to || selected.length) {
             if (range_from || range_to) {
