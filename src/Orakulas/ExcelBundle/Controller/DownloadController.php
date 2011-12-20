@@ -9,16 +9,23 @@ class DownloadController extends Controller
 {
     public function downloadAction($filename) {
         $response = null;
-        
-        if (file_exists("./savedExcels/".$filename)) {
+
+        if ($filename == 'generating') {
+            $response = new Response("Generating&hellip;");
+        } else if (file_exists("./savedExcels/{$filename}")) {
+            /*
             $response = new Response();
-            $response->headers->set('Content-Disposition', "attachment; filename=$filename");
+            $response->headers->set('Content-Disposition', "attachment; filename={$filename}");
             $response->headers->set('Content-Type', 'application/vnd.ms-excel');
-            $response->setContent(readfile("./savedExcels/".$filename));
+            $response->setContent(readfile("./savedExcels/{$filename}"));
+            */
+            header("Content-Disposition: attachment; filename={$filename}");
+            header("Content-Type: application/vnd.ms-excel");
+            return readfile("./savedExcels/{$filename}");
         } else {
-            $response = new Response("File not found");
+            $response = new Response("File not found.");
         }
-        
+
         return $response;
     }
 
