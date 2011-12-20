@@ -21,60 +21,92 @@ class DepartmentController extends DefaultController {
     }
 
     public function updateAction() {
-        $jsonValue = $_POST["jsonValue"];
+        $json = $_POST["jsonValue"];
 
-        $decodedArray = json_decode($jsonValue, true);
-
-        $informationalSystems = explode(" ", trim($decodedArray['informationalSystems']));
-        if (count($informationalSystems) <= 0 || $informationalSystems[0] == '') {
-            $informationalSystems = array();
+        $entityArray = array();
+        if (!is_array(json_decode($json))) {
+            $entityArray[] = json_decode($json, true);
+        } else {
+            $entityArray = json_decode($json, true);
         }
 
-        $tempSupportTypes = explode(", ", trim($decodedArray['supportTypes']));
-        $supportTypes = array();
-        if (count($tempSupportTypes) > 0 && $tempSupportTypes[0] != '') {
-            foreach ($tempSupportTypes as $value) {
-                $tempArray = explode(" ", $value);
-                $supportTypes[(int) $tempArray[0]] = (float) $tempArray[1];
+        $returnArray = array();
+
+        foreach ($returnArray as $e) {
+            $informationalSystems = explode(" ", trim($e['informationalSystems']));
+            if (count($informationalSystems) <= 0 || $informationalSystems[0] == '') {
+                $informationalSystems = array();
             }
+
+            $tempSupportTypes = explode(", ", trim($e['supportTypes']));
+            $supportTypes = array();
+            if (count($tempSupportTypes) > 0 && $tempSupportTypes[0] != '') {
+                foreach ($tempSupportTypes as $value) {
+                    $tempArray = explode(" ", $value);
+                    $supportTypes[(int) $tempArray[0]] = (float) $tempArray[1];
+                }
+            }
+
+            $department = $this->getEntityFacade()->load($e['id']);
+
+            $this->getEntityFacade()->merge($department, $e);
+
+            $this->getEntityFacade()->setUsedInfoSystems($department, $informationalSystems);
+            $this->getEntityFacade()->setSupportAdministrationTimes($department, $supportTypes);
+
+            $returnArray[] = $this->getEntityFacade()->toArray($department);
         }
 
-        $department = $this->getEntityFacade()->load($decodedArray['id']);
+        $responseObject = $returnArray;
+        if (count($returnArray) == 1) {
+            $responseObject = $returnArray[0];
+        }
 
-        $this->getEntityFacade()->merge($department, $decodedArray);
-
-        $this->getEntityFacade()->setUsedInfoSystems($department, $informationalSystems);
-        $this->getEntityFacade()->setSupportAdministrationTimes($department, $supportTypes);
-
-        return $this->constructResponse($this->getEntityFacade()->toJson($department));
+        return $this->constructResponse(json_encode($responseObject));
     }
 
     public function createAction() {
-        $jsonValue = $_POST["jsonValue"];
+        $json = $_POST["jsonValue"];
 
-        $decodedArray = json_decode($jsonValue, true);
-
-        $informationalSystems = explode(" ", trim($decodedArray['informationalSystems']));
-        if (count($informationalSystems) <= 0 || $informationalSystems[0] == '') {
-            $informationalSystems = array();
+        $entityArray = array();
+        if (!is_array(json_decode($json))) {
+            $entityArray[] = json_decode($json, true);
+        } else {
+            $entityArray = json_decode($json, true);
         }
 
-        $tempSupportTypes = explode(", ", trim($decodedArray['supportTypes']));
-        $supportTypes = array();
-        if (count($tempSupportTypes) > 0 && $tempSupportTypes[0] != '') {
-            foreach ($tempSupportTypes as $value) {
-                $tempArray = explode(" ", $value);
-                $supportTypes[(int) $tempArray[0]] = (float) $tempArray[1];
+        $returnArray = array();
+
+        foreach ($entityArray as $e) {
+            $informationalSystems = explode(" ", trim($e['informationalSystems']));
+            if (count($informationalSystems) <= 0 || $informationalSystems[0] == '') {
+                $informationalSystems = array();
             }
+
+            $tempSupportTypes = explode(", ", trim($e['supportTypes']));
+            $supportTypes = array();
+            if (count($tempSupportTypes) > 0 && $tempSupportTypes[0] != '') {
+                foreach ($tempSupportTypes as $value) {
+                    $tempArray = explode(" ", $value);
+                    $supportTypes[(int) $tempArray[0]] = (float) $tempArray[1];
+                }
+            }
+
+            $department = $this->getEntityFacade()->fromArray($e);
+
+            $this->getEntityFacade()->save($department);
+            $this->getEntityFacade()->setUsedInfoSystems($department, $informationalSystems);
+            $this->getEntityFacade()->setSupportAdministrationTimes($department, $supportTypes);
+
+            $returnArray[] = $this->getEntityFacade()->toArray($department);
         }
 
-        $department = $this->getEntityFacade()->fromArray($decodedArray);
+        $responseObject = $returnArray;
+        if (count($returnArray) == 1) {
+            $responseObject = $returnArray[0];
+        }
 
-        $this->getEntityFacade()->save($department);
-        $this->getEntityFacade()->setUsedInfoSystems($department, $informationalSystems);
-        $this->getEntityFacade()->setSupportAdministrationTimes($department, $supportTypes);
-
-        return $this->constructResponse($this->getEntityFacade()->toJson($department));
+        return $this->constructResponse(json_encode($responseObject));
     }
 
     public function usedInfoSysAction() {

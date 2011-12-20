@@ -16,11 +16,26 @@ class DefaultController extends Controller {
     public function createAction() {
         $json = $_POST["jsonValue"];
 
-        $entity = $this->getEntityFacade()->fromJson($json);
+        $entityArray = array();
+        if (!is_array(json_decode($json))) {
+            $entityArray[] = json_decode($json, true);
+        } else {
+            $entityArray = json_decode($json, true);
+        }
 
-        $this->getEntityFacade()->save($entity);
+        echo '<pre>';var_dump($entityArray);exit;
 
-        return $this->constructResponse($this->getEntityFacade()->toJson($entity));
+        $returnArray = array();
+
+        foreach ($entityArray as $e) {
+            $entity = $this->getEntityFacade()->fromArray($e);
+
+            $this->getEntityFacade()->save($entity);
+
+            $returnArray[] = $this->getEntityFacade()->toArray($entity);
+        }
+
+        return $this->constructResponse(json_encode($returnArray));
     }
 
     public function readAction() {
@@ -38,25 +53,59 @@ class DefaultController extends Controller {
     public function updateAction() {
         $json = $_POST["jsonValue"];
 
-        $decodedArray = json_decode($json, true);
+        $entityArray = array();
+        if (!is_array(json_decode($json))) {
+            $entityArray[] = json_decode($json, true);
+        } else {
+            $entityArray = json_decode($json, true);
+        }
 
-        $user = $this->getEntityFacade()->load($decodedArray['id']);
+        $returnArray = array();
 
-        $this->getEntityFacade()->merge($user, $decodedArray);
+        foreach ($entityArray as $e) {
+            $entity = $this->getEntityFacade()->load($e['id']);
 
-        $this->getEntityFacade()->save($user);
+            $this->getEntityFacade()->merge($entity, $e);
 
-        return $this->constructResponse($this->getEntityFacade()->toJson($user));
+            $this->getEntityFacade()->save($entity);
+
+            $returnArray[] = $this->getEntityFacade()->toArray($entity);
+        }
+
+        $responseObject = $returnArray;
+        if (count($returnArray) == 1) {
+            $responseObject = $returnArray[0];
+        }
+
+        return $this->constructResponse(json_encode($responseObject));
     }
 
     public function deleteAction() {
         $json = $_POST["jsonValue"];
 
-        $entity = $this->getEntityFacade()->fromJson($json);
+        $entityArray = array();
+        if (!is_array(json_decode($json))) {
+            $entityArray[] = json_decode($json, true);
+        } else {
+            $entityArray = json_decode($json, true);
+        }
 
-        $this->getEntityFacade()->delete($entity->getId());
+        $returnArray = array();
 
-        return $this->constructResponse(json_encode($entity->getId()));
+        foreach ($entityArray as $e) {
+            $entity = $this->getEntityFacade()->fromArray($e);
+
+            $this->getEntityFacade()->delete($entity->getId());
+
+            $returnArray[] = $entity->getId();
+        }
+
+        $responseObject = $returnArray;
+        if (count($returnArray) == 1) {
+            $responseObject = $returnArray[0];
+        }
+
+        return $this->constructResponse(json_encode($responseObject));
     }
 
     /**

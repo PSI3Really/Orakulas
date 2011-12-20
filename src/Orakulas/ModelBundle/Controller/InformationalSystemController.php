@@ -21,41 +21,73 @@ class InformationalSystemController extends DefaultController {
     }
 
     public function updateAction() {
-        $jsonValue = $_POST["jsonValue"];
+        $json = $_POST["jsonValue"];
 
-        $decodedArray = json_decode($jsonValue, true);
-
-        $departments = explode(" ", trim($decodedArray['departments']));
-        if (count($departments) <= 0 || $departments[0] == '') {
-            $departments = array();
+        $entityArray = array();
+        if (!is_array(json_decode($json))) {
+            $entityArray[] = json_decode($json, true);
+        } else {
+            $entityArray = json_decode($json, true);
         }
 
-        $informationalSystem = $this->getEntityFacade()->load($decodedArray['id']);
+        $returnArray = array();
 
-        $this->getEntityFacade()->merge($informationalSystem, $decodedArray);
+        foreach ($entityArray as $e) {
+            $departments = explode(" ", trim($e['departments']));
+            if (count($departments) <= 0 || $departments[0] == '') {
+                $departments = array();
+            }
 
-        $this->getEntityFacade()->setUsedByDepartments($informationalSystem, $departments);
+            $informationalSystem = $this->getEntityFacade()->load($e['id']);
 
-        return $this->constructResponse($this->getEntityFacade()->toJson($informationalSystem));
+            $this->getEntityFacade()->merge($informationalSystem, $e);
+
+            $this->getEntityFacade()->setUsedByDepartments($informationalSystem, $departments);
+
+            $returnArray[] = $this->getEntityFacade()->toArray($informationalSystem);
+        }
+
+        $responseObject = $returnArray;
+        if (count($returnArray) == 1) {
+            $responseObject = $returnArray[0];
+        }
+
+        return $this->constructResponse(json_encode($responseObject));
     }
 
     public function createAction() {
-        $jsonValue = $_POST["jsonValue"];
+        $json = $_POST["jsonValue"];
 
-        $decodedArray = json_decode($jsonValue, true);
-
-        $departments = explode(" ", trim($decodedArray['departments']));
-        if (count($departments) <= 0 || $departments[0] == '') {
-            $departments = array();
+        $entityArray = array();
+        if (!is_array(json_decode($json))) {
+            $entityArray[] = json_decode($json, true);
+        } else {
+            $entityArray = json_decode($json, true);
         }
 
-        $informationalSystem = $this->getEntityFacade()->fromArray($decodedArray);
+        $returnArray = array();
 
-        $this->getEntityFacade()->save($informationalSystem);
+        foreach ($returnArray as $e) {
+            $departments = explode(" ", trim($e['departments']));
+            if (count($departments) <= 0 || $departments[0] == '') {
+                $departments = array();
+            }
 
-        $this->getEntityFacade()->setUsedByDepartments($informationalSystem, $departments);
+            $informationalSystem = $this->getEntityFacade()->fromArray($e);
 
-        return $this->constructResponse($this->getEntityFacade()->toJson($informationalSystem));
+            $this->getEntityFacade()->save($informationalSystem);
+
+            $this->getEntityFacade()->setUsedByDepartments($informationalSystem, $departments);
+
+            $returnArray[] = $this->getEntityFacade()->toArray($informationalSystem);
+        }
+
+        $responseObject = $returnArray;
+        if (count($returnArray) == 1) {
+            $responseObject = $returnArray[0];
+        }
+
+        return $this->constructResponse(json_encode($responseObject));
     }
 
     public function usedByAction() {

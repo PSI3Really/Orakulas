@@ -40,50 +40,81 @@ class SupportTypeController extends DefaultController {
     }
 
     public function updateAction() {
-        $jsonValue = $_POST["jsonValue"];
+        $json = $_POST["jsonValue"];
 
-        $decodedArray = json_decode($jsonValue, true);
-
-        $tempDepartments = explode(", ", trim($decodedArray['departments']));
-        $departments = array();
-        if (count($tempDepartments) > 0 && $tempDepartments[0] != '') {
-            foreach ($tempDepartments as $value) {
-                $tempArray = explode(" ", $value);
-                $departments[(int) $tempArray[0]] = (float) $tempArray[1];
-            }
+        $entityArray = array();
+        if (!is_array(json_decode($json))) {
+            $entityArray[] = json_decode($json, true);
+        } else {
+            $entityArray = json_decode($json, true);
         }
 
-        $supportType = $this->getEntityFacade()->load($decodedArray['id']);
+        $returnArray = array();
 
-        $this->getEntityFacade()->merge($supportType, $decodedArray);
+        foreach ($returnArray as $e) {
+            $tempDepartments = explode(", ", trim($e['departments']));
+            $departments = array();
+            if (count($tempDepartments) > 0 && $tempDepartments[0] != '') {
+                foreach ($tempDepartments as $value) {
+                    $tempArray = explode(" ", $value);
+                    $departments[(int) $tempArray[0]] = (float) $tempArray[1];
+                }
+            }
 
-        $this->getEntityFacade()->setSupportAdministrationTimes($supportType, $departments);
+            $supportType = $this->getEntityFacade()->load($e['id']);
 
-        return $this->constructResponse($this->getEntityFacade()->toJson($supportType));
+            $this->getEntityFacade()->merge($supportType, $e);
+
+            $this->getEntityFacade()->setSupportAdministrationTimes($supportType, $departments);
+
+            $returnArray[] = $this->getEntityFacade()->toArray($supportType);
+        }
+
+        $responseObject = $returnArray;
+        if (count($returnArray) == 1) {
+            $responseObject = $returnArray[0];
+        }
+
+        return $this->constructResponse(json_encode($responseObject));
     }
 
     public function createAction() {
-        $jsonValue = $_POST["jsonValue"];
+        $json = $_POST["jsonValue"];
+        $json = $_POST["jsonValue"];
 
-        $decodedArray = json_decode($jsonValue, true);
-
-        $tempDepartments = explode(", ", trim($decodedArray['departments']));
-        $departments = array();
-        if (count($tempDepartments) > 0 && $tempDepartments[0] != '') {
-            foreach ($tempDepartments as $value) {
-                $tempArray = explode(" ", $value);
-                $departments[(int) $tempArray[0]] = (float) $tempArray[1];
-            }
+        $entityArray = array();
+        if (!is_array(json_decode($json))) {
+            $entityArray[] = json_decode($json, true);
+        } else {
+            $entityArray = json_decode($json, true);
         }
 
-        $supportType = $this->getEntityFacade()->fromArray($decodedArray);
-        $supportType->setSupportCategory($this->getSupportCategoryFacade()->load($decodedArray['supportCategoryId']));
+        $returnArray = array();
 
-        $this->getEntityFacade()->save($supportType);
+        foreach ($returnArray as $e) {
+            $tempDepartments = explode(", ", trim($e['departments']));
+            $departments = array();
+            if (count($tempDepartments) > 0 && $tempDepartments[0] != '') {
+                foreach ($tempDepartments as $value) {
+                    $tempArray = explode(" ", $value);
+                    $departments[(int) $tempArray[0]] = (float) $tempArray[1];
+                }
+            }
 
-        $this->getEntityFacade()->setSupportAdministrationTimes($supportType, $departments);
+            $supportType = $this->getEntityFacade()->fromArray($e);
+            $supportType->setSupportCategory($this->getSupportCategoryFacade()->load($e['supportCategoryId']));
 
-        return $this->constructResponse($this->getEntityFacade()->toJson($supportType));
+            $this->getEntityFacade()->save($supportType);
+
+            $this->getEntityFacade()->setSupportAdministrationTimes($supportType, $departments);
+        }
+
+        $responseObject = $returnArray;
+        if (count($returnArray) == 1) {
+            $responseObject = $returnArray[0];
+        }
+
+        return $this->constructResponse(json_encode($responseObject));
     }
 
     public function administeredByAction() {
