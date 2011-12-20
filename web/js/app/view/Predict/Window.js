@@ -24,7 +24,10 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.Window', {
 
     editEntitiesWnd: null,
 
+    oneStoreLoaded: false,
+
     initComponent: function () {
+        var me = this;
 
         this.title = LANG.PREDICT.TITLE;
 
@@ -38,12 +41,33 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.Window', {
             xtype: 'predicttoolbar'
         }];
 
-        this.infoSysDepartmentsStore = Ext.create('widget.adminDepartmentInfoSysUsagesStore', {});
+        this.callParent(arguments);
+
+        var entitiesButton = this.down('[action=editEntities]');
+        entitiesButton.setDisabled(true);
+
+        var loadCallback = function(){
+            if (me.oneStoreLoaded){
+                entitiesButton.setDisabled(false);
+            } else {
+                me.oneStoreLoaded = true;
+            }
+        }
+
+        this.setLoading(true);
+
+        this.infoSysDepartmentsStore = Ext.create('widget.adminDepartmentInfoSysUsagesStore', {
+            listeners:{
+                load: loadCallback
+            }
+        });
         this.infoSysDepartmentsStore.load();
 
-        this.supportDepartmentsStore = Ext.create('widget.adminSupportAdministrationTimesStore', {});
+        this.supportDepartmentsStore = Ext.create('widget.adminSupportAdministrationTimesStore', {
+            listeners:{
+                load: loadCallback
+            }
+        });
         this.supportDepartmentsStore.load();
-
-        this.callParent(arguments);
     }
 })

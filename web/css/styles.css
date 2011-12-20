@@ -33,6 +33,7 @@
 
 .dummy-form .x-panel-body-default {
     background: transparent;
+    width: 90px;
     border: 0;
 }
 
@@ -41,7 +42,8 @@
 }
 
 /* TODO: make sure this doesnt f anything up */
-.x-selectable, .x-selectable * {
-    -moz-user-select: text!important;
-    -khtml-user-select: text!important;
+.x-grid-cell-inner, .x-selectable {
+    -moz-user-select: text !important;
+    -khtml-user-select: text !important;
+    -webkit-user-select: text !important;
 }
