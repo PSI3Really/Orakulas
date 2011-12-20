@@ -113,7 +113,7 @@
     "PREDICT":{
         "TITLE": "Predict",
         "IGNORE_LAST_DATE": "Ignore last month",
-        "WINDOW_SIZE": "Forecasting window (months)",
+        "WINDOW_SIZE": "Forecasting horizon (months)",
         "UPTREND": "Uptrend %",
 
         "BUTTON":{

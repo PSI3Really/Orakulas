@@ -38,7 +38,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.AnalysisBar', {
                 minValue: 1,
                 emptyText: LANG.MAIN.PORTAL.INFO.INTERVAL_SIZE,
                 tooltip: LANG.MAIN.PORTAL.INFO.INTERVAL_SIZE,
-                width: 60
+                width: 100
             },
             '->',
             {

@@ -112,7 +112,7 @@
     "PREDICT":{
         "TITLE": "Prognozuoti",
         "IGNORE_LAST_DATE": "Ignoruoti paskutinį mėnesį",
-        "WINDOW_SIZE": "Prognozavimo langas (mėn.)",
+        "WINDOW_SIZE": "Prognozavimo horizontas (mėn.)",
         "UPTREND": "Prieaugis %",
 
         "BUTTON":{
