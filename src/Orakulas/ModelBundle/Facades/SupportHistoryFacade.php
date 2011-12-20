@@ -97,9 +97,9 @@ class SupportHistoryFacade extends EntityFacade {
         if (isset($array['id']))
             $supportHistory->setId($array['id']);
         if (isset($array['startDate']))
-            $supportHistory->setStartDate(new DateTime(date("Y-m-01", strtotime($array['startDate']))));
+            $supportHistory->setStartDate(new \DateTime(date("Y-m-01", strtotime($array['startDate']))));
         if (isset($array['endDate']))
-            $supportHistory->setEndDate(new DateTime(date("Y-m-d", strtotime("-1 second", strtotime("+1 month", strtotime(date("Y-m-01", strtotime($array['endDate']))))))));
+            $supportHistory->setEndDate(new \DateTime(date("Y-m-d", strtotime("-1 second", strtotime("+1 month", strtotime(date("Y-m-01", strtotime($array['endDate']))))))));
         if (isset($array['supportRequestCount']))
             $supportHistory->setSupportRequestCount($array['supportRequestCount']);
         if (isset($array['supportType']))
@@ -114,9 +114,9 @@ class SupportHistoryFacade extends EntityFacade {
      */
     public function merge($destination, $source) {
         if (isset($source['startDate']))
-            $destination->setStartDate(new DateTime(date("Y-m-01", strtotime($source['startDate']))));
+            $destination->setStartDate(new \DateTime(date("Y-m-01", strtotime($source['startDate']))));
         if (isset($source['endDate']))
-            $destination->setEndDate(new DateTime(date("Y-m-d", strtotime("-1 second", strtotime("+1 month", strtotime(date("Y-m-01", strtotime($source['endDate']))))))));
+            $destination->setEndDate(new \DateTime(date("Y-m-d", strtotime("-1 second", strtotime("+1 month", strtotime(date("Y-m-01", strtotime($source['endDate']))))))));
         if (isset($source['supportRequestCount']))
             $destination->setSupportRequestCount($source['supportRequestCount']);
         if (isset($source['supportType']))
