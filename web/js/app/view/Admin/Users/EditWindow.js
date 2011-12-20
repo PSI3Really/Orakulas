@@ -11,6 +11,8 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Users.EditWindow', {
         this.layout = 'fit';
         this.floatable = true;
         this.modal = true;
+        this.width = 330;
+        this.height = 230;
 
         if (this.editing){
             this.title = LANG.ADMIN.USERS.TITLE_CHANGE + this.record.get('username');
@@ -21,8 +23,18 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Users.EditWindow', {
         this.items = [
             {
                 xtype: 'form',
+                plain: true,
                 border: false,
+                bodyPadding: 5,
                 defaultType: 'textfield',
+                fieldDefaults: {
+                    labelWidth: 100,
+                    anchor: '100%'
+                },
+                layout: {
+                    type: 'vbox',
+                    align: 'stretch'
+                },
                 items: [{ // SOME REAL BLACK MAGIC HERE GUYS
                     fieldLabel: LANG.ENTITY.USERNAME, //Show this if we are creating a new user
                     name: 'username',
