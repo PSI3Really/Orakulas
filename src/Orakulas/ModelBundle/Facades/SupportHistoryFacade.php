@@ -78,8 +78,8 @@ class SupportHistoryFacade extends EntityFacade {
 
         $array = array(
             'id'                  => $entity->getId(),
-            'startDate'           => $entity->getStartDate(),
-            'endDate'             => $entity->getEndDate(),
+            'startDate'           => date('Y-m-d', $entity->getStartDate()->getTimestamp()),
+            'endDate'             => date('Y-m-d', $entity->getEndDate()->getTimestamp()),
             'supportRequestCount' => $entity->getSupportRequestCount(),
             'supportType'         => $this->getSupportTypeFacade()->toArray($supportType)
         );
@@ -97,9 +97,9 @@ class SupportHistoryFacade extends EntityFacade {
         if (isset($array['id']))
             $supportHistory->setId($array['id']);
         if (isset($array['startDate']))
-            $supportHistory->setStartDate($array['startDate']);
+            $supportHistory->setStartDate(new DateTime(date("Y-m-01", strtotime($array['startDate']))));
         if (isset($array['endDate']))
-            $supportHistory->setEndDate($array['endDate']);
+            $supportHistory->setEndDate(new DateTime(date("Y-m-d", strtotime("-1 second", strtotime("+1 month", strtotime(date("Y-m-01", strtotime($array['endDate']))))))));
         if (isset($array['supportRequestCount']))
             $supportHistory->setSupportRequestCount($array['supportRequestCount']);
         if (isset($array['supportType']))
@@ -112,11 +112,11 @@ class SupportHistoryFacade extends EntityFacade {
      * @param \Orakulas\ModelBundle\Entity\SupportHistory $source
      * @param \Orakulas\ModelBundle\Entity\SupportHistory $destination
      */
-    public function merge($destination, $destination) {
+    public function merge($destination, $source) {
         if (isset($source['startDate']))
-            $destination->setStartDate($source['startDate']);
+            $destination->setStartDate(new DateTime(date("Y-m-01", strtotime($source['startDate']))));
         if (isset($source['endDate']))
-            $destination->setEndDate($source['endDate']);
+            $destination->setEndDate(new DateTime(date("Y-m-d", strtotime("-1 second", strtotime("+1 month", strtotime(date("Y-m-01", strtotime($source['endDate']))))))));
         if (isset($source['supportRequestCount']))
             $destination->setSupportRequestCount($source['supportRequestCount']);
         if (isset($source['supportType']))
