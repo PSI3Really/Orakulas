@@ -34,17 +34,16 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.GridPortlet', {
     onPickerChange: function(field, newValue, oldValue, eOpts){
         var grid = field.up('gridportlet').dataView;
         var columns = grid.columns;
+
         for (var i = 0; i < columns.length; i++){
             if (columns[i].dataIndex == 'startDate'){ //date column
                 continue;
             }
 
-            columns[i].hide();
-            for (var j = 0; j < newValue.length; j++){ //TODO: optimize from worst n^2 to 2n - use hashtable
-                if (newValue[j] == columns[i].dataIndex){
-                    columns[i].show();
-                    break;
-                }
+            if (Ext.Array.contains(newValue, columns[i].dataIndex)){
+                if (columns[i].isHidden()) columns[i].show();
+            } else {
+                if (!columns[i].isHidden()) columns[i].hide();
             }
         }
     },
