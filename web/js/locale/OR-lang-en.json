@@ -151,7 +151,8 @@
     "LOADING":{
         "IMPORTING":"Importing&hellip;",
         "PREDICTING":"Predicting&hellip;",
-        "RELOADING":"Reloading data&hellip;"
+        "RELOADING":"Reloading data&hellip;",
+        "LOADING": "Loading&hellip;"
     },
     
     "ENTITY":{

@@ -1,6 +1,6 @@
 Ext.define(CONFIG.APP_NS+'.view.Admin.SupportQuantities.Grid', {
     extend: 'Ext.grid.Panel',
-    alias: 'widget.adminsupportquantities',
+    alias: 'widget.adminsupportquantitiesgrid',
 
     store: null,
     selType: 'rowmodel',
@@ -62,36 +62,6 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.SupportQuantities.Grid', {
             }
         }];
 
-        /*
-        this.dockedItems = {
-            xtype: 'toolbar',
-            dock: 'top',
-            items: [{
-                iconCls: 'icon-plus-circle',
-                xtype:  'button',
-                action: 'add',
-                text:   LANG.BUTTON.ADD
-            },
-            {
-                iconCls: 'icon-minus-circle',
-                xtype:  'button',
-                action: 'delete',
-                text:   LANG.BUTTON.REMOVE
-            },
-            '->',
-            {
-                xtype: 'button',
-                action: 'accept',
-                text: LANG.BUTTON.OK
-            },
-            {
-                xtype: 'button',
-                action: 'cancel',
-                text: LANG.BUTTON.CANCEL
-            }]
-        };
-        */
-
         this.plugins = [
             Ext.create('Ext.grid.plugin.RowEditing', {
                 clicksToEdit: 2,
@@ -99,7 +69,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.SupportQuantities.Grid', {
                     canceledit: {
                         fn: function(element, eOpts){
                             var data = element.record.data;
-                            if (data.type == "" || data.endDate == null || data.startDate == ""){
+                            if (data.supportTypeCode == "" || data.endDate == null || data.startDate == ""){
                                 this.grid.store.remove(element.record);
                             }
                         }

@@ -1,7 +1,7 @@
 Ext.define(CONFIG.APP_NS+'.controller.Admin.SupportQuantities', {
     extend: 'Ext.app.Controller',
 
-    views: ['Admin.SupportQuantities.Grid'],
+    views: ['Admin.SupportQuantities.Grid', 'Admin.SupportQuantities.SupportQuantities'],
     models: ['Admin.SupportQuantity'],
     stores: ['Admin.SupportQuantities'],
 
@@ -23,7 +23,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.SupportQuantities', {
     },
 
     add: function(btn){
-        var grid = btn.up('adminsupportquantities');
+        var grid = btn.up('adminsupportquantities').down('adminsupportquantitiesgrid');
         var store = grid.getStore();
 
         var rowEditor = grid.plugins[0];
@@ -33,7 +33,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.SupportQuantities', {
     },
 
     remove: function(btn){
-        var grid = btn.up('importwindow').down('importgrid');
+        var grid = btn.up('adminsupportquantities').down('adminsupportquantitiesgrid');
         var store = grid.getStore();
         var selected = grid.getSelectionModel().getSelection();
 
@@ -43,7 +43,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.SupportQuantities', {
     },
 
     sync: function(btn){
-        var grid = btn.up('adminsupportquantities');
+        var grid = btn.up('adminsupportquantities').down('adminsupportquantitiesgrid');
         var store = grid.getStore();
         store.sync();
     }

@@ -30,6 +30,9 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Users', {
             },
             'adminusersgrid button[action=sync]':{
                 click: this.sync
+            },
+            'adminusersgrid button[action=undo]':{
+                click: this.reload
             }
         });
     },
@@ -54,6 +57,11 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Users', {
         });
 
         wnd.show();
+    },
+
+    reload: function(btn){
+        var grid = btn.up('adminusersgrid');
+        grid.getStore().load();
     },
 
     remove: function(btn){
@@ -88,6 +96,9 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Users', {
         var wnd = btn.up('adminUsersEditWindow');
         var form = wnd.down('form');
 
+        if (!form.getForm().isValid())
+            return;
+
         //Save all the form fields into the record
         var values = form.getValues();
         for (var property in values){
@@ -96,6 +107,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Users', {
 
         if (wnd.store && !wnd.editing){ //are we creating a new entry? Add it to the store!
             wnd.store.add(wnd.record);
+            form.getForm().reset();
         };
 
         wnd.close();

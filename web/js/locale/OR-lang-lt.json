@@ -150,7 +150,8 @@
     "LOADING":{
         "IMPORTING":"Importuojama&hellip;",
         "PREDICTING":"Prognozuojama&hellip;",
-        "RELOADING":"Atnaujinami duomenys&hellip;"
+        "RELOADING":"Atnaujinami duomenys&hellip;",
+        "LOADING": "Kraunasi&hellip;"
     },
     
     "ENTITY":{

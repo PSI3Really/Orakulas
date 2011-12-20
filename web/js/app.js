@@ -95,10 +95,16 @@ Ext.application({
                 Ext.Ajax.request({ //Orakulas localization
                     url: urlApp,
                     success: function(response){
+
                         var text = response.responseText;
 
                         LANG = Ext.JSON.decode(text, true);
                         LANG_CODE = lang;
+
+                        Ext.override(Ext.grid.View,{
+                            loadingText: LANG.LOADING.LOADING
+                        });
+
                         Ext.create(CONFIG.APP_NS+'.view.Viewport');
                     }
                 });
