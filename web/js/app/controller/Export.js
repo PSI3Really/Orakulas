@@ -17,8 +17,16 @@ Ext.define(CONFIG.APP_NS+'.controller.Export', {
     accept: function(btn){
         var me = this;
 
-        var cont = btn.up('exportcontrols');
-        var form = cont.getForm();
+        var cont   = btn.up('exportcontrols'),
+            panels = cont.down('checkboxgroup').getValue(),
+            form   = cont.getForm();
+
+        var panels_tmp = [];
+        for (var key in panels) {
+            panels_tmp.push(panels[key]);
+        }
+        panels = panels_tmp;
+
         if (form.isValid()) {
             var windw = window.open('excel/download/generating');
 
@@ -34,7 +42,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Export', {
                 i_info = 0;
 
             var charts = [];
-            Ext.each(cont.panels, function () {
+            Ext.each(panels, function () {
                 switch (this.getXType()) {
                     case 'gridportlet':
                         var name = LANG.MAIN.PORTAL.TABLE.TITLE+(++i_grid);
@@ -67,7 +75,13 @@ Ext.define(CONFIG.APP_NS+'.controller.Export', {
 
                         break;
                     case 'infoportlet':
-                        data.analysis[LANG.MAIN.PORTAL.INFO.TITLE+(++i_info)] = [];
+                        var name = LANG.MAIN.PORTAL.INFO.TITLE+(++i_info);
+                        data.analysis[name] = [];
+
+                        var fields = this.query('form > textfield');
+                        Ext.each(fields, function () {
+                            data.analysis[name].push([this.getFieldLabel(), this.getValue()]);
+                        });
 
                         break;
                 }

@@ -21,7 +21,7 @@ Ext.define(CONFIG.APP_NS+'.view.Export.Controls', {
         var panelCheckBoxes = [];
         for (var i = 0; i < this.panels.length; i++){
             var checked = !this.panels[i].collapsed;
-            panelCheckBoxes.push({boxLabel: this.panels[i].title, inputValue: i, checked:checked});
+            panelCheckBoxes.push({boxLabel: this.panels[i].title, inputValue: this.panels[i], checked:checked});
         }
 
         this.items = [{
