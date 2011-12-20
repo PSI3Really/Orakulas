@@ -18,7 +18,10 @@ Ext.define(CONFIG.APP_NS+'.view.Export.Window', {
         this.items = {
             xtype: 'exportcontrols',
             panels: this.panels,
-            border: false
+            border: false,
+
+            // form config
+            url: 'excel/export'
         }
 
         this.callParent(arguments);

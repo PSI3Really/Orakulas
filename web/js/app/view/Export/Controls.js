@@ -12,7 +12,7 @@ Ext.define(CONFIG.APP_NS+'.view.Export.Controls', {
         this.fileTypes = Ext.create('Ext.data.Store', {
             fields: ['filetype', 'code'],
             data: [
-                {'filetype': LANG.FILETYPE.EXCEL_XLS, 'code':'excel'}
+                {'filetype': LANG.FILETYPE.EXCEL_XLS, 'code':'xls'}
                 //{'filetype': LANG.FILETYPE.INTERNAL, 'code':'internal'}
             ]
         });
@@ -28,22 +28,23 @@ Ext.define(CONFIG.APP_NS+'.view.Export.Controls', {
             xtype: 'checkboxgroup',
             region: 'center',
             border: false,
-            columns: 2,
+            columns: 3,
             allowBlank: false,
             items: panelCheckBoxes
         },{
-            xtype: 'panel',
-            region: 'east',
+            region: 'south',
             border: 'false',
+            layout: 'hbox',
+            bodyStyle: 'padding: 7px 7px 0',
             items: [{
                 xtype: 'textfield',
-                fieldLabel: LANG.ENTITY.FILE_NAME,
-                value: LANG.ENTITY.REPORT,
+                fieldLabel: '~~Išsaugoti kaip',
+                emptyText: LANG.ENTITY.FILE_NAME,
                 allowBlank: false
             },{
                 xtype: 'combobox',
-                fieldLabel: LANG.ENTITY.FILE_TYPE,
                 action: 'typeChoose',
+                emptyText: LANG.ENTITY.FILE_TYPE,
                 forceSelection: true,
                 editable: false,
                 allowBlank: false,
