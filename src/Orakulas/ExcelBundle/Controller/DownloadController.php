@@ -20,7 +20,7 @@ class DownloadController extends Controller
             $response->setContent(readfile("./savedExcels/{$filename}"));
             */
             header("Content-Type: application/vnd.ms-excel");
-            header("Content-Disposition: attachment; filename=".basename($filename));
+            header("Content-Disposition: attachment; filename={$filename}");
             header('Content-Transfer-Encoding: binary');
             readfile("./savedExcels/{$filename}");exit;
         } else {
