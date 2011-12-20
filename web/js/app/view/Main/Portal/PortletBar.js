@@ -23,6 +23,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.PortletBar', {
                 xtype: 'combobox',
                 multiSelect: true,
                 editable: false,
+                disabled: true,
                 emptyText: LANG.MAIN.PORTAL.CHOOSE_ENTITIES,
                 store:{
                     fields: ['entity'],

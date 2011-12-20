@@ -42,7 +42,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.InformationalSystems.IS', {
                                 iconCls: 'icon-arrow-return',
                                 xtype: 'button',
                                 action: 'undo',
-                                text: LANG.BUTTON.CANCEL_CHANGES
+                                text: LANG.ADMIN.REFRESH
                             }
                         ]
                     }
