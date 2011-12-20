@@ -64,8 +64,11 @@
 .icon-arrow-return {
     background: url(../images/icons/arrow-return.png) no-repeat center center;
 }
-.icon-reload{
+.icon-reload {
     background: url(../images/icons/arrow-reload.png) no-repeat center center;
+}
+.icon-question {
+    background: url(../images/icons/question.png) no-repeat center center;
 }
 
 /* Flags */

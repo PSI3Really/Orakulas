@@ -21,6 +21,23 @@ Ext.define(CONFIG.APP_NS+'.view.Import.Toolbar', {
                     }
                 }]
             },{
+                xtype: 'button',
+                tooltip: '~~Atsisiųskite duomenų failo pavyzdį',
+                iconCls: 'icon-question',
+                handler: function () {
+                    Ext.MessageBox.show({
+                        title: '~~Duomenų failo pavyzdys',
+                        msg: '~~Ar norite atsiųsti duomenų įvedimo failo pavyzdį?',
+                        icon: Ext.MessageBox.QUESTION,
+                        buttons: Ext.MessageBox.YESNO,
+                        fn: function (buttonId) {
+                            if (buttonId == 'yes') {
+                                window.open('../resources/duomenu-pavyzdys.xls');
+                            }
+                        }
+                    });
+                }
+            },'-',{
                 iconCls: 'icon-plus-circle',
                 xtype:  'button',
                 action: 'add',
