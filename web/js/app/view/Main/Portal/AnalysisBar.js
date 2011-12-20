@@ -15,25 +15,30 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.AnalysisBar', {
                 },
                 queryMode: 'local',
                 displayField: 'entity',
-                valueField: 'entity'
+                valueField: 'entity',
+                width: 200
             },
             {
                 xtype: 'datefield',
                 editable: true,
                 format: 'Y m',
-                emptyText: LANG.ENTITY.START_DATE
+                emptyText: LANG.ENTITY.START_DATE,
+                width: 80
             },
             {
                 xtype: 'datefield',
                 editable: true,
                 format: 'Y m',
-                emptyText: LANG.ENTITY.END_DATE
+                emptyText: LANG.ENTITY.END_DATE,
+                width: 80
             },
             {
                 xtype: 'numberfield',
                 allowDecimals: false,
                 minValue: 1,
-                emptyText: LANG.MAIN.PORTAL.INFO.INTERVAL_SIZE
+                emptyText: LANG.MAIN.PORTAL.INFO.INTERVAL_SIZE,
+                tooltip: LANG.MAIN.PORTAL.INFO.INTERVAL_SIZE,
+                width: 60
             },
             '->',
             {

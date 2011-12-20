@@ -16,32 +16,49 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.InfoPortlet', {
 
     initComponent: function(){
 
-        this.rangeFromField = Ext.create('Ext.form.field.Display', {
-            fieldLabel: LANG.MAIN.PORTAL.INFO.RANGE_FROM
+        this.rangeFromField = Ext.create('Ext.form.field.Text', {
+            fieldLabel: LANG.MAIN.PORTAL.INFO.RANGE_FROM,
+            readOnly: true
         });
-        this.rangeToField = Ext.create('Ext.form.field.Display', {
-            fieldLabel: LANG.MAIN.PORTAL.INFO.RANGE_TO
+        this.rangeToField = Ext.create('Ext.form.field.Text', {
+            fieldLabel: LANG.MAIN.PORTAL.INFO.RANGE_TO,
+            readOnly: true
         });
-        this.selectedField = Ext.create('Ext.form.field.Display', {
-            fieldLabel: LANG.MAIN.PORTAL.INFO.SELECTED
+        this.selectedField = Ext.create('Ext.form.field.Text', {
+            fieldLabel: LANG.MAIN.PORTAL.INFO.SELECTED,
+            readOnly: true
         });
-        this.intervalSizeField = Ext.create('Ext.form.field.Display', {
-            fieldLabel: LANG.MAIN.PORTAL.INFO.INTERVAL_SIZE
+        this.intervalSizeField = Ext.create('Ext.form.field.Text', {
+            fieldLabel: LANG.MAIN.PORTAL.INFO.INTERVAL_SIZE,
+            readOnly: true
         });
-        this.minValueField = Ext.create('Ext.form.field.Display', {
-            fieldLabel: LANG.MAIN.PORTAL.INFO.MIN_VALUE
+        this.minValueField = Ext.create('Ext.form.field.Text', {
+            fieldLabel: LANG.MAIN.PORTAL.INFO.MIN_VALUE,
+            readOnly: true
         });
-        this.minDateStartField = Ext.create('Ext.form.field.Display', {
-            fieldLabel: LANG.MAIN.PORTAL.INFO.MIN_DATE
+        this.minDateStartField = Ext.create('Ext.form.field.Text', {
+            fieldLabel: LANG.MAIN.PORTAL.INFO.MIN_DATE,
+            readOnly: true
         });
-        this.maxValueField = Ext.create('Ext.form.field.Display', {
-            fieldLabel: LANG.MAIN.PORTAL.INFO.MAX_VALUE
+        this.maxValueField = Ext.create('Ext.form.field.Text', {
+            fieldLabel: LANG.MAIN.PORTAL.INFO.MAX_VALUE,
+            readOnly: true
         });
-        this.maxDateStartField = Ext.create('Ext.form.field.Display', {
-            fieldLabel: LANG.MAIN.PORTAL.INFO.MAX_DATE
+        this.maxDateStartField = Ext.create('Ext.form.field.Text', {
+            fieldLabel: LANG.MAIN.PORTAL.INFO.MAX_DATE,
+            readOnly: true
         });
 
         this.dataView = Ext.create('Ext.form.Panel', {
+            bodyPadding: '15',
+            fieldDefaults: {
+                labelWidth: 200,
+                anchor: '100%'
+            },
+            layout: {
+                type: 'vbox',
+                align: 'stretch',
+            },
             items: [
                 this.rangeFromField,
                 this.rangeToField,
@@ -76,13 +93,15 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.InfoPortlet', {
     setData: function(data){
         this.data = data;
 
-        this.rangeFromField.setValue(data.rangeFrom);
-        this.rangeToField.setValue(data.rangeTo);
-        this.selectedField.setValue(data.selected);
+        console.log(data);
+
+        this.rangeFromField.setValue(Ext.Date.format(data.rangeFrom, 'Y-m-d'));
+        this.rangeToField.setValue(Ext.Date.format(data.rangeTo, 'Y-m-d'));
+        this.selectedField.setValue(data.selected.join(', '));
         this.intervalSizeField.setValue(data.intervalSize);
         this.minValueField.setValue(data.minValue);
-        this.minDateStartField.setValue(data.minDateStart);
+        this.minDateStartField.setValue(Ext.Date.format(data.minDateStart, 'Y-m-d'));
         this.maxValueField.setValue(data.maxValue);
-        this.maxDateStartField.setValue(data.maxDateStart);
+        this.maxDateStartField.setValue(Ext.Date.format(data.maxDateStart, 'Y-m-d'));
     }
 });

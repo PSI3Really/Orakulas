@@ -15,19 +15,22 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.FilterBar', {
                 },
                 queryMode: 'local',
                 displayField: 'entity',
-                valueField: 'entity'
+                valueField: 'entity',
+                width: 200
             },
             {
                 xtype: 'datefield',
                 editable: true,
                 format: 'Y m',
-                emptyText: LANG.ENTITY.START_DATE
+                emptyText: LANG.ENTITY.START_DATE,
+                width: 80
             },
             {
                 xtype: 'datefield',
                 editable: true,
                 format: 'Y m',
-                emptyText: LANG.ENTITY.END_DATE
+                emptyText: LANG.ENTITY.END_DATE,
+                width: 80
             },
             '->',
             {
