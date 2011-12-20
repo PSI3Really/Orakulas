@@ -50,8 +50,16 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.InfoPortlet', {
             return;
         }
 
-        if (rangeFrom) rangeFrom.setDate(1);
-        if (rangeTo) rangeTo.setDate(1);
+        if (rangeFrom) {
+            rangeFrom.setDate(1);
+        } else {
+            rangeFrom = portlet.store.min('startDate');
+        }
+        if (rangeTo) {
+            rangeTo.setDate(1);
+        } else {
+            rangeTo = portlet.store.max('startDate');
+        }
         
         if (!intervalSize){
             intervalSize = 1;

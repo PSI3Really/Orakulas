@@ -40,6 +40,7 @@ Ext.application({
         'Admin.Departments',
         'Admin.InformationalSystems',
         'Admin.SupportTypes',
+        'Admin.SupportQuantities',
         'Admin.PersonalSettings'
     ],
 

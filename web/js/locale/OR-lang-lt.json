@@ -6,7 +6,8 @@
             "USERS": "Vartotojai",
             "IS": "Informacinės sistemos",
             "DEPARTMENTS": "Padaliniai",
-            "SUPPORT_TYPES": "Priemonės"
+            "SUPPORT_TYPES": "Priemonės",
+            "SUPPORT_QUANTITIES": "Paramos kiekiai"
         },
         "PERSONAL_SETTINGS": {
             "TITLE": "Asmeniniai nustatymai",

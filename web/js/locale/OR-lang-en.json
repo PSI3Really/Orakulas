@@ -6,7 +6,8 @@
             "USERS": "Users",
             "IS": "Informational systems",
             "DEPARTMENTS": "Departments",
-            "SUPPORT_TYPES": "Support types"
+            "SUPPORT_TYPES": "Support types",
+            "SUPPORT_QUANTITIES": "Support quantities"
         },
         "PERSONAL_SETTINGS": {
             "TITLE": "Personal settings",

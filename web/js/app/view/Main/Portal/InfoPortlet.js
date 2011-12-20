@@ -93,7 +93,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.InfoPortlet', {
     setData: function(data){
         this.data = data;
 
-        console.log(data);
+        //console.log(data);
 
         this.rangeFromField.setValue(Ext.Date.format(data.rangeFrom, 'Y-m-d'));
         this.rangeToField.setValue(Ext.Date.format(data.rangeTo, 'Y-m-d'));

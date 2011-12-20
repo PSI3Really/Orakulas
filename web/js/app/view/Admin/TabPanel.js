@@ -54,7 +54,17 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.TabPanel', {
                         xtype: 'adminsupporttypes'
                     }
                 ]
+            },
+            {
+                title: LANG.ADMIN.TAB.SUPPORT_QUANTITIES,
+                layout: 'fit',
+                items: [{
+                    border: false,
+                    layout: 'fit',
+                    xtype: 'adminsupportquantities'
+                }]
             }
+
         ];
 
         this.callParent(arguments);
