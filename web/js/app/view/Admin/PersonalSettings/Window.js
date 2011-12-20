@@ -11,10 +11,10 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.PersonalSettings.Window', {
         this.floatable = true;
         this.modal = true;
 
-        this.height = 180;
+        this.height = 148;
         this.width = 300;
 
-        this.title = LANG.ADMIN.PERSONAL_SETTINGS.TITLE,
+        this.title = LANG.ADMIN.PERSONAL_SETTINGS.TITLE;
 
         this.items = [
             {

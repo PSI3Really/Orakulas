@@ -10,9 +10,17 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.PersonalSettings.PersonalSettingsPanel', {
     },
 
     initComponent: function() {
-        this.height = 130;
-        this.width = 280;
-        this.bodyPadding= 10;
+        this.plain = true;
+        this.border = 0;
+        this.bodyPadding = 5;
+        this.fieldDefaults = {
+            labelWidth: 150,
+            anchor: '100%'
+        };
+        this.layout = {
+            type: 'vbox',
+            align: 'stretch'
+        };
         this.defaultType = 'textfield';
         this.items = [
             {
