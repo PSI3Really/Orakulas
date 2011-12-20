@@ -21,3 +21,8 @@ Thumbs.db
 /app/cache/
 /app/logs/
 /vendor/
+
+# Generated files #
+###################
+web/savedExcels/
+web/savedImages/
