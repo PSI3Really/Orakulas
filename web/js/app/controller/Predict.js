@@ -33,14 +33,18 @@ Ext.define(CONFIG.APP_NS+'.controller.Predict', {
 
     beforeShow: function(window){
         var entitiesButton = window.down('[action=editEntities]');
-        entitiesButton.setDisabled(true);
+        if (entitiesButton) {
+            entitiesButton.setDisabled(true);
+        }
         window.oneStoreLoaded = false;
 
         //entitiesButton.setLoading(true);
 
         var loadCallback = function(){
             if (window.oneStoreLoaded){
-                entitiesButton.setDisabled(false);
+                if (entitiesButton) {
+                    entitiesButton.setDisabled(false);
+                }
                 //entitiesButton.setLoading(false);
             } else {
                 window.oneStoreLoaded = true;
