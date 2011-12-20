@@ -83,7 +83,8 @@
                 "MAX_DATE": "Pradžios data didžiausiai reišmei"
             },
             "CHOOSE_ENTITIES":"Pasirinkite ką rodyti",
-            "SAVE_PICTURE_AS":"Paveiksliuką galite išsaugoti paspaudę dešinyjį pelės klavišą"
+            "SAVE_PICTURE_AS":"Paveiksliuką galite išsaugoti paspaudę dešinyjį pelės klavišą",
+            "SELECT_TO_START":"Norėdami pradėti, pasirinkite ataskaitos tipą"
         }
     },
 
@@ -100,6 +101,11 @@
             "INVALID_DATA":"Klaidingai suformuotas duomenų failas eilutėje ",
             "UNKNOWN":"Nepavyko perskaityti duomenų failo",
             "TITLE":"Įvyko klaida"
+        },
+        "EXAMPLE": {
+            "TITLE":   "Duomenų failo pavyzdys",
+            "MSG":     "Ar norite atsiųsti duomenų įvedimo failo pavyzdį?",
+            "TOOLTIP": "Atsisiųskite duomenų failo pavyzdį"
         }
     },
 

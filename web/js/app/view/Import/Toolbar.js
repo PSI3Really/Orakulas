@@ -22,12 +22,12 @@ Ext.define(CONFIG.APP_NS+'.view.Import.Toolbar', {
                 }]
             },{
                 xtype: 'button',
-                tooltip: '~~Atsisiųskite duomenų failo pavyzdį',
+                tooltip: LANG.IMPORT.EXAMPLE.TOOLTIP,
                 iconCls: 'icon-question',
                 handler: function () {
                     Ext.MessageBox.show({
-                        title: '~~Duomenų failo pavyzdys',
-                        msg: '~~Ar norite atsiųsti duomenų įvedimo failo pavyzdį?',
+                        title: LANG.IMPORT.EXAMPLE.TITLE,
+                        msg: LANG.IMPORT.EXAMPLE.MSG,
                         icon: Ext.MessageBox.QUESTION,
                         buttons: Ext.MessageBox.YESNO,
                         fn: function (buttonId) {

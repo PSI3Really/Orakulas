@@ -86,7 +86,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Alternative.Panel', {
 
     addPlaceholder: function (portlet, top) {
         var $body        = $('#'+portlet.getId()+' > .x-panel-body');
-        $body.append('<div class="or-placeholder">~~Norėdami pradėti, pasirinkite ataskaitos tipą</div>');
+        $body.append('<div class="or-placeholder">'+LANG.MAIN.PORTAL.SELECT_TO_START+'</div>');
 
         var $placeholder = $body.children('.or-placeholder');
         if (top !== undefined) {

@@ -83,7 +83,8 @@
                 "MAX_DATE": "Start date for maximum value"
             },
             "CHOOSE_ENTITIES":"Choose what to display",
-            "SAVE_PICTURE_AS":"To save generated image right-click and choose 'Save Image As&hellip;'"
+            "SAVE_PICTURE_AS":"To save generated image right-click and choose 'Save Image As&hellip;'",
+            "SELECT_TO_START":"Select report type to start"
         }
     },
 
@@ -101,6 +102,11 @@
             "INVALID_DATA":"Syntax error at line ",
             "UNKNOWN":"Failed to read from file",
             "TITLE":"Error"
+        },
+        "EXAMPLE": {
+            "TITLE":   "Data file example",
+            "MSG":     "Would you like to download data file example?",
+            "TOOLTIP": "Download data file example"
         }
     },
 
