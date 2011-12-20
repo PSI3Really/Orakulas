@@ -19,13 +19,13 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.FilterBar', {
             },
             {
                 xtype: 'datefield',
-                editable: false,
+                editable: true,
                 format: 'Y m',
                 emptyText: LANG.ENTITY.START_DATE
             },
             {
                 xtype: 'datefield',
-                editable: false,
+                editable: true,
                 format: 'Y m',
                 emptyText: LANG.ENTITY.END_DATE
             },

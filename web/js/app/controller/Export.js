@@ -39,6 +39,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Export', {
                     case 'chartportlet':
                         data.tables[LANG.MAIN.PORTAL.CHART.TITLE+(++i_chart)] = {};
 
+
                         break;
                     case 'infoportlet':
                         data.tables[LANG.MAIN.PORTAL.INFO.TITLE+(++i_info)] = {};
