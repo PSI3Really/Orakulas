@@ -34,8 +34,6 @@ Ext.onReady(function(){
         Ext.TabPanelItem.prototype.closeText = "Uždaryti šią užsklandą";
     }
 
-
-
     if(Ext.LoadMask){
         Ext.LoadMask.prototype.msg = "Kraunasi...";
     }
