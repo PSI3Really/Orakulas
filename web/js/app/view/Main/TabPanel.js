@@ -14,6 +14,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.TabPanel', {
         departmentHours: null,
         departmentRequests: null
     },
+    plain: true,
 
     initComponent: function() {
         this.items = [

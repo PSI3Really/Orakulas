@@ -1,8 +1,7 @@
 Ext.define(CONFIG.APP_NS+'.view.Viewport', {
     extend: 'Ext.container.Viewport',
     layout: {
-        type: 'border',
-        padding: '0 5 5 5'
+        type: 'border'
     },
     
     requires: [
