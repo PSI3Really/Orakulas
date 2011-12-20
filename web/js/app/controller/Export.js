@@ -48,24 +48,26 @@ Ext.define(CONFIG.APP_NS+'.controller.Export', {
                         var name = LANG.MAIN.PORTAL.TABLE.TITLE+(++i_grid);
                         data.tables[name] = [];
 
-                        this.store.each(function (rec) {
-                            if (!data.tables[name].length) {
-                                var fields = [];
-                                rec.fields.each(function () {
-                                    fields.push(this.name);
-                                });
-                                data.tables[name].push(fields);
-                            }
-                            var recs = [];
-                            for (var i = 0; i < data.tables[name][0].length; i++) {
-                                var val = rec.get(data.tables[name][0][i]);
-                                if (val instanceof Date) {
-                                    val = Ext.Date.format(val, 'Y-m');
+                        if (typeof this.store.each !== 'undefined') {
+                            this.store.each(function (rec) {
+                                if (!data.tables[name].length) {
+                                    var fields = [];
+                                    rec.fields.each(function () {
+                                        fields.push(this.name);
+                                    });
+                                    data.tables[name].push(fields);
                                 }
-                                recs.push(val);
-                            }
-                            data.tables[name].push(recs);
-                        });
+                                var recs = [];
+                                for (var i = 0; i < data.tables[name][0].length; i++) {
+                                    var val = rec.get(data.tables[name][0][i]);
+                                    if (val instanceof Date) {
+                                        val = Ext.Date.format(val, 'Y-m');
+                                    }
+                                    recs.push(val);
+                                }
+                                data.tables[name].push(recs);
+                            });
+                        }
 
                         break;
                     case 'chartportlet':
