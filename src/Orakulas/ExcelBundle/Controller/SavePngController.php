@@ -11,8 +11,8 @@ class SavePngController extends Controller
     public function savePngAction()
     {
 
-        $success = "false";
-        $url = "fakeUrl";
+        $success = false;
+        $url     = null;
 
         if (isset($_POST['imageData'])) {
             $jsonData = $_POST['imageData'];
