@@ -38,7 +38,7 @@ Ext.define(CONFIG.APP_NS+'.view.Export.Controls', {
             bodyStyle: 'padding: 7px 7px 0',
             items: [{
                 xtype: 'textfield',
-                fieldLabel: '~~Išsaugoti kaip',
+                fieldLabel: LANG.BUTTON.SAVE_AS,
                 emptyText: LANG.ENTITY.FILE_NAME,
                 allowBlank: false
             },{

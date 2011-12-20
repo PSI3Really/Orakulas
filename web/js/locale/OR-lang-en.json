@@ -128,7 +128,8 @@
         "TITLE":"Error",
         "EMPTY_FIELDS":"All fields are required",
         "PASSWORD_MISMATCH":"Passwords do not match",
-        "CANNOT_CONNECT":"Could not establish connection to the database"
+        "CANNOT_CONNECT":"Could not establish connection to the database",
+        "INVALID_RANGE": "Range must be separated by at least one month"
     },
 
     "BUTTON":{
@@ -137,6 +138,7 @@
         "OK": "Ok",
         "CANCEL": "Cancel",
         "SAVE": "Save",
+        "SAVE_AS": "Save as",
         "SYNC": "Save changes",
         "CANCEL_CHANGES":"Cancel changes",
         "OPEN_FILE": "Open file",

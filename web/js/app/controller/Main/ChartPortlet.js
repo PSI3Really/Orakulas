@@ -246,8 +246,8 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
         if (value && sibling_value) {
             if ((value.getMonth() == sibling_value.getMonth() && (value.getDay() == sibling_value.getDay()))) {
                 Ext.Msg.show({
-                    title: '~~Klaidingas pasirinkimas',
-                    msg:   '~~Rėžius turi skirti bent vienas mėnuo.',
+                    title: LANG.ERROR.TITLE,
+                    msg:  LANG.ERROR.INVALID_RANGE,
                     icon:  Ext.MessageBox.ERROR,
                     buttons: Ext.MessageBox.OK,
                     fn: function () {
