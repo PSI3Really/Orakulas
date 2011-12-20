@@ -96,20 +96,32 @@ class SupportHistoryFacade extends EntityFacade {
 
         if (isset($array['id']))
             $supportHistory->setId($array['id']);
+
         if (isset($array['startDate']))
             $supportHistory->setStartDate(new \DateTime(date("Y-m-01", strtotime($array['startDate']))));
+
         if (isset($array['endDate']))
             $supportHistory->setEndDate(new \DateTime(date("Y-m-d", strtotime("-1 second", strtotime("+1 month", strtotime(date("Y-m-01", strtotime($array['endDate']))))))));
+
         if (isset($array['supportRequestCount']))
             $supportHistory->setSupportRequestCount($array['supportRequestCount']);
-        if (isset($array['supportType']))
-            $supportHistory->setSupportType($this->getSupportTypeFacade()->fromArray($array['supportType']));
+
+        if (isset($array['supportType'])) {
+            $supportType = null;
+
+            if (is_array($array['supportType']))
+                $supportType = $this->getSupportTypeFacade()->fromArray($array['supportType']);
+            else
+                $supportType = $this->getSupportTypeFacade()->load($array['supportType']);
+
+            $supportHistory->setSupportType($supportType);
+        }
 
         return $supportHistory;
     }
 
     /**
-     * @param \Orakulas\ModelBundle\Entity\SupportHistory $source
+     * @param array $source
      * @param \Orakulas\ModelBundle\Entity\SupportHistory $destination
      */
     public function merge($destination, $source) {
@@ -119,8 +131,17 @@ class SupportHistoryFacade extends EntityFacade {
             $destination->setEndDate(new \DateTime(date("Y-m-d", strtotime("-1 second", strtotime("+1 month", strtotime(date("Y-m-01", strtotime($source['endDate']))))))));
         if (isset($source['supportRequestCount']))
             $destination->setSupportRequestCount($source['supportRequestCount']);
-        if (isset($source['supportType']))
-            $destination->setSupportType($this->getSupportTypeFacade()->fromArray($source['supportType']));
+
+        if (isset($source['supportType'])) {
+            $supportType = null;
+
+            if (is_array($source['supportType']))
+                $supportType = $this->getSupportTypeFacade()->fromArray($source['supportType']);
+            else
+                $supportType = $this->getSupportTypeFacade()->load($source['supportType']);
+
+            $destination->setSupportType($supportType);
+        }
     }
 
     public function import($jsonData) {

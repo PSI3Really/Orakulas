@@ -23,8 +23,6 @@ class DefaultController extends Controller {
             $entityArray = json_decode($json, true);
         }
 
-        echo '<pre>';var_dump($entityArray);exit;
-
         $returnArray = array();
 
         foreach ($entityArray as $e) {

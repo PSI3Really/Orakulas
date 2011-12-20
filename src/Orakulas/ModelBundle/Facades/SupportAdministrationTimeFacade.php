@@ -78,10 +78,28 @@ class SupportAdministrationTimeFacade extends EntityFacade {
             $supportAdministrationTime->setId($array['id']);
         if (isset($array['']))
             $supportAdministrationTime->setHoursCount($array['hoursCount']);
-        if (isset($array['']))
-            $supportAdministrationTime->setDepartment($this->getDepartmentFacade()->fromArray($array['department']));
-        if (isset($array['']))
-            $supportAdministrationTime->setSupportType($this->getSupportTypeFacade()->fromArray($array['supportType']));
+
+        if (isset($array['department'])) {
+            $department = null;
+
+            if (is_array($array['department']))
+                $department = $this->getDepartmentFacade()->fromArray($array['department']);
+            else
+                $department = $this->getDepartmentFacade()->load((int) $array['department']);
+
+            $departmentInfoSysUsage->setDepartment($department);
+        }
+
+        if (isset($array['supportType'])) {
+            $supportType = null;
+
+            if (is_array($array['supportType']))
+                $supportType = $this->getSupportTypeFacade()->fromArray($array['supportType']);
+            else
+                $supportType = $this->getSupportTypeFacade()->load($array['supportType']);
+
+            $supportHistory->setSupportType($supportType);
+        }
 
         return $supportAdministrationTime;
     }
@@ -93,10 +111,28 @@ class SupportAdministrationTimeFacade extends EntityFacade {
     public function merge($destination, $source) {
         if (isset($source['hoursCount']))
             $destination->setHoursCount($source['hoursCount']);
-        if (isset($source['department']))
-            $destination->setDepartment($source['department']);
-        if (isset($source['supportType']))
-            $destination->setSupportType($source['supportType']);
+
+        if (isset($source['department'])) {
+            $department = null;
+
+            if (is_array($source['department']))
+                $department = $this->getDepartmentFacade()->fromArray($source['department']);
+            else
+                $department = $this->getDepartmentFacade()->load((int) $source['department']);
+
+            $destination->setDepartment($department);
+        }
+
+        if (isset($source['supportType'])) {
+            $supportType = null;
+
+            if (is_array($source['supportType']))
+                $supportType = $this->getSupportTypeFacade()->fromArray($source['supportType']);
+            else
+                $supportType = $this->getSupportTypeFacade()->load($source['supportType']);
+
+            $destination->setSupportType($supportType);
+        }
     }
 
     /**

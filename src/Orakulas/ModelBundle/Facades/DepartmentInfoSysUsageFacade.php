@@ -75,10 +75,28 @@ class DepartmentInfoSysUsageFacade extends EntityFacade {
 
         if (isset($array['id']))
             $departmentInfoSysUsage->setId($array['id']);
-        if (isset($array['department']))
-            $departmentInfoSysUsage->setDepartment($this->getDepartmentFacade()->fromArray($array['department']));
-        if (isset($array['informationalSystem']))
-            $departmentInfoSysUsage->setInformationalSystem($this->getInformationalSystemFacade()->fromArray($array['informationalSystem']));
+
+        if (isset($array['department'])) {
+            $department = null;
+
+            if (is_array($array['department']))
+                $department = $this->getDepartmentFacade()->fromArray($array['department']);
+            else
+                $department = $this->getDepartmentFacade()->load((int) $array['department']);
+
+            $departmentInfoSysUsage->setDepartment($department);
+        }
+
+        if (isset($array['informationalSystem'])) {
+            $informationalSystem = null;
+
+            if (is_array($array['informationalSystem']))
+                $informationalSystem = $this->getInformationalSystemFacade()->fromArray($array['informationalSystem']);
+            else
+                $informationalSystem = $this->getInformationalSystemFacade()->load((int) $array['informationalSystem']);
+
+            $departmentInfoSysUsage->setInformationalSystem($informationalSystem);
+        }
 
         return $departmentInfoSysUsage;
     }
@@ -88,10 +106,27 @@ class DepartmentInfoSysUsageFacade extends EntityFacade {
      * @param \Orakulas\ModelBundle\Entity\DepartmentInfoSysUsage $destination
      */
     public function merge($destination, $source) {
-        if (isset($source['department']))
-            $destination->setDepartment($this->getDepartmentFacade()->fromArray($source['department']));
-        if (isset($source['informationalSystem']))
-            $destination->setInformationalSystem($this->getInformationalSystemFacade()->fromArray($source['informationalSystem']));
+        if (isset($source['department'])) {
+            $department = null;
+
+            if (is_array($source['department']))
+                $department = $this->getDepartmentFacade()->fromArray($source['department']);
+            else
+                $department = $this->getDepartmentFacade()->load((int) $source['department']);
+
+            $destination->setDepartment($department);
+        }
+
+        if (isset($source['informationalSystem'])) {
+            $informationalSystem = null;
+
+            if (is_array($source['informationalSystem']))
+                $informationalSystem = $this->getInformationalSystemFacade()->fromArray($source['informationalSystem']);
+            else
+                $informationalSystem = $this->getInformationalSystemFacade()->load((int) $source['informationalSystem']);
+
+            $destination->setInformationalSystem($informationalSystem);
+        }
     }
 
     /**

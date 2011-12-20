@@ -281,8 +281,17 @@ class SupportTypeFacade extends EntityFacade {
             $supportType->setName($array['name']);
         if (isset($array['code']))
             $supportType->setCode($array['code']);
-        if (isset($array['supportCategory']))
-            $supportType->setSupportCategory($this->getSupportCategoryFacade()->fromArray($array['supportCategory']));
+
+        if (isset($array['supportCategory'])) {
+            $supportCategory = null;
+
+            if (is_array($array['supportCategory']))
+                $supportCategory = $this->getSupportCategoryFacade()->fromArray($array['supportCategory']);
+            else
+                $supportCategory = $this->getSupportCategoryFacade()->load($array['supportCategory']);
+
+            $supportType->setSupportCategory($supportCategory);
+        }
 
         return $supportType;
     }
@@ -296,7 +305,16 @@ class SupportTypeFacade extends EntityFacade {
             $destination->setCode($source['code']);
         if (isset($source['name']))
           $destination->setName($source['name']);
-        if (isset($source['supportCategory']))
-            $destination->setSupportCategory($this->getSupportCategoryFacade()->fromArray($source['supportCategory']));
+
+        if (isset($source['supportCategory'])) {
+            $supportCategory = null;
+
+            if (is_array($source['supportCategory']))
+                $supportCategory = $this->getSupportCategoryFacade()->fromArray($source['supportCategory']);
+            else
+                $supportCategory = $this->getSupportCategoryFacade()->load($source['supportCategory']);
+
+            $destination->setSupportCategory($supportCategory);
+        }
     }
 }
