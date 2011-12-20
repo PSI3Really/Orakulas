@@ -1,6 +1,8 @@
 {
     "ADMIN":{
         "TITLE": "Administruoti",
+
+        "REFRESH": "Atnaujinti iš DB",
         
         "TAB":{
             "USERS": "Vartotojai",

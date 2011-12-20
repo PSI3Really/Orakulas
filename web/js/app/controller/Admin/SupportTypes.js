@@ -24,6 +24,9 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.SupportTypes', {
             },
             'adminsupporttypesgrid button[action=sync]': {
                 click: this.sync
+            },
+            'adminsupporttypesgrid button[action=undo]':{
+                click: this.reload
             }
         });
     },
@@ -32,6 +35,11 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.SupportTypes', {
         var grid = btn.up('adminsupporttypesgrid');
         var store = grid.getStore();
         store.sync();
+    },
+
+    reload: function(btn){
+        var grid = btn.up('adminsupporttypesgrid');
+        grid.getStore().load();
     },
 
     add: function(btn){

@@ -41,7 +41,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Departments.Departments', {
                                 iconCls: 'icon-arrow-return',
                                 xtype: 'button',
                                 action: 'undo',
-                                text: LANG.BUTTON.CANCEL_CHANGES
+                                text: LANG.ADMIN.REFRESH
                             }
                         ]
                     }

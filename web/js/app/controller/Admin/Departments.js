@@ -24,6 +24,9 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Departments', {
             },
             'admindepartmentsgrid button[action=sync]': {
                 click: this.sync
+            },
+            'admindepartmentsgrid button[action=undo]':{
+                click: this.reload
             }
         });
     },
@@ -57,5 +60,11 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Departments', {
         var grid = btn.up('admindepartmentsgrid');
         var store = grid.getStore();
         store.sync();
+    },
+
+
+    reload: function(btn){ //TODO: NEVEIKIA
+        var grid = btn.up('admindepartmentsgrid');
+        grid.getStore().load();
     }
 });

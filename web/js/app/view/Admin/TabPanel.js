@@ -9,6 +9,8 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.TabPanel', {
         CONFIG.APP_NS+'.view.Admin.SupportTypes.SupportTypes'
     ],
 
+    plain: true,
+
     initComponent: function() {
         this.items = [
             {

@@ -21,11 +21,5 @@ Ext.define(CONFIG.APP_NS+'.store.Admin.SupportQuantities', {
             encode: true,
             writeAllFields: false
         }
-    },
-
-    listeners:{
-        update: function (store, record, operation){
-            console.log(record);
-        }
     }
 })

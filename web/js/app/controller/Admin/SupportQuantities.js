@@ -18,6 +18,9 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.SupportQuantities', {
             },
             'adminsupportquantities button[action=sync]':{
                 click: this.sync
+            },
+            'adminsupportquantities button[action=undo]':{
+                click: this.reload
             }
         });
     },
@@ -46,5 +49,10 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.SupportQuantities', {
         var grid = btn.up('adminsupportquantities').down('adminsupportquantitiesgrid');
         var store = grid.getStore();
         store.sync();
+    },
+
+    reload: function(btn){
+        var grid = btn.up('adminsupportquantities').down('adminsupportquantitiesgrid');
+        grid.getStore().load();
     }
 });

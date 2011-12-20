@@ -40,7 +40,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.SupportQuantities.SupportQuantities', {
                             iconCls: 'icon-arrow-return',
                             xtype: 'button',
                             action: 'undo',
-                            text: LANG.BUTTON.CANCEL_CHANGES
+                            text: LANG.ADMIN.REFRESH
                         }]
                     }
                 ]

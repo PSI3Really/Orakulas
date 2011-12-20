@@ -36,6 +36,9 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.InformationalSystems', {
             },
             'adminisgrid':{
                 itemdblclick: this.edit
+            },
+            'adminisgrid button[action=undo]':{
+                click: this.reload
             }
         });
     },
@@ -82,6 +85,11 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.InformationalSystems', {
         var grid = btn.up('adminisgrid');
         var store = grid.getStore();
         store.sync();
+    },
+
+    reload: function(btn){
+        var grid = btn.up('adminisgrid');
+        grid.getStore().load();
     },
 
     undo: function(btn) {
