@@ -15,6 +15,8 @@ Ext.define(CONFIG.APP_NS+'.controller.Export', {
     },
 
     accept: function(btn){
+        var me = this;
+
         var cont = btn.up('exportcontrols');
         var form = cont.getForm();
         if (form.isValid()) {
@@ -93,7 +95,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Export', {
                                             data.images[LANG.MAIN.PORTAL.CHART.TITLE+(++j)] = images[k];
                                         }
 
-                                        this.finalRequest(data, function (url) {
+                                        me.finalRequest(data, function (url) {
                                             windw.location.href = url;
 
                                             btn.up('exportwindow').close()
@@ -105,7 +107,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Export', {
                     });
                 }
             } else {
-                this.finalRequest(data, function (url) {
+                me.finalRequest(data, function (url) {
                     windw.location.href = url;
 
                     btn.up('exportwindow').close()
