@@ -59,6 +59,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.GridPortlet', {
         }
 
         picker.store.loadData(entityList);
+        picker.setDisabled(false);
     },
 
     chooseDepartments: function(btn){
