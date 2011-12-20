@@ -18,7 +18,7 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.Grid', { //TODO: merge with importgrid
         });
         
         this.columns = [{
-            header: LANG.ENTITY.SUPPORT_TYPE,
+            header: LANG.ENTITY.SUPPORT_TYPE_CODE,
             dataIndex: 'type',
             flex: 1,
             editor: {

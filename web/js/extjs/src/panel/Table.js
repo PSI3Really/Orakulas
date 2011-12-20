@@ -1249,6 +1249,34 @@ Ext.define('Ext.panel.Table', {
      * @param {Ext.data.Store} store The new store.
      * @param {Array} columns An array of column configs
      */
+
+    reconfigure: function(store, columns) {
+        var me = this,
+            headerCt = me.headerCt;
+
+        if (me.lockable) {
+            me.reconfigureLockable(store, columns);
+        } else {
+            if (columns) {
+                headerCt.suspendLayout = true;
+                headerCt.removeAll();
+                headerCt.add(columns);
+            }
+            if (store) {
+                store = Ext.StoreManager.lookup(store);
+                me.bindStore(store);
+            } else {
+                me.getView().refresh();
+            }
+            if (columns) {
+                headerCt.suspendLayout = false;
+                me.forceComponentLayout();
+            }
+        }
+        me.fireEvent('reconfigure', me);
+    }
+
+    /* //OLD version
     reconfigure: function(store, columns) {
         var me = this,
             headerCt = me.headerCt;
@@ -1275,4 +1303,5 @@ Ext.define('Ext.panel.Table', {
         }
         me.fireEvent('reconfigure', me);
     }
+    */
 });

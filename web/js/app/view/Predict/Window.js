@@ -54,8 +54,6 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.Window', {
             }
         }
 
-        this.setLoading(true);
-
         this.infoSysDepartmentsStore = Ext.create('widget.adminDepartmentInfoSysUsagesStore', {
             listeners:{
                 load: loadCallback

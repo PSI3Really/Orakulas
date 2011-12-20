@@ -100,10 +100,13 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Tab', {
     },
 
     predict: function(btn){
-        var tab = btn.up('maintab'); //.getActiveTab();
-        var wnd = Ext.create('widget.predictwindow', {parentTab: tab});
+        var tabpanel = btn.up('maintabpanel'); //.getActiveTab();
+        
+        if (!tabpanel.predictWindow){
+            tabpanel.predictWindow = Ext.create('widget.predictwindow', {parentTab: tabpanel});
+        }
 
-        wnd.show();
+        tabpanel.predictWindow.show();
     },
 
     addInfo: function(btn){

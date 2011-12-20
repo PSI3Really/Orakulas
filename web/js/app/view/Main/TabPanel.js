@@ -16,6 +16,8 @@ Ext.define(CONFIG.APP_NS+'.view.Main.TabPanel', {
     },
     plain: true,
 
+    predictWindow: null,
+
     initComponent: function() {
         this.items = [
             {
