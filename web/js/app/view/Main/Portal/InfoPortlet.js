@@ -57,7 +57,7 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.InfoPortlet', {
             },
             layout: {
                 type: 'vbox',
-                align: 'stretch',
+                align: 'stretch'
             },
             items: [
                 this.rangeFromField,
