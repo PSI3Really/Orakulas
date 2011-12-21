@@ -28,7 +28,7 @@ Ext.define(CONFIG.APP_NS+'.view.Export.Controls', {
             xtype: 'checkboxgroup',
             region: 'center',
             border: false,
-            columns: 5,
+            columns: 3,
             allowBlank: false,
             items: panelCheckBoxes
         },{
