@@ -129,4 +129,62 @@ class SupportTypeController extends DefaultController {
         return $this->constructResponse(json_encode($departmentIds));
     }
 
+    public function supportHoursCountAction() {
+        $json = $_POST["jsonValue"];
+
+        $entityArray = array();
+        if (!is_array(json_decode($json))) {
+            $entityArray[] = json_decode($json, true);
+        } else {
+            $entityArray = json_decode($json, true);
+        }
+
+        $returnArray = array();
+
+        foreach ($entityArray as $e) {
+            $supportTypeId = $e['supportTypeId'];
+            $departmentId = $e['departmentId'];
+
+            $hours = $this->getEntityFacade()->getAdministeredHours($supportTypeId, $departmentId);
+
+            $returnArray[((string) $supportTypeId) . ((string) $departmentId)] = $hours;
+        }
+
+        if (count($returnArray) == 1) {
+            $arrayValues = array_values($returnArray);
+            return $this->constructResponse(json_encode($arrayValues[0]));
+        } else {
+            return $this->constructResponse(json_encode($returnArray));
+        }
+    }
+
+    public function nameAction() {
+        $json = $_POST["jsonValue"];
+
+        $entityArray = array();
+        if (!is_array(json_decode($json))) {
+            $entityArray[] = json_decode($json, true);
+        } else {
+            $entityArray = json_decode($json, true);
+        }
+
+        $returnArray = array();
+
+        foreach ($entityArray as $e) {
+            $supportTypeId = (int) $e['id'];
+
+            $name = $this->getEntityFacade()->getName($supportTypeId);
+            echo $name;exit;
+
+            $returnArray[$supportTypeId] = $name;
+        }
+
+        if (count($returnArray) == 1) {
+            $values = array_values($returnArray);
+            return $this->constructResponse(json_encode($values[0]));
+        } else {
+            return $this->constructResponse(json_encode($returnArray));
+        }
+    }
+
 }

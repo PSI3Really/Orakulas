@@ -317,4 +317,68 @@ class SupportTypeFacade extends EntityFacade {
             $destination->setSupportCategory($supportCategory);
         }
     }
+
+    public function getAdministeredHours($supportTypeId, $departmentId) {
+        $stmtString = '
+            SELECT
+              hours_count
+            FROM
+              support_administration_time
+            WHERE
+              support_type_id = :supportTypeId AND
+              department_id = :departmentId';
+
+        $entityManager = $this->getDoctrine()->getEntityManager();
+
+        $stmt = $entityManager->getConnection()->prepare($stmtString);
+
+        $stmt->bindValue('supportTypeId', $supportTypeId);
+        $stmt->bindValue('departmentId', $departmentId);
+
+        $stmt->execute();
+
+        $resultArray = $stmt->fetchAll();
+
+        $dbHourCount = array();
+        foreach ($resultArray as $result) {
+            $dbHourCount[] = (float) $result['hours_count'];
+        }
+
+        if (count($dbHourCount) != 1) {
+            return 0;
+        } else {
+            return $dbHourCount[0];
+        }
+    }
+
+    public function getName($supportTypeId) {
+        $stmtString = '
+            SELECT
+              name
+            FROM
+              support_type
+            WHERE
+              id = :supportTypeId';
+
+        $entityManager = $this->getDoctrine()->getEntityManager();
+
+        $stmt = $entityManager->getConnection()->prepare($stmtString);
+
+        $stmt->bindValue('supportTypeId', $supportTypeId);
+
+        $stmt->execute();
+
+        $resultArray = $stmt->fetchAll();
+
+        $dbNames = array();
+        foreach ($resultArray as $result) {
+            $dbNames[] = (string) $result['name'];
+        }
+
+        if (count($dbNames) != 1) {
+            return '';
+        } else {
+            return $dbNames[0];
+        }
+    }
 }

@@ -27,3 +27,15 @@ OrakulasModelBundle_supportTypes_administeredBy:
     defaults: { _controller: OrakulasModelBundle:SupportType:administeredBy }
     requirements:
       _method:  POST
+
+OrakulasModelBundle_supportTypes_supportHoursCount:
+    pattern: /supportHoursCount
+    defaults: { _controller: OrakulasModelBundle:SupportType:supportHoursCount }
+    requirements:
+      _method:  POST
+
+OrakulasModelBundle_supportTypes_name:
+    pattern: /name
+    defaults: { _controller: OrakulasModelBundle:SupportType:name }
+    requirements:
+      _method:  POST
