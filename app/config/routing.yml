@@ -1,7 +1,3 @@
-OrakulasFoobarBundle:
-    resource: "@OrakulasFoobarBundle/Resources/config/routing.yml"
-    prefix:   /
-
 OrakulasPredictDataBundle:
     resource: "@OrakulasPredictDataBundle/Resources/config/routing.yml"
     prefix:   /

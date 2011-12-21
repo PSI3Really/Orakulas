@@ -23,7 +23,6 @@ class AppKernel extends Kernel
             new Orakulas\ExcelBundle\OrakulasExcelBundle(),
             new Orakulas\RedirectBundle\OrakulasRedirectBundle(),
             new Orakulas\PredictDataBundle\OrakulasPredictDataBundle(),
-            new Orakulas\FoobarBundle\OrakulasFoobarBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
