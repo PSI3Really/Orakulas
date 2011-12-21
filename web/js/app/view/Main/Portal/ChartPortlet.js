@@ -67,10 +67,25 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.ChartPortlet', {
             }
         ];
 
-        this.tools = [{
-            type: 'save',
-            disabled: true
-        }];
+        this.tools = [
+            {
+                type: 'save',
+                disabled: true
+            },
+            {
+                type: 'gear',
+                handler: function (event, toolEl, owner) {
+                    Ext.Msg.prompt(LANG.MAIN.PORTAL.RENAME.TITLE, LANG.MAIN.PORTAL.RENAME.MSG, function(btn, text){
+                        if (btn == 'ok'){
+                            if (text.length > 0) {
+                                owner.setTitle(text);
+                                owner.up('chartportlet').title = text;
+                            }
+                        }
+                    });
+                }
+            }
+        ];
 
         this.callParent();
     },

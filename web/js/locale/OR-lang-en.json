@@ -82,6 +82,10 @@
                 "MAX_VALUE": "Maximum value",
                 "MAX_DATE": "Start date for maximum value"
             },
+            "RENAME": {
+                "TITLE": "Change View Name",
+                "MSG":   "Enter a new name for this view:"
+            },
             "CHOOSE_ENTITIES":"Choose what to display",
             "SAVE_PICTURE_AS":"To save generated image right-click and choose 'Save Image As&hellip;'",
             "SELECT_TO_START":"Select report type to start"
@@ -113,7 +117,7 @@
     "PREDICT":{
         "TITLE": "Predict",
         "IGNORE_LAST_DATE": "Ignore last month",
-        "WINDOW_SIZE": "Forecasting horizon (months)",
+        "WINDOW_SIZE": "Forecasting window (months)",
         "UPTREND": "Uptrend %",
 
         "BUTTON":{

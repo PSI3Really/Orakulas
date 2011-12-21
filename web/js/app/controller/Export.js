@@ -43,9 +43,11 @@ Ext.define(CONFIG.APP_NS+'.controller.Export', {
 
             var charts = [];
             Ext.each(panels, function () {
+                var name = this.title;
                 switch (this.getXType()) {
                     case 'gridportlet':
-                        var name = LANG.MAIN.PORTAL.TABLE.TITLE+(++i_grid);
+                        ++i_grid;
+
                         data.tables[name] = [];
 
                         if (typeof this.store.each !== 'undefined') {
@@ -71,13 +73,16 @@ Ext.define(CONFIG.APP_NS+'.controller.Export', {
 
                         break;
                     case 'chartportlet':
-                        data.images[LANG.MAIN.PORTAL.CHART.TITLE+(++i_chart)] = '';
+                        ++i_chart;
+
+                        data.images[name] = '';
 
                         charts.push(this);
 
                         break;
                     case 'infoportlet':
-                        var name = LANG.MAIN.PORTAL.INFO.TITLE+(++i_info);
+                        ++i_info;
+
                         data.analysis[name] = [];
 
                         var fields = this.query('form > textfield');
@@ -92,12 +97,13 @@ Ext.define(CONFIG.APP_NS+'.controller.Export', {
             if (i_chart) {
                 var images = [];
                 for (var i = 0; i < i_chart; i++) {
+                    var name = charts[i].title;
                     this.convertToPng(charts[i].down('chart'), function (img) {
                         Ext.Ajax.request({
                             url: 'excel/savePng',
                             params: {
                                 imageData: Ext.JSON.encode({
-                                    name:  cont.down('textfield').getValue()+'_chart-'+i,
+                                    name:  'chart-'+Math.floor(Math.random()*10000)+'_'+i,
                                     image: img
                                 })
                             },
@@ -108,7 +114,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Export', {
                                     if (images.length == i_chart) {
                                         var j = 0;
                                         for (var k = 0; k < images.length; k++) {
-                                            data.images[LANG.MAIN.PORTAL.CHART.TITLE+(++j)] = images[k];
+                                            data.images[name] = images[k];
                                         }
 
                                         me.finalRequest(data, function (url) {
