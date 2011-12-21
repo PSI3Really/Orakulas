@@ -144,7 +144,8 @@
         "PASSWORD_MISMATCH":"Passwords do not match",
         "PASSWORD_INCORRECT":"Old password incorrect",
         "CANNOT_CONNECT":"Could not establish connection to the database",
-        "INVALID_RANGE": "Range must be separated by at least one month"
+        "INVALID_RANGE": "Range must be separated by at least one month",
+        "USER_EXISTS": "User name already in use"
     },
 
     "BUTTON":{
