@@ -123,6 +123,7 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.EditEntitiesWnd', {
         this.infoSysGrid = Ext.create('Ext.grid.Panel', {
             title: LANG.PREDICT.BUTTON.INFO_SYS_AND_DEPARTMENTS,
             store: this.infoSys,
+            multiSelect: true,
             columns: [ //TODO: can change IS name?
                 {
                     header: LANG.ENTITY.INFO_SYS,
@@ -180,10 +181,10 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.EditEntitiesWnd', {
                         store.insert(0, Ext.create(store.model));
                         rowEditor.startEdit(0, 0);
                     }
-                }/*,{
+                },{
                     iconCls: 'icon-minus-circle',
                     xtype:  'button',
-                    text:   LANG.BUTTON.REMOVE,
+                    text:   LANG.PREDICT.BUTTON.CLEAR_DEPARTMENTS,
                     handler: function(btn, e){
                         var grid = btn.up('gridpanel');
                         var store = grid.getStore();
@@ -191,15 +192,19 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.EditEntitiesWnd', {
 
                         var rowEditor = grid.plugins[0];
                         rowEditor.cancelEdit();
-                        store.remove(selected);
+
+                        for (var idx in selected){
+                            selected[idx].set('departments', []);
+                        }
                     }
-                }*/]
+                }]
             }]
         })
 
         this.supportGrid = Ext.create('Ext.grid.Panel', {
             title: LANG.PREDICT.BUTTON.SUPPORT_AND_DEPARTMENTS,
             store: this.support,
+            multiSelect: true,
             columns: [ //TODO: can change IS name?
                 {
                     header: LANG.ENTITY.SUPPORT_TYPE,
@@ -270,10 +275,10 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.EditEntitiesWnd', {
                         store.insert(0, Ext.create(store.model));
                         rowEditor.startEdit(0, 0);
                     }
-                }/*,{
+                },{
                     iconCls: 'icon-minus-circle',
                     xtype:  'button',
-                    text:   LANG.BUTTON.REMOVE,
+                    text:   LANG.PREDICT.BUTTON.CLEAR_HOURS,
                     handler: function(btn, e){
                         var grid = btn.up('gridpanel');
                         var store = grid.getStore();
@@ -281,9 +286,12 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.EditEntitiesWnd', {
 
                         var rowEditor = grid.plugins[0];
                         rowEditor.cancelEdit();
-                        store.remove(selected);
+
+                        for (var idx in selected){
+                            selected[idx].set('hoursCount', 0);
+                        }
                     }
-                }*/]
+                }]
             }]
         })
 

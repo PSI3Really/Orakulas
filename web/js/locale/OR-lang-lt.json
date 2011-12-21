@@ -120,7 +120,9 @@
             "SUPPORT_AND_DEPARTMENTS": "Priemonės/Padaliniai",
             "EDIT_ENTITIES": "Išsamiau&hellip;",
             "OPTIONS":"Parinktys",
-            "RESTORE":"Atstatyti numatytuosius nustatymus"
+            "RESTORE":"Atstatyti numatytuosius nustatymus",
+            "CLEAR_DEPARTMENTS": "Išvalyti įrašų padalinius",
+            "CLEAR_HOURS": "Išvalyti įrašų valandas"
         }
     },
 

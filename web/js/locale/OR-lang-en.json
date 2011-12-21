@@ -121,7 +121,9 @@
             "SUPPORT_AND_DEPARTMENTS": "Support types/Departments",
             "EDIT_ENTITIES": "Advanced&hellip;",
             "OPTIONS":"Options",
-            "RESTORE":"Restore default settings"
+            "RESTORE":"Restore default settings",
+            "CLEAR_DEPARTMENTS": "Clear entry departments",
+            "CLEAR_HOURS": "Clear entry hours"
         }
     },
 

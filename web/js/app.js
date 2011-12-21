@@ -17,7 +17,8 @@ Ext.application({
         'Admin.User',
         'Admin.Department',
         'Admin.InformationalSystem',
-        'Admin.DepartmentInfoSysUsage'
+        'Admin.DepartmentInfoSysUsage',
+        'Admin.SupportType'
     ],
     stores: [ //TODO: remove, only load when needed
         'Admin.Users',

@@ -76,7 +76,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Tab', {
             params: 'data={"supportQuantities":{},"supportAdministrationTimes":{},"departmentInfoSysUsages":{}}',
             success: function(response){
                 var data = Ext.JSON.decode(response.responseText);
-
+                
                 me.loadPrediction(tabpanel, data);
                 
                 tabpanel.setLoading(false);
@@ -88,15 +88,15 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.Tab', {
     },
 
     loadPrediction: function(tabpanel, data){
-        tabpanel.reports.infoSysHours.sort('startDate', 'ASC');
-        tabpanel.reports.infoSysRequests.sort('startDate', 'ASC');
-        tabpanel.reports.departmentHours.sort('startDate', 'ASC');
-        tabpanel.reports.departmentRequests.sort('startDate', 'ASC');
-
         tabpanel.reports.infoSysHours.loadRawData(data.infoSysHours);
         tabpanel.reports.infoSysRequests.loadRawData(data.infoSysRequests);
         tabpanel.reports.departmentHours.loadRawData(data.departmentHours);
         tabpanel.reports.departmentRequests.loadRawData(data.departmentRequests);
+
+        tabpanel.reports.infoSysHours.sort('startDate', 'ASC');
+        tabpanel.reports.infoSysRequests.sort('startDate', 'ASC');
+        tabpanel.reports.departmentHours.sort('startDate', 'ASC');
+        tabpanel.reports.departmentRequests.sort('startDate', 'ASC');
     },
 
     predict: function(btn){

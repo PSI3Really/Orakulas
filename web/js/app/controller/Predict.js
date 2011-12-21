@@ -117,7 +117,15 @@ Ext.define(CONFIG.APP_NS+'.controller.Predict', {
             params: jsonData,
             success: function(response){
                 var tabpanel = wnd.parentTab;
-                tabpanel.fireEvent('loadPrediction', tabpanel, Ext.JSON.decode(response.responseText));
+
+                var resp = Ext.JSON.decode(response.responseText);
+
+                if (!resp.infoSysRequests) resp.infoSysRequests = [];
+                if (!resp.infoSysHours) resp.infoSysHours = [];
+
+                //debugger;
+
+                tabpanel.fireEvent('loadPrediction', tabpanel, resp);
                 //wnd.setLoading(false);
                 wnd.hide();
             },
