@@ -232,6 +232,21 @@ class UserFacade extends EntityFacade {
      * @param \Orakulas\ModelBundle\Entity\User $destination
      */
     public function merge($destination, $source) {
+        if (isset($source['password']) && $source['password'] != '') {
+            if (!isset($source['oldPassword'])) {
+                throw new UserFacadeException("trying to set new password while the old one isn't given");
+            }
+
+            $encoder = $this->encoderFactory->getEncoder($destination);
+
+            if ($encoder->encodePassword($source['oldPassword'], $destination->getSalt()) != $destination->getPassword()) {
+                throw new UserFacadeException("old password does not match the one currently set");
+            }
+
+            $destination->setPassword($source['password']);
+            $destination->setSalt('');
+        }
+
         if (isset($source['admin']))
             $destination->setAdmin($source['admin']);
         if (isset($source['email']))
@@ -240,10 +255,6 @@ class UserFacade extends EntityFacade {
             $destination->setFirstName($source['firstName']);
         if (isset($source['lastName']))
             $destination->setLastName($source['lastName']);
-        if (isset($source['password']) && $source['password'] != '') {
-            $destination->setPassword($source['password']);
-            $destination->setSalt('');
-        }
         /*if (isset($source['salt'])) {
             $destination->setSalt($source['salt']);
             $destination->setPassword('');
