@@ -85,6 +85,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.SupportQuantities.Grid', {
 
                                 event.record.set('supportType', supportId);
                             }
+                            Ext.getCmp('supportQuantitiesSync').setDisabled(false);
                         }
                     }
                 }

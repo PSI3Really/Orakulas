@@ -33,6 +33,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.SupportQuantities', {
         rowEditor.cancelEdit();
         store.insert(0, Ext.create(store.model));
         rowEditor.startEdit(0, 0);
+        //Ext.getCmp('supportQuantitiesSync').setDisabled(false);
     },
 
     remove: function(btn){
@@ -43,16 +44,19 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.SupportQuantities', {
         var rowEditor = grid.plugins[0];
         rowEditor.cancelEdit();
         store.remove(selected);
+        Ext.getCmp('supportQuantitiesSync').setDisabled(false);
     },
 
     sync: function(btn){
         var grid = btn.up('adminsupportquantities').down('adminsupportquantitiesgrid');
         var store = grid.getStore();
         store.sync();
+        Ext.getCmp('supportQuantitiesSync').setDisabled(true);
     },
 
     reload: function(btn){
         var grid = btn.up('adminsupportquantities').down('adminsupportquantitiesgrid');
         grid.getStore().load();
+        Ext.getCmp('supportQuantitiesSync').setDisabled(true);
     }
 });

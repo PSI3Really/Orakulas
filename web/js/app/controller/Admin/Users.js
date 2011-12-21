@@ -62,6 +62,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Users', {
     reload: function(btn){
         var grid = btn.up('adminusersgrid');
         grid.getStore().load();
+        Ext.getCmp('usersSync').setDisabled(false);
     },
 
     remove: function(btn){

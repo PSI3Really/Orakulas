@@ -33,6 +33,8 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.SupportQuantities.SupportQuantities', {
                         {
                             iconCls: 'icon-disk-black',
                             xtype: 'button',
+                            id: 'supportQuantitiesSync',
+                            disabled: true,
                             action: 'sync',
                             text: LANG.BUTTON.SYNC
                         },
