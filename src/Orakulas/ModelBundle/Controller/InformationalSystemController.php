@@ -20,7 +20,7 @@ class InformationalSystemController extends DefaultController {
         return $entityFacade;
     }
 
-    public function updateAction() {
+    /*public function updateAction() {
         $json = $_POST["jsonValue"];
 
         $entityArray = array();
@@ -33,11 +33,6 @@ class InformationalSystemController extends DefaultController {
         $returnArray = array();
 
         foreach ($entityArray as $e) {
-            $departments = explode(" ", trim($e['departments']));
-            if (count($departments) <= 0 || $departments[0] == '') {
-                $departments = array();
-            }
-
             $informationalSystem = $this->getEntityFacade()->load($e['id']);
 
             $this->getEntityFacade()->merge($informationalSystem, $e);
@@ -53,9 +48,9 @@ class InformationalSystemController extends DefaultController {
         }
 
         return $this->constructResponse(json_encode($responseObject));
-    }
+    }*/
 
-    public function createAction() {
+    /*public function createAction() {
         $json = $_POST["jsonValue"];
 
         $entityArray = array();
@@ -88,7 +83,7 @@ class InformationalSystemController extends DefaultController {
         }
 
         return $this->constructResponse(json_encode($responseObject));
-    }
+    }*/
 
     public function usedByAction() {
         $jsonValue = $_POST["jsonValue"];
