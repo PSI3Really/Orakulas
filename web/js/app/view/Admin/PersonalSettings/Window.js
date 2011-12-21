@@ -29,7 +29,9 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.PersonalSettings.Window', {
                                 iconCls: 'icon-tick',
                                 xtype:  'button',
                                 action: 'confirm',
-                                text:   LANG.BUTTON.OK
+                                text:   LANG.BUTTON.OK,
+                                formBind: true,
+                                disabled: true
                             },
                             {
                                 iconCls: 'icon-cross',

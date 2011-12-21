@@ -24,30 +24,32 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.PersonalSettings', {
         var repeatpassword = panel.down('textfield[name=newpasswordagain]');
 
 
-        if((oldpassword.value.length == 0) || (newpassword.value.length == 0) || (repeatpassword.value.length == 0)) {
-            Ext.Msg.alert(LANG.ERROR.TITLE, LANG.ERROR.EMPTY_FIELDS);
-            repeatpassword.setValue('');
+        if(newpassword.value == repeatpassword.value) {
+            var params = {
+                id: CURRENT_USER.get('id'),
+                oldPassword: oldpassword.value,
+                password: newpassword.value
+            };
+
+            Ext.Ajax.request({
+                url : 'model/users/update',
+                method: 'POST',
+                params: {
+                    jsonValue: Ext.encode(params)
+                },
+                success: function() {
+                    btn.up('adminpersonalsettingswindow').close();
+                },
+                failure: function() {
+                    Ext.Msg.alert(LANG.ERROR.TITLE, "~~Neteisingai ivestas senas slaptazodis");
+                    oldpassword.setValue('');
+                }
+            });
         }
         else {
-            if(newpassword.value == repeatpassword.value) {
-                var params = {
-                    id: CURRENT_USER.get('id'),
-                    password: newpassword.value
-                };
-                
-                Ext.Ajax.request({
-                    url : 'model/users/update',
-                    method: 'POST',
-                    params: {
-                        jsonValue: Ext.encode(params)
-                    }
-                });
-
-                btn.up('adminpersonalsettingswindow').close();
-            }
-            else {
-                Ext.Msg.alert(LANG.ERROR.TITLE, LANG.ERROR.PASSWORD_MISMATCH);
-            }
+            Ext.Msg.alert(LANG.ERROR.TITLE, LANG.ERROR.PASSWORD_MISMATCH);
+            newpassword.setValue('');
+            repeatpassword.setValue('');
         }
 
     },
