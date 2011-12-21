@@ -139,6 +139,7 @@
         "TITLE":"Klaida",
         "EMPTY_FIELDS":"Visus laukelius užpildyti būtina",
         "PASSWORD_MISMATCH":"Naujas ir pakartotas slaptažodžiai nesutampa",
+        "PASSWORD_INCORRECT":"Neteisingai įvestas senas slaptažodis",
         "CANNOT_CONNECT":"Nepavyko susisiekti su sistemos duomenų baze",
         "INVALID_RANGE": "Rėžius turi skirti bent vienas mėnuo"
     },

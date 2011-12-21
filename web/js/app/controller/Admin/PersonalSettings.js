@@ -41,7 +41,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.PersonalSettings', {
                     btn.up('adminpersonalsettingswindow').close();
                 },
                 failure: function() {
-                    Ext.Msg.alert(LANG.ERROR.TITLE, "~~Neteisingai ivestas senas slaptazodis");
+                    Ext.Msg.alert(LANG.ERROR.TITLE, LANG.ERROR.PASSWORD_INCORRECT);
                     oldpassword.setValue('');
                 }
             });
