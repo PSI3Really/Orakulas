@@ -32,7 +32,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
                 click: this.saveImage
             },
             'chartportlet datefield':{
-                change: this.onDateFieldChange
+                blur: this.onDateFieldChange
             },
             'chartportlet portletbar button':{
                 click: function (btn) {
