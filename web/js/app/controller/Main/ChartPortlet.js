@@ -280,21 +280,24 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
     saveImage: function(tool, e, eOpts) {
         var chart = tool.up('chartportlet').down('chart');
 
-        var popup = Ext.create('widget.window', {
+        Ext.create('widget.window', {
             id: 'canvas-window',
             title: LANG.MAIN.PORTAL.SAVE_PICTURE_AS,
             resizable: false,
             layout: 'fit',
             modal: true,
-            width: chart.getWidth() + 12,
-            height: chart.getHeight() + 34,
             html: '<canvas width="'+chart.getWidth()+'" height="'+chart.getHeight()+'"></canvas>',
             listeners: {
+                beforerender: function (window, eOpts) {
+                    window.setWidth(chart.getWidth() + 12);
+                    window.setHeight(chart.getHeight() + 34);
+                },
                 afterrender: function (window, eOpts) {
                     var canvas = $('#'+window.getId()).find('canvas')[0];
                     canvg(canvas, $('#'+chart.getId()).html().trim());
                     var img = canvas.toDataURL('image/png');
                     $('canvas').replaceWith('<img src="'+img+'">');
+                    console.log(window.getWidth());
 
                     window.center();
                 }
