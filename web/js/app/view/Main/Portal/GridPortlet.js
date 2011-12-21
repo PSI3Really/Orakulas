@@ -40,8 +40,18 @@ Ext.define(CONFIG.APP_NS+'.view.Main.Portal.GridPortlet', {
                     Ext.Msg.prompt(LANG.MAIN.PORTAL.RENAME.TITLE, LANG.MAIN.PORTAL.RENAME.MSG, function(btn, text){
                         if (btn == 'ok'){
                             if (text.length > 0) {
-                                owner.setTitle(text);
-                                owner.up('gridportlet').title = text;
+                                var portlets = owner.up('portal').query('portlet'),
+                                    similar  = '';
+                                Ext.each(portlets, function () {
+                                    if (this.title.substring(0, text.length) == text) {
+                                        if (similar == '') {
+                                            similar = 0;
+                                        }
+                                        similar++;
+                                    }
+                                });
+                                owner.setTitle(text+similar);
+                                owner.up('gridportlet').title = text+similar;
                             }
                         }
                     });
