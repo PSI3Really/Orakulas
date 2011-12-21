@@ -294,10 +294,12 @@ Ext.define(CONFIG.APP_NS+'.controller.Main.ChartPortlet', {
                 },
                 afterrender: function (window, eOpts) {
                     var canvas = $('#'+window.getId()).find('canvas')[0];
-                    canvg(canvas, $('#'+chart.getId()).html().trim());
+                    var $clone = $('#'+chart.getId()).clone();
+                    $clone.find('.x-hide-visibility').remove();
+                    canvg(canvas, $clone.html().trim());
+                    $clone.remove();
                     var img = canvas.toDataURL('image/png');
                     $('canvas').replaceWith('<img src="'+img+'">');
-                    console.log(window.getWidth());
 
                     window.center();
                 }

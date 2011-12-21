@@ -139,7 +139,10 @@ Ext.define(CONFIG.APP_NS+'.controller.Export', {
     convertToPng: function(chart, callback) {
         $('body').append('<canvas width="'+chart.getWidth()+'" height="'+chart.getHeight()+'" style="display: none"></canvas>');
         var canvas = $('body > canvas:last')[0];
-        canvg(canvas, $('#'+chart.getId()).html().trim());
+        var $clone = $('#'+chart.getId()).clone();
+        $clone.find('.x-hide-visibility').remove();
+        canvg(canvas, $clone.html().trim());
+        $clone.remove();
         var img = canvas.toDataURL('image/png').replace('data:image/png;base64,', '');
         $(canvas).remove();
 
