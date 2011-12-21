@@ -13,6 +13,8 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.Window', {
     height: 400,
     width: 500,
 
+    closeAction: 'hide',
+
     parentTab: null,
 
     infoSysDepartmentsStore: null,

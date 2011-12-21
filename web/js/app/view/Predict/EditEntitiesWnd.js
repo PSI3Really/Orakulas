@@ -6,6 +6,8 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.EditEntitiesWnd', {
     floatable: true,
     modal: true,
 
+    closeAction: 'hide',
+
     height: 300,
     width: 400,
 
