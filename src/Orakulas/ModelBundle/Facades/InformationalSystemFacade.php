@@ -188,6 +188,14 @@ class InformationalSystemFacade extends EntityFacade {
 
         $entity->setCode(strtoupper($entity->getCode()));
 
+        foreach ($this->getDepartmentFacade()->loadAll() as $department) {
+            if ($department->getInformationalSystems()->contains($entity) && !$entity->getDepartments()->contains($department)) {
+                $department->getInformationalSystems()->removeElement($entity);
+            } else if (!$department->getInformationalSystems()->contains($entity) && $entity->getDepartments()->contains($department)) {
+                $department->addInformationalSystem($entity);
+            }
+        }
+
         parent::save($entity);
     }
 
@@ -196,6 +204,24 @@ class InformationalSystemFacade extends EntityFacade {
      * @return array
      */
     public function toArray($entity) {
+        $departments = array();
+
+        foreach ($entity->getDepartments() as $department) {
+            $departments[] = $this->getDepartmentFacade()->toSimpleArray($department);
+        }
+
+        $array = array(
+            'id'   => $entity->getId(),
+            'code' => $entity->getCode(),
+            'name' => $entity->getName(),
+            'departments' => $departments
+        );
+
+        return $array;
+    }
+
+    public function toSimpleArray($entity) {
+
         $array = array(
             'id'   => $entity->getId(),
             'code' => $entity->getCode(),
@@ -218,6 +244,41 @@ class InformationalSystemFacade extends EntityFacade {
             $informationalSystem->setCode($array['code']);
         if (isset($array['name']))
             $informationalSystem->setName($array['name']);
+        if (isset($array['departments'])) {
+            $newIds = array();
+
+            foreach ($array['departments'] as $department) {
+                if (is_array($department))
+                    $newIds[] = $department['id'];
+                else
+                    $newIds[] = $department;
+            }
+
+            foreach ($informationalSystem->getDepartments() as $department) {
+                if (in_array($department->getId(), $newIds))
+                    for ($i = 0; $i < count($newIds); $i++) {
+                        if ($newIds[$i] == $department->getId()) {
+                            unset($newIds[$i]);
+                            $newIds = array_values($newIds);
+                            break;
+                        }
+                    }
+                else {
+                    $informationalSystem->getDepartments()->removeElement($department);
+                    $department->getInformationalSystems()->removeElement($informationalSystem);
+                }
+            }
+
+            foreach ($newIds as $id) {
+                $department = $this->getDepartmentFacade()->load($id);
+
+                if ($department != null) {
+                    $department->addInformationalSystem($informationalSystem);
+
+                    $informationalSystem->addDepartment($department);
+                }
+            }
+        }
 
         return $informationalSystem;
     }
@@ -231,5 +292,41 @@ class InformationalSystemFacade extends EntityFacade {
             $destination->setCode($source['code']);
         if (isset($source['name']))
             $destination->setName($source['name']);
+
+        if (isset($source['departments'])) {
+            $newIds = array();
+
+            foreach ($source['departments'] as $department) {
+                if (is_array($department))
+                    $newIds[] = $department['id'];
+                else
+                    $newIds[] = $department;
+            }
+
+            foreach ($destination->getDepartments() as $department) {
+                if (in_array($department->getId(), $newIds))
+                    for ($i = 0; $i < count($newIds); $i++) {
+                        if ($newIds[$i] == $department->getId()) {
+                            unset($newIds[$i]);
+                            $newIds = array_values($newIds);
+                            break;
+                        }
+                    }
+                else {
+                    $destination->getDepartments()->removeElement($department);
+                    $department->getInformationalSystems()->removeElement($destination);
+                }
+            }
+
+            foreach ($newIds as $id) {
+                $department = $this->getDepartmentFacade()->load($id);
+
+                if ($department != null) {
+                    $department->addInformationalSystem($destination);
+
+                    $destination->addDepartment($department);
+                }
+            }
+        }
     }
 }

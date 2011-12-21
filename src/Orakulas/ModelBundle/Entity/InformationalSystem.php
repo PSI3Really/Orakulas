@@ -24,6 +24,12 @@ class InformationalSystem
      */
     private $name;
 
+    private $departments;
+
+    public function __construct() {
+        $this->departments = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     public function setId($id) {
         $this->id = $id;
     }
@@ -31,7 +37,7 @@ class InformationalSystem
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -51,7 +57,7 @@ class InformationalSystem
     /**
      * Get code
      *
-     * @return string 
+     * @return string
      */
     public function getCode()
     {
@@ -71,10 +77,18 @@ class InformationalSystem
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
         return $this->name;
+    }
+
+    public function getDepartments() {
+        return $this->departments;
+    }
+
+    public function addDepartment(Department $department) {
+        $this->departments->add($department);
     }
 }

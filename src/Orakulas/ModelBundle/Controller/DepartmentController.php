@@ -20,7 +20,7 @@ class DepartmentController extends DefaultController {
         return $entityFacade;
     }
 
-    public function updateAction() {
+    /*public function updateAction() {
         $json = $_POST["jsonValue"];
 
         $entityArray = array();
@@ -107,7 +107,7 @@ class DepartmentController extends DefaultController {
         }
 
         return $this->constructResponse(json_encode($responseObject));
-    }
+    }*/
 
     public function usedInfoSysAction() {
         $jsonValue = $_POST["jsonValue"];

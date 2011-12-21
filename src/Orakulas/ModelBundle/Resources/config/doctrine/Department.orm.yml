@@ -19,4 +19,16 @@ Orakulas\ModelBundle\Entity\Department:
       length: 255
       fixed: false
       nullable: false
+  manyToMany:
+    informationalSystems:
+      targetEntity: InformationalSystem
+      inversedBy: departments
+      joinTable:
+        name: department_info_sys_usage
+        joinColumns:
+          department_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          informational_system_id:
+            referencedColumnName: id
   lifecycleCallbacks: {  }

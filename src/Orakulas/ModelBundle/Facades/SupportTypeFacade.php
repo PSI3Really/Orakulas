@@ -28,6 +28,33 @@ class SupportTypeFacade extends EntityFacade {
      */
     private $supportAdministrationTimeFacade;
 
+    public function getDepartments($id) {
+        $entityManager = $this->getDoctrine()->getEntityManager();
+        $stmt = $entityManager->getConnection()->prepare("
+            SELECT
+                department.id, department.code, department.name
+            FROM
+                support_type inner join support_administration_time
+                on support_type.id = support_administration_time.support_type_id
+                inner join department
+                on department.id = support_administration_time.department_id
+            WHERE support_type.id = {$id}");
+
+        $stmt->execute();
+
+        $result = $stmt->fetchAll();
+
+        $prettyResult = array();
+        foreach ($result as $department) {
+            $prettyResult[] = array(
+                'id' => $department['id'],
+                'code' => $department['code'],
+                'name' => $department['name']
+            );
+        }
+        return $prettyResult;
+    }
+
     /**
      * @return \Orakulas\ModelBundle\Facades\DepartmentFacade
      */
@@ -258,10 +285,10 @@ class SupportTypeFacade extends EntityFacade {
         $supportCategory = $this->getSupportCategoryFacade()->load($entity->getSupportCategory()->getId());
 
         $array = array(
-
             'id' => $entity->getId(),
             'name' => $entity->getName(),
             'code' => $entity->getCode(),
+            'departments' => $this->getDepartments($entity->getId()),
             'supportCategory' => $this->getSupportCategoryFacade()->toArray($supportCategory)
         );
 

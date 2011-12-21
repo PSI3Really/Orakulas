@@ -19,4 +19,8 @@ Orakulas\ModelBundle\Entity\InformationalSystem:
       length: 255
       fixed: false
       nullable: false
+  manyToMany:
+    departments:
+      targetEntity: Department
+      mappedBy: informationalSystems
   lifecycleCallbacks: {  }
