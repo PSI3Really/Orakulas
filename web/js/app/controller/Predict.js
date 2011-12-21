@@ -128,6 +128,16 @@ Ext.define(CONFIG.APP_NS+'.controller.Predict', {
                 tabpanel.fireEvent('loadPrediction', tabpanel, resp);
                 //wnd.setLoading(false);
                 wnd.hide();
+
+                var tooltip = Ext.create('Ext.tip.ToolTip', {
+                    html: LANG.PREDICT.TOOLTIP,
+                    dismissDelay: 2000,
+                    height: 50,
+                    width: 200
+                });
+                
+                var position = [tabpanel.getWidth()/2 - tooltip.width/2, tabpanel.getHeight()/2 - tooltip.height/2];
+                tooltip.showAt(position);
             },
             failure: function(response){
                 Ext.Msg.alert(LANG.ERROR.TITLE, LANG.ERROR.CANNOT_CONNECT + ': ' + response.responseText);

@@ -123,7 +123,9 @@
             "RESTORE":"Atstatyti numatytuosius nustatymus",
             "CLEAR_DEPARTMENTS": "Išvalyti įrašų padalinius",
             "CLEAR_HOURS": "Išvalyti įrašų valandas"
-        }
+        },
+
+        "TOOLTIP":"Prognozė paruošta. Sukurkite naują vaizdą, kad pamatytumėte rezultatą"
     },
 
     "LOGIN":{

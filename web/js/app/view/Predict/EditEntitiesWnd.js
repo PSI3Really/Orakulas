@@ -124,6 +124,15 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.EditEntitiesWnd', {
             title: LANG.PREDICT.BUTTON.INFO_SYS_AND_DEPARTMENTS,
             store: this.infoSys,
             multiSelect: true,
+            listeners: {
+                selectionchange: function(selModel, selected){
+                    if (selected){
+                        me.infoSysGrid.down('[action=clear]').setDisabled(false);
+                    } else {
+                        me.infoSysGrid.down('[action=clear]').setDisabled(true);
+                    }
+                }
+            },
             columns: [ //TODO: can change IS name?
                 {
                     header: LANG.ENTITY.INFO_SYS,
@@ -184,6 +193,8 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.EditEntitiesWnd', {
                 },{
                     iconCls: 'icon-minus-circle',
                     xtype:  'button',
+                    action: 'clear',
+                    disabled: true,
                     text:   LANG.PREDICT.BUTTON.CLEAR_DEPARTMENTS,
                     handler: function(btn, e){
                         var grid = btn.up('gridpanel');
@@ -199,12 +210,22 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.EditEntitiesWnd', {
                     }
                 }]
             }]
-        })
+        });
 
         this.supportGrid = Ext.create('Ext.grid.Panel', {
             title: LANG.PREDICT.BUTTON.SUPPORT_AND_DEPARTMENTS,
             store: this.support,
             multiSelect: true,
+            listeners: {
+                selectionchange: function(selModel, selected){
+                    //debugger;
+                    if (selected){
+                        me.supportGrid.down('[action=clear]').setDisabled(false);
+                    } else {
+                        me.supportGrid.down('[action=clear]').setDisabled(true);
+                    }
+                }
+            },
             columns: [ //TODO: can change IS name?
                 {
                     header: LANG.ENTITY.SUPPORT_TYPE,
@@ -278,6 +299,8 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.EditEntitiesWnd', {
                 },{
                     iconCls: 'icon-minus-circle',
                     xtype:  'button',
+                    action: 'clear',
+                    disabled: true,
                     text:   LANG.PREDICT.BUTTON.CLEAR_HOURS,
                     handler: function(btn, e){
                         var grid = btn.up('gridpanel');
@@ -325,6 +348,9 @@ Ext.define(CONFIG.APP_NS+'.view.Predict.EditEntitiesWnd', {
                     for (var i in fields){
                         fields[i].reset();
                     }
+
+                    me.supportGrid.down('[action=clear]').setDisabled(true);
+                    me.infoSysGrid.down('[action=clear]').setDisabled(true);
                 }
             },'->',{
                 xtype: 'button',

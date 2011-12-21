@@ -35,6 +35,8 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Users.Users', {
                             '->',
                             {
                                 iconCls: 'icon-disk-black',
+                                id: 'usersSync',
+                                disabled: true,
                                 xtype: 'button',
                                 action: 'sync',
                                 text: LANG.BUTTON.SYNC

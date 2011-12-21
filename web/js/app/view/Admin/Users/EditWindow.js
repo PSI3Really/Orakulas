@@ -51,7 +51,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Users.EditWindow', {
                     fieldLabel: LANG.ENTITY.PASSWORD,
                     name: 'password',
                     inputType:'password',
-                    allowBlank: false
+                    allowBlank: true
                 },{
                     fieldLabel: LANG.ENTITY.FIRST_NAME,
                     name: 'firstName',

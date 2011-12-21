@@ -7,10 +7,9 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.SupportTypes.SupportTypesAddGrid', {
         this.store = Ext.create('widget.adminDepartmentsStore', {});
         this.columns = [
             {header: LANG.ENTITY.DEPARTMENT,     dataIndex: 'code',  flex: 1},
-            {header: LANG.ENTITY.HOURS_SPENT,     dataIndex: 'code',  flex: 1}
+            {header: LANG.ENTITY.HOURS_SPENT,     dataIndex: 'hours',  flex: 1}
         ];
-
-        this.multiSelect = true;
+        
         this.store.load();
         this.callParent(arguments);
     }

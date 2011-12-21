@@ -11,6 +11,9 @@ Ext.define(CONFIG.APP_NS+'.model.Admin.SupportType', {
         {name: 'id',            type: 'int', persist:false},
         {name: 'code',          type: 'string'},
         {name: 'name',          type: 'string'},
-        {name: 'supportCategory', model: CONFIG.APP_NS+'.model.Admin.SupportCategory'}
-    ]
+        {name: 'supportCategory', model: CONFIG.APP_NS+'.model.Admin.SupportCategory'},
+        {name: 'departments'}
+    ],
+
+    hasMany: {model: CONFIG.APP_NS+'.model.Admin.SupportAdministrationTime', name: 'supportTimes'}
 });

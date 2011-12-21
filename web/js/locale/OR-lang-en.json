@@ -124,7 +124,9 @@
             "RESTORE":"Restore default settings",
             "CLEAR_DEPARTMENTS": "Clear entry departments",
             "CLEAR_HOURS": "Clear entry hours"
-        }
+        },
+
+        "TOOLTIP":"Prediction ready. Create a new view to see the results"
     },
 
     "LOGIN":{

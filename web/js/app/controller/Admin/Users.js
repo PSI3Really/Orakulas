@@ -84,12 +84,15 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Users', {
                 }
             });
         }
+
+        Ext.getCmp('usersSync').setDisabled(false);
     },
 
     sync: function(btn){
         var grid = btn.up('adminusersgrid');
         var store = grid.getStore();
         store.sync();
+        btn.setDisabled(true);
     },
 
     onSaveEdit: function(btn){
@@ -111,6 +114,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Users', {
         };
 
         wnd.close();
+        Ext.getCmp('usersSync').setDisabled(false);
         //wnd.store.sync();
     },
 
