@@ -83,7 +83,8 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Departments.DepartmentsAddPanel', {
                         flex:   0,
                         style: {
                             width: '40px !Important'
-                        }
+                        },
+                        value: this.record.get("code")
                     },
                     {
                         xtype:  'label',
@@ -98,7 +99,8 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Departments.DepartmentsAddPanel', {
                     {
                         xtype:  'textfield',
                         name:   'name',
-                        flex:   1
+                        flex:   1,
+                        value: this.record.get("name")
                     }
                 ]
             }

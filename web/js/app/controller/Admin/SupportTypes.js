@@ -27,6 +27,9 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.SupportTypes', {
             },
             'adminsupporttypesgrid button[action=undo]':{
                 click: this.reload
+            },
+            'adminsupporttypesgrid': {
+                itemdblclick: this.edit
             }
         });
     },
@@ -57,8 +60,17 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.SupportTypes', {
         */
     },
 
-    remove: function(btn){
+    edit: function(view, record, item, index){
+        var wnd = Ext.create('widget.adminsupporttypesaddWindow', {
+            editing: true,
+            record: record,
+            store: record.store
+        });
 
+        wnd.show();
+    },
+
+    remove: function(btn){
         //alert('Pressed Delete');
     }
 });

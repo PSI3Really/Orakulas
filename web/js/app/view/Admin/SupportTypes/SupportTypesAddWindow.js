@@ -6,6 +6,11 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.SupportTypes.SupportTypesAddWindow', {
         CONFIG.APP_NS+'.view.Admin.SupportTypes.SupportTypesAddPanel'
     ],
 
+    store: null,
+    saved: false,
+    editing: false,
+    record: Ext.create('widget.adminSupportTypeModel'),
+
     initComponent: function() {
         this.layout     = 'fit';
         this.floatable  = true;
@@ -17,7 +22,8 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.SupportTypes.SupportTypesAddWindow', {
         this.items = [
             {
                 xtype:  'adminsupporttypesaddpanel',
-                layout: 'fit'
+                layout: 'fit',
+                record: this.record
             }
         ];
 

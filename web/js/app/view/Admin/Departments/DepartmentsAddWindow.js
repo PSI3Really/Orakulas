@@ -6,6 +6,11 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Departments.DepartmentsAddWindow', {
         CONFIG.APP_NS+'.view.Admin.Departments.DepartmentsAddPanel'
     ],
 
+    store: null,
+    saved: false,
+    editing: false,
+    record: Ext.create('widget.adminDepartmentModel'),
+
     initComponent: function() {
         this.layout     = 'fit';
         this.floatable  = true;
@@ -17,7 +22,9 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Departments.DepartmentsAddWindow', {
         this.items = [
             {
                 xtype:  'admindepartmentsaddpanel',
-                layout: 'fit'
+                layout: 'fit',
+                record: this.record
+
             }
         ];
         this.callParent(arguments);

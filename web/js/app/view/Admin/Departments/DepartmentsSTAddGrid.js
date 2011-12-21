@@ -6,7 +6,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Departments.DepartmentsSTAddGrid', {
         this.border = false;
         this.store = Ext.create('widget.adminSupportAdministrationTimesStore', {});
         this.columns = [
-            {header: LANG.ENTITY.SUPPORT_COUNT_PLURAL,     dataIndex: 'id',  flex: 1},
+            {header: LANG.ENTITY.SUPPORT_COUNT_PLURAL,     dataIndex: 'supportTypeName',  flex: 1},
             {header: LANG.ENTITY.HOURS_SPENT,      dataIndex: 'hoursCount',  flex: 1}
         ];
 

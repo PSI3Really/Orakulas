@@ -75,7 +75,8 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.SupportTypes.SupportTypesAddPanel', {
 
                         style: {
                             width: '40px !Important'
-                        }
+                        },
+                        value: this.record.get("code")
                     },
                     {
                         xtype:  'label',
@@ -91,7 +92,8 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.SupportTypes.SupportTypesAddPanel', {
                     {
                         xtype:  'textfield',
                         name:   'name',
-                        flex:   1
+                        flex:   1,
+                        value: this.record.get("name")
                     }
                 ]
             },
@@ -134,13 +136,16 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.SupportTypes.SupportTypesAddPanel', {
                         store: supportTypesStore,
                         mode:'local',
                         displayField: "name",
-                        valueField: "name",
+                        valueField: "id",
                         forceSelection: true,
                         emptyText:  LANG.ADMIN.SUPPORT_TYPES.CHOOSE_DIRECTION
+                        //this.record.get('supportCategory').id
                     }
                 ]
             }
         ];
+
+        //debugger;
 
         this.callParent(arguments);
     }

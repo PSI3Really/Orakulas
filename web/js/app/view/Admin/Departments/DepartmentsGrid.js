@@ -8,27 +8,13 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Departments.DepartmentsGrid', {
             {
                 header: LANG.ENTITY.CODE,
                 dataIndex: 'code',
-                flex: 0,
-
-                editor: {
-                    xtype: 'textfield'
-                }
+                flex: 0
             },
             {
                 header: LANG.ENTITY.DEPARTMENT,
                 dataIndex: 'name',
-                flex: 1,
-
-                editor: {
-                    xtype: 'textfield'
-                }
+                flex: 1
             }
-        ];
-
-        this.plugins = [
-            Ext.create('Ext.grid.plugin.RowEditing', {
-                clicksToEdit: 2
-            })
         ];
 
         this.store.load();

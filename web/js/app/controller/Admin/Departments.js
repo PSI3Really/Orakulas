@@ -27,6 +27,9 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Departments', {
             },
             'admindepartmentsgrid button[action=undo]':{
                 click: this.reload
+            },
+            'admindepartmentsgrid': {
+                itemdblclick: this.edit
             }
         });
     },
@@ -66,5 +69,17 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Departments', {
     reload: function(btn){ //TODO: NEVEIKIA
         var grid = btn.up('admindepartmentsgrid');
         grid.getStore().load();
+    },
+
+    edit: function(view, record, item, index){
+
+        var wnd = Ext.create('widget.admindepartmentsaddwindow', {
+            editing: true,
+            record: record,
+            store: record.store
+        });
+
+        wnd.show();
+        
     }
 });
