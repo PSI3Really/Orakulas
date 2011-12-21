@@ -6,7 +6,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Users.UsersGrid', {
         this.border = false;
         
         this.store = Ext.create('widget.adminUsersStore', {});
-
+        this.id = "adminusersgridid"
         this.columns = [
             {header: LANG.ENTITY.USERNAME,      dataIndex: 'username',  flex: 0},
             {header: LANG.ENTITY.FIRST_NAME,    dataIndex: 'firstName', flex: 0},

@@ -99,10 +99,19 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Users', {
     onSaveEdit: function(btn){
         var wnd = btn.up('adminUsersEditWindow');
         var form = wnd.down('form');
-
+        var store = Ext.getCmp('adminusersgridid').getStore();
+        var newUser = wnd.down("textfield[name=username]");
+        var userIndex= store.find('username', newUser.value);
         if (!form.getForm().isValid())
             return;
 
+        if(!wnd.editing) {
+            if(userIndex >= 0) {
+                Ext.Msg.alert(LANG.ERROR.TITLE, LANG.ERROR.USER_EXISTS);
+                newUser.setValue('');
+                return;
+            }
+        }
         //Save all the form fields into the record
         var values = form.getValues();
         for (var property in values){

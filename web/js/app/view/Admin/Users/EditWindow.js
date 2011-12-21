@@ -39,32 +39,36 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Users.EditWindow', {
                     fieldLabel: LANG.ENTITY.USERNAME, //Show this if we are creating a new user
                     name: 'username',
                     value: this.record.get('username'),
-                    allowBlank: false,
                     hidden: this.editing,
+                    allowBlank: false,
                     readOnly: this.editing //do not let them change their user name
                 },{
                     fieldLabel: LANG.ENTITY.USERNAME, //Show this if we are editing an existing user
                     value: this.record.get('username'),
                     hidden: !this.editing,
-                    disabled: true
+                    disabled: true,
+                    allowBlank: false
                 },{
                     fieldLabel: LANG.ENTITY.PASSWORD,
                     name: 'password',
                     inputType:'password',
-                    allowBlank: true
+                    allowBlank: this.editing
                 },{
                     fieldLabel: LANG.ENTITY.FIRST_NAME,
                     name: 'firstName',
-                    value: this.record.get('firstName')
+                    value: this.record.get('firstName'),
+                    allowBlank: false
                 },{
                     fieldLabel: LANG.ENTITY.LAST_NAME,
                     name: 'lastName',
-                    value: this.record.get('lastName')
+                    value: this.record.get('lastName'),
+                    allowBlank: false
                 },{
                     fieldLabel: LANG.ENTITY.EMAIL,
                     name: 'email',
                     value: this.record.get('email'),
-                    vtype: 'email'
+                    vtype: 'email',
+                    allowBlank: false
                 },{
                     fieldLabel: LANG.ENTITY.ADMIN + "?",
                     name: 'admin',
@@ -77,7 +81,8 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Users.EditWindow', {
                 buttons:[{
                     //formBind: true,
                     text: LANG.BUTTON.SAVE,
-                    action: 'save'
+                    action: 'save',
+                    formBind: true
                 },{
                     text: LANG.BUTTON.CANCEL,
                     action: 'cancel'
