@@ -6,7 +6,7 @@ Ext.define(CONFIG.APP_NS+'.view.Export.Window', {
     floatable: true,
     modal: true,
 
-    height: 250,
+    height: 212,
     width: 500,
 
     panels: null,

@@ -28,7 +28,7 @@ Ext.define(CONFIG.APP_NS+'.view.Export.Controls', {
             xtype: 'checkboxgroup',
             region: 'center',
             border: false,
-            columns: 3,
+            columns: 5,
             allowBlank: false,
             items: panelCheckBoxes
         },{
@@ -40,7 +40,9 @@ Ext.define(CONFIG.APP_NS+'.view.Export.Controls', {
                 xtype: 'textfield',
                 fieldLabel: LANG.BUTTON.SAVE_AS,
                 emptyText: LANG.ENTITY.FILE_NAME,
-                allowBlank: false
+                allowBlank: false,
+                labelWidth: 80,
+                margin: '0 3 0 0'
             },{
                 xtype: 'combobox',
                 action: 'typeChoose',
