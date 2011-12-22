@@ -11,7 +11,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.InformationalSystems', {
 
     views: [
         'Admin.InformationalSystems.IS',
-        'Admin.InformationalSystems.ISAddWindow'
+        'Admin.InformationalSystems.ISGrid'
     ],
 
     init: function(){
@@ -25,18 +25,6 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.InformationalSystems', {
             'adminisgrid button[action=sync]': {
                 click: this.sync
             },
-            'adminisgrid button[action=undo]': {
-                click: this.undo
-            },
-            'adminisaddpanel button[action=confirm]': {
-                click: this.addConfirm
-            },
-            'adminisaddpanel button[action=cancel]': {
-                click: this.addCancel
-            },
-            'adminisgrid':{
-                itemdblclick: this.edit
-            },
             'adminisgrid button[action=undo]':{
                 click: this.reload
             }
@@ -44,18 +32,13 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.InformationalSystems', {
     },
 
     add: function(btn){
-        Ext.create('widget.adminisaddWindow', {}).show();
-        /*
-        var grid = btn.up('adminisgrid');
+        var grid = btn.up('adminispanel').down('adminisgrid');
         var store = grid.getStore();
-        
-        var record = Ext.create(CONFIG.APP_NS+'.model.Admin.InformationalSystem', {
-            'name': 'test'
-        });
 
-        store.add(record);
-        store.sync();
-        */
+        var rowEditor = grid.plugins[0];
+        rowEditor.cancelEdit();
+        store.insert(0, Ext.create(store.model));
+        rowEditor.startEdit(0, 0);
     },
 
     remove: function(btn){
@@ -65,19 +48,10 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.InformationalSystems', {
 
         for (var index in selected){
             var item = selected[index];
-            Ext.Msg.show({
-                title: 'Trinti įrašą?',
-                msg: 'Ar tikrai norite ištrinti informacinę sistemą "' + item.get('name') + '"?',
-                buttons: Ext.Msg.YESNO,
-                icon: Ext.Msg.QUESTION,
-                fn: function(btn) {
-                    if (btn === 'yes'){
-                        store.remove(item);
-                        store.sync();
-                    }
-                }
-            });
+            store.remove(item);
         }
+
+        Ext.getCmp('infoSysSync').setDisabled(false);
     },
 
 
@@ -85,78 +59,13 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.InformationalSystems', {
         var grid = btn.up('adminisgrid');
         var store = grid.getStore();
         store.sync();
+        Ext.getCmp('infoSysSync').setDisabled(true);
     },
 
     reload: function(btn){
         var grid = btn.up('adminisgrid');
         grid.getStore().load();
-    },
-
-    undo: function(btn) {
-    },
-
-    addConfirm: function(btn) {
-        var grid = btn.up('adminisaddWindow').down('adminisaddgrid');
-        var code = btn.up('adminisaddpanel').down('textfield[name=code]');
-        var name = btn.up('adminisaddpanel').down('textfield[name=name]');
-
-        var selected = grid.getSelectionModel().getSelection();
-        var selected_id = "";
-
-        for (var index in selected){
-            var item = selected[index];
-            selected_id += item.get("id")+" ";
-        }
-
-        var params;
-        var url = "";
-        var panel = btn.up('adminisaddpanel');
-        if(panel.editing) {
-            url = "model/informationalSystems/update";
-            params = {
-                id: panel.record.get("id"),
-                code: code.value,
-                name: name.value,
-                departments: selected_id
-            };
-        }
-        else {
-            url = "model/informationalSystems/create"
-            params = {
-                code: code.value,
-                name: name.value,
-                departments: selected_id
-            };
-
-        }
-
-        Ext.Ajax.request({
-            url : url,
-            method: 'POST',
-            params: {
-                jsonValue: Ext.encode(params)
-            },
-            success:
-                function(response, opts) {
-                    var obj = Ext.decode(response.responseText);
-                    var store = Ext.getCmp('adminisgridid').getStore();
-                    store.loadRawData(obj, true);
-                    btn.up('adminisaddWindow').close();
-                }
-        });
-    },
-
-    addCancel: function(btn) {
-        btn.up('adminisaddWindow').close();
-    },
-
-    edit: function(view, record, item, index){
-        var wnd = Ext.create('widget.adminisaddWindow', {
-            editing: true,
-            record: record,
-            store: record.store
-        });
-
-        wnd.show();
+        grid.departments.load();
+        Ext.getCmp('infoSysSync').setDisabled(true);
     }
 });

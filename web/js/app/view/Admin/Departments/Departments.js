@@ -34,6 +34,8 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Departments.Departments', {
                             {
                                 iconCls: 'icon-disk-black',
                                 xtype: 'button',
+                                id: 'departmentsSync',
+                                disabled: true,
                                 action: 'sync',
                                 text: LANG.BUTTON.SYNC
                             },

@@ -35,6 +35,8 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.InformationalSystems.IS', {
                             {
                                 iconCls: 'icon-disk-black',
                                 xtype: 'button',
+                                id: 'infoSysSync',
+                                disabled: true,
                                 action: 'sync',
                                 text: LANG.BUTTON.SYNC
                             },

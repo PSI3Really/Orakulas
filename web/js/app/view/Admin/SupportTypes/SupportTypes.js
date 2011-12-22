@@ -36,6 +36,8 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.SupportTypes.SupportTypes', {
                             {
                                 iconCls: 'icon-disk-black',
                                 xtype: 'button',
+                                id: 'supportTypesSync',
+                                disabled: true,
                                 action: 'sync',
                                 text: LANG.BUTTON.SYNC
                             },
