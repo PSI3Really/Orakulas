@@ -39,7 +39,7 @@ class SupportTypeController extends DefaultController {
         return $this->supporCategoryFacade;
     }
 
-    public function updateAction() {
+    /*public function updateAction() {
         $json = $_POST["jsonValue"];
 
         $entityArray = array();
@@ -115,7 +115,7 @@ class SupportTypeController extends DefaultController {
         }
 
         return $this->constructResponse(json_encode($responseObject));
-    }
+    }*/
 
     public function administeredByAction() {
         $jsonValue = $_POST["jsonValue"];
