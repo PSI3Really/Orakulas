@@ -42,7 +42,8 @@ Ext.application({
         'Admin.InformationalSystems',
         'Admin.SupportTypes',
         'Admin.SupportQuantities',
-        'Admin.PersonalSettings'
+        'Admin.PersonalSettings',
+        'Admin.SupportAdministration'
     ],
 
     require:[

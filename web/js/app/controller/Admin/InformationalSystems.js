@@ -2,7 +2,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.InformationalSystems', {
     extend: 'Ext.app.Controller',
 
     models: [
-        'Admin.InformationalSystem'
+        'Admin.InformationalSystem', 'Admin.Department'
     ],
 
     stores: [

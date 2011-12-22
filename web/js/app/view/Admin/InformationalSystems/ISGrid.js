@@ -46,9 +46,11 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.InformationalSystems.ISGrid', {
                     var value = values[i]
                     var recordIdx = this.departments.find('id', value);
 
-                    str += this.departments.getAt(recordIdx).get('name');
-                    if (i < values.length - 1){
-                        str += ', ';
+                    if (recordIdx >= 0){
+                        str += this.departments.getAt(recordIdx).get('name');
+                        if (i < values.length - 1){
+                            str += ', ';
+                        }
                     }
                 }
                 return str;

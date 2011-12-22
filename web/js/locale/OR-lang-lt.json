@@ -9,7 +9,8 @@
             "IS": "Informacinės sistemos",
             "DEPARTMENTS": "Padaliniai",
             "SUPPORT_TYPES": "Priemonės",
-            "SUPPORT_QUANTITIES": "Paramos kiekiai"
+            "SUPPORT_QUANTITIES": "Paramos kiekiai",
+            "SUPPORT_ADMIN": "Priemonių apdorojimas"
         },
         "PERSONAL_SETTINGS": {
             "TITLE": "Asmeniniai nustatymai",
@@ -202,7 +203,8 @@
         "ENTITY_NAME": "Pavadinimas",
         "ENTITY_TYPE": "Tipas",
         "MONTH": "Mėnuo",
-        "LOADING":"Kraunama&hellip;"
+        "LOADING":"Kraunama&hellip;",
+        "CATEGORY":"Kryptis"
     },
 
     "FILETYPE":{

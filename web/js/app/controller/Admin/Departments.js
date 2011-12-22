@@ -2,7 +2,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Departments', {
     extend: 'Ext.app.Controller',
 
     models: [
-        'Admin.Department', 'Admin.SupportType'
+        'Admin.Department', 'Admin.InformationalSystem'
     ],
 
     stores: [
@@ -10,8 +10,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Departments', {
     ],
 
     views: [
-        'Admin.Departments.Departments',
-        'Admin.Departments.DepartmentsAddWindow'
+        'Admin.Departments.Departments'
     ],
 
     init: function(){
@@ -27,59 +26,44 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.Departments', {
             },
             'admindepartmentsgrid button[action=undo]':{
                 click: this.reload
-            },
-            'admindepartmentsgrid': {
-                itemdblclick: this.edit
             }
         });
     },
 
     add: function(btn){
-        Ext.create('widget.admindepartmentsaddwindow', {}).show();
-        /*
         var grid = btn.up('admindepartmentsgrid');
         var store = grid.getStore();
 
-        var record = Ext.create(CONFIG.APP_NS+'.model.Admin.Department', {
-            'code': 'testCode',
-            'name': 'testName'
-        });
-
-        store.add(record);
-        store.sync();
-        */
+        var rowEditor = grid.plugins[0];
+        rowEditor.cancelEdit();
+        store.insert(0, Ext.create(store.model));
+        rowEditor.startEdit(0, 0);
     },
 
     remove: function(btn){
-        //TODO: At the moment deletes the last entry
         var grid = btn.up('admindepartmentsgrid');
         var store = grid.getStore();
+        var selected = grid.getSelectionModel().getSelection();
 
-        store.removeAt(store.getCount() - 1);
-        store.sync();
+        for (var index in selected){
+            var item = selected[index];
+            store.remove(item);
+        }
+
+        Ext.getCmp('departmentsSync').setDisabled(false);
     },
 
     sync: function(btn) {
         var grid = btn.up('admindepartmentsgrid');
         var store = grid.getStore();
         store.sync();
+        Ext.getCmp('departmentsSync').setDisabled(true);
     },
 
 
-    reload: function(btn){ //TODO: NEVEIKIA
+    reload: function(btn){
         var grid = btn.up('admindepartmentsgrid');
         grid.getStore().load();
-    },
-
-    edit: function(view, record, item, index){
-
-        var wnd = Ext.create('widget.admindepartmentsaddwindow', {
-            editing: true,
-            record: record,
-            store: record.store
-        });
-
-        wnd.show();
-        
+        Ext.getCmp('departmentsSync').setDisabled(true);
     }
 });

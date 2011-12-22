@@ -9,7 +9,8 @@
             "IS": "Informational systems",
             "DEPARTMENTS": "Departments",
             "SUPPORT_TYPES": "Support types",
-            "SUPPORT_QUANTITIES": "Support quantities"
+            "SUPPORT_QUANTITIES": "Support quantities",
+            "SUPPORT_ADMIN": "Support administration"
         },
         "PERSONAL_SETTINGS": {
             "TITLE": "Personal settings",
@@ -203,7 +204,8 @@
         "ENTITY_NAME": "Name",
         "ENTITY_TYPE": "Type",
         "MONTH": "Month",
-        "LOADING":"Loading&hellip;"
+        "LOADING":"Loading&hellip;",
+        "CATEGORY":"Category"
     },
 
     "FILETYPE":{

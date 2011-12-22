@@ -10,8 +10,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.SupportTypes', {
     ],
 
     views: [
-        'Admin.SupportTypes.SupportTypes',
-        'Admin.SupportTypes.SupportTypesAddWindow'
+        'Admin.SupportTypes.SupportTypes'
     ],
 
     init: function(){
@@ -27,16 +26,7 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.SupportTypes', {
             },
             'adminsupporttypesgrid button[action=undo]':{
                 click: this.reload
-            },
-            'adminsupporttypesgrid': {
-                itemdblclick: this.edit
-            }/*,
-            'adminUsersEditWindow button[action=save]':{
-                click: this.onSaveEdit
-            },
-            'adminUsersEditWindow button[action=cancel]':{
-                click: this.onCancelEdit
-            }*/
+            }
         });
     },
 
@@ -54,62 +44,25 @@ Ext.define(CONFIG.APP_NS+'.controller.Admin.SupportTypes', {
     },
 
     add: function(btn){
-        Ext.create('widget.adminsupporttypesaddWindow', {}).show();
-        /*
         var grid = btn.up('adminsupporttypesgrid');
         var store = grid.getStore();
 
-        var record = Ext.create(CONFIG.APP_NS+'.model.Admin.SupportType', {
-            'name': 'test'
-        });
-
-        store.add(record);
-        store.sync();
-        */
-
-        //Ext.getCmp('supportTypesSync').setDisabled(false);
-    },
-
-    edit: function(view, record, item, index){
-        var wnd = Ext.create('widget.adminsupporttypesaddWindow', {
-            editing: true,
-            record: record,
-            store: record.store
-        });
-
-        wnd.show();
+        var rowEditor = grid.plugins[0];
+        rowEditor.cancelEdit();
+        store.insert(0, Ext.create(store.model));
+        rowEditor.startEdit(0, 0);
     },
 
     remove: function(btn){
-        alert('Pressed Delete');
+        var grid = btn.up('adminsupporttypesgrid');
+        var store = grid.getStore();
+        var selected = grid.getSelectionModel().getSelection();
+
+        for (var index in selected){
+            var item = selected[index];
+            store.remove(item);
+        }
+
         Ext.getCmp('supportTypesSync').setDisabled(false);
-    },
-
-    onSaveEdit: function(btn){
-        var wnd = btn.up('adminUsersEditWindow');
-        var form = wnd.down('form');
-
-        if (!form.getForm().isValid())
-            return;
-
-        //Save all the form fields into the record
-        var values = form.getValues();
-        for (var property in values){
-            wnd.record.set(property, values[property]);
-        };
-
-        if (wnd.store && !wnd.editing){ //are we creating a new entry? Add it to the store!
-            wnd.store.add(wnd.record);
-            form.getForm().reset();
-        };
-
-        wnd.close();
-        Ext.getCmp('supportTypesSync').setDisabled(false);
-        //wnd.store.sync();
-    },
-
-    onCancelEdit: function(btn){
-        var wnd = btn.up('adminUsersEditWindow');
-        wnd.close();
     }
 });

@@ -11,9 +11,18 @@ Ext.define(CONFIG.APP_NS+'.model.Admin.SupportType', {
         {name: 'id',            type: 'int', persist:false},
         {name: 'code',          type: 'string'},
         {name: 'name',          type: 'string'},
-        {name: 'supportCategory', model: CONFIG.APP_NS+'.model.Admin.SupportCategory'},
-        {name: 'departments'}
+        {name: 'supportCategory',
+            convert: function(value, record){
+                if (Ext.isObject(value)){
+                    return value.id
+                } else {
+                    return value;
+                }
+            }
+            //model: CONFIG.APP_NS+'.model.Admin.SupportCategory'
+        }
+        //{name: 'departments'}
     ],
 
-    hasMany: {model: CONFIG.APP_NS+'.model.Admin.SupportAdministrationTime', name: 'supportTimes'}
+    hasMany: {model: CONFIG.APP_NS+'.model.Admin.SupportType', name: 'departments'}
 });

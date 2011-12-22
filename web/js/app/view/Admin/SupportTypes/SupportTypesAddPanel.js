@@ -17,7 +17,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.SupportTypes.SupportTypesAddPanel', {
 
         var supportTypesStore = Ext.create('widget.adminSupportTypesStore', {});
 
-       this.dockedItems = [
+        this.dockedItems = [
             {
                 xtype:  'toolbar',
                 dock:   'bottom',

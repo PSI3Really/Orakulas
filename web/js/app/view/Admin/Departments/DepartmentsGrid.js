@@ -4,18 +4,83 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Departments.DepartmentsGrid', {
     
     initComponent: function() {
         this.store = Ext.create('widget.adminDepartmentsStore', {});
-        this.columns = [
-            {
-                header: LANG.ENTITY.CODE,
-                dataIndex: 'code',
-                flex: 0
-            },
-            {
-                header: LANG.ENTITY.DEPARTMENT,
-                dataIndex: 'name',
-                flex: 1
+
+        this.infoSys = Ext.create('Ext.data.Store', {
+            fields: ['id', 'name', 'code'],
+            proxy: {
+                type: 'ajax',
+                reader: 'json',
+                api: {read: 'model/informationalSystems/read'}
             }
-        ];
+        });
+        this.infoSys.load();
+
+        this.columns = [{
+            header: LANG.ENTITY.CODE,
+            dataIndex: 'code',
+            flex: 0,
+            editor: {
+                xtype: 'textfield',
+                allowBlank: false
+            }
+        },{
+            header: LANG.ENTITY.DEPARTMENT,
+            dataIndex: 'name',
+            flex: 0,
+            editor: {
+                xtype: 'textfield',
+                allowBlank: false
+            }
+        },{
+            header: LANG.ENTITY.INFO_SYS_PLURAL,
+            dataIndex: 'informationalSystems',
+            flex: 1,
+            renderer: function (values){
+                //console.log(value);
+                var str = '';
+                for(var i in values){
+                    var value = values[i]
+                    var recordIdx = this.infoSys.find('id', value);
+
+                    if (recordIdx >= 0){
+                        str += this.infoSys.getAt(recordIdx).get('name');
+                        if (i < values.length - 1){
+                            str += ', ';
+                        }
+                    }
+                }
+                return str;
+            },
+            editor: {
+                xtype: 'combobox',
+                allowBlank: true,
+                queryMode: 'local',
+                displayField: 'name',
+                valueField: 'id',
+                multiSelect: true,
+                forceSelection: true,
+                store: this.infoSys
+            }
+        }];
+
+        this.plugins = Ext.create('Ext.grid.plugin.RowEditing', {
+            clicksToEdit: 2,
+            listeners: {
+                canceledit: {
+                    fn: function(element, eOpts){
+                        var data = element.record.data;
+                        if (data.id == "" || data.name == ""){
+                            element.store.remove(element.record);
+                        }
+                    }
+                },
+                edit: {
+                    fn: function(event){
+                        Ext.getCmp('departmentsSync').setDisabled(false);
+                    }
+                }
+            }
+        }),
 
         this.store.load();
         this.callParent(arguments);

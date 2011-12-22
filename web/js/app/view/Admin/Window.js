@@ -12,7 +12,7 @@ Ext.define(CONFIG.APP_NS+'.view.Admin.Window', {
         this.modal = true;
 
         this.height = 500;
-        this.width = 600;
+        this.width = 700;
 
         this.title = LANG.ADMIN.TITLE;
 
