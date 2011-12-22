@@ -233,14 +233,12 @@ class UserFacade extends EntityFacade {
      */
     public function merge($destination, $source) {
         if (isset($source['password']) && $source['password'] != '') {
-            if (!isset($source['oldPassword'])) {
-                throw new UserFacadeException("trying to set new password while the old one isn't given");
-            }
+            if (isset($source['oldPassword'])) {
+                $encoder = $this->encoderFactory->getEncoder($destination);
 
-            $encoder = $this->encoderFactory->getEncoder($destination);
-
-            if ($encoder->encodePassword($source['oldPassword'], $destination->getSalt()) != $destination->getPassword()) {
-                throw new UserFacadeException("old password does not match the one currently set");
+                if ($encoder->encodePassword($source['oldPassword'], $destination->getSalt()) != $destination->getPassword()) {
+                    throw new UserFacadeException("old password does not match the one currently set");
+                }
             }
 
             $destination->setPassword($source['password']);
