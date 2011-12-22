@@ -345,6 +345,31 @@ class DepartmentFacade extends EntityFacade {
         $stmt->execute();
     }
 
+    public function getSupportAdministrationTimeIds($id) {
+        $entityManager = $this->getDoctrine()->getEntityManager();
+        $stmt = $entityManager->getConnection()->prepare("
+            SELECT
+                sat.id
+            FROM
+                department inner join support_administration_time sat
+                on department.id = sat.department_id
+            WHERE department.id = {$id}");
+
+        $stmt->execute();
+
+        $result = $stmt->fetchAll();
+
+        $prettyResult = array();
+        foreach ($result as $department) {
+            $prettyResult[] = array(
+                'id' => $department['id']/*,
+                'code' => $department['code'],
+                'name' => $department['name']*/
+            );
+        }
+        return $prettyResult;
+    }
+
     /**
      * @param \Orakulas\ModelBundle\Entity\Department $entity
      * @return array
@@ -356,11 +381,19 @@ class DepartmentFacade extends EntityFacade {
             $informationalSystems[] = $this->getInformationalSystemFacade()->toSimpleArray($informationalSystem);
         }
 
+        $departmentIds = $this->getSupportAdministrationTimeIds($entity->getId());
+
+        $adminTimeArray = array();
+        foreach ($departmentIds as $id) {
+            $adminTimeArray[] = $this->getSupportAdministrationTimeFacade()->toArray($this->getSupportAdministrationTimeFacade()->load($id));
+        }
+
         $array = array(
             'id'   => $entity->getId(),
             'code' => $entity->getCode(),
             'name' => $entity->getName(),
-            'informationalSystems' => $informationalSystems
+            'informationalSystems' => $informationalSystems,
+            'supportTypes' => $adminTimeArray
         );
 
         return $array;
