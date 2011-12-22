@@ -87,7 +87,7 @@ class SupportAdministrationTimeFacade extends EntityFacade {
             else
                 $department = $this->getDepartmentFacade()->load((int) $array['department']);
 
-            $departmentInfoSysUsage->setDepartment($department);
+            $supportAdministrationTime->setDepartment($department);
         }
 
         if (isset($array['supportType'])) {
@@ -98,7 +98,7 @@ class SupportAdministrationTimeFacade extends EntityFacade {
             else
                 $supportType = $this->getSupportTypeFacade()->load($array['supportType']);
 
-            $supportHistory->setSupportType($supportType);
+            $supportAdministrationTime->setSupportType($supportType);
         }
 
         return $supportAdministrationTime;
