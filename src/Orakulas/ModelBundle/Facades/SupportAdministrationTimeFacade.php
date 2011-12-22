@@ -74,9 +74,9 @@ class SupportAdministrationTimeFacade extends EntityFacade {
     public function fromArray($array) {
         $supportAdministrationTime = new SupportAdministrationTime();
 
-        if (isset($array['']))
+        if (isset($array['id']))
             $supportAdministrationTime->setId($array['id']);
-        if (isset($array['']))
+        if (isset($array['hoursCount']))
             $supportAdministrationTime->setHoursCount($array['hoursCount']);
 
         if (isset($array['department'])) {
