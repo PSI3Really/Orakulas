@@ -28,16 +28,14 @@ class SupportTypeFacade extends EntityFacade {
      */
     private $supportAdministrationTimeFacade;
 
-    public function getDepartments($id) {
+    public function getSupportAdministrationTimeIds($id) {
         $entityManager = $this->getDoctrine()->getEntityManager();
         $stmt = $entityManager->getConnection()->prepare("
             SELECT
-                department.id, department.code, department.name
+                sat.id
             FROM
-                support_type inner join support_administration_time
-                on support_type.id = support_administration_time.support_type_id
-                inner join department
-                on department.id = support_administration_time.department_id
+                support_type inner join support_administration_time sat
+                on support_type.id = sat.support_type_id
             WHERE support_type.id = {$id}");
 
         $stmt->execute();
@@ -47,9 +45,9 @@ class SupportTypeFacade extends EntityFacade {
         $prettyResult = array();
         foreach ($result as $department) {
             $prettyResult[] = array(
-                'id' => $department['id'],
+                'id' => $department['id']/*,
                 'code' => $department['code'],
-                'name' => $department['name']
+                'name' => $department['name']*/
             );
         }
         return $prettyResult;
@@ -284,11 +282,31 @@ class SupportTypeFacade extends EntityFacade {
     public function toArray($entity) {
         $supportCategory = $this->getSupportCategoryFacade()->load($entity->getSupportCategory()->getId());
 
+        $supportAdministrationTimesIds = $this->getSupportAdministrationTimeIds($entity->getId());
+
+        $adminTimeArray = array();
+        foreach ($supportAdministrationTimesIds as $id) {
+            $adminTimeArray[] = $this->getSupportAdministrationTimeFacade()->toArray($this->getSupportAdministrationTimeFacade()->load($id));
+        }
+
         $array = array(
             'id' => $entity->getId(),
             'name' => $entity->getName(),
             'code' => $entity->getCode(),
-            'departments' => $this->getDepartments($entity->getId()),
+            'departments' => $adminTimeArray,
+            'supportCategory' => $this->getSupportCategoryFacade()->toArray($supportCategory)
+        );
+
+        return $array;
+    }
+
+    public function toSimpleArray($entity) {
+        $supportCategory = $this->getSupportCategoryFacade()->load($entity->getSupportCategory()->getId());
+
+        $array = array(
+            'id' => $entity->getId(),
+            'name' => $entity->getName(),
+            'code' => $entity->getCode(),
             'supportCategory' => $this->getSupportCategoryFacade()->toArray($supportCategory)
         );
 

@@ -60,8 +60,8 @@ class SupportAdministrationTimeFacade extends EntityFacade {
         $array = array(
             'id'          => $entity->getId(),
             'hoursCount'  => $entity->getHoursCount(),
-            'department'  => $this->getDepartmentFacade()->toArray($entity->getDepartment()),
-            'supportType' => $this->getSupportTypeFacade()->toArray($entity->getSupportType())
+            'department'  => $this->getDepartmentFacade()->toSimpleArray($entity->getDepartment()),
+            'supportType' => $this->getSupportTypeFacade()->toSimpleArray($entity->getSupportType())
         );
 
         return $array;
